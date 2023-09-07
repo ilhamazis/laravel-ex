@@ -19,7 +19,7 @@ class ApplicantFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
-            'telephone' => fake()->phoneNumber(),
+            'telephone' => fake()->e164PhoneNumber(),
             'age' => fake()->numberBetween(18, 100),
             'is_married' => fake()->boolean(),
             'address' => fake()->address(),
@@ -27,7 +27,7 @@ class ApplicantFactory extends Factory
             'school' => fake()->company(),
             'faculty' => fake()->words(asText: true),
             'major' => fake()->words(asText: true),
-            'experience' => fake()->randomNumber(100),
+            'experience' => fake()->numberBetween(0, 100),
         ];
     }
 }
