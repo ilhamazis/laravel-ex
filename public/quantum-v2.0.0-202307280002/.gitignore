@@ -1,0 +1,5 @@
+# pages/index.html
+assets/css/*
+!assets/css/main.css
+!assets/css/vs2015.min.css
+!assets/css/highlightjs-copy.min.css
