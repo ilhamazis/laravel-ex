@@ -17,7 +17,7 @@
     <div class="container">
         <div class="main__header">
             <div class="main__location">
-                <x-breadcrumb/>
+                {{ $header }}
             </div>
         </div>
 
