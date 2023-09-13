@@ -40,12 +40,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
-            //
+            $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
         ]);
 
         if (App::isLocal()) {
-            $humanCapital = User::factory()->create(['email' => 'hc@sevima.com']);
-            $interviewer = User::factory()->create(['email' => 'interviewer@sevima.com']);
+            $humanCapital = User::factory()->create(['username' => 'human_capital', 'email' => 'hc@sevima.com']);
+            $interviewer = User::factory()->create(['username' => 'interviewer', 'email' => 'interviewer@sevima.com']);
 
             $humanCapital->roles()->attach($roles[RoleEnum::HUMAN_CAPITAL->value]->id);
             $interviewer->roles()->attach($roles[RoleEnum::INTERVIEWER->value]->id);
