@@ -5,9 +5,11 @@
 @endphp
 
 <x-app-layout>
-    <x-slot name="header">
-        <x-breadcrumb :paths="$paths"/>
-    </x-slot>
-    
+    <div class="main__header">
+        <div class="main__location">
+            <x-breadcrumb :paths="$paths"/>
+        </div>
+    </div>
+
     Authenticated.
 </x-app-layout>
