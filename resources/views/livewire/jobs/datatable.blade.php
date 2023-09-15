@@ -49,11 +49,17 @@
                             <th class="cell-check cell-center">
                                 <input type="checkbox" class="check-all-item" name="group">
                             </th>
-                            <th class="cell-sorting cell-sorting_active-desc">Posisi</th>
-                            <th class="cell-sorting cell-sorting_active-asc">Tipe Pekerjaan</th>
-                            <th class="cell-sorting cell-sorting_active-desc">Mulai</th>
-                            <th class="cell-sorting cell-sorting_active-desc">Selesai</th>
-                            <th class="cell-sorting cell-sorting_active-desc">Status</th>
+                            <x-cell-sorting column="title" :field="$field" :direction="$direction">
+                                Posisi
+                            </x-cell-sorting>
+                            <th>Tipe Pekerjaan</th>
+                            <x-cell-sorting column="start_at" :field="$field" :direction="$direction">
+                                Mulai
+                            </x-cell-sorting>
+                            <x-cell-sorting column="end_at" :field="$field" :direction="$direction">
+                                Selesai
+                            </x-cell-sorting>
+                            <th>Status</th>
                             <th class="cell-action cell-center">Aksi</th>
                         </tr>
                         </thead>
