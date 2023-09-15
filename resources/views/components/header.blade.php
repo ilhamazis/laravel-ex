@@ -2,9 +2,8 @@
     <div class="header__left">
         <div class="header__group">
             <a href="{{ route('home') }}" class="header__identity">
-                <h1 class="header__identity-title">
-                    <span class="header__title">SEVIMA Career</span>
-                </h1>
+                <img class="header__logo" src="{{ asset('assets/images/logo_sevima-career.svg') }}"
+                     alt="Logo Sevima Career">
             </a>
         </div>
         <div class="header__navigation">
