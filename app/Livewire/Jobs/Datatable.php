@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Jobs;
 
+use App\Enums\JobStatusEnum;
+use App\Enums\JobTypeEnum;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
@@ -23,6 +25,15 @@ class Datatable extends Component
 
     #[Url]
     public ?string $direction = null;
+
+    #[Url]
+    public int $limit = 20;
+
+    #[Url]
+    public ?string $type = null;
+
+    #[Url]
+    public ?string $status = null;
 
     public function boot(JobManagingService $jobManagingService): void
     {
@@ -48,13 +59,21 @@ class Datatable extends Component
         $this->field = $column;
     }
 
+    #[On('changeSelect')]
+    public function changeSelect(string $field, string $value): void
+    {
+        $this->$field = $value;
+    }
+
     public function render(): View
     {
         $jobs = $this->jobManagingService->findAll(
-            limit: 20,
+            limit: $this->limit,
             field: $this->field,
             direction: $this->direction,
             query: $this->query,
+            type: JobTypeEnum::tryFrom($this->type),
+            status: JobStatusEnum::tryFrom($this->status),
         );
 
         return view('livewire.jobs.datatable', ['jobs' => $jobs]);

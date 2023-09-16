@@ -7,13 +7,14 @@
         </p>
     </div>
     <div class="box-table__action-right">
-        {{--                            <div class="form-control">--}}
-        {{--                                <select wire:model.live="limit" class="select-default">--}}
-        {{--                                    <option value="20">20 Baris</option>--}}
-        {{--                                    <option value="40">40 Baris</option>--}}
-        {{--                                    <option value="100">100 Baris</option>--}}
-        {{--                                </select>--}}
-        {{--                            </div>--}}
+        <div class="form-control">
+            <select wire:change="$dispatch('changeSelect', { field: 'limit', value: $event.target.value })"
+                    x-init="initChoices($el)">
+                <option @selected($limit === 20) value="20">20 Baris</option>
+                <option @selected($limit === 40) value="40">40 Baris</option>
+                <option @selected($limit === 100) value="100">100 Baris</option>
+            </select>
+        </div>
         {{ $items->withQueryString()->links('components.paginator') }}
     </div>
 </div>

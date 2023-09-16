@@ -1,3 +1,15 @@
+@once
+    @push('styles')
+        <link rel="stylesheet"
+              href="{{ asset('/quantum-v2.0.0-202307280002/assets/js/vendors/choices.js-10.2.0/public/assets/styles/choices.min.css') }}"/>
+    @endpush
+
+    @push('scripts')
+        <script type="text/javascript"
+                src="{{ asset('/quantum-v2.0.0-202307280002/assets/js/vendors/choices.js-10.2.0/public/assets/scripts/choices.min.js') }}"></script>
+    @endpush
+@endonce
+
 <div class="card card_table">
     <div class="card__body">
         <div class="box-table">
@@ -15,29 +27,43 @@
                         </div>
                     </div>
 
-                    {{--                    <div class="col-12 col-sm-3 col-md-2">--}}
-                    {{--                        <div class="form-control">--}}
-                    {{--                            <label for="type" class="form-control__label">Tipe Pekerjaan</label>--}}
-                    {{--                            <select id="type" class="select-search">--}}
-                    {{--                                <option selected disabled>Tipe Pekerjaan</option>--}}
-                    {{--                                <option value="List Items 1">List Items 1</option>--}}
-                    {{--                                <option value="List Items 2">List Items 2</option>--}}
-                    {{--                                <option value="List Items 3">List Items 3</option>--}}
-                    {{--                            </select>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="col-12 col-sm-3 col-md-2">
+                        <div class="form-control">
+                            <div class="form-control">
+                                <label for="type" class="form-control__label">Tipe Pekerjaan</label>
+                                <select
+                                    wire:change="$dispatch('changeSelect', { field: 'type', value: $event.target.value })"
+                                    x-init="initChoicesSearch($el, 'Cari tipe pekerjaan...')"
+                                    id="type"
+                                >
+                                    <option @selected(is_null($type)) disabled>Tipe Pekerjaan</option>
+                                    @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
+                                        <option
+                                            @selected($type === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-                    {{--                    <div class="col-12 col-sm-3 col-md-2">--}}
-                    {{--                        <div class="form-control">--}}
-                    {{--                            <label for="status" class="form-control__label">Status</label>--}}
-                    {{--                            <select id="status" class="select-search">--}}
-                    {{--                                <option selected disabled>Status</option>--}}
-                    {{--                                <option value="List Items 1">List Items 1</option>--}}
-                    {{--                                <option value="List Items 2">List Items 2</option>--}}
-                    {{--                                <option value="List Items 3">List Items 3</option>--}}
-                    {{--                            </select>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="col-12 col-sm-3 col-md-2">
+                        <div class="form-control">
+                            <div class="form-control">
+                                <label for="status" class="form-control__label">Status</label>
+                                <select
+                                    wire:change="$dispatch('changeSelect', { field: 'status', value: $event.target.value })"
+                                    x-init="initChoicesSearch($el, 'Cari status pekerjaan...')"
+                                    id="status"
+                                >
+                                    <option @selected(is_null($status)) disabled>Status</option>
+                                    @foreach(\App\Enums\JobStatusEnum::values() as $statusEnum)
+                                        <option
+                                            @selected($status === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -71,8 +97,8 @@
                                 </td>
                                 <td>{{ $job->title }}</td>
                                 <td>{{ $job->type }}</td>
-                                <td>{{ is_null($job->start_at) ? 'Tidak ada waktu mulai' : $job->start_at?->isoFormat('LL') }}</td>
-                                <td>{{ is_null($job->end_at) ? 'Tidak ada deadline' : $job->end_at?->isoFormat('LL') }}</td>
+                                <td>{{ is_null($job->start_at) ? 'Tidak ada waktu mulai' : $job->start_at->isoFormat('LL') }}</td>
+                                <td>{{ is_null($job->end_at) ? 'Tidak ada deadline' : $job->end_at->isoFormat('LL') }}</td>
                                 <td>{{ $job->status }}</td>
                                 <td class="cell-action">
                                     <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
@@ -113,7 +139,7 @@
             </div>
 
             <div class="box-table__footer">
-                <x-pagination :items="$jobs"/>
+                <x-pagination :limit="$limit" :items="$jobs"/>
             </div>
         </div>
     </div>
