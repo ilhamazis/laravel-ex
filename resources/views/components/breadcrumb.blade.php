@@ -11,7 +11,7 @@
             <li class="breadcrumb__item active">{{ $path['title'] }}</li>
         @else
             <li class="breadcrumb__item">
-                <a href="{{ $path['link'] }}">{{ $path['title'] }}</a>
+                <a wire:navigate href="{{ $path['link'] }}">{{ $path['title'] }}</a>
             </li>
         @endif
     @endforeach
