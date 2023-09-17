@@ -1,4 +1,4 @@
-<header class="header">
+<header {{ $attributes->merge(['class' => 'header']) }}>
     <div class="header__left">
         <div class="header__group">
             <a href="{{ route('home') }}" class="header__identity">

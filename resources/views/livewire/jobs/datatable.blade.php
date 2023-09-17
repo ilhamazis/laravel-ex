@@ -68,6 +68,8 @@
             </div>
 
             <div class="box-table__content">
+                <x-alert variant="success" :message="session()->get('success')" dismissable/>
+
                 <div class="table-max table-max_absolute">
                     <table>
                         <thead>

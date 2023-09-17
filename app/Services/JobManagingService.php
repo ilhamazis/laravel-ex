@@ -7,6 +7,7 @@ use App\Enums\JobTypeEnum;
 use App\Models\Job;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobManagingService
@@ -36,5 +37,10 @@ class JobManagingService
                     $q->latest();
                 },
             )->paginate($limit);
+    }
+
+    public function create(array $data): Model
+    {
+        return Job::query()->create($data);
     }
 }

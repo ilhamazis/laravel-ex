@@ -23,7 +23,6 @@ class JobFactory extends Factory
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
             'description' => fake()->paragraphs(asText: true),
             'type' => collect(JobTypeEnum::values())->random(),
             'status' => collect(JobStatusEnum::values())->random(),

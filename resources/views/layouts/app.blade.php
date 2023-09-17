@@ -10,14 +10,12 @@
     <link href="{{ asset('/quantum-v2.0.0-202307280002/assets/release/qn-202307280002.css') }}" rel="stylesheet">
     @vite(['resources/js/app.js'])
 </head>
-<body {{ $attributes->merge() }}>
+<body {{ $attributes }}>
 
-<x-header/>
+<x-header @class(['header_position-static' => $headerStatic])/>
 
 <main class="main">
-    <div class="container">
-        {{ $slot }}
-    </div>
+    {{ $slot }}
 
     <x-footer/>
 </main>

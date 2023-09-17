@@ -5,18 +5,20 @@
 @endphp
 
 <x-app-layout>
-    <div class="main__header">
-        <div class="main__location">
-            <x-breadcrumb :paths="$paths"/>
+    <div class="container">
+        <div class="main__header">
+            <div class="main__location">
+                <x-breadcrumb :paths="$paths"/>
+            </div>
+
+            <div class="main__action">
+                <a wire:navigate href="{{ route('managements.jobs.create') }}" class="btn btn_primary">
+                    <span class="icon icon-plus-solid"></span>
+                    <span class="btn__text">Create New Jobs</span>
+                </a>
+            </div>
         </div>
 
-        <div class="main__action">
-            <a href="#" class="btn btn_primary">
-                <span class="icon icon-plus-solid"></span>
-                <span class="btn__text">Create New Jobs</span>
-            </a>
-        </div>
+        <livewire:jobs.datatable/>
     </div>
-
-    <livewire:jobs.datatable/>
 </x-app-layout>
