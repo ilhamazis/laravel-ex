@@ -10,14 +10,14 @@
             <nav class="nav">
                 <ul class="nav__list" data-more-text="Lainnya">
                     <li @class(['nav__item', 'active' => request()->routeIs('dashboard')])>
-                        <a wire:navigate class="nav__link" href="{{ route('dashboard') }}">
+                        <x-link class="nav__link" href="{{ route('dashboard') }}">
                             <span>Dashboard</span>
-                        </a>
+                        </x-link>
                     </li>
                     <li @class(['nav__item', 'active' => request()->routeIs('managements.jobs.*')])>
-                        <a wire:navigate class="nav__link" href="{{ route('managements.jobs.index') }}">
+                        <x-link class="nav__link" href="{{ route('managements.jobs.index') }}">
                             <span>Jobs</span>
-                        </a>
+                        </x-link>
                     </li>
                 </ul>
             </nav>

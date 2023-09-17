@@ -12,10 +12,10 @@
             </div>
 
             <div class="main__action">
-                <a wire:navigate href="{{ route('managements.jobs.create') }}" class="btn btn_primary">
+                <x-link href="{{ route('managements.jobs.create') }}" class="btn btn_primary">
                     <span class="icon icon-plus-solid"></span>
                     <span class="btn__text">Create New Jobs</span>
-                </a>
+                </x-link>
             </div>
         </div>
 

@@ -33,10 +33,10 @@
 
         <div class="form-nav">
             <div class="form-nav__left">
-                <a wire:navigate href="{{ route('managements.jobs.index') }}" class="btn btn_outline">
+                <x-link href="{{ route('managements.jobs.index') }}" class="btn btn_outline">
                     <span class="icon icon-arrow-left-mini"></span>
                     <span class="btn__text">Kembali</span>
-                </a>
+                </x-link>
             </div>
             <div class="form-nav__middle">
                 <x-breadcrumb-form :paths="$paths"/>

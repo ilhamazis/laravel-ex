@@ -6,7 +6,7 @@
             <li class="form-nav__breadcrumb-item active">{{ $path['title'] }}</li>
         @else
             <li class="form-nav__breadcrumb-item">
-                <a wire:navigate href="{{ $path['link'] }}" class="form-nav__breadcrumb-btn">{{ $path['title'] }}</a>
+                <x-link href="{{ $path['link'] }}" class="form-nav__breadcrumb-btn">{{ $path['title'] }}</x-link>
             </li>
 
             <li class="form-nav__breadcrumb-diagonal"></li>
