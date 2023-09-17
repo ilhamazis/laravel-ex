@@ -105,10 +105,10 @@
                                     </label>
                                     <div @class(['form-control__group', 'error' => $errors->has('type')])>
                                         <select
-                                            x-init="initChoicesSearch($el, 'Cari tipe pekerjaan...')"
+                                            x-init="initChoicesSearch($el)"
+                                            data-placeholder="Cari tipe pekerjaan..."
                                             id="type"
                                             name="type"
-                                            class="select-search"
                                             required
                                         >
                                             <option @selected(is_null(old('type'))) disabled>Tipe Pekerjaan</option>
@@ -129,10 +129,10 @@
                                     </label>
                                     <div @class(['form-control__group', 'error' => $errors->has('status')])>
                                         <select
-                                            x-init="initChoicesSearch($el, 'Cari status pekerjaan...')"
+                                            x-init="initChoicesSearch($el)"
+                                            data-placeholder="Cari status pekerjaan..."
                                             id="status"
                                             name="status"
-                                            class="select-search"
                                             required
                                         >
                                             <option @selected(is_null(old('status'))) disabled>Status</option>

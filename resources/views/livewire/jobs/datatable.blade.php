@@ -33,7 +33,8 @@
                                 <label for="type" class="form-control__label">Tipe Pekerjaan</label>
                                 <select
                                     wire:change="$dispatch('changeSelect', { field: 'type', value: $event.target.value })"
-                                    x-init="initChoicesSearch($el, 'Cari tipe pekerjaan...')"
+                                    x-init="initChoicesSearch($el)"
+                                    data-placeholder="Cari tipe pekerjaan..."
                                     id="type"
                                 >
                                     <option @selected(is_null($type)) disabled>Tipe Pekerjaan</option>
@@ -52,7 +53,8 @@
                                 <label for="status" class="form-control__label">Status</label>
                                 <select
                                     wire:change="$dispatch('changeSelect', { field: 'status', value: $event.target.value })"
-                                    x-init="initChoicesSearch($el, 'Cari status pekerjaan...')"
+                                    x-init="initChoicesSearch($el)"
+                                    data-placeholder="Cari status pekerjaan..."
                                     id="status"
                                 >
                                     <option @selected(is_null($status)) disabled>Status</option>
