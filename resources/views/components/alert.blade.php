@@ -11,12 +11,14 @@
 @endphp
 
 @if($message)
-    <div @class(['alert', $variant])>
-        <div class="alert__content">
-            <h4 class="alert__heading">{{ $message }}</h4>
+    <div {{ $attributes }}>
+        <div @class(['alert', $variant])>
+            <div class="alert__content">
+                <h4 class="alert__heading">{{ $message }}</h4>
+            </div>
+            @if($dismissable)
+                <span class="icon icon-x-mark-mini" data-dismiss="alert"></span>
+            @endif
         </div>
-        @if($dismissable)
-            <span class="icon icon-x-mark-mini" data-dismiss="alert"></span>
-        @endif
     </div>
 @endif
