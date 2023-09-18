@@ -1,3 +1,3 @@
 @props(['href' => '#'])
 
-<a wire:navigate href="{{ $href }}" {{ $attributes }}>{{ $slot }}</a>
+<a href="{{ $href }}" {{ $attributes }}>{{ $slot }}</a>
