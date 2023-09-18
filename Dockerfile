@@ -37,7 +37,7 @@ COPY --from=VENDOR /app/vendor/ /var/www/html/vendor/
 COPY --from=NODE /app/node_modules/ /var/www/html/node_modules/
 COPY --from=NODE /app/public/build/ /var/www/html/public/build/
 COPY --from=NODE /app/public/build/assets/ /var/www/html/public/build/assets/
-#########################Apache conf
+########################Apache conf
 RUN a2enmod rewrite
 RUN a2enmod headers
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
@@ -79,15 +79,15 @@ RUN apt-get install -y libz-dev libmemcached-dev && \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY . .
-################################################################################33
+###############################################################################33
 RUN chown -R 33:33 /var/www/html/public/
 RUN chown -R 33:33 /var/www/html/storage/
 RUN chown -R 33:33 /var/www/html/bootstrap/
 RUN chown -R 33:33 /var/www/html/vendor/
-#USER opsec
-############################################GENERATE KEY
-# RUN php artisan key:generate
-############################################CLEAR CACHE
+USER opsec
+###########################################GENERATE KEY
+#RUN php artisan key:generate
+###########################################CLEAR CACHE
 RUN php artisan optimize:clear
 ####################################PORT
 EXPOSE 80
