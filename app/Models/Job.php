@@ -5,15 +5,16 @@ namespace App\Models;
 use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
 use App\Traits\HasIdentifier;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Job extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable, HasIdentifier;
+    use HasFactory, SoftDeletes, HasIdentifier, HasSlug;
 
     protected $guarded = ['id'];
 
@@ -24,13 +25,11 @@ class Job extends Model
         'end_at' => 'date',
     ];
 
-    public function sluggable(): array
+    public function getSlugOptions(): SlugOptions
     {
-        return [
-            'slug' => [
-                'source' => 'title',
-            ],
-        ];
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName(): string
