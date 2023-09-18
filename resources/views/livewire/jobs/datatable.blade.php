@@ -10,7 +10,7 @@
     @endpush
 @endonce
 
-<div class="card card_table">
+<div x-data="{ deleteRouteKey: null }" class="card card_table">
     <div class="card__body">
         <div class="box-table">
             <div class="box-table__header">
@@ -110,13 +110,16 @@
                                            class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
                                             <span class="icon icon-eye-solid"></span>
                                         </a>
-                                        <a href="#" class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">
+                                        <button x-on:click="deleteRouteKey = @js($job->slug)" data-toggle="modal"
+                                                data-target="#delete-modal"
+                                                class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">
                                             <span class="icon icon-trash-solid"></span>
-                                        </a>
+                                        </button>
                                         <div class="dropdown">
-                                            <a href="#" class="btn btn_outline btn_xs btn_icon" data-toggle="dropdown">
+                                            <button type="button" class="btn btn_outline btn_xs btn_icon"
+                                                    data-toggle="dropdown">
                                                 <span class="icon icon-ellipsis-horizontal"></span>
-                                            </a>
+                                            </button>
                                             <ul class="dropdown__list dropdown__list_menu-end">
                                                 <li class="dropdown__item">
                                                     <a href="#">Lainnya 1</a>
@@ -128,9 +131,9 @@
                                         </div>
                                         <div class="dropdown-group__target">
                                             <div class="dropdown-group__toggle">
-                                                <a href="#" class="btn btn_outline btn_xs btn_icon">
+                                                <button class="btn btn_outline btn_xs btn_icon">
                                                     <span class="icon icon-ellipsis-horizontal"></span>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -144,6 +147,33 @@
 
             <div class="box-table__footer">
                 <x-pagination :limit="$limit" :items="$jobs"/>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore.self id="delete-modal" class="modal modal_confirmation-error">
+        <div class="modal__overlay" data-dismiss="modal"></div>
+        <div class="modal__wrapper">
+            <div class="modal__header">
+                <div class="modal__header-wrapper">
+                    <h3 class="modal__title">Hapus Job</h3>
+                </div>
+                <span class="icon icon-x-mark-mini" data-dismiss="modal"></span>
+            </div>
+            <div class="modal__body">
+                <p>Apakah anda yakin ingin menghapus data job?</p>
+            </div>
+            <div class="modal__footer">
+                <div class="grid cols-1 cols-sm-2">
+                    <button class="btn btn_outline" data-dismiss="modal">
+                        Batal
+                    </button>
+                    <form x-bind:action="'/managements/jobs/' + deleteRouteKey" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn_destructive" style="width: 100%">Hapus</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

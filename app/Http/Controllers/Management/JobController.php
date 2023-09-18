@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
+use App\Models\Job;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -65,8 +66,12 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Job $job, JobManagingService $jobManagingService)
     {
-        //
+        $jobManagingService->delete($job->id);
+
+        return redirect()
+            ->route('managements.jobs.index')
+            ->with('success', 'Berhasil menghapus job');
     }
 }

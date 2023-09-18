@@ -43,4 +43,9 @@ class JobManagingService
     {
         return Job::query()->create($data);
     }
+
+    public function delete(int $id): int
+    {
+        return Job::query()->where('id', $id)->delete();
+    }
 }
