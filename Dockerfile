@@ -13,7 +13,6 @@ RUN composer install \
     --no-dev \
     --prefer-dist
 
-
 COPY . .
 RUN composer dump-autoload
 
@@ -92,3 +91,4 @@ RUN chown -R 33:33 /var/www/html/vendor/
 RUN php artisan optimize:clear
 ####################################PORT
 EXPOSE 80
+
