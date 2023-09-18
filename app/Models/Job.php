@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
 use App\Traits\HasIdentifier;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,6 +36,13 @@ class Job extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function createdByUser(): Attribute
+    {
+        return new Attribute(
+            get: fn() => User::query()->where('username', $this->created_by)->first(),
+        );
     }
 
     public function applications(): HasMany

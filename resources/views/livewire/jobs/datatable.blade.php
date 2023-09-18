@@ -70,7 +70,8 @@
             </div>
 
             <div class="box-table__content">
-                <x-alert variant="success" :message="session()->get('success')" dismissable/>
+                <x-alert variant="success" style="padding-bottom: 1rem" :message="session()->get('success')"
+                         dismissable/>
 
                 <div class="table-max table-max_absolute">
                     <table>
@@ -106,10 +107,10 @@
                                 <td>{{ $job->status }}</td>
                                 <td class="cell-action">
                                     <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
-                                        <a href="#"
-                                           class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
+                                        <x-link href="{{ route('managements.jobs.show', $job) }}"
+                                                class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
                                             <span class="icon icon-eye-solid"></span>
-                                        </a>
+                                        </x-link>
                                         <button x-on:click="deleteRouteKey = @js($job->slug)" data-toggle="modal"
                                                 data-target="#delete-modal"
                                                 class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">

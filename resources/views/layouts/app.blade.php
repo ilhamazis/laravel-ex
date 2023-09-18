@@ -8,7 +8,7 @@
 
     @stack('styles')
     <link href="{{ asset('/quantum-v2.0.0-202307280002/assets/release/qn-202307280002.css') }}" rel="stylesheet">
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/custom-cms.css', 'resources/js/app.js'])
 </head>
 <body {{ $attributes }}>
 

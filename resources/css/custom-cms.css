@@ -1,0 +1,33 @@
+.detail__desc-wrapper {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail__desc-divider {
+    display: none;
+}
+
+.detail__desc {
+    color: #9aa4b2;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+.detail__actions {
+    display: flex;
+    gap: 1rem;
+}
+
+@media only screen and (min-width: 79.937rem) {
+    .detail__desc-wrapper {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .detail__desc-divider {
+        display: inherit;
+    }
+}
