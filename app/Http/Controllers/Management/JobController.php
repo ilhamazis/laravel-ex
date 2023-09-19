@@ -50,17 +50,21 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Job $job)
     {
-        //
+        return view('managements.jobs.edit', ['job' => $job]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreJobRequest $request, Job $job, JobManagingService $jobManagingService)
     {
-        //
+        $jobManagingService->update($job, $request->validated());
+
+        return redirect()
+            ->route('managements.jobs.show', $job)
+            ->with('success', 'Berhasil mengubah data job');
     }
 
     /**

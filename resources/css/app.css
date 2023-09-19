@@ -7,6 +7,7 @@
 @import "components/footer.css";
 @import "home.css";
 @import "jobs.css";
+@import "quill-custom.css";
 
 * {
     margin: 0;

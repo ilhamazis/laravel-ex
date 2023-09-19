@@ -1,7 +1,8 @@
 @php
     $paths = [
         ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => 'Tambah Job'],
+        ['title' => 'Detail Job', 'link' => route('managements.jobs.show', $job)],
+        ['title' => 'Edit Job'],
     ];
 @endphp
 
@@ -15,6 +16,7 @@
 
     @push('scripts')
         <script
+            type="text/javascript"
             src="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/quill-1.3.7/dist/quill.min.js') }}"></script>
         <script type="text/javascript"
                 src="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/choices.js-10.2.0/public/assets/scripts/choices.min.js') }}"></script>
@@ -35,13 +37,13 @@
 @endonce
 
 <x-app-layout header-static>
-    <form action="{{ route('managements.jobs.store') }}" method="post">
+    <form action="{{ route('managements.jobs.update', $job) }}" method="post">
         @csrf
-        @method('POST')
+        @method('PUT')
 
         <div class="form-nav">
             <div class="form-nav__left">
-                <x-link href="{{ route('managements.jobs.index') }}" class="btn btn_outline">
+                <x-link href="{{ route('managements.jobs.show', $job) }}" class="btn btn_outline">
                     <span class="icon icon-arrow-left-mini"></span>
                     <span class="btn__text">Kembali</span>
                 </x-link>
@@ -51,6 +53,10 @@
             </div>
             <div class="form-nav__right">
                 <div class="form-nav__wrapper">
+                    <span class="form-nav__timestamp">
+                        <span class="icon icon-check"></span>
+                        Disimpan {{ $job->updated_at->diffForHumans() }}
+                    </span>
                     <div class="form-nav__button-wrapper">
                         <button type="submit" class="btn btn_primary">
                             Simpan
@@ -66,7 +72,7 @@
                     <x-breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
-                        <h1 class="main__title">Tambah Job</h1>
+                        <h1 class="main__title">Edit Job</h1>
                     </div>
                 </div>
             </div>
@@ -84,7 +90,7 @@
                                         <div @class(['form-control__group', 'error' => $errors->has('title')])>
                                             <input type="text" id="title" name="title"
                                                    class="form-control__input"
-                                                   value="{{ old('title') }}"
+                                                   value="{{ old('title', $job->title) }}"
                                                    placeholder="Masukkan posisi" required>
                                             <span data-clear="input"></span>
                                         </div>
@@ -95,13 +101,13 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <div x-data="{ textareaValue: '' }" class="form-control">
+                                    <div class="form-control">
                                         <label for="description" class="form-control__label">
                                             Deskripsi<span class="important">*</span>
                                         </label>
-                                        <div class="text-editor">{!! old('description') !!}</div>
+                                        <div class="text-editor">{!! old('description', $job->description) !!}</div>
                                         <textarea id="description" name="description"
-                                                  style="display: none">{!! old('description') !!}</textarea>
+                                                  style="display: none">{!! old('description', $job->description) !!}</textarea>
                                         @error('description')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
@@ -124,7 +130,7 @@
                                                 <option @selected(is_null(old('type'))) disabled>Tipe Pekerjaan</option>
                                                 @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
                                                     <option
-                                                        @selected(old('type') === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
+                                                        @selected(old('type', $job->type->value) === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -150,7 +156,7 @@
                                                 <option @selected(is_null(old('status'))) disabled>Status</option>
                                                 @foreach(\App\Enums\JobStatusEnum::values() as $statusEnum)
                                                     <option
-                                                        @selected(old('status') === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
+                                                        @selected(old('status', $job->status->value) === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -165,7 +171,7 @@
                                         <label for="start_at" class="form-control__label">Mulai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('start_at')])>
                                             <input type="date" id="start_at" name="start_at" class="form-control__input"
-                                                   value="{{ old('start_at') }}">
+                                                   value="{{ old('start_at', $job->start_at) }}">
                                         </div>
                                         @error('start_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -178,7 +184,7 @@
                                         <label for="end_at" class="form-control__label">Selesai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('end_at')])>
                                             <input type="date" id="end_at" name="end_at" class="form-control__input"
-                                                   value="{{ old('end_at') }}">
+                                                   value="{{ old('end_at', $job->end_at) }}">
                                         </div>
                                         @error('end_at')
                                         <div class="form-control__helper error">{{ $message }}</div>

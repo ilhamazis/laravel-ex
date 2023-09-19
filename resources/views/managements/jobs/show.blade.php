@@ -13,6 +13,9 @@
             </div>
         </div>
 
+        <x-alert variant="success" :message="session()->get('success')"
+                 dismissable/>
+
         <div class="grid">
             <div class="col-12">
                 <x-badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
@@ -87,7 +90,9 @@
             </div>
 
             <div class="card__body">
-                {!! $job->description !!}
+                <div class="custom__ql-container">
+                    {!! $job->description !!}
+                </div>
             </div>
         </div>
     </div>
