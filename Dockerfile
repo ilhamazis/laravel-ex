@@ -6,7 +6,6 @@ ENV CACHE_DRIVER=file
 COPY database/ app/database/
 COPY composer.json /app
 COPY composer.lock /app
-RUN composer update
 RUN composer install \
     --no-interaction \
     --no-plugins \
