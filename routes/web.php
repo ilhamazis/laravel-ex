@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::prefix('/managements')->name('managements.')->group(function () {
-        Route::resource('/jobs', JobController::class);
+        Route::resource('/jobs', JobController::class)->except('destroy');
+        Route::delete('/jobs', [JobController::class, 'destroy'])->name('jobs.destroy');
     });
 });

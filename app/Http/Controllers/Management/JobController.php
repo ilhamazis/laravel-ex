@@ -8,6 +8,8 @@ use App\Http\Requests\StoreJobRequest;
 use App\Models\Job;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JobController extends Controller
 {
@@ -82,9 +84,11 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job)
+    public function destroy(Request $request)
     {
-        $this->jobManagingService->delete($job->id);
+        $data = $request->validate(['id' => ['required', Rule::exists(Job::class, 'id')]]);
+
+        $this->jobManagingService->delete($data['id']);
 
         return redirect()
             ->route('managements.jobs.index')

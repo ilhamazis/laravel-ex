@@ -10,7 +10,7 @@
     @endpush
 @endonce
 
-<div x-data="{ deleteRouteKey: null }" class="card card_table">
+<div x-data="{ deleteId: null }" class="card card_table">
     <div class="card__body">
         <div class="box-table">
             <div class="box-table__header">
@@ -112,7 +112,7 @@
                                             <span class="icon icon-eye-solid"></span>
                                         </x-link>
                                         @can(\App\Enums\PermissionEnum::DELETE_JOB->value)
-                                            <button x-on:click="deleteRouteKey = @js($job->slug)" data-toggle="modal"
+                                            <button x-on:click="deleteId = @js($job->id)" data-toggle="modal"
                                                     data-target="#delete-modal"
                                                     class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">
                                                 <span class="icon icon-trash-solid"></span>
@@ -171,9 +171,11 @@
                     <button class="btn btn_outline" data-dismiss="modal">
                         Batal
                     </button>
-                    <form x-bind:action="'/managements/jobs/' + deleteRouteKey" method="post">
+                    <form action="{{ route('managements.jobs.destroy') }}" method="post">
                         @csrf
                         @method('DELETE')
+
+                        <input type="hidden" name="id" x-bind:value="deleteId"/>
                         <button type="submit" class="btn btn_destructive" style="width: 100%">Hapus</button>
                     </form>
                 </div>
