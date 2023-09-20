@@ -5,35 +5,6 @@
     ];
 @endphp
 
-@once
-    @push('styles')
-        <link rel="stylesheet"
-              href="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/quill-1.3.7/dist/quill.snow.css') }}"/>
-        <link rel="stylesheet"
-              href="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/choices.js-10.2.0/public/assets/styles/choices.min.css') }}"/>
-    @endpush
-
-    @push('scripts')
-        <script
-            src="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/quill-1.3.7/dist/quill.min.js') }}"></script>
-        <script type="text/javascript"
-                src="{{ asset('quantum-v2.0.0-202307280002/assets/js/vendors/choices.js-10.2.0/public/assets/scripts/choices.min.js') }}"></script>
-    @endpush
-
-    @push('custom-scripts')
-        <script type="text/javascript"
-                src="{{ asset('quantum-v2.0.0-202307280002/assets/js/utils/quill-options.js') }}"></script>
-        <script>
-            const descriptionQuill = document.querySelector('div.text-editor .ql-editor');
-            const descriptionTextarea = document.querySelector('#description');
-
-            descriptionQuill.addEventListener('DOMSubtreeModified', () => {
-                descriptionTextarea.innerHTML = descriptionQuill.innerHTML;
-            });
-        </script>
-    @endpush
-@endonce
-
 <x-app-layout header-static>
     <form action="{{ route('managements.jobs.store') }}" method="post">
         @csrf
@@ -82,10 +53,8 @@
                                             Posisi<span class="important">*</span>
                                         </label>
                                         <div @class(['form-control__group', 'error' => $errors->has('title')])>
-                                            <input type="text" id="title" name="title"
-                                                   class="form-control__input"
-                                                   value="{{ old('title') }}"
-                                                   placeholder="Masukkan posisi" required>
+                                            <x-input type="text" id="title" name="title" value="{{ old('title') }}"
+                                                     placeholder="Masukkan posisi" required/>
                                             <span data-clear="input"></span>
                                         </div>
                                         @error('title')
@@ -99,7 +68,7 @@
                                         <label for="description" class="form-control__label">
                                             Deskripsi<span class="important">*</span>
                                         </label>
-                                        <div class="text-editor">{!! old('description') !!}</div>
+                                        <x-quill id="descriptionQuill">{!! old('description') !!}</x-quill>
                                         <textarea id="description" name="description"
                                                   style="display: none">{!! old('description') !!}</textarea>
                                         @error('description')
@@ -114,19 +83,14 @@
                                             Tipe Pekerjaan<span class="important">*</span>
                                         </label>
                                         <div @class(['form-control__group', 'error' => $errors->has('type')])>
-                                            <select
-                                                x-init="initChoicesSearch($el)"
-                                                data-placeholder="Cari tipe pekerjaan..."
-                                                id="type"
-                                                name="type"
-                                                required
-                                            >
+                                            <x-select variant="single-search" placeholder="Cari tipe pekerjaan..."
+                                                      id="type" name="type" required>
                                                 <option @selected(is_null(old('type'))) disabled>Tipe Pekerjaan</option>
                                                 @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
                                                     <option
                                                         @selected(old('type') === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
                                                 @endforeach
-                                            </select>
+                                            </x-select>
                                         </div>
                                         @error('type')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -140,19 +104,14 @@
                                             Status<span class="important">*</span>
                                         </label>
                                         <div @class(['form-control__group', 'error' => $errors->has('status')])>
-                                            <select
-                                                x-init="initChoicesSearch($el)"
-                                                data-placeholder="Cari status pekerjaan..."
-                                                id="status"
-                                                name="status"
-                                                required
-                                            >
+                                            <x-select variant="single-search" placeholder="Cari status pekerjaan..."
+                                                      id="status" name="status" required>
                                                 <option @selected(is_null(old('status'))) disabled>Status</option>
                                                 @foreach(\App\Enums\JobStatusEnum::values() as $statusEnum)
                                                     <option
                                                         @selected(old('status') === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
                                                 @endforeach
-                                            </select>
+                                            </x-select>
                                         </div>
                                         @error('status')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -164,8 +123,8 @@
                                     <div class="form-control">
                                         <label for="start_at" class="form-control__label">Mulai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('start_at')])>
-                                            <input type="date" id="start_at" name="start_at" class="form-control__input"
-                                                   value="{{ old('start_at') }}">
+                                            <x-input type="date" id="start_at" name="start_at"
+                                                     value="{{ old('start_at') }}"/>
                                         </div>
                                         @error('start_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -177,8 +136,8 @@
                                     <div class="form-control">
                                         <label for="end_at" class="form-control__label">Selesai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('end_at')])>
-                                            <input type="date" id="end_at" name="end_at" class="form-control__input"
-                                                   value="{{ old('end_at') }}">
+                                            <x-input type="date" id="end_at" name="end_at"
+                                                     value="{{ old('end_at') }}"/>
                                         </div>
                                         @error('end_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -192,4 +151,15 @@
             </div>
         </div>
     </form>
+
+    @push('custom-scripts')
+        <script>
+            const descriptionQuill = document.querySelector('#descriptionQuill .ql-editor');
+            const descriptionTextarea = document.querySelector('#description');
+
+            descriptionQuill.addEventListener('DOMSubtreeModified', () => {
+                descriptionTextarea.innerHTML = descriptionQuill.innerHTML;
+            });
+        </script>
+    @endpush
 </x-app-layout>
