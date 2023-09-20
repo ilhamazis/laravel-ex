@@ -4,30 +4,14 @@ namespace App\Livewire\Jobs;
 
 use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
+use App\Livewire\Master\Datatable as MasterDatatable;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
-use Livewire\Component;
-use Livewire\WithPagination;
 
-class Datatable extends Component
+class Datatable extends MasterDatatable
 {
-    use WithPagination;
-
     private JobManagingService $jobManagingService;
-
-    #[Url(as: 'q', history: true)]
-    public string $query = '';
-
-    #[Url]
-    public ?string $field = null;
-
-    #[Url]
-    public ?string $direction = null;
-
-    #[Url]
-    public int $limit = 20;
 
     #[Url]
     public ?string $type = null;
@@ -38,31 +22,6 @@ class Datatable extends Component
     public function boot(JobManagingService $jobManagingService): void
     {
         $this->jobManagingService = $jobManagingService;
-    }
-
-    public function updated(mixed $property): void
-    {
-        if ($property === 'query') {
-            $this->resetPage();
-        }
-    }
-
-    #[On('sortCell')]
-    public function sortBy(string $column): void
-    {
-        if ($this->field === $column) {
-            $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->direction = 'asc';
-        }
-
-        $this->field = $column;
-    }
-
-    #[On('changeSelect')]
-    public function changeSelect(string $field, string $value): void
-    {
-        $this->$field = $value;
     }
 
     public function render(): View
