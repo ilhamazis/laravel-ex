@@ -26,7 +26,7 @@
                 <h2>{{ $job->title }}</h2>
                 <div class="detail__desc-wrapper">
                     <p class="detail__desc">
-                        By {{ $job->created_by_user->name }}
+                        By {{ $job->createdBy->name }}
                     </p>
                     <div class="detail__desc-divider">
                         <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">

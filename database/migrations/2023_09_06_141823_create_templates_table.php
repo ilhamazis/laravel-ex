@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('created_by');
-            $table->string('updated_by');
-            $table->string('deleted_by')->nullable();
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('updated_by')->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
