@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.force_https')) {
+            URL::forceScheme('https');
+        }
+
         $roles = Cache::rememberForever('roles_with_permissions', fn() => Role::with('permissions')->get());
         $permissions = [];
         foreach ($roles as $role) {
