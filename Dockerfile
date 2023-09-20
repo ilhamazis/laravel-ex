@@ -15,7 +15,6 @@ RUN composer install \
     --prefer-dist
 
 COPY . .
-RUN composer dump-autoload
 
 ######################NODE
 FROM node:latest AS NODE
@@ -82,9 +81,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY . .
 ###############################################################################33
 RUN chown -R 33:33 /var/www/html/public/
-RUN chown -R 33:33 /var/www/html/storage/
-RUN chown -R 33:33 /var/www/html/bootstrap/
-RUN chown -R 33:33 /var/www/html/vendor/
+RUN chown -R opsec:33 /var/www/html/storage/
+RUN chown -R opsec:33 /var/www/html/bootstrap/
+RUN chown -R opsec:33 /var/www/html/vendor/
 USER opsec
 ###########################################GENERATE KEY
 #RUN php artisan key:generate
