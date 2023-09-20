@@ -37,10 +37,15 @@ class DatabaseSeeder extends Seeder
 
         $roles[RoleEnum::HUMAN_CAPITAL->value]->permissions()->sync([
             $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
+            $permissions[PermissionEnum::VIEW_JOB->value]->id,
+            $permissions[PermissionEnum::CREATE_JOB->value]->id,
+            $permissions[PermissionEnum::UPDATE_JOB->value]->id,
+            $permissions[PermissionEnum::DELETE_JOB->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
             $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
+            $permissions[PermissionEnum::VIEW_JOB->value]->id,
         ]);
 
         if (App::isLocal()) {

@@ -12,10 +12,12 @@
             </div>
 
             <div class="main__action">
-                <x-link href="{{ route('managements.jobs.create') }}" class="btn btn_primary">
-                    <span class="icon icon-plus-solid"></span>
-                    <span class="btn__text">Create New Jobs</span>
-                </x-link>
+                @can(\App\Enums\PermissionEnum::CREATE_JOB->value)
+                    <x-link href="{{ route('managements.jobs.create') }}" class="btn btn_primary">
+                        <span class="icon icon-plus-solid"></span>
+                        <span class="btn__text">Create New Jobs</span>
+                    </x-link>
+                @endcan
             </div>
         </div>
 

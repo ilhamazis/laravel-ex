@@ -14,11 +14,13 @@
                             <span>Dashboard</span>
                         </x-link>
                     </li>
-                    <li @class(['nav__item', 'active' => request()->routeIs('managements.jobs.*')])>
-                        <x-link class="nav__link" href="{{ route('managements.jobs.index') }}">
-                            <span>Jobs</span>
-                        </x-link>
-                    </li>
+                    @can(\App\Enums\PermissionEnum::VIEW_JOB->value)
+                        <li @class(['nav__item', 'active' => request()->routeIs('managements.jobs.*')])>
+                            <x-link class="nav__link" href="{{ route('managements.jobs.index') }}">
+                                <span>Jobs</span>
+                            </x-link>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
         </div>

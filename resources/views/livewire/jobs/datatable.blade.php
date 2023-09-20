@@ -111,11 +111,13 @@
                                                 class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
                                             <span class="icon icon-eye-solid"></span>
                                         </x-link>
-                                        <button x-on:click="deleteRouteKey = @js($job->slug)" data-toggle="modal"
-                                                data-target="#delete-modal"
-                                                class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">
-                                            <span class="icon icon-trash-solid"></span>
-                                        </button>
+                                        @can(\App\Enums\PermissionEnum::DELETE_JOB->value)
+                                            <button x-on:click="deleteRouteKey = @js($job->slug)" data-toggle="modal"
+                                                    data-target="#delete-modal"
+                                                    class="btn btn_outline btn_xs btn_icon" data-btn-label="Hapus">
+                                                <span class="icon icon-trash-solid"></span>
+                                            </button>
+                                        @endcan
                                         <div class="dropdown">
                                             <button type="button" class="btn btn_outline btn_xs btn_icon"
                                                     data-toggle="dropdown">

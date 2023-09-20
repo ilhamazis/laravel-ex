@@ -60,10 +60,12 @@
             <div class="col-12 col-sm-5 col-md-3">
                 <div class="grid">
                     <div class="col-6">
-                        <x-link href="{{ route('managements.jobs.edit', $job) }}" class="btn btn_outline btn_md">
-                            <span class="icon icon-pencil-square-solid"></span>
-                            Edit Job
-                        </x-link>
+                        @can(\App\Enums\PermissionEnum::UPDATE_JOB->value)
+                            <x-link href="{{ route('managements.jobs.edit', $job) }}" class="btn btn_outline btn_md">
+                                <span class="icon icon-pencil-square-solid"></span>
+                                Edit Job
+                            </x-link>
+                        @endcan
                     </div>
                     <div class="col-6">
                         <x-copy-link class="btn btn_outline btn_md btn_full-width">
