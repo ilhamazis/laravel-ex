@@ -10,7 +10,6 @@ RUN composer install \
     --no-interaction \
     --no-plugins \
     --no-scripts \
-    --no-dev \
     --prefer-dist
 
 COPY . .
@@ -63,7 +62,7 @@ RUN apt-get install -y zlib1g-dev libpng-dev libfreetype6-dev libjpeg62-turbo-de
 RUN apt-get update
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pgsql
+    && docker-php-ext-install pdo dom pdo_pgsql pgsql
 
 RUN docker-php-ext-install exif pcntl bcmath gd
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
@@ -88,6 +87,8 @@ USER opsec
 #RUN php artisan key:generate
 ###########################################CLEAR CACHE
 RUN php artisan optimize:clear
+###########################################MIGRATE-TO-DATABASE-DUMMY
+RUN php artisan migrate:fresh --seed
 ####################################PORT
 EXPOSE 80
 
