@@ -8,9 +8,10 @@ use App\Enums\RoleEnum;
 use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\Attachment;
-use App\Models\Comment;
 use App\Models\Job;
+use App\Models\Note;
 use App\Models\Permission;
+use App\Models\Review;
 use App\Models\Role;
 use App\Models\Step;
 use App\Models\Template;
@@ -76,9 +77,14 @@ class DatabaseSeeder extends Seeder
 
             $step = Step::factory()->create(['application_id' => $application->id]);
 
-            $comment = Comment::factory()->create([
+            $review = Review::factory()->create([
                 'step_id' => $step->id,
                 'user_id' => $interviewer->id,
+            ]);
+
+            $note = Note::factory()->create([
+                'step_id' => $step->id,
+                'user_id' => $humanCapital->id,
             ]);
 
             $template = Template::factory()->create([

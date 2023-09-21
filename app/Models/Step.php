@@ -23,8 +23,13 @@ class Step extends Model
         return $this->belongsTo(Application::class);
     }
 
-    public function comments(): HasMany
+    public function reviews(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Review::class);
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
     }
 }
