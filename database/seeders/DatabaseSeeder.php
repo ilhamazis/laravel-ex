@@ -37,10 +37,15 @@ class DatabaseSeeder extends Seeder
 
         $roles[RoleEnum::HUMAN_CAPITAL->value]->permissions()->sync([
             $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
+            $permissions[PermissionEnum::VIEW_JOB->value]->id,
+            $permissions[PermissionEnum::CREATE_JOB->value]->id,
+            $permissions[PermissionEnum::UPDATE_JOB->value]->id,
+            $permissions[PermissionEnum::DELETE_JOB->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
             $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
+            $permissions[PermissionEnum::VIEW_JOB->value]->id,
         ]);
 
         if (App::isLocal()) {
@@ -51,8 +56,8 @@ class DatabaseSeeder extends Seeder
             $interviewer->roles()->attach($roles[RoleEnum::INTERVIEWER->value]->id);
 
             $job = Job::factory()->create([
-                'created_by' => $humanCapital->username,
-                'updated_by' => $humanCapital->username,
+                'created_by' => $humanCapital->id,
+                'updated_by' => $humanCapital->id,
                 'deleted_by' => null,
             ]);
 
@@ -65,8 +70,8 @@ class DatabaseSeeder extends Seeder
 
             $attachment = Attachment::factory()->create([
                 'application_id' => $application->id,
-                'created_by' => $applicant->name,
-                'updated_by' => $applicant->name,
+                'created_by' => null,
+                'updated_by' => null,
             ]);
 
             $step = Step::factory()->create(['application_id' => $application->id]);
@@ -77,8 +82,8 @@ class DatabaseSeeder extends Seeder
             ]);
 
             $template = Template::factory()->create([
-                'created_by' => $humanCapital->username,
-                'updated_by' => $humanCapital->username,
+                'created_by' => $humanCapital->id,
+                'updated_by' => $humanCapital->id,
             ]);
         }
     }

@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->text('path');
             $table->foreignId('application_id')->constrained();
-            $table->string('created_by');
-            $table->string('updated_by');
-            $table->string('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

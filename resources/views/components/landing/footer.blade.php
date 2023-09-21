@@ -19,42 +19,42 @@
             <h6 class="footer__links-title">Produk</h6>
             <ul class="footer__links-list">
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Edlink
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Maukuliah
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Siakad Cloud
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Akreditasi Cloud
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Profeeder
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         GoFeeder
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Karirlink
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Sevima Pay
                     </a>
                 </li>
@@ -65,22 +65,22 @@
             <h6 class="footer__links-title">Perusahaan</h6>
             <ul class="footer__links-list">
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Tentang SEVIMA
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Event
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Berita
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Perguruan Tinggi
                     </a>
                 </li>
@@ -91,17 +91,17 @@
             <h6 class="footer__links-title">Legal</h6>
             <ul class="footer__links-list">
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Privacy Policy
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Terms & Conditions
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Sitemap
                     </a>
                 </li>
@@ -112,27 +112,27 @@
             <h6 class="footer__links-title">Ikuti Sevima</h6>
             <ul class="footer__links-list">
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Facebook
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Instagram
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Twitter
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Youtube
                     </a>
                 </li>
                 <li class="footer__links-item">
-                    <a wire:navigate href="#">
+                    <a href="#">
                         Linkedin
                     </a>
                 </li>

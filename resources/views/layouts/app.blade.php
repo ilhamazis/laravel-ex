@@ -6,29 +6,23 @@
 
     <title>{{ $title ?? config('app.name', 'SEVIMA Career') }}</title>
 
-    @yield('styles')
+    @stack('styles')
     <link href="{{ asset('/quantum-v2.0.0-202307280002/assets/release/qn-202307280002.css') }}" rel="stylesheet">
+    @vite(['resources/css/custom-cms.css', 'resources/js/app.js'])
 </head>
-<body {{ $attributes->merge() }}>
+<body {{ $attributes }}>
 
-<x-header/>
+<x-header @class(['header_position-static' => $headerStatic])/>
 
 <main class="main">
-    <div class="container">
-        <div class="main__header">
-            <div class="main__location">
-                <x-breadcrumb/>
-            </div>
-        </div>
-
-        {{ $slot }}
-    </div>
+    {{ $slot }}
 
     <x-footer/>
 </main>
 
-@yield('scripts')
+@stack('scripts')
 <script type="text/javascript"
         src="{{ asset('/quantum-v2.0.0-202307280002/assets/release/qn-202307280002.js') }}"></script>
+@stack('custom-scripts')
 </body>
 </html>

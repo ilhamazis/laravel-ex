@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Management\JobController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -16,4 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/logout', [AuthController::class, 'destroy'])->name('logout');
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::prefix('/managements')->name('managements.')->group(function () {
+        Route::resource('/jobs', JobController::class)->except('destroy');
+        Route::delete('/jobs', [JobController::class, 'destroy'])->name('jobs.destroy');
+    });
 });
