@@ -2,25 +2,21 @@
     padding: 1.25rem 2.5rem;
 }
 
+.cta__wrapper {
+    background: linear-gradient(88deg, #EAF6FF 22.55%, #B8E3FF 93.75%);
+    border-radius: 2rem;
+}
+
 .cta__container {
     position: relative;
     overflow: hidden;
     gap: 2.5rem;
     padding: 4.5rem 4rem;
-    border-radius: 2rem;
-    background: linear-gradient(88deg, #EAF6FF 22.55%, #B8E3FF 93.75%);
-}
-
-.cta__illustration {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 5;
+    background-size: cover;
 }
 
 .cta__title {
     position: relative;
-    z-index: 10;
     width: 100%;
     color: #0F2C3F;
     font-size: 2rem;
@@ -32,7 +28,6 @@
 
 .cta__button {
     position: relative;
-    z-index: 10;
     display: inline-block;
     white-space: nowrap;
     margin-top: 2.5rem;
