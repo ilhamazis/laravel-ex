@@ -10,12 +10,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('application_steps', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
+            $table->string('status');
+            $table->foreignId('application_id')->constrained();
             $table->foreignId('step_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('updated_by')->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('application_steps');
     }
 };

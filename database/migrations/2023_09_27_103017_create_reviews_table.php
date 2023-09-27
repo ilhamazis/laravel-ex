@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('rating');
             $table->text('content');
-            $table->foreignId('step_id')->constrained();
+            $table->foreignId('application_step_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

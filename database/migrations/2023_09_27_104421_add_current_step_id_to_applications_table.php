@@ -10,11 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('steps', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('order');
-            $table->timestamps();
+        Schema::table('applications', function (Blueprint $table) {
+            $table->foreignId('current_application_step_id')
+                ->unique()
+                ->constrained('application_steps');
         });
     }
 
@@ -23,6 +22,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('steps');
+        Schema::table('applications', function (Blueprint $table) {
+            //
+        });
     }
 };
