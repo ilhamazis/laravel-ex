@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::table('applications', function (Blueprint $table) {
             $table->foreignId('current_application_step_id')
                 ->unique()
+                ->nullable()
                 ->constrained('application_steps');
         });
     }
