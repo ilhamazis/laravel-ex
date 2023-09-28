@@ -9,9 +9,23 @@
 @import "jobs.css";
 @import "quill-custom.css";
 
+:root {
+    --custom-color-black: #0F2C3F;
+    --custom-color-white: #FFFFFF;
+    --custom-color-gray: rgba(0, 0, 0, 0.5);
+    --custom-color-light-gray: #F4F7F9;
+    --custom-color-blue: #3955A4;
+    --custom-color-teal: #4D6D7D;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Instrument Sans', sans-serif;
+}
+
+select,
+button {
+    cursor: pointer;
 }

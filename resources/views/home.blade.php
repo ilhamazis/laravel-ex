@@ -221,7 +221,7 @@
             <ul class="home__slide-row splide__list">
                 <li class="card splide__slide">
                     <h4 class="card__title">Business Intellegences (Internship)</h4>
-                    <span class="card__badge-type">Internship</span>
+                    <span class="card__badge-outline">Internship</span>
                     <x-link href="#" class="card__link">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,7 +233,7 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Internal Communication Graphic Designer Freelance</h4>
-                    <span class="card__badge-type">Freelance</span>
+                    <span class="card__badge-outline">Freelance</span>
                     <x-link href="#" class="card__link">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -245,7 +245,7 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Senior Software Engineer (Backend)</h4>
-                    <span class="card__badge-type">Fulltime</span>
+                    <span class="card__badge-outline">Fulltime</span>
                     <x-link href="#" class="card__link">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -257,7 +257,7 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Business Intellegences (Internship)</h4>
-                    <span class="card__badge-type">Internship</span>
+                    <span class="card__badge-outline">Internship</span>
                     <x-link href="#" class="card__link">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -269,7 +269,7 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Internal Communication Graphic Designer Freelance</h4>
-                    <span class="card__badge-type">Freelance</span>
+                    <span class="card__badge-outline">Freelance</span>
                     <x-link href="#" class="card__link">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,7 @@
 }
 
 .card__title {
-    color: #0F2C3F;
+    color: var(--custom-color-black);
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 2rem;
@@ -19,8 +19,8 @@
     align-items: center;
 }
 
-.card__badge-type,
-.card__badge-count {
+.card__badge-outline,
+.card__badge-secondary {
     width: fit-content;
     height: fit-content;
     padding: 0.75rem 1rem;
@@ -29,19 +29,19 @@
     line-height: 1.5rem;
 }
 
-.card__badge-type {
-    border: 1px solid #3955A4;
-    background-color: #F6F6F6;
-    color: #3955A4;
+.card__badge-outline {
+    border: 1px solid var(--custom-color-blue);
+    background-color: var(--custom-color-light-gray);
+    color: var(--custom-color-blue);
 }
 
-.card__badge-count {
+.card__badge-secondary {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
-    background-color: #F6F6F6;
-    color: #989898;
+    background-color: var(--custom-color-light-gray);
+    color: var(--custom-color-gray);
 }
 
 .card__link {
@@ -53,16 +53,16 @@
     margin-top: 1rem;
     padding: 0.875rem 1.125rem;
     border-radius: 3.5rem;
-    background-color: #3955A4;
-    color: #FFFFFF;
+    background-color: var(--custom-color-blue);
+    color: var(--custom-color-white);
     text-decoration: none;
     font-weight: 500;
     line-height: 1.5rem;
 }
 
 @media (min-width: 1024px) {
-    .card__badge-type,
-    .card__badge-count {
+    .card__badge-outline,
+    .card__badge-secondary {
         font-size: 1.125rem;
         line-height: 1.625rem;
     }

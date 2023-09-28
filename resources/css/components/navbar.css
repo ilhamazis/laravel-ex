@@ -12,19 +12,19 @@
 }
 
 .navbar__logo-text {
-    color: #3955A4;
+    color: var(--custom-color-blue);
     font-size: 1.25rem;
     font-weight: 500;
 }
 
 .navbar__cta {
     display: none;
-    background-color: #FFFFFF;
-    color: #3955A4;
+    background-color: var(--custom-color-white);
+    color: var(--custom-color-blue);
     font-size: 1rem;
     text-decoration: none;
     padding: 0.75rem 0.875rem;
-    border: 1px solid #3955A4;
+    border: 1px solid var(--custom-color-blue);
     border-radius: 2rem;
 }
 

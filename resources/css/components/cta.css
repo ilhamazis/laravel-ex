@@ -18,7 +18,7 @@
 .cta__title {
     position: relative;
     width: 100%;
-    color: #0F2C3F;
+    color: var(--custom-color-black);
     font-size: 2rem;
     font-style: normal;
     font-weight: 600;
@@ -33,8 +33,8 @@
     margin-top: 2.5rem;
     padding: 1.125rem 2rem;
     border-radius: 2rem;
-    background-color: #3955A4;
-    color: #FFFFFF;
+    background-color: var(--custom-color-blue);
+    color: var(--custom-color-white);
     text-decoration: none;
     font-weight: 500;
     line-height: 1.5rem;
