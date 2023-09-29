@@ -31,13 +31,6 @@
     display: inline-block;
     white-space: nowrap;
     margin-top: 2.5rem;
-    padding: 1.125rem 2rem;
-    border-radius: 2rem;
-    background-color: var(--custom-color-blue);
-    color: var(--custom-color-white);
-    text-decoration: none;
-    font-weight: 500;
-    line-height: 1.5rem;
 }
 
 @media (min-width: 1024px) {

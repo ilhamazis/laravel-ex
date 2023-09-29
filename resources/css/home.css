@@ -47,19 +47,6 @@
     font-weight: 600;
 }
 
-.home__gallery-cta {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    gap: 0.88rem;
-    padding: 0.5rem 0;
-    color: var(--custom-color-blue);
-    font-size: 1.125rem;
-    font-weight: 500;
-    text-decoration: none;
-    line-height: 1.5rem;
-}
-
 .home__gallery-content {
     margin-top: 5rem;
     display: grid;

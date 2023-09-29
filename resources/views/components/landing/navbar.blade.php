@@ -4,7 +4,7 @@
         <span class="navbar__logo-text">Career</span>
     </x-link>
 
-    <x-link href="{{ route('jobs') }}" class="navbar__cta">
+    <x-link href="{{ route('jobs') }}" class="navbar__cta button button__outline">
         Explore Sekarang!
     </x-link>
 </div>
