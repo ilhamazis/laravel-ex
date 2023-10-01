@@ -5,7 +5,7 @@
         <div class="hero__content">
             <h1 class="hero__title">
                 Bergabunglah dengan SEVIMA untuk Meraih
-                <span class="hero__title-emphasis">Karier Luar Biasa!</span>
+                <span class="emphasis">Karier Luar Biasa!</span>
             </h1>
             <p class="hero__description">
                 Apakah Anda siap mengambil langkah berani dalam karier Anda? SEVIMA mengundang Anda untuk menjelajahi
@@ -65,7 +65,7 @@
             <div class="home__gallery-header">
                 <h4 class="home__gallery-text">GALERI KAMI</h4>
                 <h2 class="home__gallery-title">
-                    <span class="home__gallery-title-emphasis">
+                    <span class="emphasis">
                         Menjelajahi Suasana SEVIMA:
                     </span>
                     Melihat Lebih Dekat Lingkungan Kerja Inspiratif Kami!
@@ -135,7 +135,7 @@
         <div class="home__motto-header">
             <h4 class="home__motto-text">CORE VALUE</h4>
             <h2 class="home__motto-title">
-                <span class="home__motto-title-emphasis">Pilar Nilai SEVIMA:</span>
+                <span class="emphasis">Pilar Nilai SEVIMA:</span>
                 Mengarahkan Keunggulan Kami
             </h2>
         </div>

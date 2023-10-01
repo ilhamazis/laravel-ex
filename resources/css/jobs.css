@@ -5,9 +5,9 @@
 .jobs__count {
     text-align: center;
     color: var(--custom-color-black);
-    font-size: 2rem;
+    font-size: var(--custom-fs-4);
     font-weight: 500;
-    line-height: 2.5rem;
+    line-height: var(--custom-fs-3);
 }
 
 .jobs__wrapper {
@@ -30,7 +30,7 @@
 
 .jobs__pagination-detail {
     color: var(--custom-color-gray);
-    line-height: 1.5rem;
+    line-height: var(--custom-lh-5);
 }
 
 @media (min-width: 768px) {
@@ -47,9 +47,7 @@
     .jobs__count {
         text-align: left;
     }
-}
 
-@media (min-width: 1280px) {
     .jobs__wrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }

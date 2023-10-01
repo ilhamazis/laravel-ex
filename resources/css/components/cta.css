@@ -19,10 +19,10 @@
     position: relative;
     width: 100%;
     color: var(--custom-color-black);
-    font-size: 2rem;
+    font-size: var(--custom-fs-1);
     font-style: normal;
     font-weight: 600;
-    line-height: 4rem;
+    line-height: var(--custom-lh-1);
     letter-spacing: -0.075rem;
 }
 
@@ -39,7 +39,6 @@
     }
 
     .cta__title {
-        width: 45%;
-        font-size: 3rem;
+        width: 50%;
     }
 }

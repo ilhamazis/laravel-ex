@@ -28,23 +28,18 @@
 .home__motto-item-text,
 .home__featured-text {
     color: var(--custom-color-teal);
-    font-size: 1rem;
+    font-size: var(--custom-fs-6);
     font-weight: 500;
-    line-height: 1.625rem;
+    line-height: var(--custom-lh-5);
     letter-spacing: 0.05rem;
 }
 
 .home__gallery-title {
     margin: 1.25rem 0;
     color: var(--custom-color-black);
-    font-size: 2rem;
+    font-size: var(--custom-fs-2);
     font-weight: 500;
-    line-height: 3.5rem;
-}
-
-.home__gallery-title-emphasis {
-    font-style: italic;
-    font-weight: 600;
+    line-height: var(--custom-lh-1);
 }
 
 .home__gallery-content {
@@ -118,13 +113,13 @@
 
 .home__statistic-count {
     font-weight: 500;
-    font-size: 2.5rem;
-    line-height: 2.5rem;
+    font-size: var(--custom-fs-1);
+    line-height: var(--custom-lh-2);
 }
 
 .home__statistic-desc {
     color: var(--custom-color-teal);
-    font-size: 0.875rem;
+    font-size: var(--custom-fs-6);
 }
 
 .home__motto {
@@ -154,25 +149,12 @@
     text-align: center;
 }
 
-.home__motto-text {
-    color: var(--custom-color-teal);
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.625rem;
-    letter-spacing: 0.05rem;
-}
-
 .home__motto-title {
     margin: 1.25rem 0;
     color: var(--custom-color-white);
-    font-size: 2rem;
+    font-size: var(--custom-fs-2);
     font-weight: 500;
-    line-height: 3.5rem;
-}
-
-.home__motto-title-emphasis {
-    font-style: italic;
-    font-weight: 600;
+    line-height: var(--custom-lh-1);
 }
 
 .home__motto-content {
@@ -205,16 +187,16 @@
 .home__motto-item-title {
     margin-top: 1.25rem;
     margin-bottom: 1rem;
-    font-size: 2.5rem;
+    font-size: var(--custom-fs-3);
     font-weight: 500;
-    line-height: 3rem;
+    line-height: var(--custom-lh-2);
 }
 
 .home__motto-item-desc {
     width: 100%;
     opacity: 0.56;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: var(--custom-fs-6);
+    line-height: var(--custom-lh-5);
 }
 
 .home__motto-image {
@@ -240,9 +222,9 @@
 .home__featured-title {
     margin-top: 1.25rem;
     color: var(--custom-color-black);
-    font-size: 2rem;
+    font-size: var(--custom-fs-2);
     font-weight: 500;
-    line-height: 3.5rem;
+    line-height: var(--custom-lh-1);
 }
 
 .home__slide-controls {
@@ -287,20 +269,9 @@
         padding: 2.5rem 5rem;
     }
 
-    .home__gallery-header {
+    .home__gallery-header,
+    .home__motto-header {
         width: 50%;
-    }
-
-    .home__gallery-text,
-    .home__motto-text,
-    .home__motto-item-text,
-    .home__featured-text {
-        font-size: 1.25rem;
-    }
-
-    .home__gallery-title,
-    .home__motto-title {
-        font-size: 2.5rem;
     }
 
     .home__gallery-item:nth-child(odd) {
@@ -313,10 +284,6 @@
 
     .home__motto {
         padding: 5rem;
-    }
-
-    .home__motto-header {
-        width: 50%;
     }
 
     .home__motto-row,
@@ -352,10 +319,6 @@
 
     .home__statistic-item:last-child {
         border-right: none;
-    }
-
-    .home__motto-header {
-        width: 40%;
     }
 
     .home__motto-image {

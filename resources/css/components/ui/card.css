@@ -8,9 +8,9 @@
 
 .card__title {
     color: var(--custom-color-black);
-    font-size: 1.5rem;
+    font-size: var(--custom-fs-5);
     font-weight: 500;
-    line-height: 2rem;
+    line-height: var(--custom-lh-4);
 }
 
 .card__badges {

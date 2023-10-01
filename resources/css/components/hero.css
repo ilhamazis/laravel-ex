@@ -26,20 +26,15 @@
 
 .hero__title {
     color: var(--custom-color-black);
-    font-size: 2.5rem;
+    font-size: var(--custom-fs-1);
     font-weight: 500;
-}
-
-.hero__title-emphasis {
-    font-style: italic;
-    font-weight: 600;
 }
 
 .hero__description {
     margin: 1rem 0;
     color: var(--custom-color-gray);
-    font-size: 1rem;
-    line-height: 1.75rem;
+    font-size: var(--custom-fs-6);
+    line-height: var(--custom-lh-4);
 }
 
 .hero__form {
@@ -100,12 +95,11 @@
     }
 
     .hero__title {
-        width: 37.5%;
-        font-size: 3rem;
+        width: 40%;
     }
 
     .hero__description {
-        width: 27.5%;
+        width: 35%;
     }
 
     .hero__form {
