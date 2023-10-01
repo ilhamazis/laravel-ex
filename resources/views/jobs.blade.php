@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <button class="hero__button button button__primary" type="submit">Cari Sekarang</button>
+                <button class="hero__button button button__md button__primary" type="submit">Cari Sekarang</button>
             </form>
         </div>
     </section>
@@ -74,7 +74,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -100,7 +100,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -126,7 +126,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -152,7 +152,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -178,7 +178,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -204,7 +204,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -230,7 +230,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -256,7 +256,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -282,7 +282,7 @@
                         120 Job Applicants
                     </div>
                 </div>
-                <x-link href="#" class="card__link button button__primary">
+                <x-link href="#" class="card__link button button__md button__primary">
                     See Detail
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -294,7 +294,8 @@
         </div>
 
         <div class="jobs__pagination">
-            <button type="button" class="jobs__pagination-button">Muat lebih banyak</button>
+            <button type="button" class="jobs__pagination-button button button__md button__outline">Muat lebih banyak
+            </button>
             <p class="jobs__pagination-detail">Showing 9 of out 200</p>
         </div>
     </section>

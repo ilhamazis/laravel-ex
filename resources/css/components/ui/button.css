@@ -4,8 +4,6 @@
     align-items: center;
     gap: 0.88rem;
     text-decoration: none;
-    padding: 1rem 1.5rem;
-    border-radius: 2rem;
 }
 
 .button__primary {
@@ -22,4 +20,22 @@
 .button__ghost {
     color: var(--custom-color-blue);
     font-weight: 500;
+}
+
+.button__sm {
+    font-size: 0.75rem;
+    padding: 0.65rem 1rem;
+    border-radius: 1.5rem;
+}
+
+.button__md {
+    font-size: 1rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 2rem;
+}
+
+.button__lg {
+    font-size: 1.125rem;
+    padding: 1.1rem 1.75rem;
+    border-radius: 2.5rem;
 }

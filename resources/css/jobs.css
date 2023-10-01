@@ -26,12 +26,6 @@
 
 .jobs__pagination-button {
     background-color: var(--custom-color-white);
-    color: var(--custom-color-blue);
-    font-weight: 500;
-    text-decoration: none;
-    padding: 1.125rem 2rem;
-    border: 1px solid var(--custom-color-blue);
-    border-radius: 2rem;
 }
 
 .jobs__pagination-detail {
