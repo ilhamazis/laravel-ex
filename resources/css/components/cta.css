@@ -11,7 +11,7 @@
     position: relative;
     overflow: hidden;
     gap: 2.5rem;
-    padding: 4.5rem 4rem;
+    padding: 4.5rem 2rem;
     background-size: cover;
 }
 
@@ -36,6 +36,10 @@
 @media (min-width: 1024px) {
     .cta {
         padding: 1.25rem 5rem;
+    }
+
+    .cta__container {
+        padding: 4.5rem 4rem;
     }
 
     .cta__title {
