@@ -86,6 +86,8 @@ class DatabaseSeeder extends Seeder
                 'updated_by' => null
             ]);
 
+            $application->update(['current_application_step_id' => $applicationStep->id]);
+
             $attachment = Attachment::factory()->create([
                 'application_id' => $application->id,
                 'created_by' => null,
