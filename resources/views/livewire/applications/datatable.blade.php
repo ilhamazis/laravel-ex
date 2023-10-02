@@ -56,7 +56,7 @@
                         </td>
                         <td>{{ $application->created_at->toFormattedDateString() }}</td>
                         <td>{{ $application->applicant->name }}</td>
-                        <td>{{ $application->latestStep->name }}</td>
+                        <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
                         <td class="cell-action">
                             <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
                                 <x-link href="{{ route('managements.jobs.applications.show', [$job, $application]) }}"

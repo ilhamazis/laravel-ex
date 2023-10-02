@@ -32,7 +32,7 @@ class Datatable extends MasterDatatable
     public function render(): View
     {
         $applications = $this->applicationManagingService->findAll(
-            jobId: $this->job->id,
+            job: $this->job,
             limit: $this->limit,
             field: $this->field,
             direction: $this->direction,
