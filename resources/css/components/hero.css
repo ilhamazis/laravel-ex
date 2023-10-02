@@ -51,7 +51,7 @@
 }
 
 .hero__input-group {
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -70,7 +70,7 @@
     width: 100%;
     border: none;
     outline: none;
-    padding: 0.625rem 0;
+    padding: 0.825rem 0;
     background-color: var(--custom-color-white);
     color: var(--custom-color-gray);
 }
