@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ApplicationStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,10 @@ class Application extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'status' => ApplicationStatusEnum::class,
+    ];
+
     public function applicant(): BelongsTo
     {
         return $this->belongsTo(Applicant::class);
@@ -23,13 +28,23 @@ class Application extends Model
         return $this->belongsTo(Job::class);
     }
 
+    public function currentApplicationStep(): BelongsTo
+    {
+        return $this->belongsTo(ApplicationStep::class, 'current_application_step_id');
+    }
+
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class);
     }
 
-    public function steps(): HasMany
+    public function communications(): HasMany
     {
-        return $this->hasMany(Step::class);
+        return $this->hasMany(Communication::class);
+    }
+
+    public function applicationSteps(): HasMany
+    {
+        return $this->hasMany(ApplicationStep::class);
     }
 }

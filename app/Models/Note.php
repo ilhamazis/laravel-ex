@@ -12,9 +12,9 @@ class Note extends Model
 
     protected $guarded = ['id'];
 
-    public function step(): BelongsTo
+    public function applicationStep(): BelongsTo
     {
-        return $this->belongsTo(Step::class);
+        return $this->belongsTo(ApplicationStep::class);
     }
 
     public function user(): BelongsTo
