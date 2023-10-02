@@ -1,0 +1,22 @@
+.badge {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 3.5rem;
+    font-size: 0.85rem;
+}
+
+.badge__outline {
+    border: 1px solid var(--custom-color-blue);
+    background-color: var(--custom-color-light-gray);
+    color: var(--custom-color-blue);
+}
+
+.badge__secondary {
+    background-color: var(--custom-color-light-gray);
+    color: var(--custom-color-gray);
+}

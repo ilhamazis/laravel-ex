@@ -5,7 +5,7 @@
         <div class="hero__content">
             <h1 class="hero__title">
                 Bergabunglah dengan SEVIMA untuk Meraih
-                <span class="hero__title-emphasis">Karier Luar Biasa!</span>
+                <span class="emphasis">Karier Luar Biasa!</span>
             </h1>
             <p class="hero__description">
                 Apakah Anda siap mengambil langkah berani dalam karier Anda? SEVIMA mengundang Anda untuk menjelajahi
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <button class="hero__button" type="submit">Cari Sekarang</button>
+                <button class="button button__md button__primary" type="submit">Cari Sekarang</button>
             </form>
         </div>
     </section>
@@ -65,12 +65,12 @@
             <div class="home__gallery-header">
                 <h4 class="home__gallery-text">GALERI KAMI</h4>
                 <h2 class="home__gallery-title">
-                    <span class="home__gallery-title-emphasis">
+                    <span class="emphasis">
                         Menjelajahi Suasana SEVIMA:
                     </span>
                     Melihat Lebih Dekat Lingkungan Kerja Inspiratif Kami!
                 </h2>
-                <x-link href="#" class="home__gallery-cta">
+                <x-link href="#" class="button button__md button__ghost">
                     <span>Explore Sekarang!</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -135,7 +135,7 @@
         <div class="home__motto-header">
             <h4 class="home__motto-text">CORE VALUE</h4>
             <h2 class="home__motto-title">
-                <span class="home__motto-title-emphasis">Pilar Nilai SEVIMA:</span>
+                <span class="emphasis">Pilar Nilai SEVIMA:</span>
                 Mengarahkan Keunggulan Kami
             </h2>
         </div>
@@ -221,8 +221,8 @@
             <ul class="home__slide-row splide__list">
                 <li class="card splide__slide">
                     <h4 class="card__title">Business Intellegences (Internship)</h4>
-                    <span class="card__badge-type">Internship</span>
-                    <x-link href="#" class="card__link">
+                    <span class="badge badge__outline">Internship</span>
+                    <x-link href="#" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -233,8 +233,8 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Internal Communication Graphic Designer Freelance</h4>
-                    <span class="card__badge-type">Freelance</span>
-                    <x-link href="#" class="card__link">
+                    <span class="badge badge__outline">Freelance</span>
+                    <x-link href="#" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -245,8 +245,8 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Senior Software Engineer (Backend)</h4>
-                    <span class="card__badge-type">Fulltime</span>
-                    <x-link href="#" class="card__link">
+                    <span class="badge badge__outline">Fulltime</span>
+                    <x-link href="#" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -257,8 +257,8 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Business Intellegences (Internship)</h4>
-                    <span class="card__badge-type">Internship</span>
-                    <x-link href="#" class="card__link">
+                    <span class="badge badge__outline">Internship</span>
+                    <x-link href="#" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -269,8 +269,8 @@
                 </li>
                 <li class="card splide__slide">
                     <h4 class="card__title">Internal Communication Graphic Designer Freelance</h4>
-                    <span class="card__badge-type">Freelance</span>
-                    <x-link href="#" class="card__link">
+                    <span class="badge badge__outline">Freelance</span>
+                    <x-link href="#" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -283,7 +283,7 @@
         </div>
 
         <div class="home__featured-cta">
-            <x-link href="{{ route('jobs') }}" class="home__featured-cta-button">Explore Sekarang!</x-link>
+            <x-link href="{{ route('jobs') }}" class="button button__md button__outline">Explore Sekarang!</x-link>
         </div>
     </section>
 
