@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import "normalize.css";
+@import "components/ui/badge.css";
+@import "components/ui/button.css";
 @import "components/ui/card.css";
 @import "components/navbar.css";
 @import "components/hero.css";
@@ -9,9 +11,64 @@
 @import "jobs.css";
 @import "quill-custom.css";
 
+:root {
+    --custom-fs-1: 2rem;
+    --custom-fs-2: 1.75rem;
+    --custom-fs-3: 1.5rem;
+    --custom-fs-4: 1.25rem;
+    --custom-fs-5: 1.125rem;
+    --custom-fs-6: 0.8rem;
+    --custom-lh-1: 2.25rem;
+    --custom-lh-2: 2rem;
+    --custom-lh-3: 1.75rem;
+    --custom-lh-4: 1.5rem;
+    --custom-lh-5: 1.25rem;
+    --custom-lh-6: 1rem;
+    --custom-color-black: #0F2C3F;
+    --custom-color-white: #FFFFFF;
+    --custom-color-gray: rgba(0, 0, 0, 0.5);
+    --custom-color-light-gray: #F4F7F9;
+    --custom-color-blue: #3955A4;
+    --custom-color-teal: #4D6D7D;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Instrument Sans', sans-serif;
+}
+
+select,
+button {
+    cursor: pointer;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2hldnJvbi1kb3duIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEuNjQ2IDQuNjQ2YS41LjUgMCAwIDEgLjcwOCAwTDggMTAuMjkzbDUuNjQ2LTUuNjQ3YS41LjUgMCAwIDEgLjcwOC43MDhsLTYgNmEuNS41IDAgMCAxLS43MDggMGwtNi02YS41LjUgMCAwIDEgMC0uNzA4eiIvPgo8L3N2Zz4=) no-repeat 95% 50%;
+}
+
+.emphasis {
+    font-style: italic;
+    font-weight: 600;
+}
+
+@media only screen and (min-width: 1024px) {
+    :root {
+        --custom-fs-1: 2.5rem;
+        --custom-fs-2: 2.25rem;
+        --custom-fs-3: 2rem;
+        --custom-fs-4: 1.75rem;
+        --custom-fs-5: 1.5rem;
+        --custom-fs-6: 1rem;
+        --custom-lh-1: 2.75rem;
+        --custom-lh-2: 2.5rem;
+        --custom-lh-3: 2.25rem;
+        --custom-lh-4: 2rem;
+        --custom-lh-5: 1.75rem;
+        --custom-lh-6: 1.25rem;
+    }
 }

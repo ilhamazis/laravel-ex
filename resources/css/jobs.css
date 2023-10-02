@@ -4,10 +4,10 @@
 
 .jobs__count {
     text-align: center;
-    color: #0F2C3F;
-    font-size: 2rem;
+    color: var(--custom-color-black);
+    font-size: var(--custom-fs-4);
     font-weight: 500;
-    line-height: 2.5rem;
+    line-height: var(--custom-fs-3);
 }
 
 .jobs__wrapper {
@@ -25,18 +25,12 @@
 }
 
 .jobs__pagination-button {
-    background-color: #FFFFFF;
-    color: #3955A4;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 1.125rem 2rem;
-    border: 1px solid #3955A4;
-    border-radius: 2rem;
+    background-color: var(--custom-color-white);
 }
 
 .jobs__pagination-detail {
-    color: #989898;
-    line-height: 1.5rem;
+    color: var(--custom-color-gray);
+    line-height: var(--custom-lh-5);
 }
 
 @media (min-width: 768px) {
@@ -53,9 +47,7 @@
     .jobs__count {
         text-align: left;
     }
-}
 
-@media (min-width: 1536px) {
     .jobs__wrapper {
         grid-template-columns: 1fr 1fr 1fr;
     }
