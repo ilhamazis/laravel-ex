@@ -48,9 +48,4 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationStep::class);
     }
-
-    public function latestStep(): HasOne
-    {
-        return $this->hasOne(Step::class)->latest();
-    }
 }
