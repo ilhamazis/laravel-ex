@@ -19,6 +19,7 @@ class StepFactory extends Factory
     {
         return [
             'name' => collect(ApplicationStepEnum::values())->random(),
+            'order' => fake()->numberBetween(1, count(ApplicationStepEnum::values())),
         ];
     }
 }

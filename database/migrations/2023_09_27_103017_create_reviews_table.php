@@ -10,10 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->integer('rating');
             $table->text('content');
-            $table->foreignId('step_id')->constrained();
+            $table->foreignId('application_step_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('reviews');
     }
 };

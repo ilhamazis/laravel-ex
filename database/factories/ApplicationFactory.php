@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ApplicationStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class ApplicationFactory extends Factory
     public function definition(): array
     {
         return [
+            'status' => collect(ApplicationStatusEnum::values())->random(),
             'salary_before' => fake()->numberBetween(0, 1_000_000_000),
             'salary_expected' => fake()->numberBetween(0, 1_000_000_000),
         ];
