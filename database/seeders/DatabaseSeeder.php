@@ -3,11 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\ApplicationStepEnum;
 use App\Enums\PermissionEnum;
 use App\Enums\RoleEnum;
 use App\Models\Applicant;
 use App\Models\Application;
+use App\Models\ApplicationStep;
 use App\Models\Attachment;
+use App\Models\Communication;
 use App\Models\Job;
 use App\Models\Note;
 use App\Models\Permission;
@@ -49,6 +52,13 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_JOB->value]->id,
         ]);
 
+        foreach (ApplicationStepEnum::values() as $index => $step) {
+            Step::query()->create([
+                'name' => $step,
+                'order' => $index + 1,
+            ]);
+        }
+
         if (App::isLocal()) {
             $humanCapital = User::factory()->create(['username' => 'human_capital', 'email' => 'hc@sevima.com']);
             $interviewer = User::factory()->create(['username' => 'interviewer', 'email' => 'interviewer@sevima.com']);
@@ -69,21 +79,31 @@ class DatabaseSeeder extends Seeder
                 'job_id' => $job->id,
             ]);
 
+            $applicationStep = ApplicationStep::factory()->create([
+                'application_id' => $application->id,
+                'step_id' => 1,
+                'created_by' => null,
+                'updated_by' => null
+            ]);
+
             $attachment = Attachment::factory()->create([
                 'application_id' => $application->id,
                 'created_by' => null,
                 'updated_by' => null,
             ]);
 
-            $step = Step::factory()->create(['application_id' => $application->id]);
+            $communication = Communication::factory()->create([
+                'application_id' => $application->id,
+                'user_id' => $humanCapital->id,
+            ]);
 
             $review = Review::factory()->create([
-                'step_id' => $step->id,
+                'application_step_id' => $applicationStep->id,
                 'user_id' => $interviewer->id,
             ]);
 
             $note = Note::factory()->create([
-                'step_id' => $step->id,
+                'application_step_id' => $applicationStep->id,
                 'user_id' => $humanCapital->id,
             ]);
 

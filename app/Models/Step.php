@@ -18,18 +18,8 @@ class Step extends Model
         'name' => ApplicationStepEnum::class,
     ];
 
-    public function application(): BelongsTo
+    public function applicationSteps(): HasMany
     {
-        return $this->belongsTo(Application::class);
-    }
-
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
-    }
-
-    public function notes(): HasMany
-    {
-        return $this->hasMany(Note::class);
+        return $this->hasMany(ApplicationStep::class);
     }
 }
