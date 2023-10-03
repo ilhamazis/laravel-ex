@@ -33,7 +33,7 @@
         <x-alert variant="success" style="padding-bottom: 1rem" :message="session()->get('success')"
                  dismissable/>
 
-        <div class="table-max table-max_absolute">
+        <div wire:ignore.self class="table-max table-max_absolute">
             <table>
                 <thead>
                 <tr>
