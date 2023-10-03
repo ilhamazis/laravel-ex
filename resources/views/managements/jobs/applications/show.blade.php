@@ -4,6 +4,12 @@
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $jobSlug)],
         ['title' => 'Detail Pelamar'],
     ];
+
+    $applicationSteps = $application->applicationSteps->map(function (\App\Models\ApplicationStep $applicationStep) {
+        return $applicationStep->step->name->value;
+    })->toArray();
+
+    $missingSteps = array_diff(\App\Enums\ApplicationStepEnum::values(), $applicationSteps);
 @endphp
 
 <x-app-layout>
@@ -16,7 +22,7 @@
 
         <div class="card card_details-primary">
             <div class="grid">
-                <div class="col-12 col-sm-6 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="grid">
                         <div class="col-12">
                             <div class="row-data">
@@ -56,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="grid">
                         <div class="col-12">
                             <div class="row-data">
@@ -96,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="grid">
                         <div class="col-12">
                             <div class="row-data">
@@ -122,7 +128,7 @@
                         </div>
                         <div class="col-12">
                             <div class="row-data">
-                                <label class="row-data__name">Gaji Sebelumnya</label>
+                                <label class="row-data__name">Gaji yang Diharapkan</label>
                                 <span class="row-data__value">
                                     <span class="row-data__colon">:</span>
                                      {{
@@ -138,9 +144,33 @@
             </div>
         </div>
 
+        <div class="grid cols-1" style="overflow-x: auto; padding: 1.5rem 0">
+            <ul class="stepper">
+                @foreach($application->applicationSteps as $applicationStep)
+                    <li @class([
+                        'stepper__item',
+                        'check' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::PASSED,
+                        'active' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
+                        'fail' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::REJECTED,
+                    ])>{{ $applicationStep->step->name }}</li>
+                @endforeach
+
+                @foreach($missingSteps as $step)
+                    <li class="stepper__item">{{ $step }}</li>
+                @endforeach
+            </ul>
+        </div>
+
         <div class="grid">
-            <button type="submit" class="btn btn_primary">Move Forward</button>
-            <button type="button" class="btn btn_destructive">Reject</button>
+            <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn_primary btn_full-width">
+                    Lanjutkan ke Tahap
+                    {{ \App\Enums\ApplicationStepEnum::nextStepFrom($application->currentApplicationStep->step->name) }}
+                </button>
+            </div>
+            <div class="col-12 col-md-1">
+                <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
+            </div>
         </div>
 
         <div class="card">
@@ -148,7 +178,7 @@
                 <nav class="nav-tab">
                     <ul class="nav-tab__wrapper">
                         <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.show', [$jobSlug, $application])])>
-                            <x-link href="#">Communications</x-link>
+                            <x-link href="#">Kirim Email</x-link>
                         </li>
                         <li @class(['nav-tab__item', 'active' => false])>
                             <x-link href="#">Reviews</x-link>

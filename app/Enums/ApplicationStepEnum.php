@@ -14,4 +14,12 @@ enum ApplicationStepEnum: string
     case PSYCHOLOGICAL_TEST = 'Psychological Test';
     case USER_INTERVIEW = 'User Interview';
     case FINAL_INTERVIEW = 'Final Interview';
+
+    public static function nextStepFrom(ApplicationStepEnum $stepEnum)
+    {
+        $steps = ApplicationStepEnum::values();
+        $stepIndex = array_search($stepEnum->value, $steps);
+
+        return $steps[($stepIndex + 1) % count($steps)];
+    }
 }

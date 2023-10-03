@@ -33,8 +33,8 @@ window.initChoices = initChoices;
 window.initChoicesSearch = initChoicesSearch;
 window.copyToClipboard = copyToClipboard;
 
-if (typeof Livewire === 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof Livewire === 'undefined') {
         document.querySelectorAll('select[x-init="initChoices($el)"]').forEach(el => {
             initChoices(el);
         });
@@ -42,5 +42,11 @@ if (typeof Livewire === 'undefined') {
         document.querySelectorAll('select[x-init="initChoicesSearch($el)"]').forEach(el => {
             initChoicesSearch(el);
         });
+    }
+
+    document.querySelectorAll('.stepper').forEach(el => {
+        const stepperLineWidth = el.scrollWidth / el.childElementCount;
+
+        el.style.setProperty('--stepper-line-width', `${stepperLineWidth}px`)
     });
-}
+});

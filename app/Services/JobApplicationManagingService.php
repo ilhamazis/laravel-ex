@@ -7,6 +7,7 @@ use App\Models\Application;
 use App\Models\Job;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobApplicationManagingService
@@ -42,5 +43,13 @@ class JobApplicationManagingService
                     $q->latest();
                 },
             )->paginate($limit);
+    }
+
+    public function find(string $id): Application|Model|null
+    {
+        return Application::query()
+            ->with(['applicant', 'applicationSteps', 'applicationSteps.step', 'currentApplicationStep'])
+            ->where('id', $id)
+            ->first();
     }
 }

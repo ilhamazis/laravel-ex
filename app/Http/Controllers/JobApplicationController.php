@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Application;
 use App\Models\Job;
+use App\Services\JobApplicationManagingService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
 {
+    private JobApplicationManagingService $applicationManagingService;
+
+    public function __construct(JobApplicationManagingService $applicationManagingService)
+    {
+        $this->applicationManagingService = $applicationManagingService;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Job $job)
+    public function index(Job $job): View
     {
         return view('managements.jobs.applications.index', ['job' => $job]);
     }
@@ -19,8 +27,10 @@ class JobApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $jobSlug, Application $application)
+    public function show(string $jobSlug, string $applicationId): View
     {
+        $application = $this->applicationManagingService->find($applicationId);
+
         return view('managements.jobs.applications.show', [
             'jobSlug' => $jobSlug,
             'application' => $application,
