@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PermissionEnum;
 use App\Models\Job;
-use App\Services\JobApplicationManagingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
 {
-    private JobApplicationManagingService $applicationManagingService;
-
-    public function __construct(JobApplicationManagingService $applicationManagingService)
+    public function __construct()
     {
-        $this->applicationManagingService = $applicationManagingService;
+        $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION->value)->only(['index']);
     }
 
     /**
@@ -23,7 +21,7 @@ class JobApplicationController extends Controller
     {
         return view('managements.jobs.applications.index', ['job' => $job]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
