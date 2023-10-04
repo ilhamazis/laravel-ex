@@ -46,11 +46,13 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::CREATE_JOB->value]->id,
             $permissions[PermissionEnum::UPDATE_JOB->value]->id,
             $permissions[PermissionEnum::DELETE_JOB->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
             $permissions[PermissionEnum::VIEW_DASHBOARD->value]->id,
             $permissions[PermissionEnum::VIEW_JOB->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION->value]->id,
         ]);
 
         foreach (ApplicationStepEnum::values() as $index => $step) {
