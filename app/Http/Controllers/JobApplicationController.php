@@ -23,20 +23,7 @@ class JobApplicationController extends Controller
     {
         return view('managements.jobs.applications.index', ['job' => $job]);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $jobSlug, string $applicationId): View
-    {
-        $application = $this->applicationManagingService->find($applicationId);
-
-        return view('managements.jobs.applications.show', [
-            'jobSlug' => $jobSlug,
-            'application' => $application,
-        ]);
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
