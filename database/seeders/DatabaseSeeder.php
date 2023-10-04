@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Enums\ApplicationStepStatusEnum;
 use App\Enums\PermissionEnum;
@@ -78,6 +79,7 @@ class DatabaseSeeder extends Seeder
             $applicant = Applicant::factory()->create();
 
             $application = Application::factory()->create([
+                'status' => ApplicationStatusEnum::ONGOING,
                 'applicant_id' => $applicant->id,
                 'job_id' => $job->id,
             ]);

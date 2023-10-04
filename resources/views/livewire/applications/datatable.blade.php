@@ -44,7 +44,8 @@
                         Tanggal Apply
                     </x-cell-sorting>
                     <th>Nama Pelamar</th>
-                    <th>Tahap Rekrutmen</th>
+                    <th>Tahap Rekrutmen Saat Ini</th>
+                    <th>Status</th>
                     <th class="cell-action cell-center">Aksi</th>
                 </tr>
                 </thead>
@@ -57,6 +58,11 @@
                         <td>{{ $application->created_at->toFormattedDateString() }}</td>
                         <td>{{ $application->applicant->name }}</td>
                         <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
+                        <td>
+                            <x-badge :variant="\App\Enums\ApplicationStatusEnum::getBadgeVariant($application->status)">
+                                {{ $application->status }}
+                            </x-badge>
+                        </td>
                         <td class="cell-action">
                             @if($application->currentApplicationStep)
                                 <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
