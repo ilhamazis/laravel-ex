@@ -26,7 +26,8 @@
 }
 
 .stepper__item.check,
-.stepper__item.current {
+.stepper__item.current,
+.stepper__item.fail {
     color: var(--stepper-text-primary);
     font-weight: 500;
 }
