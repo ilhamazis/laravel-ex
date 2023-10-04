@@ -164,35 +164,134 @@
             </ul>
         </div>
 
-        @if($application->currentApplicationStep->id === $currentApplicationStep->id)
-            <div class="grid">
-                <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn_primary btn_full-width">
-                        Lanjutkan ke Tahap
-                        {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
-                    </button>
-                </div>
-                <div class="col-12 col-md-1">
-                    <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
+        <div class="grid">
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <div class="card__body">
+                        <nav class="nav-tab">
+                            <ul class="nav-tab__wrapper">
+                                <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [$jobSlug, $application, $currentApplicationStep])])>
+                                    <x-link href="#">Kirim Email</x-link>
+                                </li>
+                                <li @class(['nav-tab__item', 'active' => false])>
+                                    <x-link href="#">Reviews</x-link>
+                                </li>
+                                <li @class(['nav-tab__item', 'active' => false])>
+                                    <x-link href="#">Notes</x-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        @endif
+            <div class="col-12 col-md-4">
+                <div class="grid">
+                    @if($application->currentApplicationStep->id === $currentApplicationStep->id)
+                        <div class="col-12">
+                            <div class="grid cols-1 cols-sm-2">
+                                <button type="submit" class="btn btn_primary btn_full-width">
+                                    Lanjutkan ke Tahap
+                                    {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
+                                </button>
+                                <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
+                            </div>
+                        </div>
+                    @endif
 
-        <div class="card">
-            <div class="card__body">
-                <nav class="nav-tab">
-                    <ul class="nav-tab__wrapper">
-                        <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [$jobSlug, $application, $currentApplicationStep])])>
-                            <x-link href="#">Kirim Email</x-link>
-                        </li>
-                        <li @class(['nav-tab__item', 'active' => false])>
-                            <x-link href="#">Reviews</x-link>
-                        </li>
-                        <li @class(['nav-tab__item', 'active' => false])>
-                            <x-link href="#">Notes</x-link>
-                        </li>
-                    </ul>
-                </nav>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card__body">
+                                <h2 class="card__title">Lampiran Berkas</h2>
+
+                                <div class="grid">
+                                    <div class="col-12">
+                                        <div class="form-control">
+                                            <div class="upload-draggable">
+                                                <div class="upload-draggable__box">
+                                                    <input type="file" class="upload-draggable__file-input"
+                                                           name="files[]" id=""
+                                                           accept="application/pdf,.ppt,.pptx,.doc,.docx,.xlsx,.xls,.zip, image/*,.mp4,.mbz,.txt,.myo,.rar"/>
+                                                    <label class="upload-draggable__icon"><span
+                                                            class="icon icon-cloud-arrow-up"></span></label>
+                                                    <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
+                                                    <p class="upload-draggable__subtitle">atau seret file ke sini</p>
+                                                    <p class="upload-draggable__support">SVG, PNG, JPG atau GIF (max.
+                                                        800x400px)</p>
+                                                </div>
+                                                <div class="upload-draggable__uploading">
+                                                    <span class="loader"></span> sedang memuat...
+                                                </div>
+                                                <div class="upload-draggable__success">
+                                                    Berhasil
+                                                </div>
+                                                <div class="upload-draggable__error">
+                                                    Gagal
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-control">
+                                            <div class="attachment">
+                                                <div class="attachment__wrapper">
+                                                    <div class="attachment__wrapper-icon">
+                                                        <img
+                                                            src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/doc-solid.svg') }}">
+                                                    </div>
+                                                    <div class="attachment__wrapper-text">
+                                                        <div class="attachment__title">
+                                                            <h3 class="attachment__heading">Customers_Q4_Report.doc</h3>
+                                                            <span class="attachment__description">440KB</span>
+                                                        </div>
+                                                        <div class="attachment__action">
+                                                            <button type="button"
+                                                                    class="btn btn_icon btn_outline btn_xs">
+                                                                <span class="icon icon-cloud-arrow-down"></span>
+                                                            </button>
+                                                            <button type="button"
+                                                                    class="btn btn_icon btn_outline btn_xs">
+                                                                <span class="icon icon-trash"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-control">
+                                            <div class="attachment">
+                                                <div class="attachment__wrapper">
+                                                    <div class="attachment__wrapper-icon">
+                                                        <img
+                                                            src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/pdf-solid.svg') }}">
+                                                    </div>
+                                                    <div class="attachment__wrapper-text">
+                                                        <div class="attachment__title">
+                                                            <h3 class="attachment__heading">Customers_Q4_Report.pdf</h3>
+                                                            <span class="attachment__description">440KB</span>
+                                                        </div>
+                                                        <div class="attachment__action">
+                                                            <button type="button"
+                                                                    class="btn btn_icon btn_outline btn_xs">
+                                                                <span class="icon icon-cloud-arrow-down"></span>
+                                                            </button>
+                                                            <button type="button"
+                                                                    class="btn btn_icon btn_outline btn_xs">
+                                                                <span class="icon icon-trash"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
