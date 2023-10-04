@@ -20,9 +20,9 @@ class ApplicationStepManagingService
             ->get();
     }
 
-    public function find(string $id): ApplicationStep
+    public function findOrFail(string $id): ApplicationStep
     {
-        return ApplicationStep::with('step')->find($id);
+        return ApplicationStep::with('step')->findOrFail($id);
     }
 
     /**
