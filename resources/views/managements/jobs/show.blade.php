@@ -1,7 +1,7 @@
 @php
     $paths = [
         ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => 'Detail Job'],
+        ['title' => $job->title],
     ];
 @endphp
 

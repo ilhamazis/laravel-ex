@@ -1,8 +1,9 @@
 @php
     $paths = [
         ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $jobSlug)],
-        ['title' => 'Detail Pelamar'],
+        ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
+        ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $job)],
+        ['title' => $application->applicant->name],
     ];
 @endphp
 
@@ -152,13 +153,13 @@
                         'check' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::PASSED,
                         'current' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
                         'fail' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::REJECTED,
-                        'active' => url()->current() === route('managements.jobs.applications.steps.show', [$jobSlug, $application, $applicationStep]),
+                        'active' => url()->current() === route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep]),
                     ])>
                         @if($applicationStep->id === $currentApplicationStep->id)
                             {{ $applicationStep->step->name }}
                         @else
                             <x-link
-                                :href="route('managements.jobs.applications.steps.show', [$jobSlug, $application, $applicationStep])"
+                                :href="route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])"
                                 class="stepper__link">{{ $applicationStep->step->name }}</x-link>
                         @endif
                     </li>
@@ -176,7 +177,7 @@
                     <div class="card__body">
                         <nav class="nav-tab">
                             <ul class="nav-tab__wrapper">
-                                <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [$jobSlug, $application, $currentApplicationStep])])>
+                                <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [$job, $application, $currentApplicationStep])])>
                                     <x-link href="#">Kirim Email</x-link>
                                 </li>
                                 <li @class(['nav-tab__item', 'active' => false])>
@@ -320,7 +321,7 @@
             <div class="grid cols-1 cols-sm-2">
                 <button class="btn btn_outline" data-dismiss="modal">Batal</button>
                 <form
-                    action="{{ route('managements.jobs.applications.steps.update', [$jobSlug, $application, $currentApplicationStep]) }}"
+                    action="{{ route('managements.jobs.applications.steps.update', [$job, $application, $currentApplicationStep]) }}"
                     method="post">
                     @csrf
                     @method('PUT')
@@ -341,7 +342,7 @@
             <div class="grid cols-1 cols-sm-2">
                 <button class="btn btn_outline" data-dismiss="modal">Batal</button>
                 <form
-                    action="{{ route('managements.jobs.applications.steps.destroy', [$jobSlug, $application, $currentApplicationStep]) }}"
+                    action="{{ route('managements.jobs.applications.steps.destroy', [$job, $application, $currentApplicationStep]) }}"
                     method="post">
                     @csrf
                     @method('DELETE')

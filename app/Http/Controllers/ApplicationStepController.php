@@ -38,7 +38,7 @@ class ApplicationStepController extends Controller
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
 
         return view('managements.jobs.applications.application-steps.show', [
-            'jobSlug' => $job->slug,
+            'job' => $job,
             'application' => $application,
             'applicationSteps' => $applicationSteps,
             'missingApplicationSteps' => $missingApplicationSteps,
