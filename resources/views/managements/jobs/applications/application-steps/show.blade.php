@@ -4,12 +4,6 @@
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $jobSlug)],
         ['title' => 'Detail Pelamar'],
     ];
-
-    $applicationSteps = $application->applicationSteps->map(function (\App\Models\ApplicationStep $applicationStep) {
-        return $applicationStep->step->name->value;
-    })->toArray();
-
-    $missingSteps = array_diff(\App\Enums\ApplicationStepEnum::values(), $applicationSteps);
 @endphp
 
 <x-app-layout>
@@ -146,38 +140,49 @@
 
         <div class="grid cols-1" style="overflow-x: auto; padding: 1.5rem 0">
             <ul class="stepper">
-                @foreach($application->applicationSteps as $applicationStep)
+                @foreach($applicationSteps as $applicationStep)
                     <li @class([
                         'stepper__item',
                         'check' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::PASSED,
-                        'active' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
+                        'current' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
                         'fail' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::REJECTED,
-                    ])>{{ $applicationStep->step->name }}</li>
+                        'active' => url()->current() === route('managements.jobs.applications.steps.show', [$jobSlug, $application, $applicationStep]),
+                    ])>
+                        @if($applicationStep->id === $currentApplicationStep->id)
+                            {{ $applicationStep->step->name }}
+                        @else
+                            <x-link
+                                :href="route('managements.jobs.applications.steps.show', [$jobSlug, $application, $applicationStep])"
+                                class="stepper__link">{{ $applicationStep->step->name }}</x-link>
+                        @endif
+                    </li>
                 @endforeach
 
-                @foreach($missingSteps as $step)
-                    <li class="stepper__item">{{ $step }}</li>
+                @foreach($missingApplicationSteps as $applicationStep)
+                    <li class="stepper__item">{{ $applicationStep }}</li>
                 @endforeach
             </ul>
         </div>
 
-        <div class="grid">
-            <div class="col-12 col-md-3">
-                <button type="submit" class="btn btn_primary btn_full-width">
-                    Lanjutkan ke Tahap
-                    {{ \App\Enums\ApplicationStepEnum::nextStepFrom($application->currentApplicationStep->step->name) }}
-                </button>
+        @if($application->currentApplicationStep->id === $currentApplicationStep->id)
+            <div class="grid">
+                <div class="col-12 col-md-3">
+                    <button type="submit" class="btn btn_primary btn_full-width">
+                        Lanjutkan ke Tahap
+                        {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
+                    </button>
+                </div>
+                <div class="col-12 col-md-1">
+                    <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
+                </div>
             </div>
-            <div class="col-12 col-md-1">
-                <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
-            </div>
-        </div>
+        @endif
 
         <div class="card">
             <div class="card__body">
                 <nav class="nav-tab">
                     <ul class="nav-tab__wrapper">
-                        <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.show', [$jobSlug, $application])])>
+                        <li @class(['nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [$jobSlug, $application, $currentApplicationStep])])>
                             <x-link href="#">Kirim Email</x-link>
                         </li>
                         <li @class(['nav-tab__item', 'active' => false])>

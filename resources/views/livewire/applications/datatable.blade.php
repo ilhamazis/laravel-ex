@@ -58,19 +58,22 @@
                         <td>{{ $application->applicant->name }}</td>
                         <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
                         <td class="cell-action">
-                            <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
-                                <x-link href="{{ route('managements.jobs.applications.show', [$job, $application]) }}"
+                            @if($application->currentApplicationStep)
+                                <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
+                                    <x-link
+                                        href="{{ route('managements.jobs.applications.steps.show', [$job, $application, $application->currentApplicationStep]) }}"
                                         class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
-                                    <span class="icon icon-eye-solid"></span>
-                                </x-link>
-                                <div class="dropdown-group__target">
-                                    <div class="dropdown-group__toggle">
-                                        <button class="btn btn_outline btn_xs btn_icon">
-                                            <span class="icon icon-ellipsis-horizontal"></span>
-                                        </button>
+                                        <span class="icon icon-eye-solid"></span>
+                                    </x-link>
+                                    <div class="dropdown-group__target">
+                                        <div class="dropdown-group__toggle">
+                                            <button class="btn btn_outline btn_xs btn_icon">
+                                                <span class="icon icon-ellipsis-horizontal"></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

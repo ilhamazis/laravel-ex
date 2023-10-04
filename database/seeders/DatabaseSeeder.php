@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\ApplicationStepEnum;
+use App\Enums\ApplicationStepStatusEnum;
 use App\Enums\PermissionEnum;
 use App\Enums\RoleEnum;
 use App\Models\Applicant;
@@ -79,14 +80,23 @@ class DatabaseSeeder extends Seeder
                 'job_id' => $job->id,
             ]);
 
-            $applicationStep = ApplicationStep::factory()->create([
+            $applicationStepPassed = ApplicationStep::factory()->create([
+                'status' => ApplicationStepStatusEnum::PASSED,
                 'application_id' => $application->id,
                 'step_id' => 1,
                 'created_by' => null,
                 'updated_by' => null
             ]);
 
-            $application->update(['current_application_step_id' => $applicationStep->id]);
+            $applicationStepOngoing = ApplicationStep::factory()->create([
+                'status' => ApplicationStepStatusEnum::ONGOING,
+                'application_id' => $application->id,
+                'step_id' => 2,
+                'created_by' => null,
+                'updated_by' => null
+            ]);
+
+            $application->update(['current_application_step_id' => $applicationStepOngoing->id]);
 
             $attachment = Attachment::factory()->create([
                 'application_id' => $application->id,
@@ -100,12 +110,12 @@ class DatabaseSeeder extends Seeder
             ]);
 
             $review = Review::factory()->create([
-                'application_step_id' => $applicationStep->id,
+                'application_step_id' => $applicationStepPassed->id,
                 'user_id' => $interviewer->id,
             ]);
 
             $note = Note::factory()->create([
-                'application_step_id' => $applicationStep->id,
+                'application_step_id' => $applicationStepPassed->id,
                 'user_id' => $humanCapital->id,
             ]);
 

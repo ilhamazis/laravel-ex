@@ -48,8 +48,7 @@ class JobApplicationManagingService
     public function find(string $id): Application|Model|null
     {
         return Application::query()
-            ->with(['applicant', 'applicationSteps', 'applicationSteps.step', 'currentApplicationStep'])
-            ->where('id', $id)
-            ->first();
+            ->with(['applicant'])
+            ->find($id);
     }
 }
