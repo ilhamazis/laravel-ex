@@ -25,9 +25,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/jobs', [JobController::class, 'destroy'])->name('jobs.destroy');
 
         Route::resource('jobs.applications', JobApplicationController::class)
-            ->only(['index', 'edit', 'update']);
+            ->only(['index']);
 
         Route::resource('jobs.applications.steps', ApplicationStepController::class)
-            ->only(['show']);
+            ->only(['show', 'update', 'destroy']);
     });
 });

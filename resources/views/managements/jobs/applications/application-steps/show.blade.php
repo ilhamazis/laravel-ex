@@ -14,6 +14,12 @@
             </div>
         </div>
 
+        <x-alert variant="success" :message="session()->get('success')" dismissable/>
+
+        @error('status')
+        <x-alert variant="error" :message="$message" dismissable/>
+        @enderror
+
         <div class="card card_details-primary">
             <div class="grid">
                 <div class="col-12 col-md-6">
@@ -186,14 +192,22 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="grid">
-                    @if($application->currentApplicationStep->id === $currentApplicationStep->id)
+                    @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING && $application->currentApplicationStep->id === $currentApplicationStep->id)
                         <div class="col-12">
                             <div class="grid cols-1 cols-sm-2">
-                                <button type="submit" class="btn btn_primary btn_full-width">
-                                    Lanjutkan ke Tahap
-                                    {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
+                                <button class="btn btn_primary btn_full-width" data-label="Lanjutkan"
+                                        data-toggle="modal" data-target="#next-step-modal">
+                                    @if(\App\Enums\ApplicationStepEnum::onLastStep($currentApplicationStep->step->name))
+                                        Rekrut
+                                    @else
+                                        Lanjutkan ke Tahap
+                                        {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
+                                    @endif
                                 </button>
-                                <button type="button" class="btn btn_outline btn_full-width">Eliminasi</button>
+                                <button type="button" class="btn btn_outline btn_full-width" data-label="Eliminasi"
+                                        data-toggle="modal" data-target="#reject-modal">
+                                    Eliminasi
+                                </button>
                             </div>
                         </div>
                     @endif
@@ -295,4 +309,46 @@
             </div>
         </div>
     </div>
+
+    <x-modal-confirmation id="next-step-modal" title="Konfirmasi Melanjutkan Tahap">
+        <x-slot:body>
+            <p>Apakah anda yakin ingin melanjutkan kandidat ini ke tahap selanjutnya?</p>
+            <p>Aksi ini tidak dapat dikembalikan.</p>
+        </x-slot:body>
+
+        <x-slot:footer>
+            <div class="grid cols-1 cols-sm-2">
+                <button class="btn btn_outline" data-dismiss="modal">Batal</button>
+                <form
+                    action="{{ route('managements.jobs.applications.steps.update', [$jobSlug, $application, $currentApplicationStep]) }}"
+                    method="post">
+                    @csrf
+                    @method('PUT')
+
+                    <button type="submit" class="btn btn_primary" style="width: 100%">Konfirmasi</button>
+                </form>
+            </div>
+        </x-slot:footer>
+    </x-modal-confirmation>
+
+    <x-modal-confirmation variant="danger" id="reject-modal" title="Konfirmasi Eliminasi">
+        <x-slot:body>
+            <p>Apakah anda yakin ingin mengeliminasi kandidat ini?</p>
+            <p>Kandidat yang telah tereliminasi tidak dapat dikembalikan lagi.</p>
+        </x-slot:body>
+
+        <x-slot:footer>
+            <div class="grid cols-1 cols-sm-2">
+                <button class="btn btn_outline" data-dismiss="modal">Batal</button>
+                <form
+                    action="{{ route('managements.jobs.applications.steps.destroy', [$jobSlug, $application, $currentApplicationStep]) }}"
+                    method="post">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn_destructive" style="width: 100%">Eliminasi</button>
+                </form>
+            </div>
+        </x-slot:footer>
+    </x-modal-confirmation>
 </x-app-layout>

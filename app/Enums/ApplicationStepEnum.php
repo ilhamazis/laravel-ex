@@ -15,11 +15,18 @@ enum ApplicationStepEnum: string
     case USER_INTERVIEW = 'User Interview';
     case FINAL_INTERVIEW = 'Final Interview';
 
-    public static function nextStepFrom(ApplicationStepEnum $stepEnum)
+    public static function nextStepFrom(ApplicationStepEnum $stepEnum): string
     {
         $steps = ApplicationStepEnum::values();
         $stepIndex = array_search($stepEnum->value, $steps);
 
         return $steps[($stepIndex + 1) % count($steps)];
+    }
+
+    public static function onLastStep(ApplicationStepEnum $stepEnum): bool
+    {
+        $stepEnums = ApplicationStepEnum::values();
+
+        return end($stepEnums) === $stepEnum->value;
     }
 }
