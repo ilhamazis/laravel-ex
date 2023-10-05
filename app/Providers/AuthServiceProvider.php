@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +24,15 @@ class AuthServiceProvider extends ServiceProvider
      * Register any authentication / authorization services.
      */
     public function boot(): void
+    {
+        try {
+            $this->registerGates();
+        } catch (\PDOException $exception) {
+            Log::info('Cannot register gates, cause: ' . $exception);
+        }
+    }
+
+    private function registerGates(): void
     {
         $roles = Cache::rememberForever('roles_with_permissions', fn() => Role::with('permissions')->get());
         $permissions = [];
