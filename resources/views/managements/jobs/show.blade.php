@@ -84,9 +84,11 @@
                         <li @class(['nav-tab__item', 'active' => request()->routeIs('managements.jobs.show')])>
                             <x-link :href="route('managements.jobs.show', $job)">Deskripsi</x-link>
                         </li>
-                        <li @class(['nav-tab__item', 'active' => request()->routeIs('managements.jobs.applications.index')])>
-                            <x-link :href="route('managements.jobs.applications.index', $job)">List Pelamar</x-link>
-                        </li>
+                        @can(\App\Enums\PermissionEnum::VIEW_APPLICATION->value)
+                            <li @class(['nav-tab__item', 'active' => request()->routeIs('managements.jobs.applications.index')])>
+                                <x-link :href="route('managements.jobs.applications.index', $job)">List Pelamar</x-link>
+                            </li>
+                        @endcan
                     </ul>
                 </nav>
             </div>

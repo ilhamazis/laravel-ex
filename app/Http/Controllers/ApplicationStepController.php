@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\ApplicationStepEnum;
 use App\Enums\ApplicationStepStatusEnum;
+use App\Enums\PermissionEnum;
 use App\Models\Application;
 use App\Models\ApplicationStep;
 use App\Models\Job;
@@ -25,6 +26,9 @@ class ApplicationStepController extends Controller
     {
         $this->applicationManagingService = $applicationManagingService;
         $this->applicationStepManagingService = $applicationStepManagingService;
+
+        $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION_STEP->value)->only(['show']);
+        $this->middleware('can:' . PermissionEnum::UPDATE_APPLICATION_STEP->value)->only(['update', 'destroy']);
     }
 
     public function show(Job $job, string $applicationId, string $applicationStepId): View

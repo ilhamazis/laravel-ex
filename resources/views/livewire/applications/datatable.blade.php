@@ -61,22 +61,24 @@
                             </x-badge>
                         </td>
                         <td class="cell-action">
-                            @if($application->currentApplicationStep)
-                                <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
-                                    <x-link
-                                        href="{{ route('managements.jobs.applications.steps.show', [$job, $application, $application->currentApplicationStep]) }}"
-                                        class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
-                                        <span class="icon icon-eye-solid"></span>
-                                    </x-link>
-                                    <div class="dropdown-group__target">
-                                        <div class="dropdown-group__toggle">
-                                            <button class="btn btn_outline btn_xs btn_icon">
-                                                <span class="icon icon-ellipsis-horizontal"></span>
-                                            </button>
+                            @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_STEP->value)
+                                @if($application->currentApplicationStep)
+                                    <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
+                                        <x-link
+                                            href="{{ route('managements.jobs.applications.steps.show', [$job, $application, $application->currentApplicationStep]) }}"
+                                            class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
+                                            <span class="icon icon-eye-solid"></span>
+                                        </x-link>
+                                        <div class="dropdown-group__target">
+                                            <div class="dropdown-group__toggle">
+                                                <button class="btn btn_outline btn_xs btn_icon">
+                                                    <span class="icon icon-ellipsis-horizontal"></span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

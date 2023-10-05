@@ -193,25 +193,27 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="grid">
-                    @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING && $application->currentApplicationStep->id === $currentApplicationStep->id)
-                        <div class="col-12">
-                            <div class="grid cols-1 cols-sm-2">
-                                <button class="btn btn_primary btn_full-width" data-label="Lanjutkan"
-                                        data-toggle="modal" data-target="#next-step-modal">
-                                    @if(\App\Enums\ApplicationStepEnum::onLastStep($currentApplicationStep->step->name))
-                                        Rekrut
-                                    @else
-                                        Lanjutkan ke Tahap
-                                        {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
-                                    @endif
-                                </button>
-                                <button type="button" class="btn btn_outline btn_full-width" data-label="Eliminasi"
-                                        data-toggle="modal" data-target="#reject-modal">
-                                    Eliminasi
-                                </button>
+                    @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
+                        @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING && $application->currentApplicationStep->id === $currentApplicationStep->id)
+                            <div class="col-12">
+                                <div class="grid cols-1 cols-sm-2">
+                                    <button class="btn btn_primary btn_full-width" data-label="Lanjutkan"
+                                            data-toggle="modal" data-target="#next-step-modal">
+                                        @if(\App\Enums\ApplicationStepEnum::onLastStep($currentApplicationStep->step->name))
+                                            Rekrut
+                                        @else
+                                            Lanjutkan ke Tahap
+                                            {{ \App\Enums\ApplicationStepEnum::nextStepFrom($currentApplicationStep->step->name) }}
+                                        @endif
+                                    </button>
+                                    <button type="button" class="btn btn_outline btn_full-width" data-label="Eliminasi"
+                                            data-toggle="modal" data-target="#reject-modal">
+                                        Eliminasi
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
+                    @endcan
 
                     <div class="col-12">
                         <div class="card">
