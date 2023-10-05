@@ -24,11 +24,6 @@ class ApplicationStepManagingService
             ->get();
     }
 
-    public function findOrFail(string $id): ApplicationStep
-    {
-        return ApplicationStep::with('step')->findOrFail($id);
-    }
-
     /**
      * @param Collection<ApplicationStep> $createdApplicationSteps
      * @return array

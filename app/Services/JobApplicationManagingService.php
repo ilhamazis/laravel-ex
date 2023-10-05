@@ -43,11 +43,4 @@ class JobApplicationManagingService
                 },
             )->paginate($limit);
     }
-
-    public function findOrFail(string $id): Application
-    {
-        return Application::query()
-            ->with(['applicant'])
-            ->findOrFail($id);
-    }
 }

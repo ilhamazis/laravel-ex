@@ -9,52 +9,54 @@ use App\Models\Application;
 use App\Models\ApplicationStep;
 use App\Models\Job;
 use App\Services\ApplicationStepManagingService;
-use App\Services\JobApplicationManagingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ApplicationStepController extends Controller
 {
-    private JobApplicationManagingService $applicationManagingService;
     private ApplicationStepManagingService $applicationStepManagingService;
 
-    public function __construct(
-        JobApplicationManagingService  $applicationManagingService,
-        ApplicationStepManagingService $applicationStepManagingService,
-    )
+    public function __construct(ApplicationStepManagingService $applicationStepManagingService)
     {
-        $this->applicationManagingService = $applicationManagingService;
         $this->applicationStepManagingService = $applicationStepManagingService;
 
+        $this->middleware(function (Request $request, \Closure $next) use ($applicationStepManagingService) {
+            $job = $request->route('job');
+            $application = $request->route('application');
+            $applicationStep = $request->route('step');
+
+            if ($application->job_id !== $job->id || $applicationStep->application_id !== $application->id) {
+                abort(404);
+            }
+
+            return $next($request);
+        })->only(['show', 'update', 'destroy']);
         $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION_STEP->value)->only(['show']);
         $this->middleware('can:' . PermissionEnum::UPDATE_APPLICATION_STEP->value)->only(['update', 'destroy']);
     }
 
-    public function show(Job $job, string $applicationId, string $applicationStepId): View
+    public function show(Job $job, Application $application, ApplicationStep $step): View
     {
-        $application = $this->applicationManagingService->findOrFail($applicationId);
-        $currentApplicationStep = $this->applicationStepManagingService->findOrFail($applicationStepId);
+        $application = $application->load('applicant');
+        $currentApplicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
-
-        $this->validateRoute($job, $application, $currentApplicationStep);
-
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
 
         return view('managements.jobs.applications.application-steps.show', [
             'job' => $job,
             'application' => $application,
+            'currentApplicationStep' => $currentApplicationStep,
             'applicationSteps' => $applicationSteps,
             'missingApplicationSteps' => $missingApplicationSteps,
-            'currentApplicationStep' => $currentApplicationStep,
         ]);
     }
 
-    public function update(Job $job, Application $application, string $applicationStepId): RedirectResponse
+    public function update(Job $job, Application $application, ApplicationStep $step): RedirectResponse
     {
-        $currentApplicationStep = $this->applicationStepManagingService->findOrFail($applicationStepId);
+        $currentApplicationStep = $step->load('step');
 
-        $this->validateRoute($job, $application, $currentApplicationStep);
         $this->validateStepStatus($currentApplicationStep);
 
         if (ApplicationStepEnum::onLastStep($currentApplicationStep->step->name)) {
@@ -72,11 +74,10 @@ class ApplicationStepController extends Controller
         }
     }
 
-    public function destroy(Job $job, Application $application, string $applicationStepId): RedirectResponse
+    public function destroy(Job $job, Application $application, ApplicationStep $step): RedirectResponse
     {
-        $currentApplicationStep = $this->applicationStepManagingService->findOrFail($applicationStepId);
+        $currentApplicationStep = $step->load('step');
 
-        $this->validateRoute($job, $application, $currentApplicationStep);
         $this->validateStepStatus($currentApplicationStep);
 
         $this->applicationStepManagingService->reject($currentApplicationStep);
@@ -84,13 +85,6 @@ class ApplicationStepController extends Controller
         return redirect()
             ->route('managements.jobs.applications.steps.show', [$job, $application, $currentApplicationStep])
             ->with('success', 'Berhasil mengubah status rekrutmen');
-    }
-
-    private function validateRoute(Job $job, Application $application, ApplicationStep $applicationStep): void
-    {
-        if ($application->job_id !== $job->id || $applicationStep->application_id !== $application->id) {
-            abort(404);
-        }
     }
 
     private function validateStepStatus(ApplicationStep $applicationStep): void
