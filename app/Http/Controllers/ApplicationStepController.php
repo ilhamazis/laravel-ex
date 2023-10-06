@@ -22,7 +22,7 @@ class ApplicationStepController extends Controller
     {
         $this->applicationStepManagingService = $applicationStepManagingService;
 
-        $this->middleware(function (Request $request, \Closure $next) use ($applicationStepManagingService) {
+        $this->middleware(function (Request $request, \Closure $next) {
             $job = $request->route('job');
             $application = $request->route('application');
             $applicationStep = $request->route('step');
