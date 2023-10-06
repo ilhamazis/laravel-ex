@@ -136,9 +136,12 @@
                         'check' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::PASSED,
                         'current' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
                         'fail' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::REJECTED,
-                        'active' => url()->current() === route('managements.jobs.applications.steps.show', [
-                                                            $job, $application, $applicationStep
-                                                         ]),
+                        'active' => str_contains(
+                                        url()->current(),
+                                        route('managements.jobs.applications.steps.show', [
+                                            $job, $application, $applicationStep
+                                        ]),
+                                    ),
                     ])>
                         @if($applicationStep->id === $currentApplicationStep->id)
                             {{ $applicationStep->step->name }}
@@ -164,20 +167,33 @@
                     <div class="card__body">
                         <nav class="nav-tab">
                             <ul class="nav-tab__wrapper">
-                                <li
-                                    @class([
-                                        'nav-tab__item', 'active' => route('managements.jobs.applications.steps.show', [
-                                                                         $job, $application, $currentApplicationStep
-                                                                     ])
+                                <li @class([
+                                        'nav-tab__item',
+                                        'active' => url()->current() ===
+                                                    route('managements.jobs.applications.steps.show', [
+                                                        $job, $application, $currentApplicationStep
+                                                    ])
                                     ])
                                 >
-                                    <x-link href="#">Kirim Email</x-link>
+                                    <x-link
+                                        :href="route('managements.jobs.applications.steps.show', [
+                                            $job, $application, $currentApplicationStep
+                                        ])"
+                                    >
+                                        Kirim Email
+                                    </x-link>
                                 </li>
-                                <li @class(['nav-tab__item', 'active' => false])>
-                                    <x-link href="#">Reviews</x-link>
-                                </li>
-                                <li @class(['nav-tab__item', 'active' => false])>
-                                    <x-link href="#">Notes</x-link>
+                                <li @class([
+                                        'nav-tab__item',
+                                        'active' => request()->routeIs('managements.jobs.applications.steps.reviews.*'),
+                                    ])>
+                                    <x-link
+                                        :href="route('managements.jobs.applications.steps.reviews.index', [
+                                            $job, $application, $currentApplicationStep
+                                        ])"
+                                    >
+                                        Review
+                                    </x-link>
                                 </li>
                             </ul>
                         </nav>
