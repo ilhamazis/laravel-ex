@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ApplicationStepStatusEnum;
+use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreReviewRequest;
 use App\Models\Application;
 use App\Models\ApplicationStep;
@@ -37,6 +38,8 @@ class ReviewController extends Controller
 
             return $next($request);
         })->only(['index', 'store']);
+        $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION_REVIEW->value)->only('index');
+        $this->middleware('can:' . PermissionEnum::CREATE_APPLICATION_REVIEW->value)->only('store');
     }
 
     /**
