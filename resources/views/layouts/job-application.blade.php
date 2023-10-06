@@ -244,32 +244,78 @@
 
                                 <div class="grid">
                                     <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="upload-draggable">
-                                                <div class="upload-draggable__box">
-                                                    <input type="file" class="upload-draggable__file-input"
-                                                           name="files[]" id=""
-                                                           accept="application/pdf,.doc,.docx"/>
-                                                    <label class="upload-draggable__icon"><span
-                                                            class="icon icon-cloud-arrow-up"></span></label>
-                                                    <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
-                                                    <p class="upload-draggable__subtitle">atau seret file ke sini</p>
-                                                    <p class="upload-draggable__support">
-                                                        DOC, DOCX, atau PDF (max. 2MB)
-                                                    </p>
-                                                </div>
-                                                <div class="upload-draggable__uploading">
-                                                    <span class="loader"></span> sedang memuat...
-                                                </div>
-                                                <div class="upload-draggable__success">
-                                                    Berhasil
-                                                </div>
-                                                <div class="upload-draggable__error">
-                                                    Gagal
+                                        <form
+                                            class="grid"
+                                            action="{{ route('managements.jobs.applications.steps.attachments.store', [
+                                                $job, $application, $currentApplicationStep
+                                            ]) }}"
+                                            method="post"
+                                            enctype="multipart/form-data"
+                                        >
+                                            @csrf
+                                            @method('POST')
+
+                                            <div class="col-12">
+                                                <div class="form-control">
+                                                    <div class="upload-draggable">
+                                                        <div class="upload-draggable__box">
+                                                            <input type="file" class="upload-draggable__file-input"
+                                                                   name="file" id="file"
+                                                                   accept="application/pdf,.doc,.docx"/>
+                                                            <label class="upload-draggable__icon"><span
+                                                                    class="icon icon-cloud-arrow-up"></span></label>
+                                                            <h2 class="upload-draggable__title">Klik untuk pilih
+                                                                file</h2>
+                                                            <p class="upload-draggable__subtitle">atau seret file ke
+                                                                sini</p>
+                                                            <p class="upload-draggable__support">
+                                                                DOC, DOCX, atau PDF (max. 2MB)
+                                                            </p>
+                                                        </div>
+                                                        <div class="upload-draggable__uploading">
+                                                            <span class="loader"></span> sedang memuat...
+                                                        </div>
+                                                        <div class="upload-draggable__success">
+                                                            Berhasil
+                                                        </div>
+                                                        <div class="upload-draggable__error">
+                                                            Gagal
+                                                        </div>
+                                                    </div>
+                                                    @error('file')
+                                                    <div class="form-control__helper error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn_primary btn_full-width"
+                                                        data-label="Upload"
+                                                        data-toggle="modal" data-target="#create-attachment-modal">
+                                                    Upload Lampiran
+                                                </button>
+                                            </div>
+
+                                            <x-modal-confirmation id="create-attachment-modal"
+                                                                  title="Konfirmasi Upload Lampiran">
+                                                <x-slot:body>
+                                                    <p>Apakah anda yakin ingin meng-upload lampiran?</p>
+                                                </x-slot:body>
+
+                                                <x-slot:footer>
+                                                    <div class="grid cols-1 cols-sm-2">
+                                                        <button type="button" class="btn btn_outline"
+                                                                data-dismiss="modal">
+                                                            Batal
+                                                        </button>
+                                                        <button type="submit" class="btn btn_primary">
+                                                            Konfirmasi
+                                                        </button>
+                                                    </div>
+                                                </x-slot:footer>
+                                            </x-modal-confirmation>
+                                        </form>
                                     </div>
+
 
                                     @foreach($attachments as $attachment)
                                         <div class="col-12">
@@ -302,14 +348,52 @@
                                                                     class="attachment__description">{{ $attachment->file_size }}KB</span>
                                                             </div>
                                                             <div class="attachment__action">
-                                                                <button type="button"
-                                                                        class="btn btn_icon btn_outline btn_xs">
+                                                                <x-link
+                                                                    :href="route('managements.jobs.applications.steps.attachments.show', [
+                                                                        $job, $application, $currentApplicationStep, $attachment
+                                                                    ])"
+                                                                    class="btn btn_icon btn_outline btn_xs">
                                                                     <span class="icon icon-cloud-arrow-down"></span>
-                                                                </button>
-                                                                <button type="button"
-                                                                        class="btn btn_icon btn_outline btn_xs">
-                                                                    <span class="icon icon-trash"></span>
-                                                                </button>
+                                                                </x-link>
+                                                                <form
+                                                                    action="{{ route('managements.jobs.applications.steps.attachments.destroy', [
+                                                                        $job, $application, $currentApplicationStep, $attachment
+                                                                    ]) }}"
+                                                                    method="post"
+                                                                >
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    
+                                                                    <button type="button"
+                                                                            class="btn btn_icon btn_outline btn_xs"
+                                                                            data-label="Delete Attachment"
+                                                                            data-toggle="modal"
+                                                                            data-target="#delete-attachment-modal">
+                                                                        <span class="icon icon-trash"></span>
+                                                                    </button>
+                                                                    <x-modal-confirmation variant="danger"
+                                                                                          id="delete-attachment-modal"
+                                                                                          title="Konfirmasi Eliminasi">
+                                                                        <x-slot:body>
+                                                                            <p>Apakah anda yakin ingin menghapus
+                                                                                lampiran ini?</p>
+                                                                        </x-slot:body>
+
+                                                                        <x-slot:footer>
+                                                                            <div class="grid cols-1 cols-sm-2">
+                                                                                <button type="button"
+                                                                                        class="btn btn_outline"
+                                                                                        data-dismiss="modal">
+                                                                                    Batal
+                                                                                </button>
+                                                                                <button type="submit"
+                                                                                        class="btn btn_destructive">
+                                                                                    Hapus
+                                                                                </button>
+                                                                            </div>
+                                                                        </x-slot:footer>
+                                                                    </x-modal-confirmation>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
