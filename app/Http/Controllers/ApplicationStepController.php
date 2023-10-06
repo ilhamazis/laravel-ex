@@ -58,6 +58,7 @@ class ApplicationStepController extends Controller
         $applicationStep = $step->load('step');
 
         $this->validateStepStatus($applicationStep);
+        $this->validateStepHasReviews($applicationStep);
 
         if (ApplicationStepEnum::onLastStep($applicationStep->step->name)) {
             $this->applicationStepManagingService->hire($applicationStep);
@@ -92,6 +93,15 @@ class ApplicationStepController extends Controller
         if ($applicationStep->status !== ApplicationStepStatusEnum::ONGOING) {
             throw ValidationException::withMessages([
                 'status' => 'Status dari Tahap Rekrutmen harus Ongoing',
+            ]);
+        }
+    }
+
+    private function validateStepHasReviews(ApplicationStep $applicationStep): void
+    {
+        if (!$applicationStep->hasReviews()) {
+            throw ValidationException::withMessages([
+                'status' => 'Tahap Rekrutmen harus memiliki Review',
             ]);
         }
     }

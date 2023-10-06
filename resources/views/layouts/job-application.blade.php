@@ -204,13 +204,22 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="grid">
+                    @if(!$currentApplicationStep->hasReviews())
+                        <div class="col-12">
+                            <x-alert variant="helper"
+                                     message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
+                        </div>
+                    @endif
+
                     @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
                         @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING
                             && $application->currentApplicationStep->id === $currentApplicationStep->id)
                             <div class="col-12">
                                 <div class="grid cols-1 cols-sm-2">
-                                    <button class="btn btn_primary btn_full-width" data-label="Lanjutkan"
-                                            data-toggle="modal" data-target="#next-step-modal">
+                                    <button @disabled(!$currentApplicationStep->hasReviews())
+                                            class="btn btn_primary btn_full-width" data-label="Lanjutkan"
+                                            data-toggle="modal" data-target="#next-step-modal"
+                                    >
                                         {{
                                             \App\Enums\ApplicationStepEnum::onLastStep($currentApplicationStep->step->name)
                                                 ? 'Rekrut'
