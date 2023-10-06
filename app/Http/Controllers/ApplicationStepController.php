@@ -40,14 +40,14 @@ class ApplicationStepController extends Controller
     public function show(Job $job, Application $application, ApplicationStep $step): View
     {
         $application = $application->load('applicant');
-        $currentApplicationStep = $step->load('step');
+        $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
 
         return view('managements.jobs.applications.application-steps.show', [
             'job' => $job,
             'application' => $application,
-            'currentApplicationStep' => $currentApplicationStep,
+            'applicationStep' => $applicationStep,
             'applicationSteps' => $applicationSteps,
             'missingApplicationSteps' => $missingApplicationSteps,
         ]);
@@ -55,18 +55,18 @@ class ApplicationStepController extends Controller
 
     public function update(Job $job, Application $application, ApplicationStep $step): RedirectResponse
     {
-        $currentApplicationStep = $step->load('step');
+        $applicationStep = $step->load('step');
 
-        $this->validateStepStatus($currentApplicationStep);
+        $this->validateStepStatus($applicationStep);
 
-        if (ApplicationStepEnum::onLastStep($currentApplicationStep->step->name)) {
-            $this->applicationStepManagingService->hire($currentApplicationStep);
+        if (ApplicationStepEnum::onLastStep($applicationStep->step->name)) {
+            $this->applicationStepManagingService->hire($applicationStep);
 
             return redirect()
-                ->route('managements.jobs.applications.steps.show', [$job, $application, $currentApplicationStep])
+                ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
                 ->with('success', 'Berhasil merekrut kandidat');
         } else {
-            $nextApplicationStep = $this->applicationStepManagingService->moveToNextStep($currentApplicationStep);
+            $nextApplicationStep = $this->applicationStepManagingService->moveToNextStep($applicationStep);
 
             return redirect()
                 ->route('managements.jobs.applications.steps.show', [$job, $application, $nextApplicationStep])
@@ -76,14 +76,14 @@ class ApplicationStepController extends Controller
 
     public function destroy(Job $job, Application $application, ApplicationStep $step): RedirectResponse
     {
-        $currentApplicationStep = $step->load('step');
+        $applicationStep = $step->load('step');
 
-        $this->validateStepStatus($currentApplicationStep);
+        $this->validateStepStatus($applicationStep);
 
-        $this->applicationStepManagingService->reject($currentApplicationStep);
+        $this->applicationStepManagingService->reject($applicationStep);
 
         return redirect()
-            ->route('managements.jobs.applications.steps.show', [$job, $application, $currentApplicationStep])
+            ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
             ->with('success', 'Berhasil mengubah status rekrutmen');
     }
 
