@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\Management\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/managements')->name('managements.')->group(function () {
         Route::resource('/jobs', JobController::class)->except('destroy');
         Route::delete('/jobs', [JobController::class, 'destroy'])->name('jobs.destroy');
+
+        Route::resource('jobs.applications', JobApplicationController::class)
+            ->only(['index']);
+
+        Route::resource('jobs.applications.steps', ApplicationStepController::class)
+            ->only(['show', 'update', 'destroy']);
     });
 });

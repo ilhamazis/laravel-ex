@@ -19,10 +19,8 @@ class JobFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->jobTitle();
-
         return [
-            'title' => $title,
+            'title' => fake()->sentence(3),
             'description' => fake()->paragraphs(asText: true),
             'type' => collect(JobTypeEnum::values())->random(),
             'status' => collect(JobStatusEnum::values())->random(),

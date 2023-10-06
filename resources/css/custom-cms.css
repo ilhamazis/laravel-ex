@@ -1,4 +1,6 @@
 @import "quill-custom.css";
+@import "cms/jobs-list.css";
+@import "cms/stepper.css";
 
 .detail__desc-wrapper {
     padding-top: 1rem;

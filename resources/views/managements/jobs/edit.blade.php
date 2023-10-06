@@ -127,7 +127,7 @@
                                         <label for="start_at" class="form-control__label">Mulai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('start_at')])>
                                             <x-input type="date" id="start_at" name="start_at"
-                                                     value="{{ old('start_at', $job->start_at) }}"/>
+                                                     value="{{ old('start_at', $job->start_at?->format('Y-m-d')) }}"/>
                                         </div>
                                         @error('start_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -140,7 +140,7 @@
                                         <label for="end_at" class="form-control__label">Selesai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('end_at')])>
                                             <x-input type="date" id="end_at" name="end_at"
-                                                     value="{{ old('end_at', $job->end_at) }}"/>
+                                                     value="{{ old('end_at', $job->end_at?->format('Y-m-d')) }}"/>
                                         </div>
                                         @error('end_at')
                                         <div class="form-control__helper error">{{ $message }}</div>

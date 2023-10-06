@@ -1,7 +1,8 @@
 @php
     $paths = [
         ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => $job->title],
+        ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
+        ['title' => 'List Pelamar'],
     ];
 @endphp
 
@@ -93,11 +94,7 @@
                 </nav>
             </div>
 
-            <div class="card__body">
-                <div class="custom__ql-container">
-                    {!! $job->description !!}
-                </div>
-            </div>
+            <livewire:applications.datatable :job="$job"/>
         </div>
     </div>
 </x-app-layout>
