@@ -270,62 +270,52 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="attachment">
-                                                <div class="attachment__wrapper">
-                                                    <div class="attachment__wrapper-icon">
-                                                        <img alt="DOCX Icon"
-                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/doc-solid.svg') }}">
-                                                    </div>
-                                                    <div class="attachment__wrapper-text">
-                                                        <div class="attachment__title">
-                                                            <h3 class="attachment__heading">Customers_Q4_Report.doc</h3>
-                                                            <span class="attachment__description">440KB</span>
+                                    @foreach($attachments as $attachment)
+                                        <div class="col-12">
+                                            <div class="form-control">
+                                                <div class="attachment">
+                                                    <div class="attachment__wrapper">
+                                                        <div class="attachment__wrapper-icon">
+                                                            @switch($attachment->file_extension)
+                                                                @case('doc')
+                                                                    <img alt="DOC Icon"
+                                                                         src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/doc-solid.svg') }}">
+                                                                    @break
+                                                                @case('docx')
+                                                                    <img alt="DOCX Icon"
+                                                                         src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/docx-solid.svg') }}">
+                                                                    @break
+                                                                @case('pdf')
+                                                                    <img alt="PDF Icon"
+                                                                         src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/pdf-solid.svg') }}">
+                                                                    @break
+                                                                @default
+                                                                    <img alt="TXT Icon"
+                                                                         src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/txt-solid.svg') }}">
+                                                            @endswitch
                                                         </div>
-                                                        <div class="attachment__action">
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-cloud-arrow-down"></span>
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-trash"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="attachment">
-                                                <div class="attachment__wrapper">
-                                                    <div class="attachment__wrapper-icon">
-                                                        <img alt="PDF Icon"
-                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/pdf-solid.svg') }}">
-                                                    </div>
-                                                    <div class="attachment__wrapper-text">
-                                                        <div class="attachment__title">
-                                                            <h3 class="attachment__heading">Customers_Q4_Report.pdf</h3>
-                                                            <span class="attachment__description">440KB</span>
-                                                        </div>
-                                                        <div class="attachment__action">
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-cloud-arrow-down"></span>
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-trash"></span>
-                                                            </button>
+                                                        <div class="attachment__wrapper-text">
+                                                            <div class="attachment__title">
+                                                                <h3 class="attachment__heading">{{ $attachment->file_name }}</h3>
+                                                                <span
+                                                                    class="attachment__description">{{ $attachment->file_size }}KB</span>
+                                                            </div>
+                                                            <div class="attachment__action">
+                                                                <button type="button"
+                                                                        class="btn btn_icon btn_outline btn_xs">
+                                                                    <span class="icon icon-cloud-arrow-down"></span>
+                                                                </button>
+                                                                <button type="button"
+                                                                        class="btn btn_icon btn_outline btn_xs">
+                                                                    <span class="icon icon-trash"></span>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

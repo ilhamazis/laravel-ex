@@ -48,6 +48,7 @@ class ReviewController extends Controller
     public function index(Job $job, Application $application, ApplicationStep $step)
     {
         $application = $application->load('applicant');
+        $attachments = $application->attachments;
         $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
@@ -56,6 +57,7 @@ class ReviewController extends Controller
         return view('managements.jobs.applications.application-steps.reviews.index', [
             'job' => $job,
             'application' => $application,
+            'attachments' => $attachments,
             'applicationStep' => $applicationStep,
             'applicationSteps' => $applicationSteps,
             'missingApplicationSteps' => $missingApplicationSteps,

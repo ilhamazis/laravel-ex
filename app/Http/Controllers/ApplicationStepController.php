@@ -40,12 +40,14 @@ class ApplicationStepController extends Controller
     public function show(Job $job, Application $application, ApplicationStep $step): View
     {
         $application = $application->load('applicant');
+        $attachments = $application->attachments;
         $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
 
         return view('managements.jobs.applications.application-steps.show', [
             'job' => $job,
+            'attachments' => $attachments,
             'application' => $application,
             'applicationStep' => $applicationStep,
             'applicationSteps' => $applicationSteps,

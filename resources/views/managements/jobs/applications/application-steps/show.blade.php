@@ -7,7 +7,7 @@
     ];
 @endphp
 
-<x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application"
+<x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application" :attachments="$attachments"
                           :current-application-step="$applicationStep"
                           :application-steps="$applicationSteps" :missing-application-steps="$missingApplicationSteps">
 
