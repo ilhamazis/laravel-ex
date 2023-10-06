@@ -183,18 +183,20 @@
                                         Kirim Email
                                     </x-link>
                                 </li>
-                                <li @class([
+                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
+                                    <li @class([
                                         'nav-tab__item',
                                         'active' => request()->routeIs('managements.jobs.applications.steps.reviews.*'),
                                     ])>
-                                    <x-link
-                                        :href="route('managements.jobs.applications.steps.reviews.index', [
+                                        <x-link
+                                            :href="route('managements.jobs.applications.steps.reviews.index', [
                                             $job, $application, $currentApplicationStep
                                         ])"
-                                    >
-                                        Review
-                                    </x-link>
-                                </li>
+                                        >
+                                            Review
+                                        </x-link>
+                                    </li>
+                                @endcan
                             </ul>
                         </nav>
                     </div>
