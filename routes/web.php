@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationStepController;
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
@@ -33,5 +34,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)
             ->only(['index', 'store', 'update', 'destroy']);
+
+        Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
+            ->only(['store', 'show', 'destroy']);
     });
 });
