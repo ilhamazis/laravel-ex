@@ -83,12 +83,6 @@ RUN chown -R opsec:33 /var/www/html/storage/
 RUN chown -R opsec:33 /var/www/html/bootstrap/
 RUN chown -R opsec:33 /var/www/html/vendor/
 USER opsec
-###########################################GENERATE KEY
-#RUN php artisan key:generate
-###########################################CLEAR CACHE
-RUN php artisan optimize:clear
-###########################################MIGRATE-TO-DATABASE-DUMMY
-RUN php artisan migrate:fresh --seed
 ####################################PORT
 EXPOSE 80
 
