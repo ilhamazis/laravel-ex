@@ -110,6 +110,7 @@ class DatabaseSeeder extends Seeder
             $application->update(['current_application_step_id' => $applicationStepOngoing->id]);
 
             $attachment = Attachment::factory()->create([
+                'path' => 'dummy.pdf',
                 'application_id' => $application->id,
                 'created_by' => null,
                 'updated_by' => null,

@@ -38,7 +38,9 @@ class Attachment extends Model
     public function fileSize(): Attribute
     {
         return new Attribute(
-            get: fn() => Storage::exists($this->path) ? Storage::size($this->path) / 1000 : 0,
+            get: fn() => Storage::exists($this->path)
+                ? round(Storage::size($this->path) / 1000)
+                : 0,
         );
     }
 }

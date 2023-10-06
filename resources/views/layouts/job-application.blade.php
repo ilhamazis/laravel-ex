@@ -254,8 +254,9 @@
                                                             class="icon icon-cloud-arrow-up"></span></label>
                                                     <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
                                                     <p class="upload-draggable__subtitle">atau seret file ke sini</p>
-                                                    <p class="upload-draggable__support">SVG, PNG, JPG atau GIF (max.
-                                                        800x400px)</p>
+                                                    <p class="upload-draggable__support">
+                                                        DOC, DOCX, atau PDF (max. 2MB)
+                                                    </p>
                                                 </div>
                                                 <div class="upload-draggable__uploading">
                                                     <span class="loader"></span> sedang memuat...
