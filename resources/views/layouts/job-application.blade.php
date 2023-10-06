@@ -206,7 +206,7 @@
                 <div class="grid">
                     @if(!$currentApplicationStep->hasReviews())
                         <div class="col-12">
-                            <x-alert variant="helper"
+                            <x-alert variant="helper" font-weight="normal"
                                      message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
                         </div>
                     @endif
