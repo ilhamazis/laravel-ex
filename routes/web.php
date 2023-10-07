@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\Management\JobController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -37,5 +38,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
+
+        Route::resource('/templates', TemplateController::class)->except('destroy');
+        Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');
     });
 });
