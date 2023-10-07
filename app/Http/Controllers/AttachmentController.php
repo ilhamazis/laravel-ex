@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreAttachmentRequest;
 use App\Models\Application;
 use App\Models\ApplicationStep;
@@ -28,22 +29,22 @@ class AttachmentController extends Controller
             }
 
             return $next($request);
-        })->only(['store']);
+        })->only(['store', 'show', 'destroy']);
 
         $this->middleware(function (Request $request, \Closure $next) {
-            $job = $request->route('job');
             $application = $request->route('application');
-            $applicationStep = $request->route('step');
             $attachment = $request->route('attachment');
 
-            if ($application->job_id !== $job->id
-                || $applicationStep->application_id !== $application->id
-                || $attachment->application_id !== $application->id) {
+            if ($attachment->application_id !== $application->id) {
                 abort(404);
             }
 
             return $next($request);
         })->only(['show', 'destroy']);
+
+        $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value)->only(['show']);
+        $this->middleware('can:' . PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value)->only(['store']);
+        $this->middleware('can:' . PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value)->only(['destroy']);
     }
 
     /**

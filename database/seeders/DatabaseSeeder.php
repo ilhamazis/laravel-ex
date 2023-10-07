@@ -52,6 +52,9 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::UPDATE_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
@@ -61,6 +64,7 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
         ]);
 
         foreach (ApplicationStepEnum::values() as $index => $step) {

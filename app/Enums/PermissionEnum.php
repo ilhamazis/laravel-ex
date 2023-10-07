@@ -18,4 +18,7 @@ enum PermissionEnum: string
     case UPDATE_APPLICATION_STEP = 'update_application_step';
     case VIEW_APPLICATION_REVIEW = 'view_application_review';
     case CREATE_APPLICATION_REVIEW = 'create_application_review';
+    case VIEW_APPLICATION_ATTACHMENT = 'view_application_attachment';
+    case CREATE_APPLICATION_ATTACHMENT = 'create_application_attachment';
+    case DELETE_APPLICATION_ATTACHMENT = 'delete_application_attachment';
 }
