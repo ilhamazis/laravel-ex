@@ -12,10 +12,12 @@
             </div>
 
             <div class="main__action">
-                <x-link href="{{ route('managements.templates.create') }}" class="btn btn_primary">
-                    <span class="icon icon-plus-solid"></span>
-                    <span class="btn__text">Tambah Template</span>
-                </x-link>
+                @can(\App\Enums\PermissionEnum::CREATE_TEMPLATE->value)
+                    <x-link href="{{ route('managements.templates.create') }}" class="btn btn_primary">
+                        <span class="icon icon-plus-solid"></span>
+                        <span class="btn__text">Tambah Template</span>
+                    </x-link>
+                @endcan
             </div>
         </div>
 

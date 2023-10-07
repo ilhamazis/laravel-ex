@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Models\Template;
 use App\Services\TemplateManagingService;
@@ -17,6 +18,11 @@ class TemplateController extends Controller
     public function __construct(TemplateManagingService $templateManagingService)
     {
         $this->templateManagingService = $templateManagingService;
+
+        $this->middleware('can:' . PermissionEnum::VIEW_TEMPLATE->value)->only(['index']);
+        $this->middleware('can:' . PermissionEnum::CREATE_TEMPLATE->value)->only(['create', 'store']);
+        $this->middleware('can:' . PermissionEnum::UPDATE_TEMPLATE->value)->only(['edit', 'update']);
+        $this->middleware('can:' . PermissionEnum::DELETE_TEMPLATE->value)->only(['destroy']);
     }
 
     /**

@@ -55,6 +55,10 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::VIEW_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::CREATE_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::UPDATE_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::DELETE_TEMPLATE->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([

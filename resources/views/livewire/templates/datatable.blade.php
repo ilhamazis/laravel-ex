@@ -34,17 +34,22 @@
                         </div>
                     </div>
                     <div class="jobs__item-action">
-                        <x-link :href="route('managements.templates.edit', $template)" class="btn btn_outline btn_xs"
-                                data-btn-label="Detail">
-                            <span class="icon icon-pencil-square-solid"></span>
-                            Edit
-                        </x-link>
-                        <button x-on:click="deleteId = @js($template->id)" data-toggle="modal"
-                                data-target="#delete-modal"
-                                class="btn btn_destructive btn_xs" data-btn-label="Hapus">
-                            <span class="icon icon-trash-solid"></span>
-                            Hapus
-                        </button>
+                        @can(\App\Enums\PermissionEnum::UPDATE_TEMPLATE->value)
+                            <x-link :href="route('managements.templates.edit', $template)"
+                                    class="btn btn_outline btn_xs"
+                                    data-btn-label="Detail">
+                                <span class="icon icon-pencil-square-solid"></span>
+                                Edit
+                            </x-link>
+                        @endcan
+                        @can(\App\Enums\PermissionEnum::DELETE_TEMPLATE->value)
+                            <button x-on:click="deleteId = @js($template->id)" data-toggle="modal"
+                                    data-target="#delete-modal"
+                                    class="btn btn_destructive btn_xs" data-btn-label="Hapus">
+                                <span class="icon icon-trash-solid"></span>
+                                Hapus
+                            </button>
+                        @endcan
                     </div>
                 </div>
             @endforeach
