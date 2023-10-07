@@ -28,4 +28,9 @@ class TemplateManagingService
                 },
             )->paginate($limit);
     }
+
+    public function create(array $data): Template
+    {
+        return Template::query()->create($data);
+    }
 }
