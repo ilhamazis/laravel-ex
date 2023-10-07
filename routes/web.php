@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
 
-        Route::resource('/templates', TemplateController::class)->except(['show', 'destroy']);
+        Route::resource('/templates', TemplateController::class)->except(['destroy']);
         Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');
     });
 });

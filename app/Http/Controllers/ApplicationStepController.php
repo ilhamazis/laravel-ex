@@ -9,6 +9,7 @@ use App\Models\Application;
 use App\Models\ApplicationStep;
 use App\Models\Job;
 use App\Services\ApplicationStepManagingService;
+use App\Services\TemplateManagingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,10 +18,15 @@ use Illuminate\Validation\ValidationException;
 class ApplicationStepController extends Controller
 {
     private ApplicationStepManagingService $applicationStepManagingService;
+    private TemplateManagingService $templateManagingService;
 
-    public function __construct(ApplicationStepManagingService $applicationStepManagingService)
+    public function __construct(
+        ApplicationStepManagingService $applicationStepManagingService,
+        TemplateManagingService        $templateManagingService,
+    )
     {
         $this->applicationStepManagingService = $applicationStepManagingService;
+        $this->templateManagingService = $templateManagingService;
 
         $this->middleware(function (Request $request, \Closure $next) {
             $job = $request->route('job');
@@ -44,6 +50,7 @@ class ApplicationStepController extends Controller
         $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
+        $templates = $this->templateManagingService->findAll();
 
         return view('managements.jobs.applications.application-steps.show', [
             'job' => $job,
@@ -52,6 +59,7 @@ class ApplicationStepController extends Controller
             'applicationStep' => $applicationStep,
             'applicationSteps' => $applicationSteps,
             'missingApplicationSteps' => $missingApplicationSteps,
+            'templates' => $templates,
         ]);
     }
 
