@@ -33,4 +33,14 @@ class TemplateManagingService
     {
         return Template::query()->create($data);
     }
+
+    public function update(Template $template, array $data): bool
+    {
+        return $template->update($data);
+    }
+
+    public function delete(int $id): int
+    {
+        return Template::query()->where('id', $id)->delete();
+    }
 }

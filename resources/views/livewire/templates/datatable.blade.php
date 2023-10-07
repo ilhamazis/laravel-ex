@@ -34,10 +34,10 @@
                         </div>
                     </div>
                     <div class="jobs__item-action">
-                        <x-link :href="route('managements.templates.show', $template)" class="btn btn_outline btn_xs"
+                        <x-link :href="route('managements.templates.edit', $template)" class="btn btn_outline btn_xs"
                                 data-btn-label="Detail">
-                            <span class="icon icon-eye-solid"></span>
-                            Detail
+                            <span class="icon icon-pencil-square-solid"></span>
+                            Edit
                         </x-link>
                         <button x-on:click="deleteId = @js($template->id)" data-toggle="modal"
                                 data-target="#delete-modal"
