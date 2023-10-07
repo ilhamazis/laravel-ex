@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\Management\JobController;
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps', ApplicationStepController::class)
             ->only(['show', 'update', 'destroy']);
+
+        Route::resource('jobs.application.steps.communications', CommunicationController::class)
+            ->only(['store']);
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)
             ->only(['index', 'store', 'update', 'destroy']);
