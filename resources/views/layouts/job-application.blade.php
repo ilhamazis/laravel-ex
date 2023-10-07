@@ -206,14 +206,14 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="grid">
-                    @if(!$currentApplicationStep->hasReviews())
-                        <div class="col-12">
-                            <x-alert variant="helper" font-weight="normal"
-                                     message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
-                        </div>
-                    @endif
-
                     @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
+                        @if(!$currentApplicationStep->hasReviews())
+                            <div class="col-12">
+                                <x-alert variant="helper" font-weight="normal"
+                                         message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
+                            </div>
+                        @endif
+
                         @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING
                             && $application->currentApplicationStep->id === $currentApplicationStep->id)
                             <div class="col-12">
