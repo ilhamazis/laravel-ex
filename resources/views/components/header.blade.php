@@ -1,10 +1,10 @@
 <header {{ $attributes->merge(['class' => 'header']) }}>
     <div class="header__left">
         <div class="header__group">
-            <a href="{{ route('home') }}" class="header__identity">
+            <x-link :href="route('home')" class="header__identity">
                 <img class="header__logo" src="{{ asset('assets/images/logo_sevima-career.svg') }}"
                      alt="Logo Sevima Career">
-            </a>
+            </x-link>
         </div>
         <div class="header__navigation">
             <nav class="nav">
@@ -21,6 +21,11 @@
                             </x-link>
                         </li>
                     @endcan
+                    <li @class(['nav__item', 'active' => request()->routeIs('managements.templates.*')])>
+                        <x-link class="nav__link" href="{{ route('managements.templates.index') }}">
+                            <span>Template</span>
+                        </x-link>
+                    </li>
                 </ul>
             </nav>
         </div>
