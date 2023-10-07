@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <x-alert variant="success" style="padding-bottom: 1rem" :message="session()->get('success')"
+        <x-alert variant="success" style="padding: 1rem" :message="session()->get('success')"
                  dismissable/>
 
         <div class="jobs__list-wrapper">
