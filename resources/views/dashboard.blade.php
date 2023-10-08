@@ -24,7 +24,7 @@
                                     <span class="statistic__tooltip icon icon-information-circle-solid"></span>
                                 </span>
                             </div>
-                            <span class="statistic__count">120</span>
+                            <span class="statistic__count">{{ $activeJobsCount }}</span>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                     <span class="statistic__tooltip icon icon-information-circle-solid"></span>
                                 </span>
                             </div>
-                            <span class="statistic__count">1.250</span>
+                            <span class="statistic__count">{{ $totalApplicationsCount }}</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                     <span class="statistic__tooltip icon icon-information-circle-solid"></span>
                                 </span>
                             </div>
-                            <span class="statistic__count">24</span>
+                            <span class="statistic__count">{{ $lastMonthApplicationsCount }}</span>
                         </div>
                     </div>
                 </div>
@@ -98,11 +98,11 @@
             new Chart(chart, {
                 type: "line",
                 data: {
-                    labels: ["Jan 23", "Feb 23", "Mar 23", "Apr 23", "Mei 23", "Jun 23"],
+                    labels: @js($chartApplicationsPerMonth['labels']),
                     datasets: [
                         {
                             label: "Jumlah Pelamar",
-                            data: [160, 18, 25, 52, 22, 200],
+                            data: @js($chartApplicationsPerMonth['data']),
                             backgroundColor: "#2486FF",
                             borderColor: "#2486FF",
                         },
