@@ -6,13 +6,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
-use App\Http\Controllers\Management\JobController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\Landing;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
-Route::view('/jobs', 'jobs')->name('jobs');
+Route::get('/', Landing\HomeController::class)->name('home');
+Route::get('/jobs', [Landing\JobController::class, 'index'])->name('jobs');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'create'])->name('login');

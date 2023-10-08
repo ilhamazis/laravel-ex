@@ -10,6 +10,13 @@
     line-height: var(--custom-fs-3);
 }
 
+.jobs__empty {
+    font-size: var(--custom-fs-5);
+    font-weight: 500;
+    color: var(--custom-color-black);
+    text-align: center;
+}
+
 .jobs__wrapper {
     padding: 2.5rem 0;
     display: grid;
