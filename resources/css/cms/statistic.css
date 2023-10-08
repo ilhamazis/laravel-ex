@@ -1,0 +1,52 @@
+.statistic__item {
+    padding-left: 1.5rem;
+}
+
+.statistic__item.blue {
+    border-left: 3px solid #0F6AF5;
+}
+
+.statistic__item.green {
+    border-left: 3px solid #0E9384;
+}
+
+.statistic__item.orange {
+    border-left: 3px solid #F58220;
+}
+
+.statistic__header {
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.statistic__title {
+    color: #9AA4B2;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.statistic__tooltip {
+    font-size: 1rem;
+    color: #9AA4B2;
+}
+
+.statistic__count {
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 3.125rem;
+}
+
+.statistic__item.blue .statistic__count {
+    color: #0F6AF5;
+}
+
+.statistic__item.green .statistic__count {
+    color: #0E9384;
+}
+
+.statistic__item.orange .statistic__count {
+    color: #F58220;
+}
