@@ -11,7 +11,7 @@
                 Apakah Anda siap mengambil langkah berani dalam karier Anda? SEVIMA mengundang Anda untuk menjelajahi
                 peluang luar biasa di dunia profesional kami.
             </p>
-            <form class="hero__form">
+            <form action="{{ route('jobs') }}" class="hero__form">
                 <div class="hero__input-row">
                     <div class="hero__input-group">
                         <div class="hero__input-icon">
@@ -22,7 +22,7 @@
                                     stroke="#6F6F6F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <input type="text" class="hero__input" placeholder="Cari Pekerjaanmu..."/>
+                        <input type="text" name="q" class="hero__input" placeholder="Cari Pekerjaanmu..."/>
                     </div>
 
                     <div class="hero__input-group">
@@ -34,13 +34,16 @@
                                     stroke="#6F6F6F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <select class="hero__select">
+                        <select name="type" class="hero__select">
                             <option selected disabled>Tipe Pekerjaan</option>
+                            @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
+                                <option value="{{ $typeEnum }}">{{ $typeEnum }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
-                <button type="button" wire:click="$refresh" class="button button__md button__primary">
+                <button type="submit" class="button button__md button__primary">
                     Cari Sekarang
                 </button>
             </form>
