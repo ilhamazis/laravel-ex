@@ -55,8 +55,8 @@
                 <div class="card">
                     <h4 class="card__title">{{ $job->title }}</h4>
                     <div class="card__badges">
-                        <span class="badge badge__outline">{{ $job->type }}</span>
-                        <div class="badge badge__secondary">
+                        <span class="custom__badge custom__badge-outline">{{ $job->type }}</span>
+                        <div class="custom__badge custom__badge-secondary">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -69,7 +69,7 @@
                             {{ $job->applications_count }} Pelamar
                         </div>
                     </div>
-                    <x-link href="#" class="card__link button button__md button__primary">
+                    <x-link href="{{ route('jobs.show', $job) }}" class="card__link button button__md button__primary">
                         See Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"

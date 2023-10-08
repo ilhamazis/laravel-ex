@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landing\HomeController::class)->name('home');
 Route::get('/jobs', [Landing\JobController::class, 'index'])->name('jobs');
+Route::get('/jobs/{job}', [Landing\JobController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{job}/apply', [Landing\JobController::class, 'create'])->name('jobs.apply');
+Route::post('/jobs/{job}/apply', [Landing\JobController::class, 'store']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'create'])->name('login');
