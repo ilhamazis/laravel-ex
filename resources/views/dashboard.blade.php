@@ -101,7 +101,7 @@
                     labels: ["Jan 23", "Feb 23", "Mar 23", "Apr 23", "Mei 23", "Jun 23"],
                     datasets: [
                         {
-                            label: "Piutang",
+                            label: "Jumlah Pelamar",
                             data: [160, 18, 25, 52, 22, 200],
                             backgroundColor: "#2486FF",
                             borderColor: "#2486FF",
