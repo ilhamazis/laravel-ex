@@ -12,7 +12,6 @@ class Datatable extends MasterDatatable
 {
     private JobApplyingService $jobApplyingService;
 
-    #[Url]
     public int $limit = 9;
 
     #[Url]
@@ -21,6 +20,11 @@ class Datatable extends MasterDatatable
     public function boot(JobApplyingService $jobApplyingService): void
     {
         $this->jobApplyingService = $jobApplyingService;
+    }
+
+    public function extendLimit(): void
+    {
+        $this->limit += 9;
     }
 
     public function render(): View

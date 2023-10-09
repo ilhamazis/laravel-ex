@@ -50,8 +50,8 @@
             <h3 class="jobs__count">{{ $jobs->total() }} Lowongan Pekerjaan Tersedia</h3>
         @endif
 
-        @forelse($jobs as $job)
-            <div class="jobs__wrapper">
+        <div class="jobs__wrapper">
+            @forelse($jobs as $job)
                 <div class="card">
                     <h4 class="card__title">{{ $job->title }}</h4>
                     <div class="card__badges">
@@ -78,14 +78,15 @@
                         </svg>
                     </x-link>
                 </div>
-            </div>
-        @empty
-            <h3 class="jobs__empty">Lowongan pekerjaan tidak ditemukan</h3>
-        @endforelse
+            @empty
+                <h3 class="jobs__empty">Lowongan pekerjaan tidak ditemukan</h3>
+            @endforelse
+        </div>
 
         @if($jobs->hasMorePages())
             <div class="jobs__pagination">
-                <button type="button" class="jobs__pagination-button button button__md button__outline">
+                <button wire:click="extendLimit" type="button"
+                        class="jobs__pagination-button button button__md button__outline">
                     Muat lebih banyak
                 </button>
                 <p class="jobs__pagination-detail">Showing {{ $jobs->lastItem() }} out of {{ $jobs->total() }}</p>
