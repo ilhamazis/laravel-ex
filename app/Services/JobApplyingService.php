@@ -33,8 +33,8 @@ class JobApplyingService
     public function getFeaturedJobs(): Collection
     {
         return Job::query()
-            ->where('status', JobStatusEnum::PUBLISHED)
             ->withCount('applications')
+            ->isActive()
             ->orderBy('applications_count', 'desc')
             ->limit(5)
             ->get();
@@ -48,7 +48,7 @@ class JobApplyingService
     {
         return Job::query()
             ->withCount('applications')
-            ->where('status', JobStatusEnum::PUBLISHED)
+            ->isActive()
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');
             })->when(!is_null($type), function (Builder $q) use ($type) {

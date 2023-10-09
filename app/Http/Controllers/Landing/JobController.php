@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Landing;
 
+use App\Enums\JobStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobApplyRequest;
 use App\Models\Job;
 use App\Services\JobApplyingService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -16,6 +18,20 @@ class JobController extends Controller
     public function __construct(JobApplyingService $jobApplyingService)
     {
         $this->jobApplyingService = $jobApplyingService;
+
+        $this->middleware(function (Request $request, \Closure $next) {
+            $job = $request->route('job');
+
+            if (
+                $job->status !== JobStatusEnum::PUBLISHED
+                || ($job->start_at !== null && $job->start_at < now())
+                || ($job->end_at !== null && $job->end_at > now())
+            ) {
+                abort(404);
+            }
+
+            return $next($request);
+        })->except(['index']);
     }
 
     /**
