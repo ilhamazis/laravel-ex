@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreCommunicationRequest;
 use App\Models\Application;
 use App\Models\ApplicationStep;
 use App\Models\Job;
 use App\Services\CommunicationSendingService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -18,6 +20,19 @@ class CommunicationController extends Controller
     public function __construct(CommunicationSendingService $sendingService)
     {
         $this->sendingService = $sendingService;
+
+        $this->middleware(function (Request $request, \Closure $next) {
+            $job = $request->route('job');
+            $application = $request->route('application');
+            $applicationStep = $request->route('step');
+
+            if ($application->job_id !== $job->id || $applicationStep->application_id !== $application->id) {
+                abort(404);
+            }
+
+            return $next($request);
+        })->only(['store']);
+        $this->middleware('can:' . PermissionEnum::CREATE_APPLICATION_COMMUNICATION->value)->only(['store']);
     }
 
     /**
