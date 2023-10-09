@@ -63,9 +63,17 @@
                         <td class="cell-action">
                             @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_STEP->value)
                                 @if($application->currentApplicationStep)
-                                    <div class="dropdown-group" style="display: flex; align-items: center; gap: 4px;">
+                                    <div class="dropdown-group"
+                                         style="display: flex; align-items: center; gap: 4px;">
                                         <x-link
-                                            href="{{ route('managements.jobs.applications.steps.show', [$job, $application, $application->currentApplicationStep]) }}"
+                                            href="{{
+                                                    route(
+                                                        auth()->user()->can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
+                                                            ? 'managements.jobs.applications.steps.show'
+                                                            : 'managements.jobs.applications.steps.reviews.index',
+                                                        [$job, $application, $application->currentApplicationStep],
+                                                    )
+                                                  }}"
                                             class="btn btn_outline btn_xs btn_icon" data-btn-label="Detail">
                                             <span class="icon icon-eye-solid"></span>
                                         </x-link>

@@ -39,7 +39,10 @@ class ApplicationStepController extends Controller
 
             return $next($request);
         })->only(['show', 'update', 'destroy']);
-        $this->middleware('can:' . PermissionEnum::VIEW_APPLICATION_STEP->value)->only(['show']);
+        $this->middleware([
+            'can:' . PermissionEnum::VIEW_APPLICATION_STEP->value,
+            'can:' . PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value],
+        )->only(['show']);
         $this->middleware('can:' . PermissionEnum::UPDATE_APPLICATION_STEP->value)->only(['update', 'destroy']);
     }
 

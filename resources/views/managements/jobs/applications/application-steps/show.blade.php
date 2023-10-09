@@ -20,6 +20,10 @@
         @csrf
         @method('POST')
 
+        @error('mail')
+        <x-alert style="padding-bottom: 2rem" variant="error" :message="$message" dismissable/>
+        @enderror
+
         <div class="grid">
             <div class="col-12">
                 <div class="form-control">
