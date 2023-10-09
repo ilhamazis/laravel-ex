@@ -50,6 +50,8 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::UPDATE_APPLICATION_STEP->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_COMMUNICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
