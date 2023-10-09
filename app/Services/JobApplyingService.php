@@ -98,11 +98,13 @@ class JobApplyingService
             ->where('name', ApplicationStepEnum::RECRUITER_SCREEN)
             ->first();
 
-        ApplicationStep::query()->create([
+        $applicationStep = ApplicationStep::query()->create([
             'status' => ApplicationStepStatusEnum::ONGOING,
             'application_id' => $application->id,
             'step_id' => $step->id,
         ]);
+
+        $application->update(['current_application_step_id' => $applicationStep->id]);
 
         DB::commit();
     }
