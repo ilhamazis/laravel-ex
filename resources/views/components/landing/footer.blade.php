@@ -19,44 +19,49 @@
             <h6 class="custom__footer-links-title">Produk</h6>
             <ul class="custom__footer-links-list">
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Edlink
-                    </a>
+                    <x-link href="https://siakadcloud.com" target="_blank">
+                        siAkadCloud
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Maukuliah
-                    </a>
+                    <x-link href="https://gofeedercloud.com" target="_blank">
+                        GoFeederCloud
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Siakad Cloud
-                    </a>
+                    <x-link href="https://siakadcloud.com/akreditasicloud/" target="_blank">
+                        AkreditasiCloud
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Akreditasi Cloud
-                    </a>
+                    <x-link href="https://profeeder.id" target="_blank">
+                        ProFeeder
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Profeeder
-                    </a>
+                    <x-link href="https://sevimapay.com" target="_blank">
+                        SevimaPay
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        GoFeeder
-                    </a>
+                    <x-link href="https://edlink.id" target="_blank">
+                        EdLink
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Karirlink
-                    </a>
+                    <x-link href="https://maukuliah.id" target="_blank">
+                        MauKuliah
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Sevima Pay
-                    </a>
+                    <x-link href="https://karirlink.id" target="_blank">
+                        KarirLink
+                    </x-link>
+                </li>
+                <li class="custom__footer-links-item">
+                    <x-link href="https://persuratan.integrasolusi.com" target="_blank">
+                        IntegraOffice Persuratan
+                    </x-link>
                 </li>
             </ul>
         </div>
@@ -65,24 +70,24 @@
             <h6 class="custom__footer-links-title">Perusahaan</h6>
             <ul class="custom__footer-links-list">
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://sevima.com/tentang-sevima/" target="_blank">
                         Tentang SEVIMA
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://sevima.com/event-sevima/" target="_blank">
                         Event
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://sevima.com/berita/" target="_blank">
                         Berita
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://sevima.com/portofolio/" target="_blank">
                         Perguruan Tinggi
-                    </a>
+                    </x-link>
                 </li>
             </ul>
         </div>
@@ -112,29 +117,29 @@
             <h6 class="custom__footer-links-title">Ikuti Sevima</h6>
             <ul class="custom__footer-links-list">
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://www.facebook.com/SentraVidyaUtama" target="_blank">
                         Facebook
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://www.instagram.com/sevima_official/" target="_blank">
                         Instagram
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
+                    <x-link href="https://twitter.com/sevima_official/" target="_blank">
                         Twitter
-                    </a>
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Youtube
-                    </a>
+                    <x-link href="https://www.youtube.com/channel/UCDcvqZbhsdaDCnmUURz54uw" target="_blank">
+                        YouTube
+                    </x-link>
                 </li>
                 <li class="custom__footer-links-item">
-                    <a href="#">
-                        Linkedin
-                    </a>
+                    <x-link href="https://www.linkedin.com/company/sevima" target="_blank">
+                        LinkedIn
+                    </x-link>
                 </li>
             </ul>
         </div>
