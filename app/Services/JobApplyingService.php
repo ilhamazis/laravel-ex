@@ -77,7 +77,7 @@ class JobApplyingService
             'education' => $data['education'],
             'school' => $data['school'],
             'faculty' => $data['faculty'] ?? null,
-            'major' => $data['major'],
+            'major' => $data['major'] ?? null,
             'experience' => $data['experience'],
         ]);
 
