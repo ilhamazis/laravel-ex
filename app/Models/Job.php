@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
 use App\Traits\HasIdentifier;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -40,5 +41,17 @@ class Job extends Model
     public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
+    }
+
+    public function scopeIsActive(Builder $query): void
+    {
+        $query->where('status', JobStatusEnum::PUBLISHED)
+            ->where(function (Builder $q) {
+                $q->whereNull('start_at')
+                    ->orWhere('start_at', '<', now());
+            })->where(function (Builder $q) {
+                $q->whereNull('end_at')
+                    ->orWhere('end_at', '>', now());
+            });
     }
 }

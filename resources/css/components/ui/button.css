@@ -15,6 +15,7 @@
 .button__outline {
     color: var(--custom-color-blue);
     border: 1px solid var(--custom-color-blue);
+    background-color: var(--custom-color-white);
 }
 
 .button__ghost {

@@ -11,7 +11,7 @@
                 <ul class="nav__list" data-more-text="Lainnya">
                     <li @class(['nav__item', 'active' => request()->routeIs('dashboard')])>
                         <x-link class="nav__link" href="{{ route('dashboard') }}">
-                            <span>Dashboard</span>
+                            <span>Beranda</span>
                         </x-link>
                     </li>
                     @can(\App\Enums\PermissionEnum::VIEW_JOB->value)
