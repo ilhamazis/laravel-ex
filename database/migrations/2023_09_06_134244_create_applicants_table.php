@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('education');
             $table->string('school');
             $table->string('faculty')->nullable();
-            $table->string('major');
+            $table->string('major')->nullable();
             $table->integer('experience');
             $table->timestamps();
         });

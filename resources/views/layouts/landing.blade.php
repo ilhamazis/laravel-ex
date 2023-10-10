@@ -6,12 +6,12 @@
 
     <title>{{ $title ?? config('app.name', 'SEVIMA Career') }}</title>
 
-    @yield('styles')
+    @stack('styles')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body {{ $attributes->merge() }}>
 {{ $slot }}
 
-@yield('scripts')
+@stack('scripts')
 </body>
 </html>
