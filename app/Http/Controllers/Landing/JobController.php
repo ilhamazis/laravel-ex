@@ -24,8 +24,8 @@ class JobController extends Controller
 
             if (
                 $job->status !== JobStatusEnum::PUBLISHED
-                || ($job->start_at !== null && $job->start_at < now())
-                || ($job->end_at !== null && $job->end_at > now())
+                || ($job->start_at !== null && $job->start_at > now())
+                || ($job->end_at !== null && $job->end_at < now())
             ) {
                 abort(404);
             }
