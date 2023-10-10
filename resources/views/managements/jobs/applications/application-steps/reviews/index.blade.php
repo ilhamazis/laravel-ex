@@ -1,6 +1,6 @@
 @php
     $paths = [
-        ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
+        ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
         ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $job)],
         [

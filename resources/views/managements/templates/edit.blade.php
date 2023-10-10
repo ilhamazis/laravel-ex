@@ -1,7 +1,7 @@
 @php
     $paths = [
         ['title' => 'Template', 'link' => route('managements.templates.index')],
-        ['title' => 'Edit Template'],
+        ['title' => 'Ubah Template'],
     ];
 @endphp
 
@@ -37,7 +37,7 @@
                     <x-breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
-                        <h1 class="main__title">Edit Template</h1>
+                        <h1 class="main__title">Ubah Template</h1>
                     </div>
                 </div>
             </div>

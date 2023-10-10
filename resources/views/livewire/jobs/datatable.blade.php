@@ -3,7 +3,7 @@
         <div class="grid" style="grid-row-gap: 1.25rem; padding: 1rem">
             <div class="col-12 col-sm-4">
                 <div class="form-control">
-                    <label for="search" class="form-control__label">Search</label>
+                    <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
                         <x-input wire:model.live.debounce.500ms="query" type="search"
@@ -64,13 +64,17 @@
                                 </svg>
                             </div>
                             <p class="jobs__item-info">{{ $job->type }}</p>
-                            <div class="custom__data-info-divider">
-                                <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                </svg>
-                            </div>
-                            <p class="jobs__item-info">Created on {{ $job->created_at->toFormattedDateString() }}</p>
+                            @if($job->start_at)
+                                <div class="custom__data-info-divider">
+                                    <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
+                                    </svg>
+                                </div>
+                                <p class="jobs__item-info">
+                                    Mulai tanggal {{ $job->created_at->toFormattedDateString() }}
+                                </p>
+                            @endif
                             @if($job->end_at)
                                 <div class="custom__data-info-divider">
                                     <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
@@ -78,7 +82,9 @@
                                         <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
                                     </svg>
                                 </div>
-                                <p class="jobs__item-info">End at {{ $job->end_at->toFormattedDateString() }}</p>
+                                <p class="jobs__item-info">
+                                    Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
+                                </p>
                             @endif
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 @php
     $paths = [
-        ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => 'Tambah Job'],
+        ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
+        ['title' => 'Buat Lowongan Pekerjaan'],
     ];
 @endphp
 
@@ -37,7 +37,7 @@
                     <x-breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
-                        <h1 class="main__title">Tambah Job</h1>
+                        <h1 class="main__title">Buat Lowongan Pekerjaan</h1>
                     </div>
                 </div>
             </div>
