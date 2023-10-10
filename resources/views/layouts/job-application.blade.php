@@ -167,22 +167,24 @@
                     <div class="card__body">
                         <nav class="nav-tab">
                             <ul class="nav-tab__wrapper">
-                                <li @class([
+                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
+                                    <li @class([
                                         'nav-tab__item',
                                         'active' => url()->current() ===
                                                     route('managements.jobs.applications.steps.show', [
                                                         $job, $application, $currentApplicationStep
                                                     ])
                                     ])
-                                >
-                                    <x-link
-                                        :href="route('managements.jobs.applications.steps.show', [
+                                    >
+                                        <x-link
+                                            :href="route('managements.jobs.applications.steps.show', [
                                             $job, $application, $currentApplicationStep
                                         ])"
-                                    >
-                                        Kirim Email
-                                    </x-link>
-                                </li>
+                                        >
+                                            Kirim Email
+                                        </x-link>
+                                    </li>
+                                @endcan
                                 @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
                                     <li @class([
                                         'nav-tab__item',
