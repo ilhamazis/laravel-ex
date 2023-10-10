@@ -1,4 +1,4 @@
-@props(['variant' => 'default', 'message', 'dismissable' => false])
+@props(['variant' => 'default', 'message', 'dismissable' => false, 'fontWeight' => 'bold'])
 
 @php
     $variant = match ($variant) {
@@ -14,7 +14,11 @@
     <div {{ $attributes }}>
         <div @class(['alert', $variant])>
             <div class="alert__content">
-                <h4 class="alert__heading">{{ $message }}</h4>
+                @if($fontWeight === 'bold')
+                    <h4 class="alert__heading">{{ $message }}</h4>
+                @elseif ($fontWeight === 'normal')
+                    <p>{{ $message }}</p>
+                @endif
             </div>
             @if($dismissable)
                 <span class="icon icon-x-mark-mini" data-dismiss="alert"></span>

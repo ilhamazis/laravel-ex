@@ -1,4 +1,4 @@
-.badge {
+.custom__badge {
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -10,13 +10,13 @@
     font-size: 0.85rem;
 }
 
-.badge__outline {
+.custom__badge-outline {
     border: 1px solid var(--custom-color-blue);
     background-color: var(--custom-color-light-gray);
     color: var(--custom-color-blue);
 }
 
-.badge__secondary {
+.custom__badge-secondary {
     background-color: var(--custom-color-light-gray);
     color: var(--custom-color-gray);
 }

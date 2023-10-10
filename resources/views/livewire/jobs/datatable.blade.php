@@ -43,28 +43,28 @@
             </div>
         </div>
 
-        <x-alert variant="success" style="padding-bottom: 1rem" :message="session()->get('success')"
+        <x-alert variant="success" style="padding: 1rem" :message="session()->get('success')"
                  dismissable/>
 
-        <div class="jobs__list-wrapper">
+        <div class="custom__data-list">
             @foreach($jobs as $job)
-                <div class="jobs__item">
-                    <div class="jobs__item-detail">
-                        <h3 class="jobs__item-title">{{ $job->title }}</h3>
-                        <div class="jobs__item-info-wrapper">
-                            <p class="jobs__item-info">
+                <div class="custom__data-item">
+                    <div class="custom__data-detail">
+                        <h3 class="custom__data-title">{{ $job->title }}</h3>
+                        <div class="custom__data-info-wrapper">
+                            <p class="custom__data-info">
                                 <x-badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
                                     {{ $job->status }}
                                 </x-badge>
                             </p>
-                            <div class="jobs__item-info-divider">
+                            <div class="custom__data-info-divider">
                                 <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
                                 </svg>
                             </div>
                             <p class="jobs__item-info">{{ $job->type }}</p>
-                            <div class="jobs__item-info-divider">
+                            <div class="custom__data-info-divider">
                                 <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
@@ -72,7 +72,7 @@
                             </div>
                             <p class="jobs__item-info">Created on {{ $job->created_at->toFormattedDateString() }}</p>
                             @if($job->end_at)
-                                <div class="jobs__item-info-divider">
+                                <div class="custom__data-info-divider">
                                     <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
@@ -82,7 +82,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="jobs__item-action">
+                    <div class="custom__data-action">
                         <x-link :href="route('managements.jobs.show', $job)" class="btn btn_outline btn_xs"
                                 data-btn-label="Detail">
                             <span class="icon icon-eye-solid"></span>

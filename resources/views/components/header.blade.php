@@ -1,23 +1,30 @@
 <header {{ $attributes->merge(['class' => 'header']) }}>
     <div class="header__left">
         <div class="header__group">
-            <a href="{{ route('home') }}" class="header__identity">
+            <x-link :href="route('home')" class="header__identity">
                 <img class="header__logo" src="{{ asset('assets/images/logo_sevima-career.svg') }}"
                      alt="Logo Sevima Career">
-            </a>
+            </x-link>
         </div>
         <div class="header__navigation">
             <nav class="nav">
                 <ul class="nav__list" data-more-text="Lainnya">
                     <li @class(['nav__item', 'active' => request()->routeIs('dashboard')])>
                         <x-link class="nav__link" href="{{ route('dashboard') }}">
-                            <span>Dashboard</span>
+                            <span>Beranda</span>
                         </x-link>
                     </li>
                     @can(\App\Enums\PermissionEnum::VIEW_JOB->value)
                         <li @class(['nav__item', 'active' => request()->routeIs('managements.jobs.*')])>
                             <x-link class="nav__link" href="{{ route('managements.jobs.index') }}">
                                 <span>Jobs</span>
+                            </x-link>
+                        </li>
+                    @endcan
+                    @can(\App\Enums\PermissionEnum::VIEW_TEMPLATE->value)
+                        <li @class(['nav__item', 'active' => request()->routeIs('managements.templates.*')])>
+                            <x-link class="nav__link" href="{{ route('managements.templates.index') }}">
+                                <span>Template</span>
                             </x-link>
                         </li>
                     @endcan

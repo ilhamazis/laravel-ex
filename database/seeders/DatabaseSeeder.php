@@ -50,6 +50,17 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::UPDATE_APPLICATION_STEP->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_COMMUNICATION->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value]->id,
+            $permissions[PermissionEnum::VIEW_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::CREATE_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::UPDATE_TEMPLATE->value]->id,
+            $permissions[PermissionEnum::DELETE_TEMPLATE->value]->id,
         ]);
 
         $roles[RoleEnum::INTERVIEWER->value]->permissions()->sync([
@@ -57,6 +68,9 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_JOB->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
         ]);
 
         foreach (ApplicationStepEnum::values() as $index => $step) {
@@ -106,6 +120,7 @@ class DatabaseSeeder extends Seeder
             $application->update(['current_application_step_id' => $applicationStepOngoing->id]);
 
             $attachment = Attachment::factory()->create([
+                'path' => 'dummy.pdf',
                 'application_id' => $application->id,
                 'created_by' => null,
                 'updated_by' => null,

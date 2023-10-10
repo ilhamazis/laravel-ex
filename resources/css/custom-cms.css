@@ -1,6 +1,12 @@
 @import "quill-custom.css";
-@import "cms/jobs-list.css";
+@import "cms/custom-list.css";
 @import "cms/stepper.css";
+@import "cms/rating.css";
+@import "cms/statistic.css";
+
+.text-editor .ql-editor {
+    min-height: 15rem;
+}
 
 .detail__desc-wrapper {
     padding-top: 1rem;
@@ -23,6 +29,21 @@
 .detail__actions {
     display: flex;
     gap: 1rem;
+}
+
+.review__item {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.review__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.review__description {
+    color: #697586;
+    line-height: 150%;
 }
 
 @media only screen and (min-width: 79.937rem) {
