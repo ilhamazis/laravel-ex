@@ -167,22 +167,24 @@
                     <div class="card__body">
                         <nav class="nav-tab">
                             <ul class="nav-tab__wrapper">
-                                <li @class([
+                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
+                                    <li @class([
                                         'nav-tab__item',
                                         'active' => url()->current() ===
                                                     route('managements.jobs.applications.steps.show', [
                                                         $job, $application, $currentApplicationStep
                                                     ])
                                     ])
-                                >
-                                    <x-link
-                                        :href="route('managements.jobs.applications.steps.show', [
+                                    >
+                                        <x-link
+                                            :href="route('managements.jobs.applications.steps.show', [
                                             $job, $application, $currentApplicationStep
                                         ])"
-                                    >
-                                        Kirim Email
-                                    </x-link>
-                                </li>
+                                        >
+                                            Kirim Email
+                                        </x-link>
+                                    </li>
+                                @endcan
                                 @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
                                     <li @class([
                                         'nav-tab__item',
@@ -237,99 +239,182 @@
                         @endif
                     @endcan
 
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card__body">
-                                <h2 class="card__title">Lampiran Berkas</h2>
+                    @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value)
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h2 class="card__title">Lampiran Berkas</h2>
 
-                                <div class="grid">
-                                    <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="upload-draggable">
-                                                <div class="upload-draggable__box">
-                                                    <input type="file" class="upload-draggable__file-input"
-                                                           name="files[]" id=""
-                                                           accept="application/pdf,.doc,.docx"/>
-                                                    <label class="upload-draggable__icon"><span
-                                                            class="icon icon-cloud-arrow-up"></span></label>
-                                                    <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
-                                                    <p class="upload-draggable__subtitle">atau seret file ke sini</p>
-                                                    <p class="upload-draggable__support">SVG, PNG, JPG atau GIF (max.
-                                                        800x400px)</p>
-                                                </div>
-                                                <div class="upload-draggable__uploading">
-                                                    <span class="loader"></span> sedang memuat...
-                                                </div>
-                                                <div class="upload-draggable__success">
-                                                    Berhasil
-                                                </div>
-                                                <div class="upload-draggable__error">
-                                                    Gagal
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="grid">
+                                        @can(\App\Enums\PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value)
+                                            <div class="col-12">
+                                                <form
+                                                    class="grid"
+                                                    action="{{ route('managements.jobs.applications.steps.attachments.store', [
+                                                $job, $application, $currentApplicationStep
+                                            ]) }}"
+                                                    method="post"
+                                                    enctype="multipart/form-data"
+                                                >
+                                                    @csrf
+                                                    @method('POST')
 
-                                    <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="attachment">
-                                                <div class="attachment__wrapper">
-                                                    <div class="attachment__wrapper-icon">
-                                                        <img alt="DOCX Icon"
-                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/doc-solid.svg') }}">
-                                                    </div>
-                                                    <div class="attachment__wrapper-text">
-                                                        <div class="attachment__title">
-                                                            <h3 class="attachment__heading">Customers_Q4_Report.doc</h3>
-                                                            <span class="attachment__description">440KB</span>
+                                                    <div class="col-12">
+                                                        <div class="form-control">
+                                                            <div class="upload-draggable">
+                                                                <div class="upload-draggable__box">
+                                                                    <input type="file"
+                                                                           class="upload-draggable__file-input"
+                                                                           name="file" id="file"
+                                                                           accept="application/pdf,.doc,.docx"/>
+                                                                    <label class="upload-draggable__icon"><span
+                                                                            class="icon icon-cloud-arrow-up"></span></label>
+                                                                    <h2 class="upload-draggable__title">Klik untuk pilih
+                                                                        file</h2>
+                                                                    <p class="upload-draggable__subtitle">atau seret
+                                                                        file ke
+                                                                        sini</p>
+                                                                    <p class="upload-draggable__support">
+                                                                        DOC, DOCX, atau PDF (max. 2MB)
+                                                                    </p>
+                                                                </div>
+                                                                <div class="upload-draggable__uploading">
+                                                                    <span class="loader"></span> sedang memuat...
+                                                                </div>
+                                                                <div class="upload-draggable__success">
+                                                                    Berhasil
+                                                                </div>
+                                                                <div class="upload-draggable__error">
+                                                                    Gagal
+                                                                </div>
+                                                            </div>
+                                                            @error('file')
+                                                            <div class="form-control__helper error">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
-                                                        <div class="attachment__action">
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-cloud-arrow-down"></span>
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-trash"></span>
-                                                            </button>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="button" class="btn btn_primary btn_full-width"
+                                                                data-label="Upload"
+                                                                data-toggle="modal"
+                                                                data-target="#create-attachment-modal">
+                                                            Upload Lampiran
+                                                        </button>
+                                                    </div>
+
+                                                    <x-modal-confirmation id="create-attachment-modal"
+                                                                          title="Konfirmasi Upload Lampiran">
+                                                        <x-slot:body>
+                                                            <p>Apakah anda yakin ingin meng-upload lampiran?</p>
+                                                        </x-slot:body>
+
+                                                        <x-slot:footer>
+                                                            <div class="grid cols-1 cols-sm-2">
+                                                                <button type="button" class="btn btn_outline"
+                                                                        data-dismiss="modal">
+                                                                    Batal
+                                                                </button>
+                                                                <button type="submit" class="btn btn_primary">
+                                                                    Konfirmasi
+                                                                </button>
+                                                            </div>
+                                                        </x-slot:footer>
+                                                    </x-modal-confirmation>
+                                                </form>
+                                            </div>
+                                        @endcan
+
+                                        @foreach($attachments as $attachment)
+                                            <div class="col-12">
+                                                <div class="form-control">
+                                                    <div class="attachment">
+                                                        <div class="attachment__wrapper">
+                                                            <div class="attachment__wrapper-icon">
+                                                                @switch($attachment->file_extension)
+                                                                    @case('doc')
+                                                                        <img alt="DOC Icon"
+                                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/doc-solid.svg') }}">
+                                                                        @break
+                                                                    @case('docx')
+                                                                        <img alt="DOCX Icon"
+                                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/docx-solid.svg') }}">
+                                                                        @break
+                                                                    @case('pdf')
+                                                                        <img alt="PDF Icon"
+                                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/pdf-solid.svg') }}">
+                                                                        @break
+                                                                    @default
+                                                                        <img alt="TXT Icon"
+                                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/txt-solid.svg') }}">
+                                                                @endswitch
+                                                            </div>
+                                                            <div class="attachment__wrapper-text">
+                                                                <div class="attachment__title">
+                                                                    <h3 class="attachment__heading">{{ $attachment->file_name }}</h3>
+                                                                    <span
+                                                                        class="attachment__description">{{ $attachment->file_size }}KB</span>
+                                                                </div>
+                                                                <div class="attachment__action">
+                                                                    <x-link
+                                                                        :href="route('managements.jobs.applications.steps.attachments.show', [
+                                                                        $job, $application, $currentApplicationStep, $attachment
+                                                                    ])"
+                                                                        class="btn btn_icon btn_outline btn_xs">
+                                                                        <span class="icon icon-cloud-arrow-down"></span>
+                                                                    </x-link>
+                                                                    @can(\App\Enums\PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value)
+                                                                        <form
+                                                                            action="{{ route('managements.jobs.applications.steps.attachments.destroy', [
+                                                                        $job, $application, $currentApplicationStep, $attachment
+                                                                    ]) }}"
+                                                                            method="post"
+                                                                        >
+                                                                            @csrf
+                                                                            @method('DELETE')
+
+                                                                            <button type="button"
+                                                                                    class="btn btn_icon btn_outline btn_xs"
+                                                                                    data-label="Delete Attachment"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#delete-attachment-modal">
+                                                                                <span class="icon icon-trash"></span>
+                                                                            </button>
+                                                                            <x-modal-confirmation variant="danger"
+                                                                                                  id="delete-attachment-modal"
+                                                                                                  title="Konfirmasi Eliminasi">
+                                                                                <x-slot:body>
+                                                                                    <p>Apakah anda yakin ingin menghapus
+                                                                                        lampiran ini?</p>
+                                                                                </x-slot:body>
+
+                                                                                <x-slot:footer>
+                                                                                    <div class="grid cols-1 cols-sm-2">
+                                                                                        <button type="button"
+                                                                                                class="btn btn_outline"
+                                                                                                data-dismiss="modal">
+                                                                                            Batal
+                                                                                        </button>
+                                                                                        <button type="submit"
+                                                                                                class="btn btn_destructive">
+                                                                                            Hapus
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </x-slot:footer>
+                                                                            </x-modal-confirmation>
+                                                                        </form>
+                                                                    @endcan
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-control">
-                                            <div class="attachment">
-                                                <div class="attachment__wrapper">
-                                                    <div class="attachment__wrapper-icon">
-                                                        <img alt="PDF Icon"
-                                                             src="{{ asset('/quantum-v2.0.0-202307280002/assets/images/misc-icons/file-document/pdf-solid.svg') }}">
-                                                    </div>
-                                                    <div class="attachment__wrapper-text">
-                                                        <div class="attachment__title">
-                                                            <h3 class="attachment__heading">Customers_Q4_Report.pdf</h3>
-                                                            <span class="attachment__description">440KB</span>
-                                                        </div>
-                                                        <div class="attachment__action">
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-cloud-arrow-down"></span>
-                                                            </button>
-                                                            <button type="button"
-                                                                    class="btn btn_icon btn_outline btn_xs">
-                                                                <span class="icon icon-trash"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endcan
                 </div>
             </div>
         </div>

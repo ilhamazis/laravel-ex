@@ -7,11 +7,14 @@
             'title' => $application->applicant->name,
             'link' => route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
         ],
-        ['title' => 'Review'],
     ];
+
+    if (auth()->user()->can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)) {
+        $paths[] = ['title' => 'Review'];
+    }
 @endphp
 
-<x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application"
+<x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application" :attachments="$attachments"
                           :current-application-step="$applicationStep"
                           :application-steps="$applicationSteps" :missing-application-steps="$missingApplicationSteps">
     @can(\App\Enums\PermissionEnum::CREATE_APPLICATION_REVIEW->value)

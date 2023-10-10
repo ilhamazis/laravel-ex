@@ -18,6 +18,7 @@ class ReviewManagingService
         return Review::query()
             ->with('user')
             ->whereBelongsTo($applicationStep)
+            ->latest()
             ->get();
     }
 
