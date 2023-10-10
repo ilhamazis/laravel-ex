@@ -16,6 +16,8 @@ enum PermissionEnum: string
     case VIEW_APPLICATION = 'view_application';
     case VIEW_APPLICATION_STEP = 'view_application_step';
     case UPDATE_APPLICATION_STEP = 'update_application_step';
+    case VIEW_APPLICATION_COMMUNICATION = 'view_application_communication';
+    case CREATE_APPLICATION_COMMUNICATION = 'create_application_communication';
     case VIEW_APPLICATION_REVIEW = 'view_application_review';
     case CREATE_APPLICATION_REVIEW = 'create_application_review';
     case VIEW_APPLICATION_ATTACHMENT = 'view_application_attachment';

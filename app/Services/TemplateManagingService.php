@@ -4,18 +4,19 @@ namespace App\Services;
 
 use App\Models\Template;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class TemplateManagingService
 {
     public function findAll(
-        int     $limit,
+        ?int    $limit = null,
         ?string $field = null,
         ?string $direction = null,
         ?string $query = null,
-    ): LengthAwarePaginator
+    ): Collection|LengthAwarePaginator
     {
-        return Template::query()
+        $templates = Template::query()
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');
             })->when(
@@ -26,7 +27,18 @@ class TemplateManagingService
                 function (Builder $q) {
                     $q->latest();
                 },
-            )->paginate($limit);
+            );
+
+        if (is_null($limit)) {
+            return $templates->get();
+        } else {
+            return $templates->paginate($limit);
+        }
+    }
+
+    public function findOrFail(string $id): Template
+    {
+        return Template::query()->findOrFail($id);
     }
 
     public function create(array $data): Template

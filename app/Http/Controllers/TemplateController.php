@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTemplateRequest;
 use App\Models\Template;
 use App\Services\TemplateManagingService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,7 @@ class TemplateController extends Controller
     {
         $this->templateManagingService = $templateManagingService;
 
-        $this->middleware('can:' . PermissionEnum::VIEW_TEMPLATE->value)->only(['index']);
+        $this->middleware('can:' . PermissionEnum::VIEW_TEMPLATE->value)->only(['index', 'show']);
         $this->middleware('can:' . PermissionEnum::CREATE_TEMPLATE->value)->only(['create', 'store']);
         $this->middleware('can:' . PermissionEnum::UPDATE_TEMPLATE->value)->only(['edit', 'update']);
         $this->middleware('can:' . PermissionEnum::DELETE_TEMPLATE->value)->only(['destroy']);
@@ -31,6 +32,18 @@ class TemplateController extends Controller
     public function index(): View
     {
         return view('managements.templates.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id): JsonResponse
+    {
+        return response()->json(
+            $this->templateManagingService
+                ->findOrFail($id)
+                ->only(['content'])
+        );
     }
 
     /**
