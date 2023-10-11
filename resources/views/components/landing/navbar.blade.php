@@ -5,6 +5,6 @@
     </x-link>
 
     <x-link href="{{ route('jobs') }}" class="navbar__cta button button__md button__outline">
-        Explore Sekarang!
+        Jelajahi Sekarang!
     </x-link>
 </div>

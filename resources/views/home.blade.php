@@ -84,7 +84,7 @@
                             <span class="custom__badge custom__badge-outline">{{ $job->type }}</span>
                             <x-link href="{{ route('jobs.show', $job) }}"
                                     class="card__link button button__md button__primary">
-                                See Detail
+                                Lihat Detail
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -98,7 +98,7 @@
             </div>
 
             <div class="home__featured-cta">
-                <x-link href="{{ route('jobs') }}" class="button button__md button__outline">Explore Sekarang!</x-link>
+                <x-link href="{{ route('jobs') }}" class="button button__md button__outline">Jelajahi Sekarang!</x-link>
             </div>
         </section>
     @endif

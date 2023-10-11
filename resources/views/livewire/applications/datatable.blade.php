@@ -3,7 +3,7 @@
         <div class="grid" style="grid-row-gap: 1.25rem">
             <div class="col-12 col-sm-4">
                 <div class="form-control">
-                    <label for="search" class="form-control__label">Search</label>
+                    <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
                         <x-input wire:model.live.debounce.500ms="query" type="search"
@@ -38,7 +38,7 @@
                         <input type="checkbox" class="check-all-item" name="group">
                     </th>
                     <x-cell-sorting column="created_at" :field="$field" :direction="$direction">
-                        Tanggal Apply
+                        Tanggal Melamar
                     </x-cell-sorting>
                     <th>Nama Pelamar</th>
                     <th>Tahap Rekrutmen Saat Ini</th>

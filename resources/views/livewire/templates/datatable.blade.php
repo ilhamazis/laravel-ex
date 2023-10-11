@@ -3,7 +3,7 @@
         <div class="grid" style="grid-row-gap: 1.25rem; padding: 1rem">
             <div class="col-12 col-sm-4">
                 <div class="form-control">
-                    <label for="search" class="form-control__label">Search</label>
+                    <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
                         <x-input wire:model.live.debounce.500ms="query" type="search"
@@ -19,27 +19,28 @@
         <div class="custom__data-list">
             @foreach($templates as $template)
                 <div class="custom__data-item">
-                    <div class="custom__data-detatil">
+                    <div class="custom__data-detail">
                         <h3 class="custom__data-title">{{ $template->title }}</h3>
                         <div class="custom__data-info-wrapper">
-                            <p class="custom_data-info">By {{ $template->createdBy->name }}</p>
+                            <p class="custom_data-info">Dibuat oleh {{ $template->createdBy->name }}</p>
                             <div class="custom__data-info-divider">
                                 <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
                                 </svg>
                             </div>
-                            <p class="custom_data-info">Created
-                                on {{ $template->created_at->toFormattedDateString() }}</p>
+                            <p class="custom_data-info">
+                                Dibuat tanggal {{ $template->created_at->toFormattedDateString() }}
+                            </p>
                         </div>
                     </div>
                     <div class="custom__data-action">
                         @can(\App\Enums\PermissionEnum::UPDATE_TEMPLATE->value)
                             <x-link :href="route('managements.templates.edit', $template)"
                                     class="btn btn_outline btn_xs"
-                                    data-btn-label="Detail">
+                                    data-btn-label="Edit">
                                 <span class="icon icon-pencil-square-solid"></span>
-                                Edit
+                                Ubah
                             </x-link>
                         @endcan
                         @can(\App\Enums\PermissionEnum::DELETE_TEMPLATE->value)

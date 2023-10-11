@@ -298,14 +298,14 @@
                                                                 data-label="Upload"
                                                                 data-toggle="modal"
                                                                 data-target="#create-attachment-modal">
-                                                            Upload Lampiran
+                                                            Unggah Lampiran
                                                         </button>
                                                     </div>
 
                                                     <x-modal-confirmation id="create-attachment-modal"
-                                                                          title="Konfirmasi Upload Lampiran">
+                                                                          title="Konfirmasi Unggah Lampiran">
                                                         <x-slot:body>
-                                                            <p>Apakah anda yakin ingin meng-upload lampiran?</p>
+                                                            <p>Apakah anda yakin ingin mengunggah lampiran?</p>
                                                         </x-slot:body>
 
                                                         <x-slot:footer>
