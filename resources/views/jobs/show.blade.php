@@ -25,9 +25,7 @@
         <hr class="jobs-detail__divider"/>
 
         <div class="jobs-detail__description">
-            <div class="custom__ql-container">
-                {!! $job->description !!}
-            </div>
+            <x-rich-text-renderer id="job-description" :content="$job->description"/>
         </div>
 
         <div class="jobs-detail__buttons">

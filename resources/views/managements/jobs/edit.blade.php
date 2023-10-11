@@ -70,10 +70,8 @@
                                         <label for="description" class="form-control__label">
                                             Deskripsi<span class="important">*</span>
                                         </label>
-                                        <x-quill
-                                            id="descriptionQuill">{!! old('description', $job->description) !!}</x-quill>
-                                        <textarea id="description" name="description"
-                                                  style="display: none">{!! old('description', $job->description) !!}</textarea>
+                                        <x-rich-text-editor id="description" name="description"
+                                                            :value="old('description', $job->description)"/>
                                         @error('description')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
@@ -154,15 +152,4 @@
             </div>
         </div>
     </form>
-
-    @push('custom-scripts')
-        <script>
-            const descriptionQuill = document.querySelector('#descriptionQuill .ql-editor');
-            const descriptionTextarea = document.querySelector('#description');
-
-            descriptionQuill.addEventListener('DOMSubtreeModified', () => {
-                descriptionTextarea.innerHTML = descriptionQuill.innerHTML;
-            });
-        </script>
-    @endpush
 </x-app-layout>

@@ -67,9 +67,8 @@
                     <label for="content" class="form-control__label">
                         Isi Email<span class="important">*</span>
                     </label>
-                    <x-quill id="contentQuill">{!! old('content') !!}</x-quill>
-                    <textarea id="content" name="content"
-                              style="display: none">{!! old('content') !!}</textarea>
+                    <x-rich-text-editor id="content" name="content"
+                                        :value="old('content')"/>
                     @error('content')
                     <div class="form-control__helper error">{{ $message }}</div>
                     @enderror
@@ -100,13 +99,6 @@
 
     @push('custom-scripts')
         <script>
-            const contentQuill = document.querySelector('#contentQuill .ql-editor');
-            const contentTextarea = document.querySelector('#content');
-
-            contentQuill.addEventListener('DOMSubtreeModified', () => {
-                contentTextarea.innerHTML = contentQuill.innerHTML;
-            });
-
             const templateSelect = document.querySelector('#template_id');
 
             templateSelect.addEventListener('change', async (e) => {

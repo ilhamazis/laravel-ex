@@ -7,8 +7,6 @@
 
 <x-job-layout :breadcrumbs="$paths" :job="$job">
     <div class="card__body">
-        <div class="custom__ql-container">
-            {!! $job->description !!}
-        </div>
+        <x-rich-text-renderer id="job-description" :content="$job->description"/>
     </div>
 </x-job-layout>
