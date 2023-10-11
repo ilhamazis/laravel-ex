@@ -1,8 +1,8 @@
 @php
     $paths = [
-        ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
-        ['title' => 'Detail Job', 'link' => route('managements.jobs.show', $job)],
-        ['title' => 'Edit Job'],
+        ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
+        ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
+        ['title' => 'Ubah Data'],
     ];
 @endphp
 
@@ -38,7 +38,7 @@
                     <x-breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
-                        <h1 class="main__title">Edit Job</h1>
+                        <h1 class="main__title">Ubah Data</h1>
                     </div>
                 </div>
             </div>

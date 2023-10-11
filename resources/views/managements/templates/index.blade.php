@@ -15,7 +15,7 @@
                 @can(\App\Enums\PermissionEnum::CREATE_TEMPLATE->value)
                     <x-link href="{{ route('managements.templates.create') }}" class="btn btn_primary">
                         <span class="icon icon-plus-solid"></span>
-                        <span class="btn__text">Tambah Template</span>
+                        <span class="btn__text">Buat Template</span>
                     </x-link>
                 @endcan
             </div>

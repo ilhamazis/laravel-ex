@@ -17,7 +17,7 @@
                     @can(\App\Enums\PermissionEnum::VIEW_JOB->value)
                         <li @class(['nav__item', 'active' => request()->routeIs('managements.jobs.*')])>
                             <x-link class="nav__link" href="{{ route('managements.jobs.index') }}">
-                                <span>Jobs</span>
+                                <span>Lowongan Pekerjaan</span>
                             </x-link>
                         </li>
                     @endcan

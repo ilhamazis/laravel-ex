@@ -1,6 +1,6 @@
 @php
     $paths = [
-        ['title' => 'Jobs', 'link' => route('managements.jobs.index')],
+        ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
         ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $job)],
         [
@@ -125,7 +125,9 @@
                 <div class="col-12">
                     <div class="review__item">
                         <h6 class="review__title">{{ $review->user->name }}</h6>
-                        <p class="review__description">Created on {{ $review->created_at->toFormattedDateString() }}</p>
+                        <p class="review__description">
+                            Dibuat tanggal {{ $review->created_at->toFormattedDateString() }}
+                        </p>
                         <div class="rating__group" style="padding: 0.5rem 0">
                             @for($i = 1; $i <= $review->rating; $i++)
                                 <span class="rating__icon-checked"></span>

@@ -1,4 +1,4 @@
-<x-landing-layout>
+<x-landing-layout :title="$job->title . ' - SEVIMA Career'">
     <div class="navbar__wrapper">
         <x-landing.navbar/>
     </div>
