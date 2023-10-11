@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\Landing;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function () {
             ->only(['store']);
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)
+            ->only(['index', 'store', 'update', 'destroy']);
+
+        Route::resource('jobs.applications.steps.notes', NoteController::class)
             ->only(['index', 'store', 'update', 'destroy']);
 
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)

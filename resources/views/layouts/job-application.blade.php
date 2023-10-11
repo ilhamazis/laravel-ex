@@ -199,6 +199,20 @@
                                         </x-link>
                                     </li>
                                 @endcan
+                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_NOTE->value)
+                                    <li @class([
+                                        'nav-tab__item',
+                                        'active' => request()->routeIs('managements.jobs.applications.steps.notes.*'),
+                                    ])>
+                                        <x-link
+                                            :href="route('managements.jobs.applications.steps.notes.index', [
+                                            $job, $application, $currentApplicationStep
+                                        ])"
+                                        >
+                                            Catatan
+                                        </x-link>
+                                    </li>
+                                @endcan
                             </ul>
                         </nav>
                     </div>

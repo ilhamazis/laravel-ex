@@ -54,6 +54,8 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::CREATE_APPLICATION_COMMUNICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_NOTE->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_NOTE->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value]->id,
@@ -70,6 +72,8 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_NOTE->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_NOTE->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
         ]);
 
