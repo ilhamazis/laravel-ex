@@ -100,6 +100,7 @@
     @push('custom-scripts')
         <script>
             const templateSelect = document.querySelector('#template_id');
+            const contentQuill = document.querySelector('#contentQuill');
 
             templateSelect.addEventListener('change', async (e) => {
                 const baseRoute = @js(route('managements.templates.index'));
@@ -111,7 +112,7 @@
                 });
                 const data = await response.json();
 
-                contentQuill.innerHTML = data.content;
+                contentQuill.querySelector('.ql-editor').innerHTML = data.content;
             });
         </script>
     @endpush
