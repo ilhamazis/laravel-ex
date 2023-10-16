@@ -55,7 +55,7 @@
             <h4 class="home__featured-text">FEATURED JOB</h4>
 
             <div class="home__featured-row">
-                <h2 class="home__featured-title">Jelajahi Semua Job yang Tersedia</h2>
+                <h2 class="home__featured-title">Jelajahi Lowongan Pekerjaan yang Tersedia</h2>
 
                 <div class="home__slide-controls">
                     <button id="featured-jobs-previous" class="home__slide-button">
