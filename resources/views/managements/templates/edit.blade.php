@@ -22,6 +22,10 @@
             </div>
             <div class="form-nav__right">
                 <div class="form-nav__wrapper">
+                    <span class="form-nav__timestamp">
+                        <span class="icon icon-check"></span>
+                        Disimpan {{ $template->updated_at->diffForHumans() }}
+                    </span>
                     <div class="form-nav__button-wrapper">
                         <button type="submit" class="btn btn_primary">
                             Simpan
