@@ -13,11 +13,7 @@ class JobMonitoringService
 {
     public function getActiveJobsCount(): int
     {
-        return $this->numberFormat(
-            Job::query()
-                ->where('status', JobStatusEnum::PUBLISHED)
-                ->count()
-        );
+        return $this->numberFormat(Job::query()->isActive()->count());
     }
 
     public function getApplicationsCount(): int
