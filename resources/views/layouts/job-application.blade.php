@@ -358,22 +358,28 @@
                                                             <div class="attachment__wrapper-text">
                                                                 <div class="attachment__title">
                                                                     <h3 class="attachment__heading">{{ $attachment->file_name }}</h3>
-                                                                    <span
-                                                                        class="attachment__description">{{ $attachment->file_size }}KB</span>
+                                                                    <p
+                                                                        class="attachment__description">
+                                                                        {{ $attachment->file_size }}KB
+                                                                    </p>
+                                                                    <p class="attachment__description">
+                                                                        Diupload oleh
+                                                                        {{ $attachment->createdBy->name ?? 'Pelamar' }}
+                                                                    </p>
                                                                 </div>
-                                                                <div class="attachment__action">
+                                                                <div class="attachment__action" style="margin: auto 0">
                                                                     <x-link
                                                                         :href="route('managements.jobs.applications.steps.attachments.show', [
-                                                                        $job, $application, $currentApplicationStep, $attachment
-                                                                    ])"
+                                                                            $job, $application, $currentApplicationStep, $attachment
+                                                                        ])"
                                                                         class="btn btn_icon btn_outline btn_xs">
                                                                         <span class="icon icon-cloud-arrow-down"></span>
                                                                     </x-link>
                                                                     @can(\App\Enums\PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value)
                                                                         <form
                                                                             action="{{ route('managements.jobs.applications.steps.attachments.destroy', [
-                                                                        $job, $application, $currentApplicationStep, $attachment
-                                                                    ]) }}"
+                                                                                $job, $application, $currentApplicationStep, $attachment
+                                                                            ]) }}"
                                                                             method="post"
                                                                         >
                                                                             @csrf
