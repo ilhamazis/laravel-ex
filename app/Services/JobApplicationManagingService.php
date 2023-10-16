@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Models\Application;
 use App\Models\Job;
@@ -12,12 +13,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class JobApplicationManagingService
 {
     public function findAll(
-        Job                  $job,
-        int                  $limit,
-        ?string              $field = null,
-        ?string              $direction = null,
-        ?string              $query = null,
-        ?ApplicationStepEnum $step = null,
+        Job                    $job,
+        int                    $limit,
+        ?string                $field = null,
+        ?string                $direction = null,
+        ?string                $query = null,
+        ?ApplicationStepEnum   $step = null,
+        ?ApplicationStatusEnum $status = null,
     ): LengthAwarePaginator|Collection
     {
         return Application::query()
@@ -33,6 +35,8 @@ class JobApplicationManagingService
                         $__q->where('name', $step);
                     });
                 });
+            })->when(!is_null($status), function (Builder $q) use ($status) {
+                $q->where('status', $status);
             })->when(
                 !is_null($field) && !is_null($direction),
                 function (Builder $q) use ($field, $direction) {

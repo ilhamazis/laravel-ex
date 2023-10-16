@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Applications;
 
+use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Livewire\Master\Datatable as MasterDatatable;
 use App\Models\Job;
@@ -24,6 +25,9 @@ class Datatable extends MasterDatatable
     #[Url]
     public ?string $step = null;
 
+    #[Url]
+    public ?string $status = null;
+
     public function boot(JobApplicationManagingService $applicationManagingService): void
     {
         $this->applicationManagingService = $applicationManagingService;
@@ -38,6 +42,7 @@ class Datatable extends MasterDatatable
             direction: $this->direction,
             query: $this->query,
             step: ApplicationStepEnum::tryFrom($this->step),
+            status: ApplicationStatusEnum::tryFrom($this->status),
         );
 
         return view('livewire.applications.datatable', ['applications' => $applications]);
