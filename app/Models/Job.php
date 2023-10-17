@@ -48,10 +48,10 @@ class Job extends Model
         $query->where('status', JobStatusEnum::PUBLISHED)
             ->where(function (Builder $q) {
                 $q->whereNull('start_at')
-                    ->orWhere('start_at', '<', now());
+                    ->orWhereDate('start_at', '<=', now());
             })->where(function (Builder $q) {
                 $q->whereNull('end_at')
-                    ->orWhere('end_at', '>', now());
+                    ->orWhereDate('end_at', '>=', now());
             });
     }
 }

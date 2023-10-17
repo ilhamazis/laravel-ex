@@ -209,7 +209,10 @@
             <div class="col-12 col-md-4">
                 <div class="grid">
                     @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
-                        @if(!$currentApplicationStep->hasReviews())
+                        @if(
+                            \App\Enums\ApplicationStepEnum::mustHaveReview($currentApplicationStep->step->name)
+                            && !$currentApplicationStep->hasReviews()
+                        )
                             <div class="col-12">
                                 <x-alert variant="helper" font-weight="normal"
                                          message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
@@ -220,9 +223,13 @@
                             && $application->currentApplicationStep->id === $currentApplicationStep->id)
                             <div class="col-12">
                                 <div class="grid cols-1 cols-sm-2">
-                                    <button @disabled(!$currentApplicationStep->hasReviews())
-                                            class="btn btn_primary btn_full-width" data-label="Lanjutkan"
-                                            data-toggle="modal" data-target="#next-step-modal"
+                                    <button
+                                        @disabled(
+                                            \App\Enums\ApplicationStepEnum::mustHaveReview($currentApplicationStep->step->name)
+                                            && !$currentApplicationStep->hasReviews()
+                                        )
+                                        class="btn btn_primary btn_full-width" data-label="Lanjutkan"
+                                        data-toggle="modal" data-target="#next-step-modal"
                                     >
                                         {{
                                             \App\Enums\ApplicationStepEnum::onLastStep($currentApplicationStep->step->name)
@@ -351,22 +358,28 @@
                                                             <div class="attachment__wrapper-text">
                                                                 <div class="attachment__title">
                                                                     <h3 class="attachment__heading">{{ $attachment->file_name }}</h3>
-                                                                    <span
-                                                                        class="attachment__description">{{ $attachment->file_size }}KB</span>
+                                                                    <p
+                                                                        class="attachment__description">
+                                                                        {{ $attachment->file_size }}KB
+                                                                    </p>
+                                                                    <p class="attachment__description">
+                                                                        Diupload oleh
+                                                                        {{ $attachment->createdBy->name ?? 'Pelamar' }}
+                                                                    </p>
                                                                 </div>
-                                                                <div class="attachment__action">
+                                                                <div class="attachment__action" style="margin: auto 0">
                                                                     <x-link
                                                                         :href="route('managements.jobs.applications.steps.attachments.show', [
-                                                                        $job, $application, $currentApplicationStep, $attachment
-                                                                    ])"
+                                                                            $job, $application, $currentApplicationStep, $attachment
+                                                                        ])"
                                                                         class="btn btn_icon btn_outline btn_xs">
                                                                         <span class="icon icon-cloud-arrow-down"></span>
                                                                     </x-link>
                                                                     @can(\App\Enums\PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value)
                                                                         <form
                                                                             action="{{ route('managements.jobs.applications.steps.attachments.destroy', [
-                                                                        $job, $application, $currentApplicationStep, $attachment
-                                                                    ]) }}"
+                                                                                $job, $application, $currentApplicationStep, $attachment
+                                                                            ]) }}"
                                                                             method="post"
                                                                         >
                                                                             @csrf

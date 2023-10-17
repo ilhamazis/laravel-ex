@@ -72,7 +72,7 @@
                                     </svg>
                                 </div>
                                 <p class="jobs__item-info">
-                                    Mulai tanggal {{ $job->created_at->toFormattedDateString() }}
+                                    Mulai tanggal {{ $job->start_at->toFormattedDateString() }}
                                 </p>
                             @endif
                             @if($job->end_at)

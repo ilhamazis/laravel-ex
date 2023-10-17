@@ -71,7 +71,10 @@ class ApplicationStepController extends Controller
         $applicationStep = $step->load('step');
 
         $this->validateStepStatus($applicationStep);
-        $this->validateStepHasReviews($applicationStep);
+
+        if (ApplicationStepEnum::mustHaveReview($applicationStep->step->name)) {
+            $this->validateStepHasReviews($applicationStep);
+        }
 
         if (ApplicationStepEnum::onLastStep($applicationStep->step->name)) {
             $this->applicationStepManagingService->hire($applicationStep);
