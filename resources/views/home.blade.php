@@ -141,20 +141,20 @@
 
         <div class="home__statistic">
             <div class="home__statistic-item">
-                <h4 class="home__statistic-count">450+</h4>
+                <h4 class="home__statistic-count">250+</h4>
                 <p class="home__statistic-desc">Karyawan</p>
             </div>
             <div class="home__statistic-item">
-                <h4 class="home__statistic-count">450+</h4>
-                <p class="home__statistic-desc">Karyawan</p>
+                <h4 class="home__statistic-count">850+</h4>
+                <p class="home__statistic-desc">Klien Universitas</p>
             </div>
             <div class="home__statistic-item">
-                <h4 class="home__statistic-count">450+</h4>
-                <p class="home__statistic-desc">Karyawan</p>
+                <h4 class="home__statistic-count">2,5Jt+</h4>
+                <p class="home__statistic-desc">Pengguna Layanan Sevima</p>
             </div>
             <div class="home__statistic-item">
-                <h4 class="home__statistic-count">450+</h4>
-                <p class="home__statistic-desc">Karyawan</p>
+                <h4 class="home__statistic-count">2,5Rb+</h4>
+                <p class="home__statistic-desc">Civitas Universitas Bergabung Komunitas</p>
             </div>
         </div>
     </section>
