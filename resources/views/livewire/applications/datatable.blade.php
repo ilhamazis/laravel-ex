@@ -6,8 +6,8 @@
                     <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
-                        <x-input wire:model.live.debounce.500ms="query" type="search"
-                                 id="search" placeholder="Cari nama pelamar..."/>
+                        <x-quantum.input wire:model.live.debounce.500ms="query" type="search"
+                                         id="search" placeholder="Cari nama pelamar..."/>
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
             <div class="col-12 col-sm-3 col-md-2">
                 <div class="form-control">
                     <label for="step" class="form-control__label">Tahap Rekrutmen</label>
-                    <x-select
+                    <x-quantum.select
                         wire:change="$dispatch('changeSelect', { field: 'step', value: $event.target.value })"
                         variant="single-search" id="step" placeholder="Cari tahap rekrutmen...">
                         <option @selected(is_null($step)) disabled>Tahap Rekrutmen</option>
@@ -23,14 +23,14 @@
                             <option
                                 @selected($step === $stepEnum) value="{{ $stepEnum }}">{{ $stepEnum }}</option>
                         @endforeach
-                    </x-select>
+                    </x-quantum.select>
                 </div>
             </div>
 
             <div class="col-12 col-sm-3 col-md-2">
                 <div class="form-control">
                     <label for="step" class="form-control__label">Status Rekrutmen</label>
-                    <x-select
+                    <x-quantum.select
                         wire:change="$dispatch('changeSelect', { field: 'status', value: $event.target.value })"
                         variant="single-search" id="step" placeholder="Cari status rekrutmen...">
                         <option @selected(is_null($status)) disabled>Status Rekrutmen</option>
@@ -38,7 +38,7 @@
                             <option
                                 @selected($status === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
                         @endforeach
-                    </x-select>
+                    </x-quantum.select>
                 </div>
             </div>
         </div>
@@ -52,9 +52,9 @@
                     <th class="cell-check cell-center">
                         <input type="checkbox" class="check-all-item" name="group">
                     </th>
-                    <x-cell-sorting column="created_at" :field="$field" :direction="$direction">
+                    <x-quantum.cell-sorting column="created_at" :field="$field" :direction="$direction">
                         Tanggal Melamar
-                    </x-cell-sorting>
+                    </x-quantum.cell-sorting>
                     <th>Nama Pelamar</th>
                     <th>Tahap Rekrutmen Saat Ini</th>
                     <th>Status</th>
@@ -71,9 +71,10 @@
                         <td>{{ $application->applicant->name }}</td>
                         <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
                         <td>
-                            <x-badge :variant="\App\Enums\ApplicationStatusEnum::getBadgeVariant($application->status)">
+                            <x-quantum.badge
+                                :variant="\App\Enums\ApplicationStatusEnum::getBadgeVariant($application->status)">
                                 {{ $application->status }}
-                            </x-badge>
+                            </x-quantum.badge>
                         </td>
                         <td class="cell-action">
                             @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_STEP->value)
@@ -111,6 +112,6 @@
     </div>
 
     <div class="box-table__footer">
-        <x-pagination :limit="$limit" :items="$applications"/>
+        <x-cms.pagination :limit="$limit" :items="$applications"/>
     </div>
 </div>

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="main__header">
             <div class="main__location">
-                <x-breadcrumb :paths="$paths"/>
+                <x-quantum.breadcrumb :paths="$paths"/>
             </div>
         </div>
 

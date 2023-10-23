@@ -2,14 +2,14 @@
     <div class="container">
         <div class="main__header">
             <div class="main__location">
-                <x-breadcrumb :paths="$breadcrumbs"/>
+                <x-quantum.breadcrumb :paths="$breadcrumbs"/>
             </div>
         </div>
 
-        <x-alert variant="success" :message="session()->get('success')" dismissable/>
+        <x-quantum.alert variant="success" :message="session()->get('success')" dismissable/>
 
         @error('status')
-        <x-alert variant="error" :message="$message" dismissable/>
+        <x-quantum.alert variant="error" :message="$message" dismissable/>
         @enderror
 
         <div class="card card_details-primary">
@@ -214,8 +214,8 @@
                             && !$currentApplicationStep->hasReviews()
                         )
                             <div class="col-12">
-                                <x-alert variant="helper" font-weight="normal"
-                                         message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
+                                <x-quantum.alert variant="helper" font-weight="normal"
+                                                 message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
                             </div>
                         @endif
 
@@ -258,8 +258,8 @@
                                                 <form
                                                     class="grid"
                                                     action="{{ route('managements.jobs.applications.steps.attachments.store', [
-                                                $job, $application, $currentApplicationStep
-                                            ]) }}"
+                                                        $job, $application, $currentApplicationStep
+                                                    ]) }}"
                                                     method="post"
                                                     enctype="multipart/form-data"
                                                 >
@@ -274,8 +274,9 @@
                                                                            class="upload-draggable__file-input"
                                                                            name="file" id="file"
                                                                            accept="application/pdf,.doc,.docx"/>
-                                                                    <label class="upload-draggable__icon"><span
-                                                                            class="icon icon-cloud-arrow-up"></span></label>
+                                                                    <label class="upload-draggable__icon">
+                                                                        <span class="icon icon-cloud-arrow-up"></span>
+                                                                    </label>
                                                                     <h2 class="upload-draggable__title">Klik untuk pilih
                                                                         file</h2>
                                                                     <p class="upload-draggable__subtitle">atau seret
@@ -309,8 +310,8 @@
                                                         </button>
                                                     </div>
 
-                                                    <x-modal-confirmation id="create-attachment-modal"
-                                                                          title="Konfirmasi Unggah Lampiran">
+                                                    <x-quantum.modal-confirmation id="create-attachment-modal"
+                                                                                  title="Konfirmasi Unggah Lampiran">
                                                         <x-slot:body>
                                                             <p>Apakah anda yakin ingin mengunggah lampiran?</p>
                                                         </x-slot:body>
@@ -326,7 +327,7 @@
                                                                 </button>
                                                             </div>
                                                         </x-slot:footer>
-                                                    </x-modal-confirmation>
+                                                    </x-quantum.modal-confirmation>
                                                 </form>
                                             </div>
                                         @endcan
@@ -392,9 +393,10 @@
                                                                                     data-target="#delete-attachment-modal">
                                                                                 <span class="icon icon-trash"></span>
                                                                             </button>
-                                                                            <x-modal-confirmation variant="danger"
-                                                                                                  id="delete-attachment-modal"
-                                                                                                  title="Konfirmasi Eliminasi">
+                                                                            <x-quantum.modal-confirmation
+                                                                                variant="danger"
+                                                                                id="delete-attachment-modal"
+                                                                                title="Konfirmasi Eliminasi">
                                                                                 <x-slot:body>
                                                                                     <p>Apakah anda yakin ingin menghapus
                                                                                         lampiran ini?</p>
@@ -413,7 +415,7 @@
                                                                                         </button>
                                                                                     </div>
                                                                                 </x-slot:footer>
-                                                                            </x-modal-confirmation>
+                                                                            </x-quantum.modal-confirmation>
                                                                         </form>
                                                                     @endcan
                                                                 </div>
@@ -433,7 +435,7 @@
         </div>
     </div>
 
-    <x-modal-confirmation id="next-step-modal" title="Konfirmasi Melanjutkan Tahap">
+    <x-quantum.modal-confirmation id="next-step-modal" title="Konfirmasi Melanjutkan Tahap">
         <x-slot:body>
             <p>Apakah anda yakin ingin melanjutkan kandidat ini ke tahap selanjutnya?</p>
             <p>Aksi ini tidak dapat dikembalikan.</p>
@@ -454,9 +456,9 @@
                 </form>
             </div>
         </x-slot:footer>
-    </x-modal-confirmation>
+    </x-quantum.modal-confirmation>
 
-    <x-modal-confirmation variant="danger" id="reject-modal" title="Konfirmasi Eliminasi">
+    <x-quantum.modal-confirmation variant="danger" id="reject-modal" title="Konfirmasi Eliminasi">
         <x-slot:body>
             <p>Apakah anda yakin ingin mengeliminasi kandidat ini?</p>
             <p>Kandidat yang telah tereliminasi tidak dapat dikembalikan lagi.</p>
@@ -477,5 +479,5 @@
                 </form>
             </div>
         </x-slot:footer>
-    </x-modal-confirmation>
+    </x-quantum.modal-confirmation>
 </x-app-layout>
