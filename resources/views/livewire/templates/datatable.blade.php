@@ -6,15 +6,15 @@
                     <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
-                        <x-input wire:model.live.debounce.500ms="query" type="search"
-                                 id="search" placeholder="Cari template..."/>
+                        <x-quantum.input wire:model.live.debounce.500ms="query" type="search"
+                                         id="search" placeholder="Cari template..."/>
                     </div>
                 </div>
             </div>
         </div>
 
-        <x-alert variant="success" style="padding: 1rem" :message="session()->get('success')"
-                 dismissable/>
+        <x-quantum.alert variant="success" style="padding: 1rem" :message="session()->get('success')"
+                         dismissable/>
 
         <div class="custom__data-list">
             @foreach($templates as $template)
@@ -56,10 +56,10 @@
             @endforeach
         </div>
 
-        <x-pagination :limit="$limit" :items="$templates"/>
+        <x-cms.pagination :limit="$limit" :items="$templates"/>
     </div>
 
-    <x-modal-confirmation variant="danger" id="delete-modal" title="Hapus Job">
+    <x-quantum.modal-confirmation variant="danger" id="delete-modal" title="Hapus Job">
         <x-slot:body>
             <p>Apakah anda yakin ingin menghapus template ini?</p>
         </x-slot:body>
@@ -76,5 +76,5 @@
                 </form>
             </div>
         </x-slot:footer>
-    </x-modal-confirmation>
+    </x-quantum.modal-confirmation>
 </div>

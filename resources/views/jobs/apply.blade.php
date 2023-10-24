@@ -27,8 +27,8 @@
         <div x-data="{ education: @js(old('education')) }" class="jobs-form__container">
             <h2 class="jobs-form__title">Form Pelamaran</h2>
 
-            <x-alert variant="success" :message="session()->get('success')"
-                     font-weight="normal" style="padding-bottom: 2rem" dismissable/>
+            <x-quantum.alert variant="success" :message="session()->get('success')"
+                             font-weight="normal" style="padding-bottom: 2rem" dismissable/>
 
             <form action="{{ route('jobs.apply', $job) }}" method="POST"
                   class="grid" enctype="multipart/form-data">
@@ -41,8 +41,8 @@
                             Nama Lengkap<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('name')])>
-                            <x-input type="text" id="name" name="name" value="{{ old('name') }}"
-                                     placeholder="Masukkan nama lengkap Anda" required/>
+                            <x-quantum.input type="text" id="name" name="name" value="{{ old('name') }}"
+                                             placeholder="Masukkan nama lengkap Anda" required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('name')
@@ -58,8 +58,8 @@
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('email')])>
                             <span data-input-icon="email"></span>
-                            <x-input type="email" id="email" name="email" value="{{ old('email') }}"
-                                     placeholder="Masukkan email" required/>
+                            <x-quantum.input type="email" id="email" name="email" value="{{ old('email') }}"
+                                             placeholder="Masukkan email" required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('email')
@@ -78,8 +78,9 @@
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('telephone')])>
                             <span class="form-control__text">+</span>
-                            <x-input type="number" id="telephone" name="telephone" value="{{ old('telephone') }}"
-                                     placeholder="Masukkan nomor telepon" required/>
+                            <x-quantum.input type="number" id="telephone" name="telephone"
+                                             value="{{ old('telephone') }}"
+                                             placeholder="Masukkan nomor telepon" required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('telephone')
@@ -94,8 +95,8 @@
                             Umur<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('age')])>
-                            <x-input type="number" id="age" name="age" value="{{ old('age') }}"
-                                     placeholder="Masukkan umur Anda" required/>
+                            <x-quantum.input type="number" id="age" name="age" value="{{ old('age') }}"
+                                             placeholder="Masukkan umur Anda" required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('age')
@@ -128,8 +129,8 @@
                             Alamat<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('address')])>
-                            <x-input type="text" id="address" name="address" value="{{ old('address') }}"
-                                     placeholder="Masukkan alamat Anda" required/>
+                            <x-quantum.input type="text" id="address" name="address" value="{{ old('address') }}"
+                                             placeholder="Masukkan alamat Anda" required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('address')
@@ -144,9 +145,9 @@
                             Pendidikan Terakhir<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-select x-on:change="education = $event.target.value" variant="single-search"
-                                      placeholder="Cari skala pendidikan..."
-                                      id="education" name="education" required>
+                            <x-quantum.select x-on:change="education = $event.target.value" variant="single-search"
+                                              placeholder="Cari skala pendidikan..."
+                                              id="education" name="education" required>
                                 <option @selected(is_null(old('education'))) disabled>Pendidikan Terakhir</option>
                                 @foreach(['S3', 'S2', 'S1', 'SMK', 'SMA', 'SMP', 'SD'] as $education)
                                     <option
@@ -154,7 +155,7 @@
                                         {{ $education }}
                                     </option>
                                 @endforeach
-                            </x-select>
+                            </x-quantum.select>
                         </div>
                         @error('education')
                         <div class="form-control__helper error">{{ $message }}</div>
@@ -169,8 +170,8 @@
                                 Universitas<span class="important">*</span>
                             </label>
                             <div @class(['form-control__group', 'error' => $errors->has('school')])>
-                                <x-input type="text" id="school" name="school" value="{{ old('school') }}"
-                                         placeholder="Masukkan universitas tempat Anda belajar"/>
+                                <x-quantum.input type="text" id="school" name="school" value="{{ old('school') }}"
+                                                 placeholder="Masukkan universitas tempat Anda belajar"/>
                                 <span data-clear="input"></span>
                             </div>
                             @error('school')
@@ -187,8 +188,8 @@
                                 Fakultas<span class="important">*</span>
                             </label>
                             <div @class(['form-control__group', 'error' => $errors->has('faculty')])>
-                                <x-input type="text" id="faculty" name="faculty" value="{{ old('faculty') }}"
-                                         placeholder="Masukkan fakultas Anda"/>
+                                <x-quantum.input type="text" id="faculty" name="faculty" value="{{ old('faculty') }}"
+                                                 placeholder="Masukkan fakultas Anda"/>
                                 <span data-clear="input"></span>
                             </div>
                             @error('faculty')
@@ -205,8 +206,8 @@
                                 Sekolah<span class="important">*</span>
                             </label>
                             <div @class(['form-control__group', 'error' => $errors->has('school')])>
-                                <x-input type="text" id="school" name="school" value="{{ old('school') }}"
-                                         placeholder="Masukkan sekolah Anda"/>
+                                <x-quantum.input type="text" id="school" name="school" value="{{ old('school') }}"
+                                                 placeholder="Masukkan sekolah Anda"/>
                                 <span data-clear="input"></span>
                             </div>
                             @error('school')
@@ -223,8 +224,8 @@
                                 Jurusan<span class="important">*</span>
                             </label>
                             <div @class(['form-control__group', 'error' => $errors->has('major')])>
-                                <x-input type="text" id="major" name="major" value="{{ old('major') }}"
-                                         placeholder="Masukkan jurusan Anda"/>
+                                <x-quantum.input type="text" id="major" name="major" value="{{ old('major') }}"
+                                                 placeholder="Masukkan jurusan Anda"/>
                                 <span data-clear="input"></span>
                             </div>
                             @error('major')
@@ -243,8 +244,10 @@
                     </span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('experience')])>
-                            <x-input type="number" id="experience" name="experience" value="{{ old('experience') }}"
-                                     placeholder="Masukkan pengalaman bekerja Anda (dalam skala tahun)" required/>
+                            <x-quantum.input type="number" id="experience" name="experience"
+                                             value="{{ old('experience') }}"
+                                             placeholder="Masukkan pengalaman bekerja Anda (dalam skala tahun)"
+                                             required/>
                             <span data-clear="input"></span>
                         </div>
                         @error('experience')
@@ -260,9 +263,9 @@
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('salary_before')])>
                             <span class="form-control__text">Rp</span>
-                            <x-input type="text" id="salary_before" name="salary_before"
-                                     value="{{ old('salary_before') }}"
-                                     placeholder="Masukkan gaji Anda sebelumnya"/>
+                            <x-quantum.input type="text" id="salary_before" name="salary_before"
+                                             value="{{ old('salary_before') }}"
+                                             placeholder="Masukkan gaji Anda sebelumnya"/>
                             <span data-clear="input"></span>
                         </div>
                         @error('salary_before')
@@ -278,9 +281,9 @@
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('salary_expected')])>
                             <span class="form-control__text">Rp</span>
-                            <x-input type="text" id="salary_expected"
-                                     name="salary_expected" value="{{ old('salary_expected') }}"
-                                     placeholder="Masukkan gaji yang Anda harapkan"/>
+                            <x-quantum.input type="text" id="salary_expected"
+                                             name="salary_expected" value="{{ old('salary_expected') }}"
+                                             placeholder="Masukkan gaji yang Anda harapkan"/>
                             <span data-clear="input"></span>
                         </div>
                         @error('salary_expected')
@@ -361,8 +364,8 @@
                         Submit
                     </button>
 
-                    <x-modal-confirmation id="job-apply-modal"
-                                          title="Konfirmasi Melamar Pekerjaan">
+                    <x-quantum.modal-confirmation id="job-apply-modal"
+                                                  title="Konfirmasi Melamar Pekerjaan">
                         <x-slot:body>
                             <p>Apakah Anda yakin ingin melamar pekerjaan ini?</p>
                             <p>Pastikan semua inputan Anda sudah benar.</p>
@@ -379,7 +382,7 @@
                                 </button>
                             </div>
                         </x-slot:footer>
-                    </x-modal-confirmation>
+                    </x-quantum.modal-confirmation>
                 </div>
             </form>
         </div>

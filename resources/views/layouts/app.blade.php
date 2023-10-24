@@ -17,12 +17,12 @@
 </head>
 <body {{ $attributes }}>
 
-<x-header @class(['header_position-static' => $headerStatic])/>
+<x-quantum.header @class(['header_position-static' => $headerStatic])/>
 
 <main class="main">
     {{ $slot }}
 
-    <x-footer/>
+    <x-quantum.footer/>
 </main>
 
 @stack('scripts')

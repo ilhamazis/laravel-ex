@@ -2,18 +2,18 @@
     <div class="container">
         <div class="main__header">
             <div class="main__location">
-                <x-breadcrumb :paths="$breadcrumbs"/>
+                <x-quantum.breadcrumb :paths="$breadcrumbs"/>
             </div>
         </div>
 
-        <x-alert variant="success" :message="session()->get('success')"
-                 dismissable/>
+        <x-quantum.alert variant="success" :message="session()->get('success')"
+                         dismissable/>
 
         <div class="grid">
             <div class="col-12">
-                <x-badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
+                <x-quantum.badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
                     {{ $job->status }}
-                </x-badge>
+                </x-quantum.badge>
             </div>
             <div class="col-12 col-sm-7 col-md-9">
                 <h2>{{ $job->title }}</h2>
@@ -56,7 +56,8 @@
                 <div class="grid">
                     <div class="col-6">
                         @if($job->status === \App\Enums\JobStatusEnum::PUBLISHED)
-                            <x-copy-link :url="route('jobs.show', $job)" class="btn btn_outline btn_md btn_full-width">
+                            <x-copy-link :url="route('jobs.show', $job)"
+                                         class="btn btn_outline btn_md btn_full-width">
                                 <span class="icon icon-clipboard-document-mini"></span>
                                 Salin Link
                             </x-copy-link>

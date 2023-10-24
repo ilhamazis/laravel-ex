@@ -21,7 +21,7 @@
         @method('POST')
 
         @error('mail')
-        <x-alert style="padding-bottom: 2rem" variant="error" :message="$message" dismissable/>
+        <x-quantum.alert style="padding-bottom: 2rem" variant="error" :message="$message" dismissable/>
         @enderror
 
         <div class="grid">
@@ -31,14 +31,15 @@
                         Template
                     </label>
                     <div @class(['form-control__group', 'error' => $errors->has('template_id')])>
-                        <x-select variant="single-search" placeholder="Cari template..."
-                                  id="template_id" name="template_id" required>
+                        <x-quantum.select variant="single-search" placeholder="Cari template..."
+                                          id="template_id" name="template_id" required>
                             <option @selected(is_null(old('template_id'))) disabled>Pilih Template</option>
                             @foreach($templates as $template)
-                                <option
-                                    @selected(old('template_id') === $template->id) value="{{ $template->id }}">{{ $template->title }}</option>
+                                <option @selected(old('template_id') === $template->id) value="{{ $template->id }}">
+                                    {{ $template->title }}
+                                </option>
                             @endforeach
-                        </x-select>
+                        </x-quantum.select>
                     </div>
                     @error('template_id')
                     <div class="form-control__helper error">{{ $message }}</div>
@@ -52,8 +53,8 @@
                         Subjek<span class="important">*</span>
                     </label>
                     <div @class(['form-control__group', 'error' => $errors->has('title')])>
-                        <x-input type="text" id="title" name="title" value="{{ old('title') }}"
-                                 placeholder="Masukkan subjek" required/>
+                        <x-quantum.input type="text" id="title" name="title" value="{{ old('title') }}"
+                                         placeholder="Masukkan subjek" required/>
                         <span data-clear="input"></span>
                     </div>
                     @error('title')
@@ -67,8 +68,8 @@
                     <label for="content" class="form-control__label">
                         Isi Email<span class="important">*</span>
                     </label>
-                    <x-rich-text-editor id="content" name="content"
-                                        :value="old('content')"/>
+                    <x-quantum.rich-text-editor id="content" name="content"
+                                                :value="old('content')"/>
                     @error('content')
                     <div class="form-control__helper error">{{ $message }}</div>
                     @enderror
@@ -82,7 +83,7 @@
                 </button>
             </div>
 
-            <x-modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
+            <x-quantum.modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
                 <x-slot:body>
                     <p>Apakah anda yakin ingin mengirim email ke kandidat ini?</p>
                 </x-slot:body>
@@ -93,7 +94,7 @@
                         <button type="submit" class="btn btn_primary">Konfirmasi</button>
                     </div>
                 </x-slot:footer>
-            </x-modal-confirmation>
+            </x-quantum.modal-confirmation>
         </div>
     </form>
 

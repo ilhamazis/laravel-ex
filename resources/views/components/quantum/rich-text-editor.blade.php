@@ -4,7 +4,7 @@
     $quillId = $id . 'Quill';
 @endphp
 
-<x-quill id="{{ $quillId }}"></x-quill>
+<x-quantum.quill id="{{ $quillId }}"></x-quantum.quill>
 
 <textarea id="{{ $id }}" name="{{ $name }}"
           style="display: none"></textarea>

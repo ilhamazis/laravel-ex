@@ -22,8 +22,8 @@
             <form
                 class="card__body"
                 action="{{ route('managements.jobs.applications.steps.reviews.store', [
-            $job, $application, $applicationStep
-        ]) }}"
+                    $job, $application, $applicationStep
+                ]) }}"
                 method="post"
             >
                 @csrf
@@ -76,8 +76,8 @@
                             <label for="content" class="form-control__label">
                                 Review<span class="important">*</span>
                             </label>
-                            <x-rich-text-editor id="content" name="content"
-                                                :value="old('content')"/>
+                            <x-quantum.rich-text-editor id="content" name="content"
+                                                        :value="old('content')"/>
                             @error('content')
                             <div class="form-control__helper error">{{ $message }}</div>
                             @enderror
@@ -91,7 +91,7 @@
                         </button>
                     </div>
 
-                    <x-modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
+                    <x-quantum.modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
                         <x-slot:body>
                             <p>Apakah anda yakin ingin membuat review ini?</p>
                         </x-slot:body>
@@ -102,7 +102,7 @@
                                 <button type="submit" class="btn btn_primary">Konfirmasi</button>
                             </div>
                         </x-slot:footer>
-                    </x-modal-confirmation>
+                    </x-quantum.modal-confirmation>
                 </div>
             </form>
 
