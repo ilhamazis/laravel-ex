@@ -297,27 +297,12 @@
                         <label for="curriculum_vitae" class="form-control__label">
                             CV<span class="important">*</span>
                         </label>
-                        <div class="upload-draggable">
-                            <div class="upload-draggable__box">
-                                <input type="file" class="upload-draggable__file-input" name="curriculum_vitae"
-                                       id="curriculum_vitae" accept=".doc,.docx,.pdf" required
-                                       value="{{ old('curriculum_vitae') }}"/>
-                                <label class="upload-draggable__icon"><span
-                                        class="icon icon-cloud-arrow-up"></span></label>
-                                <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
-                                <p class="upload-draggable__subtitle">atau seret file ke sini</p>
-                                <p class="upload-draggable__support">DOC, DOCX, atau PDF (max. 2MB)</p>
-                            </div>
-                            <div class="upload-draggable__uploading">
-                                <span class="loader"></span> sedang memuat...
-                            </div>
-                            <div class="upload-draggable__success">
-                                Berhasil
-                            </div>
-                            <div class="upload-draggable__error">
-                                Gagal
-                            </div>
-                        </div>
+                        <x-quantum.input-file
+                            name="curriculum_vitae"
+                            id="curriculum_vitae" accept=".doc,.docx,.pdf" required
+                            value="{{ old('curriculum_vitae') }}"
+                            support="DOC, DOCX, atau PDF (max. 2MB)"
+                        />
                         @error('curriculum_vitae')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
@@ -329,27 +314,12 @@
                         <label for="portfolio" class="form-control__label">
                             Portofolio<span class="important">*</span>
                         </label>
-                        <div class="upload-draggable">
-                            <div class="upload-draggable__box">
-                                <input type="file" class="upload-draggable__file-input" name="portfolio"
-                                       id="portfolio" accept=".doc,.docx,.pdf" required
-                                       value="{{ old('portfolio') }}"/>
-                                <label class="upload-draggable__icon"><span
-                                        class="icon icon-cloud-arrow-up"></span></label>
-                                <h2 class="upload-draggable__title">Klik untuk pilih file</h2>
-                                <p class="upload-draggable__subtitle">atau seret file ke sini</p>
-                                <p class="upload-draggable__support">DOC, DOCX, atau PDF (max. 2MB)</p>
-                            </div>
-                            <div class="upload-draggable__uploading">
-                                <span class="loader"></span> sedang memuat...
-                            </div>
-                            <div class="upload-draggable__success">
-                                Berhasil
-                            </div>
-                            <div class="upload-draggable__error">
-                                Gagal
-                            </div>
-                        </div>
+                        <x-quantum.input-file
+                            name="portfolio"
+                            id="portfolio" accept=".doc,.docx,.pdf" required
+                            value="{{ old('portfolio') }}"
+                            support="DOC, DOCX, atau PDF (max. 2MB)"
+                        />
                         @error('portfolio')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror

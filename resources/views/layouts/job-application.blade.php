@@ -265,34 +265,12 @@
 
                                                     <div class="col-12">
                                                         <div class="form-control">
-                                                            <div class="upload-draggable">
-                                                                <div class="upload-draggable__box">
-                                                                    <input type="file"
-                                                                           class="upload-draggable__file-input"
-                                                                           name="file" id="file"
-                                                                           accept="application/pdf,.doc,.docx"/>
-                                                                    <label class="upload-draggable__icon">
-                                                                        <span class="icon icon-cloud-arrow-up"></span>
-                                                                    </label>
-                                                                    <h2 class="upload-draggable__title">Klik untuk pilih
-                                                                        file</h2>
-                                                                    <p class="upload-draggable__subtitle">atau seret
-                                                                        file ke
-                                                                        sini</p>
-                                                                    <p class="upload-draggable__support">
-                                                                        DOC, DOCX, atau PDF (max. 2MB)
-                                                                    </p>
-                                                                </div>
-                                                                <div class="upload-draggable__uploading">
-                                                                    <span class="loader"></span> sedang memuat...
-                                                                </div>
-                                                                <div class="upload-draggable__success">
-                                                                    Berhasil
-                                                                </div>
-                                                                <div class="upload-draggable__error">
-                                                                    Gagal
-                                                                </div>
-                                                            </div>
+                                                            <x-quantum.input-file
+                                                                name="file" id="file"
+                                                                accept="application/pdf,.doc,.docx"
+                                                                support="DOC, DOCX, atau PDF (max. 2MB)"
+                                                            />
+
                                                             @error('file')
                                                             <div class="form-control__helper error">{{ $message }}</div>
                                                             @enderror
