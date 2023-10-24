@@ -15,7 +15,7 @@
     gap: 1rem;
 }
 
-.detail__desc-divider {
+.detail__desc-divider::before {
     display: none;
 }
 
@@ -52,7 +52,9 @@
         align-items: center;
     }
 
-    .detail__desc-divider {
+    .detail__desc-divider::before {
+        content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNEOUQ5RDkiLz4KPC9zdmc+Cg==");
         display: inherit;
+        margin-bottom: 6px;
     }
 }

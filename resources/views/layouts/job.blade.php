@@ -21,31 +21,18 @@
                     <p class="detail__desc">
                         Dibuat oleh {{ $job->createdBy->name }}
                     </p>
-                    <div class="detail__desc-divider">
-                        <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                        </svg>
-                    </div>
+                    <span class="detail__desc-divider"></span>
                     <p class="detail__desc">
                         {{ $job->type }}
                     </p>
                     @if ($job->start_at)
-                        <div class="detail__desc-divider">
-                            <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                            </svg>
-                        </div>
+                        <span class="detail__desc-divider"></span>
                         <p class="detail__desc">
                             Mulai tanggal {{ $job->start_at->toFormattedDateString() }}
                         </p>
                     @endif
                     @if($job->end_at)
-                        <div class="detail__desc-divider">
-                            <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                            </svg>
-                        </div>
+                        <span class="detail__desc-divider"></span>
                         <p class="detail__desc">
                             Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
                         </p>

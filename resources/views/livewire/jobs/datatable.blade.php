@@ -57,31 +57,16 @@
                                     {{ $job->status }}
                                 </x-quantum.badge>
                             </p>
-                            <div class="custom__data-info-divider">
-                                <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                </svg>
-                            </div>
+                            <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->type }}</p>
                             @if($job->start_at)
-                                <div class="custom__data-info-divider">
-                                    <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                    </svg>
-                                </div>
+                                <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
                                     Mulai tanggal {{ $job->start_at->toFormattedDateString() }}
                                 </p>
                             @endif
                             @if($job->end_at)
-                                <div class="custom__data-info-divider">
-                                    <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                    </svg>
-                                </div>
+                                <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
                                     Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
                                 </p>
