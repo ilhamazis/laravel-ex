@@ -52,7 +52,7 @@ class Application extends Model
     public function salaryBefore(): Attribute
     {
         return new Attribute(
-            get: fn(string $value) => $value
+            get: fn(?string $value) => $value
                 ? 'Rp ' . number_format($value, decimal_separator: ',', thousands_separator: '.') . ',-'
                 : '-',
         );
@@ -61,7 +61,7 @@ class Application extends Model
     public function salaryExpected(): Attribute
     {
         return new Attribute(
-            get: fn(string $value) => $value
+            get: fn(?string $value) => $value
                 ? 'Rp ' . number_format($value, decimal_separator: ',', thousands_separator: '.') . ',-'
                 : '-',
         );
