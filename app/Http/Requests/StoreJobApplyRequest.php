@@ -50,9 +50,16 @@ class StoreJobApplyRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $salaryBefore = empty($this->salary_before)
+            ? null
+            : Str::replace('.', '', $this->salary_before);
+        $salaryExpected = empty($this->salary_expected)
+            ? null
+            : Str::replace('.', '', $this->salary_expected);
+
         $this->merge([
-            'salary_before' => Str::replace('.', '', $this->salary_before),
-            'salary_expected' => Str::replace('.', '', $this->salary_expected),
+            'salary_before' => $salaryBefore,
+            'salary_expected' => $salaryExpected,
         ]);
     }
 }
