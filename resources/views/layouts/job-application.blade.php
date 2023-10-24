@@ -129,20 +129,17 @@
         </div>
 
         <div class="grid cols-1" style="overflow-x: auto; padding: 1.5rem 0">
-            <ul class="stepper">
+            <x-quantum.stepper>
                 @foreach($applicationSteps as $applicationStep)
-                    <li @class([
-                        'stepper__item',
-                        'check' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::PASSED,
-                        'current' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::ONGOING,
-                        'fail' => $applicationStep->status === \App\Enums\ApplicationStepStatusEnum::REJECTED,
-                        'active' => str_contains(
-                                        url()->current(),
-                                        route('managements.jobs.applications.steps.show', [
-                                            $job, $application, $applicationStep
-                                        ]),
-                                    ),
-                    ])>
+                    <x-quantum.stepper-item
+                        :variant="\App\Enums\ApplicationStepStatusEnum::getStepperItemVariant($applicationStep->status)"
+                        :active="str_contains(
+                                     url()->current(),
+                                     route('managements.jobs.applications.steps.show', [
+                                         $job, $application, $applicationStep
+                                     ]),
+                                 )"
+                    >
                         @if($applicationStep->id === $currentApplicationStep->id)
                             {{ $applicationStep->step->name }}
                         @else
@@ -152,13 +149,13 @@
                                 ])"
                                 class="stepper__link">{{ $applicationStep->step->name }}</x-link>
                         @endif
-                    </li>
+                    </x-quantum.stepper-item>
                 @endforeach
 
                 @foreach($missingApplicationSteps as $applicationStep)
-                    <li class="stepper__item">{{ $applicationStep }}</li>
+                    <x-quantum.stepper-item>{{ $applicationStep }}</x-quantum.stepper-item>
                 @endforeach
-            </ul>
+            </x-quantum.stepper>
         </div>
 
         <div class="grid">
