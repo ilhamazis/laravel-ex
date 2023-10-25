@@ -26,43 +26,12 @@
         <div class="grid">
             <div class="col-12 col-md-8">
                 <div class="card">
-                    <div class="card__body">
-                        <x-quantum.nav-tab>
-                            @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
-                                <x-quantum.nav-tab-item
-                                    :active="url()->current() === route('managements.jobs.applications.steps.show', [
-                                                 $job, $application, $currentApplicationStep
-                                             ])"
-                                >
-                                    <x-link
-                                        :href="route('managements.jobs.applications.steps.show', [
-                                            $job, $application, $currentApplicationStep
-                                        ])"
-                                    >
-                                        Kirim Email
-                                    </x-link>
-                                </x-quantum.nav-tab-item>
-                            @endcan
-
-                            @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
-                                <x-quantum.nav-tab-item
-                                    :active="request()->routeIs('managements.jobs.applications.steps.reviews.*')"
-                                >
-                                    <x-link
-                                        :href="route('managements.jobs.applications.steps.reviews.index', [
-                                            $job, $application, $currentApplicationStep
-                                        ])"
-                                    >
-                                        Review
-                                    </x-link>
-                                </x-quantum.nav-tab-item>
-                            @endcan
-                        </x-quantum.nav-tab>
-                    </div>
+                    <x-cms.job-application.card-navigation/>
 
                     {{ $slot }}
                 </div>
             </div>
+            
             <div class="col-12 col-md-4">
                 <div class="grid">
                     @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
