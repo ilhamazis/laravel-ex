@@ -61,10 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
             initChoicesSearch(el);
         });
     }
-
-    document.querySelectorAll('.stepper').forEach(el => {
-        const stepperLineWidth = (el.scrollWidth / el.childElementCount) + 8;
-
-        el.style.setProperty('--stepper-line-width', `${stepperLineWidth}px`)
-    });
 });
