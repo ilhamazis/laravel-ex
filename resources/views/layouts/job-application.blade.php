@@ -48,42 +48,37 @@
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card__body">
-                        <nav class="nav-tab">
-                            <ul class="nav-tab__wrapper">
-                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
-                                    <li @class([
-                                        'nav-tab__item',
-                                        'active' => url()->current() ===
-                                                    route('managements.jobs.applications.steps.show', [
-                                                        $job, $application, $currentApplicationStep
-                                                    ])
-                                    ])
+                        <x-quantum.nav-tab>
+                            @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
+                                <x-quantum.nav-tab-item
+                                    :active="url()->current() === route('managements.jobs.applications.steps.show', [
+                                                 $job, $application, $currentApplicationStep
+                                             ])"
+                                >
+                                    <x-link
+                                        :href="route('managements.jobs.applications.steps.show', [
+                                            $job, $application, $currentApplicationStep
+                                        ])"
                                     >
-                                        <x-link
-                                            :href="route('managements.jobs.applications.steps.show', [
+                                        Kirim Email
+                                    </x-link>
+                                </x-quantum.nav-tab-item>
+                            @endcan
+
+                            @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
+                                <x-quantum.nav-tab-item
+                                    :active="request()->routeIs('managements.jobs.applications.steps.reviews.*')"
+                                >
+                                    <x-link
+                                        :href="route('managements.jobs.applications.steps.reviews.index', [
                                             $job, $application, $currentApplicationStep
                                         ])"
-                                        >
-                                            Kirim Email
-                                        </x-link>
-                                    </li>
-                                @endcan
-                                @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_REVIEW->value)
-                                    <li @class([
-                                        'nav-tab__item',
-                                        'active' => request()->routeIs('managements.jobs.applications.steps.reviews.*'),
-                                    ])>
-                                        <x-link
-                                            :href="route('managements.jobs.applications.steps.reviews.index', [
-                                            $job, $application, $currentApplicationStep
-                                        ])"
-                                        >
-                                            Review
-                                        </x-link>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </nav>
+                                    >
+                                        Review
+                                    </x-link>
+                                </x-quantum.nav-tab-item>
+                            @endcan
+                        </x-quantum.nav-tab>
                     </div>
 
                     {{ $slot }}
