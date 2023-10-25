@@ -6,7 +6,7 @@
                 :active="str_contains(
                              url()->current(),
                              route('managements.jobs.applications.steps.show', [
-                                 $job, $application, $applicationStep
+                                 request()->route('job'), request()->route('application'), $applicationStep
                              ]),
                          )"
             >
@@ -15,7 +15,7 @@
                 @else
                     <x-link
                         :href="route('managements.jobs.applications.steps.show', [
-                                   $job, $application, $applicationStep
+                                   request()->route('job'), request()->route('application'), $applicationStep
                                ])"
                         class="stepper__link">{{ $applicationStep->step->name }}</x-link>
                 @endif

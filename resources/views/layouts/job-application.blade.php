@@ -12,11 +12,12 @@
         <x-quantum.alert variant="error" :message="$message" dismissable/>
         @enderror
 
-        <x-cms.job-application.card-applicant :application="$application" :applicant="$application->applicant"/>
+        <x-cms.job-application.card-applicant
+            :application="$application"
+            :applicant="$application->applicant"
+        />
 
         <x-cms.job-application.stepper
-            :job="$job"
-            :application="$application"
             :current-application-step="$currentApplicationStep"
             :application-steps="$applicationSteps"
             :missing-application-steps="$missingApplicationSteps"
