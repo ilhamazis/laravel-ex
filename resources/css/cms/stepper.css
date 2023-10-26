@@ -6,13 +6,14 @@
     --stepper-text-secondary: #1B1C1D;
     --stepper-text-white: #FFFFFF;
     --stepper-item-size: 3rem;
+    --stepper-item-gap: 5rem;
     --stepper-line-thickness: 0.2rem;
-    --stepper-line-width: 0;
+    --stepper-line-width: calc(var(--stepper-item-gap) * 2 + var(--stepper-item-size));
 
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 5rem;
+    gap: var(--stepper-item-gap);
 }
 
 .stepper__item {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\AttachmentExtensionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -23,6 +24,8 @@ class StoreJobApplyRequest extends FormRequest
      */
     public function rules(): array
     {
+        $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
+
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
@@ -43,8 +46,8 @@ class StoreJobApplyRequest extends FormRequest
             'experience' => ['required', 'numeric'],
             'salary_before' => ['nullable', 'numeric'],
             'salary_expected' => ['nullable', 'numeric'],
-            'curriculum_vitae' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
-            'portfolio' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
+            'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+            'portfolio' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
         ];
     }
 

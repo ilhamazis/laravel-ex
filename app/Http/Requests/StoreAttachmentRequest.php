@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\AttachmentExtensionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAttachmentRequest extends FormRequest
@@ -21,8 +22,10 @@ class StoreAttachmentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
+
         return [
-            'file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
+            'file' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
         ];
     }
 }

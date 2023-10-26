@@ -23,12 +23,7 @@
                         <h3 class="custom__data-title">{{ $template->title }}</h3>
                         <div class="custom__data-info-wrapper">
                             <p class="custom_data-info">Dibuat oleh {{ $template->createdBy->name }}</p>
-                            <div class="custom__data-info-divider">
-                                <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                </svg>
-                            </div>
+                            <span class="custom__data-info-divider"></span>
                             <p class="custom_data-info">
                                 Dibuat tanggal {{ $template->created_at->toFormattedDateString() }}
                             </p>
