@@ -77,12 +77,12 @@
                     <div class="form-control">
                         <label for="telephone" class="form-control__label">
                             Nomor Telepon<span class="important">*</span>
-                            <span data-tooltip="contoh: 6281234567890">
+                            <span data-tooltip="contoh: 81234567890">
                         <span class="icon icon-information-circle"></span>
                     </span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('telephone')])>
-                            <span class="form-control__text">+</span>
+                            <span class="form-control__text">+62</span>
                             <x-quantum.input type="number" id="telephone" name="telephone"
                                              value="{{ old('telephone') }}"
                                              placeholder="Masukkan nomor telepon" required/>
@@ -253,7 +253,7 @@
                                              value="{{ old('experience') }}"
                                              placeholder="Masukkan pengalaman bekerja Anda (dalam skala tahun)"
                                              required/>
-                            <span data-clear="input"></span>
+                            <span class="form-control__text">tahun</span>
                         </div>
                         @error('experience')
                         <div class="form-control__helper error">{{ $message }}</div>

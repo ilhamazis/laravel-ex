@@ -25,7 +25,7 @@
                         <label class="row-data__name">Nomor Telepon</label>
                         <span class="row-data__value">
                             <span class="row-data__colon">:</span>
-                            {{ $applicant->telephone }}
+                            62{{ $applicant->telephone }}
                         </span>
                     </div>
                 </div>

@@ -48,8 +48,8 @@ class StoreJobApplyRequest extends FormRequest
                 ['required', 'string', 'max:255'],
             )],
             'experience' => ['required', 'numeric'],
-            'salary_before' => ['nullable', 'numeric'],
-            'salary_expected' => ['nullable', 'numeric'],
+            'salary_before' => ['nullable', 'numeric', 'max:2147483647'],
+            'salary_expected' => ['nullable', 'numeric', 'max:2147483647'],
             'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
             'portfolio' => [
                 Rule::when(
