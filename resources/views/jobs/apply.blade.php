@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <hr style="margin: 2.5rem 0"/>
+        <hr class="jobs-detail__divider"/>
 
         <div x-data="{ education: @js(old('education')) }" class="jobs-form__container">
             <h2 class="jobs-form__title">Form Pelamaran</h2>
