@@ -42,6 +42,8 @@
 
 .jobs-detail__wrapper {
     padding: 0 2.5rem;
+    margin: 0 auto;
+    max-width: 1280px;
 }
 
 .jobs-detail__title {
