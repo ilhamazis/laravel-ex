@@ -81,7 +81,12 @@
                     @foreach($featuredJobs as $job)
                         <li class="card splide__slide">
                             <h4 class="card__title">{{ $job->title }}</h4>
-                            <span class="custom__badge custom__badge-outline">{{ $job->type }}</span>
+                            <div class="card__badges">
+                                <span class="custom__badge custom__badge-outline">{{ $job->type }}</span>
+                            </div>
+                            <p class="card__description">
+                                {{ strip_tags($job->description) }}
+                            </p>
                             <x-link href="{{ route('jobs.show', $job) }}"
                                     class="card__link button button__md button__primary">
                                 Lihat Detail

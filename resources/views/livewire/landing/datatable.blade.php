@@ -69,6 +69,9 @@
                             {{ $job->applications_count }} Pelamar
                         </div>
                     </div>
+                    <p class="card__description">
+                        {{ strip_tags($job->description) }}
+                    </p>
                     <x-link href="{{ route('jobs.show', $job) }}" class="card__link button button__md button__primary">
                         Lihat Detail
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
