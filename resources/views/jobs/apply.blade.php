@@ -35,7 +35,7 @@
             <x-quantum.alert variant="success" :message="session()->get('success')"
                              font-weight="normal" style="padding-bottom: 2rem" dismissable/>
 
-            <form action="{{ route('jobs.apply', $job) }}" method="POST"
+            <form id="apply-form" action="{{ route('jobs.apply', $job) }}" method="POST"
                   class="grid" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -314,22 +314,24 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <div class="form-control">
-                        <label for="portfolio" class="form-control__label">
-                            Portofolio<span class="important">*</span>
-                        </label>
-                        <x-quantum.input-file
-                            name="portfolio"
-                            id="portfolio" accept=".doc,.docx,.pdf" required
-                            value="{{ old('portfolio') }}"
-                            support="DOC, DOCX, atau PDF (max. 2MB)"
-                        />
-                        @error('portfolio')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
+                @if($job->need_portfolio)
+                    <div class="col-12">
+                        <div class="form-control">
+                            <label for="portfolio" class="form-control__label">
+                                Portofolio<span class="important">*</span>
+                            </label>
+                            <x-quantum.input-file
+                                name="portfolio"
+                                id="portfolio" accept=".doc,.docx,.pdf" required
+                                value="{{ old('portfolio') }}"
+                                support="DOC, DOCX, atau PDF (max. 2MB)"
+                            />
+                            @error('portfolio')
+                            <div class="form-control__helper error">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="col-12">
                     <button type="button" class="button button__md button__primary"
@@ -352,7 +354,10 @@
                                         data-dismiss="modal">
                                     Batal
                                 </button>
-                                <button type="submit" class="btn btn_primary">
+                                <button
+                                    type="button" class="btn btn_primary"
+                                    onclick="document.getElementById('apply-form').submit()"
+                                >
                                     Konfirmasi
                                 </button>
                             </div>

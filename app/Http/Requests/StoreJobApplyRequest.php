@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\AttachmentExtensionEnum;
+use App\Models\Job;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -24,6 +25,9 @@ class StoreJobApplyRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var Job $job */
+        $job = $this->route('job');
+
         $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
 
         return [
@@ -47,7 +51,13 @@ class StoreJobApplyRequest extends FormRequest
             'salary_before' => ['nullable', 'numeric'],
             'salary_expected' => ['nullable', 'numeric'],
             'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
-            'portfolio' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+            'portfolio' => [
+                Rule::when(
+                    $job->need_portfolio,
+                    ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+                    ['nullable'],
+                ),
+            ],
         ];
     }
 

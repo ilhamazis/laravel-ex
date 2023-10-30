@@ -91,7 +91,9 @@ class JobApplyingService
 
         $folder = $job->slug . '/' . $application->id . '/' . now()->timestamp;
         foreach ($attachments as $attachment) {
-            $this->attachmentManagingService->create($application, $attachment, $folder);
+            if ($attachment instanceof UploadedFile) {
+                $this->attachmentManagingService->create($application, $attachment, $folder);
+            }
         }
 
         $step = Step::query()
