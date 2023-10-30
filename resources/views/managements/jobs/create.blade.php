@@ -6,7 +6,7 @@
 @endphp
 
 <x-app-layout header-static>
-    <form action="{{ route('managements.jobs.store') }}" method="post">
+    <form action="{{ route('managements.jobs.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
 
@@ -55,10 +55,28 @@
                                         <div @class(['form-control__group', 'error' => $errors->has('title')])>
                                             <x-quantum.input type="text" id="title" name="title"
                                                              value="{{ old('title') }}"
-                                                             placeholder="Masukkan posisi" required/>
+                                                             placeholder="Masukkan posisi pekerjaan" required/>
                                             <span data-clear="input"></span>
                                         </div>
                                         @error('title')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <label for="banner" class="form-control__label">
+                                            Banner<span class="important">*</span>
+                                        </label>
+                                        <x-quantum.input-file
+                                            name="banner"
+                                            id="banner" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg,.webp"
+                                            value="{{ old('banner') }}"
+                                            support="JPG, PNG, BMP, GIF, SVG, atau WEBP (max. 500KB)"
+                                            required
+                                        />
+                                        @error('banner')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -89,7 +107,11 @@
                                                 <option @selected(is_null(old('type'))) disabled>Tipe Pekerjaan</option>
                                                 @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
                                                     <option
-                                                        @selected(old('type') === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
+                                                        @selected(old('type') === $typeEnum)
+                                                        value="{{ $typeEnum }}"
+                                                    >
+                                                        {{ $typeEnum }}
+                                                    </option>
                                                 @endforeach
                                             </x-quantum.select>
                                         </div>
@@ -111,11 +133,32 @@
                                                 <option @selected(is_null(old('status'))) disabled>Status</option>
                                                 @foreach(\App\Enums\JobStatusEnum::values() as $statusEnum)
                                                     <option
-                                                        @selected(old('status') === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
+                                                        @selected(old('status') === $statusEnum)
+                                                        value="{{ $statusEnum }}"
+                                                    >
+                                                        {{ $statusEnum }}
+                                                    </option>
                                                 @endforeach
                                             </x-quantum.select>
                                         </div>
                                         @error('status')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <label for="quota" class="form-control__label">
+                                            Kuota<span class="important">*</span>
+                                        </label>
+                                        <div @class(['form-control__group', 'error' => $errors->has('quota')])>
+                                            <x-quantum.input type="number" id="quota" name="quota"
+                                                             value="{{ old('quota') }}"
+                                                             placeholder="Masukkan kuota lowongan pekerjaan" required/>
+                                            <span class="form-control__text">orang</span>
+                                        </div>
+                                        @error('quota')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -144,6 +187,18 @@
                                         @error('end_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="form-control__checkbox" id="need_portfolio"
+                                                   name="need_portfolio" value="1" @checked(old('need_portfolio'))/>
+                                            <label for="need_portfolio" class="form-control__label-checkbox">
+                                                Memerlukan lampiran portofolio?
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

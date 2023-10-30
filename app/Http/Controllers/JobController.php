@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreJobRequest;
+use App\Http\Requests\UpdateJobRequest;
 use App\Models\Job;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
@@ -45,7 +46,7 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
-        $this->jobManagingService->create($request->validated());
+        $this->jobManagingService->create($request->validated(), $request->file('banner'));
 
         return redirect()
             ->route('managements.jobs.index')
@@ -71,9 +72,9 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreJobRequest $request, Job $job)
+    public function update(UpdateJobRequest $request, Job $job)
     {
-        $this->jobManagingService->update($job, $request->validated());
+        $this->jobManagingService->update($job, $request->validated(), $request->file('banner'));
 
         return redirect()
             ->route('managements.jobs.show', $job)

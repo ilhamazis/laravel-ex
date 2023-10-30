@@ -7,7 +7,7 @@ use App\Enums\JobTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class StoreJobRequest extends FormRequest
+class UpdateJobRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class StoreJobRequest extends FormRequest
             'type' => ['required', new Enum(JobTypeEnum::class)],
             'status' => ['required', new Enum(JobStatusEnum::class)],
             'quota' => ['required', 'numeric'],
-            'banner' => ['required', 'image', 'max:512'],
+            'banner' => ['nullable', 'image', 'max:512'],
             'need_portfolio' => ['boolean'],
             'start_at' => ['nullable', 'date'],
             'end_at' => ['nullable', 'date'],

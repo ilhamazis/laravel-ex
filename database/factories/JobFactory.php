@@ -25,7 +25,7 @@ class JobFactory extends Factory
             'type' => collect(JobTypeEnum::values())->random(),
             'status' => collect(JobStatusEnum::values())->random(),
             'quota' => fake()->numberBetween(1, 5),
-            'banner' => null,
+            'banner' => 'dummy.png',
             'start_at' => null,
             'end_at' => null,
         ];
