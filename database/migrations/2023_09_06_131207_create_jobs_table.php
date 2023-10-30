@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->text('description');
             $table->string('type');
             $table->string('status');
+            $table->integer('quota');
+            $table->text('banner')->nullable();
             $table->date('start_at')->nullable();
             $table->date('end_at')->nullable();
             $table->foreignId('created_by')->constrained('users');
