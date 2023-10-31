@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Application extends Model
 {
@@ -47,6 +48,11 @@ class Application extends Model
     public function applicationSteps(): HasMany
     {
         return $this->hasMany(ApplicationStep::class);
+    }
+
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(Review::class, ApplicationStep::class);
     }
 
     public function salaryBefore(): Attribute

@@ -52,7 +52,7 @@ class ReviewController extends Controller
         $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
-        $reviews = $this->reviewManagingService->findAll($applicationStep);
+        $reviews = $this->reviewManagingService->findAll($application);
 
         return view('managements.jobs.applications.application-steps.reviews.index', [
             'job' => $job,

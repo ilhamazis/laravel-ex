@@ -117,7 +117,10 @@
             @forelse($reviews as $review)
                 <div class="col-12">
                     <div class="review__item">
-                        <h6 class="review__title">{{ $review->user->name }}</h6>
+                        <div class="review__header">
+                            <h6 class="review__title">{{ $review->user->name }}</h6>
+                            <p class="review__step">Tahap {{ $review->applicationStep->step->name }}</p>
+                        </div>
                         <p class="review__description">
                             Dibuat tanggal {{ $review->created_at->toFormattedDateString() }}
                         </p>

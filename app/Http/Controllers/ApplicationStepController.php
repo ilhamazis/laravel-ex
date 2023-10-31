@@ -80,13 +80,13 @@ class ApplicationStepController extends Controller
             $this->applicationStepManagingService->hire($applicationStep);
 
             return redirect()
-                ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
+                ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $applicationStep])
                 ->with('success', 'Berhasil merekrut kandidat');
         } else {
             $nextApplicationStep = $this->applicationStepManagingService->moveToNextStep($applicationStep);
 
             return redirect()
-                ->route('managements.jobs.applications.steps.show', [$job, $application, $nextApplicationStep])
+                ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $nextApplicationStep])
                 ->with('success', 'Berhasil mengubah rekrutmen ke tahap selanjutnya');
         }
     }
@@ -100,7 +100,7 @@ class ApplicationStepController extends Controller
         $this->applicationStepManagingService->reject($applicationStep);
 
         return redirect()
-            ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
+            ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $applicationStep])
             ->with('success', 'Berhasil mengubah status rekrutmen');
     }
 
