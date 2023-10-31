@@ -69,15 +69,17 @@ class JobApplyingService
 
         $applicant = Applicant::query()->create([
             'name' => $data['name'],
+            'nik' => $data['nik'],
             'email' => $data['email'],
             'telephone' => $data['telephone'],
-            'age' => $data['age'],
+            'date_of_birth' => $data['date_of_birth'],
             'is_married' => $data['is_married'],
+            'gender' => $data['gender'],
             'address' => $data['address'],
             'education' => $data['education'],
             'school' => $data['school'],
-            'faculty' => $data['faculty'] ?? null,
-            'major' => $data['major'] ?? null,
+            'faculty' => $data['faculty'] ?: null,
+            'major' => $data['major'] ?: null,
             'experience' => $data['experience'],
         ]);
 

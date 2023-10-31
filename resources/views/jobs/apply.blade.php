@@ -3,8 +3,6 @@
         <x-landing.navbar/>
     </div>
 
-    <img src="{{ asset('storage/' . $job->banner) }}" class="jobs-detail__banner" alt="Banner"/>
-
     <section class="jobs-detail__wrapper">
         <div class="jobs-detail__header-wrapper">
             <div class="jobs-detail__header">
@@ -58,6 +56,23 @@
 
                 <div class="col-12">
                     <div class="form-control">
+                        <label for="nik" class="form-control__label">
+                            NIK/Nomor KTP<span class="important">*</span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('nik')])>
+                            <x-quantum.input type="number" id="nik" name="nik"
+                                             value="{{ old('nik') }}"
+                                             placeholder="Masukkan NIK atau Nomor KTP Anda" required/>
+                            <span data-clear="input"></span>
+                        </div>
+                        @error('nik')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
                         <label for="email" class="form-control__label">
                             Email<span class="important">*</span>
                         </label>
@@ -96,21 +111,21 @@
 
                 <div class="col-12">
                     <div class="form-control">
-                        <label for="age" class="form-control__label">
-                            Umur<span class="important">*</span>
+                        <label for="date_of_birth" class="form-control__label">
+                            Tanggal Lahir<span class="important">*</span>
                         </label>
-                        <div @class(['form-control__group', 'error' => $errors->has('age')])>
-                            <x-quantum.input type="number" id="age" name="age" value="{{ old('age') }}"
-                                             placeholder="Masukkan umur Anda" required/>
-                            <span data-clear="input"></span>
+                        <div @class(['form-control__group', 'error' => $errors->has('date_of_birth')])>
+                            <x-quantum.input type="date" id="date_of_birth" name="date_of_birth"
+                                             value="{{ old('date_of_birth') }}"
+                                             placeholder="Masukkan tanggal lahir Anda" required/>
                         </div>
-                        @error('age')
+                        @error('date_of_birth')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-6">
                     <div class="form-control">
                         <label class="form-control__label">
                             Status<span class="important">*</span>
@@ -125,6 +140,30 @@
                                    name="is_married" value="1" @checked(old('is_married') === '1')>
                             <label for="married" class="form-control__label-radio">Sudah Menikah</label>
                         </div>
+                        @error('is_married')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-control">
+                        <label class="form-control__label">
+                            Jenis Kelamin<span class="important">*</span>
+                        </label>
+                        <div class="radio-button">
+                            <input type="radio" class="form-control__radio" id="laki-laki"
+                                   name="gender" value="Laki-laki" @checked(old('gender') === 'Laki-laki')>
+                            <label for="laki-laki" class="form-control__label-radio">Laki-laki</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" class="form-control__radio" id="perempuan"
+                                   name="gender" value="Perempuan" @checked(old('gender') === 'Perempuan')>
+                            <label for="perempuan" class="form-control__label-radio">Perempuan</label>
+                        </div>
+                        @error('gender')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -144,7 +183,7 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="form-control">
                         <label for="education" class="form-control__label">
                             Pendidikan Terakhir<span class="important">*</span>
@@ -154,7 +193,7 @@
                                               placeholder="Cari skala pendidikan..."
                                               id="education" name="education" required>
                                 <option @selected(is_null(old('education'))) disabled>Pendidikan Terakhir</option>
-                                @foreach(['S3', 'S2', 'S1', 'SMK', 'SMA', 'SMP', 'SD'] as $education)
+                                @foreach(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'] as $education)
                                     <option
                                         @selected(old('education') === $education) value="{{ $education }}">
                                         {{ $education }}
@@ -168,7 +207,31 @@
                     </div>
                 </div>
 
-                <template x-if="['S3', 'S2', 'S1'].includes(education)">
+                <div class="col-12 col-md-6">
+                    <div class="form-control">
+                        <label for="experience" class="form-control__label">
+                            Pengalaman Kerja<span class="important">*</span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('education')])>
+                            <x-quantum.select variant="single-search"
+                                              placeholder="Cari skala pengalaman kerja..."
+                                              id="experience" name="experience" required>
+                                <option @selected(is_null(old('experience'))) disabled>Pengalaman Kerja</option>
+                                @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experience)
+                                    <option
+                                        @selected(old('experience') === $experience) value="{{ $experience }}">
+                                        {{ $experience }}
+                                    </option>
+                                @endforeach
+                            </x-quantum.select>
+                        </div>
+                        @error('experience')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <template x-if="['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1'].includes(education)">
                     <div class="col-12">
                         <div class="form-control">
                             <label for="school" class="form-control__label">
@@ -186,7 +249,7 @@
                     </div>
                 </template>
 
-                <template x-if="['S3', 'S2', 'S1'].includes(education)">
+                <template x-if="['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1'].includes(education)">
                     <div class="col-12">
                         <div class="form-control">
                             <label for="faculty" class="form-control__label">
@@ -222,7 +285,7 @@
                     </div>
                 </template>
 
-                <template x-if="['S3', 'S2', 'S1', 'SMK', 'SMA'].includes(education)">
+                <template x-if="['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'].includes(education)">
                     <div class="col-12">
                         <div class="form-control">
                             <label for="major" class="form-control__label">
@@ -239,27 +302,6 @@
                         </div>
                     </div>
                 </template>
-
-                <div class="col-12">
-                    <div class="form-control">
-                        <label for="experience" class="form-control__label">
-                            Pengalaman Kerja<span class="important">*</span>
-                            <span data-tooltip="Pengalaman kerja dalam skala tahun">
-                        <span class="icon icon-information-circle"></span>
-                    </span>
-                        </label>
-                        <div @class(['form-control__group', 'error' => $errors->has('experience')])>
-                            <x-quantum.input type="number" id="experience" name="experience"
-                                             value="{{ old('experience') }}"
-                                             placeholder="Masukkan pengalaman bekerja Anda (dalam skala tahun)"
-                                             required/>
-                            <span class="form-control__text">tahun</span>
-                        </div>
-                        @error('experience')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
 
                 <div class="col-12">
                     <div class="form-control">
@@ -334,12 +376,13 @@
                 @endif
 
                 <div class="col-12">
-                    <button type="button" class="button button__md button__primary"
-                            style="display: block; margin-left: auto"
-                            data-label="Upload" data-toggle="modal"
-                            data-target="#job-apply-modal">
-                        Submit
-                    </button>
+                    <div style="padding-top: 3rem">
+                        <button type="button" class="btn btn_primary btn_full-width btn_md"
+                                data-label="Upload" data-toggle="modal"
+                                data-target="#job-apply-modal">
+                            Kirim Lamaran
+                        </button>
+                    </div>
 
                     <x-quantum.modal-confirmation id="job-apply-modal"
                                                   title="Konfirmasi Melamar Pekerjaan">

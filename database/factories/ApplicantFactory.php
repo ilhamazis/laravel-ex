@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ApplicationExperienceEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,16 +19,18 @@ class ApplicantFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'nik' => fake()->numberBetween(1000000000, 2147483647),
             'email' => fake()->safeEmail(),
-            'telephone' => fake()->e164PhoneNumber(),
-            'age' => fake()->numberBetween(18, 100),
+            'telephone' => fake()->numberBetween(8000000000, 8999999999),
+            'date_of_birth' => fake()->date(),
             'is_married' => fake()->boolean(),
+            'gender' => collect(['Laki-laki', 'Perempuan'])->random(),
             'address' => fake()->address(),
-            'education' => collect(['S3', 'S2', 'S1', 'SMK', 'SMA', 'SMP', 'SD'])->random(),
+            'education' => collect(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'])->random(),
             'school' => fake()->company(),
             'faculty' => fake()->words(asText: true),
             'major' => fake()->words(asText: true),
-            'experience' => fake()->numberBetween(0, 100),
+            'experience' => collect(ApplicationExperienceEnum::values())->random(),
         ];
     }
 }

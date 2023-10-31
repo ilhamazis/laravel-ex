@@ -13,6 +13,15 @@
                 </div>
                 <div class="col-12">
                     <div class="row-data">
+                        <label class="row-data__name">NIK/Nomor KTP</label>
+                        <span class="row-data__value">
+                            <span class="row-data__colon">:</span>
+                            {{ $applicant->nik }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row-data">
                         <label class="row-data__name">Email</label>
                         <span class="row-data__value">
                             <span class="row-data__colon">:</span>
@@ -29,19 +38,37 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="row-data">
-                        <label class="row-data__name">Umur</label>
-                        <span class="row-data__value">
-                            <span class="row-data__colon">:</span>
-                            {{ $applicant->age }} tahun
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-12 col-md-6">
             <div class="grid">
+                <div class="col-12">
+                    <div class="row-data">
+                        <label class="row-data__name">Tanggal Lahir</label>
+                        <span class="row-data__value">
+                            <span class="row-data__colon">:</span>
+                            {{ $applicant->date_of_birth->isoFormat('LL') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row-data">
+                        <label class="row-data__name">Status</label>
+                        <span class="row-data__value">
+                            <span class="row-data__colon">:</span>
+                            {{ $applicant->is_married ? 'Sudah Menikah' : 'Belum Menikah' }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row-data">
+                        <label class="row-data__name">Jenis Kelamin</label>
+                        <span class="row-data__value">
+                            <span class="row-data__colon">:</span>
+                            {{ $applicant->gender }}
+                        </span>
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="row-data">
                         <label class="row-data__name">Alamat</label>
@@ -51,6 +78,10 @@
                         </span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="grid">
                 <div class="col-12">
                     <div class="row-data">
                         <label class="row-data__name">Pendidikan Terakhir</label>
@@ -71,10 +102,10 @@
                 </div>
                 <div class="col-12">
                     <div class="row-data">
-                        <label class="row-data__name">Status</label>
+                        <label class="row-data__name">Pengalaman Kerja</label>
                         <span class="row-data__value">
                             <span class="row-data__colon">:</span>
-                            {{ $applicant->is_married ? 'Sudah Menikah' : 'Belum Menikah' }}
+                            {{ $applicant->experience }}
                         </span>
                     </div>
                 </div>
@@ -82,15 +113,6 @@
         </div>
         <div class="col-12 col-md-6">
             <div class="grid">
-                <div class="col-12">
-                    <div class="row-data">
-                        <label class="row-data__name">Pengalaman Kerja</label>
-                        <span class="row-data__value">
-                            <span class="row-data__colon">:</span>
-                            {{ $applicant->experience }} tahun
-                        </span>
-                    </div>
-                </div>
                 <div class="col-12">
                     <div class="row-data">
                         <label class="row-data__name">Gaji Sebelumnya</label>

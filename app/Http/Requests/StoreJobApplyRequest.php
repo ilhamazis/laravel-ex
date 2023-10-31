@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ApplicationExperienceEnum;
 use App\Enums\AttachmentExtensionEnum;
 use App\Models\Job;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreJobApplyRequest extends FormRequest
 {
@@ -32,22 +34,24 @@ class StoreJobApplyRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'numeric'],
             'email' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'numeric'],
-            'age' => ['required', 'numeric'],
+            'date_of_birth' => ['required', 'date'],
             'is_married' => ['required', 'boolean'],
+            'gender' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'address' => ['required', 'string'],
-            'education' => ['required', Rule::in(['S3', 'S2', 'S1', 'SMK', 'SMA', 'SMP', 'SD'])],
+            'education' => ['required', Rule::in(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'])],
             'school' => ['required', 'string', 'max:255'],
             'faculty' => [Rule::when(
-                in_array($this->education, ['S3', 'S2', 'S1']),
+                in_array($this->education, ['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1']),
                 ['required', 'string', 'max:255'],
             )],
             'major' => [Rule::when(
-                in_array($this->education, ['S3', 'S2', 'S1', 'SMK', 'SMA']),
+                in_array($this->education, ['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA']),
                 ['required', 'string', 'max:255'],
             )],
-            'experience' => ['required', 'numeric'],
+            'experience' => ['required', new Enum(ApplicationExperienceEnum::class)],
             'salary_before' => ['nullable', 'numeric', 'max:2147483647'],
             'salary_expected' => ['nullable', 'numeric', 'max:2147483647'],
             'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
