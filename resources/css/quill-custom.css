@@ -1,5 +1,15 @@
 .custom__ql-container > * {
     cursor: text;
+    line-height: 175%;
+}
+
+.custom__ql-container img {
+    display: block;
+    margin: 0 auto;
+}
+
+.custom__ql-container strong {
+    font-weight: 600;
 }
 
 .custom__ql-container p,
@@ -16,6 +26,7 @@
     margin: 0;
     padding: 0;
     counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    color: var(--custom-color-black);
 }
 
 .custom__ql-container ol,

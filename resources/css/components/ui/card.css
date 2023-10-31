@@ -1,6 +1,6 @@
 .card {
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 2.25rem 1.5rem;
     border-radius: 2rem;
     border: 2px solid rgba(174, 174, 174, 0.12);
@@ -10,7 +10,7 @@
     color: var(--custom-color-black);
     font-size: var(--custom-fs-5);
     font-weight: 500;
-    line-height: var(--custom-lh-4);
+    line-height: var(--custom-lh-6);
 }
 
 .card__badges {
@@ -19,8 +19,18 @@
     align-items: center;
 }
 
+.card__description {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--custom-color-gray);
+    line-height: 150%;
+    margin: 0.5rem 0;
+}
+
 .card__link {
     width: fit-content;
     height: fit-content;
-    margin-top: 1rem;
 }

@@ -7,7 +7,7 @@
 @endphp
 
 <x-app-layout header-static>
-    <form action="{{ route('managements.jobs.update', $job) }}" method="post">
+    <form action="{{ route('managements.jobs.update', $job) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -60,11 +60,40 @@
                                         <div @class(['form-control__group', 'error' => $errors->has('title')])>
                                             <x-quantum.input type="text" id="title" name="title"
                                                              value="{{ old('title', $job->title) }}"
-                                                             placeholder="Masukkan posisi" required/>
+                                                             placeholder="Masukkan posisi pekerjaan" required/>
                                             <span data-clear="input"></span>
                                         </div>
                                         @error('title')
                                         <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <label for="banner" class="form-control__label">
+                                            Banner
+                                        </label>
+
+                                        <div
+                                            style="display: block;
+                                                    margin-bottom: 1rem;
+                                                    margin-right: auto;
+                                                    margin-left: auto"
+                                        >
+                                            <img id="banner-preview" src="{{ asset('storage/' . $job->banner) }}"
+                                                 alt="Job banner"/>
+                                        </div>
+
+                                        <x-quantum.input-file
+                                            name="banner"
+                                            id="banner" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg,.webp"
+                                            value="{{ old('banner') }}"
+                                            title="Klik untuk ubah banner"
+                                            support="JPG, PNG, BMP, GIF, SVG, atau WEBP (max. 500KB)"
+                                        />
+                                        @error('banner')
+                                        <div class="form-control__h elper error">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -94,7 +123,11 @@
                                                 <option @selected(is_null(old('type'))) disabled>Tipe Pekerjaan</option>
                                                 @foreach(\App\Enums\JobTypeEnum::values() as $typeEnum)
                                                     <option
-                                                        @selected(old('type', $job->type->value) === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
+                                                        @selected(old('type', $job->type->value) === $typeEnum)
+                                                        value="{{ $typeEnum }}"
+                                                    >
+                                                        {{ $typeEnum }}
+                                                    </option>
                                                 @endforeach
                                             </x-quantum.select>
                                         </div>
@@ -116,7 +149,11 @@
                                                 <option @selected(is_null(old('status'))) disabled>Status</option>
                                                 @foreach(\App\Enums\JobStatusEnum::values() as $statusEnum)
                                                     <option
-                                                        @selected(old('status', $job->status->value) === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
+                                                        @selected(old('status', $job->status->value) === $statusEnum)
+                                                        value="{{ $statusEnum }}"
+                                                    >
+                                                        {{ $statusEnum }}
+                                                    </option>
                                                 @endforeach
                                             </x-quantum.select>
                                         </div>
@@ -128,10 +165,29 @@
 
                                 <div class="col-12">
                                     <div class="form-control">
+                                        <label for="quota" class="form-control__label">
+                                            Kuota<span class="important">*</span>
+                                        </label>
+                                        <div @class(['form-control__group', 'error' => $errors->has('quota')])>
+                                            <x-quantum.input type="number" id="quota" name="quota"
+                                                             value="{{ old('quota', $job->quota) }}"
+                                                             placeholder="Masukkan kuota lowongan pekerjaan" required/>
+                                            <span class="form-control__text">orang</span>
+                                        </div>
+                                        @error('quota')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
                                         <label for="start_at" class="form-control__label">Mulai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('start_at')])>
-                                            <x-quantum.input type="date" id="start_at" name="start_at"
-                                                             value="{{ old('start_at', $job->start_at?->format('Y-m-d')) }}"/>
+                                            <x-quantum.input
+                                                type="date" id="start_at" name="start_at"
+                                                value="{{ old('start_at', $job->start_at?->format('Y-m-d')) }}"
+                                            />
                                         </div>
                                         @error('start_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
@@ -143,12 +199,28 @@
                                     <div class="form-control">
                                         <label for="end_at" class="form-control__label">Selesai</label>
                                         <div @class(['form-control__group', 'error' => $errors->has('end_at')])>
-                                            <x-quantum.input type="date" id="end_at" name="end_at"
-                                                             value="{{ old('end_at', $job->end_at?->format('Y-m-d')) }}"/>
+                                            <x-quantum.input
+                                                type="date" id="end_at" name="end_at"
+                                                value="{{ old('end_at', $job->end_at?->format('Y-m-d')) }}"
+                                            />
                                         </div>
                                         @error('end_at')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div class="checkbox">
+                                            <input @checked(old('need_portfolio', $job->need_portfolio))
+                                                   type="checkbox" class="form-control__checkbox" id="need_portfolio"
+                                                   name="need_portfolio" value="1"
+                                            />
+                                            <label for="need_portfolio" class="form-control__label-checkbox">
+                                                Memerlukan lampiran portofolio?
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -158,4 +230,14 @@
             </div>
         </div>
     </form>
+
+    @push('custom-scripts')
+        <script>
+            document.querySelector('#banner').addEventListener('change', event => {
+                if (event.target.files[0]) {
+                    document.querySelector('#banner-preview').src = URL.createObjectURL(event.target.files[0]);
+                }
+            });
+        </script>
+    @endpush
 </x-app-layout>

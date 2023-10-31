@@ -8,7 +8,9 @@ use App\Models\Job;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 class JobManagingService
 {
@@ -41,16 +43,40 @@ class JobManagingService
 
     public function create(array $data): Model
     {
+        /** @var UploadedFile $banner */
+        $banner = $data['banner'];
+
+        $bannerFilepath = $banner->store('banners', ['disk' => 'public']);
+
+        $data['banner'] = $bannerFilepath;
+        $data['need_portfolio'] = $data['need_portfolio'] ?? false;
+
         return Job::query()->create($data);
     }
 
     public function update(Job $job, array $data): bool
     {
+        /** @var ?UploadedFile $newBanner */
+        $newBanner = $data['banner'] ?? null;
+
+        if ($newBanner !== null) {
+            $bannerFilepath = $newBanner->store('banners', ['disk' => 'public']);
+            Storage::disk('public')->delete($job->banner);
+
+            $data['banner'] = $bannerFilepath;
+        }
+
+        $data['need_portfolio'] = $data['need_portfolio'] ?? false;
+
         return $job->update($data);
     }
 
-    public function delete(int $id): int
+    public function delete(int $id): bool
     {
-        return Job::query()->where('id', $id)->delete();
+        $job = Job::query()->where('id', $id)->first();
+        
+        Storage::disk('public')->delete($job->banner);
+
+        return $job->delete();
     }
 }
