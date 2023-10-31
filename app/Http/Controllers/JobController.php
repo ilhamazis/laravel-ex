@@ -46,7 +46,7 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
-        $this->jobManagingService->create($request->validated(), $request->file('banner'));
+        $this->jobManagingService->create($request->validated());
 
         return redirect()
             ->route('managements.jobs.index')
@@ -74,7 +74,7 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
-        $this->jobManagingService->update($job, $request->validated(), $request->file('banner'));
+        $this->jobManagingService->update($job, $request->validated());
 
         return redirect()
             ->route('managements.jobs.show', $job)

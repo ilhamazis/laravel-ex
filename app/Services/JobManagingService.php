@@ -41,8 +41,11 @@ class JobManagingService
             )->paginate($limit);
     }
 
-    public function create(array $data, UploadedFile $banner): Model
+    public function create(array $data): Model
     {
+        /** @var UploadedFile $banner */
+        $banner = $data['banner'];
+
         $bannerFilepath = $banner->store('banners', ['disk' => 'public']);
 
         $data['banner'] = $bannerFilepath;
@@ -51,8 +54,11 @@ class JobManagingService
         return Job::query()->create($data);
     }
 
-    public function update(Job $job, array $data, ?UploadedFile $newBanner = null): bool
+    public function update(Job $job, array $data): bool
     {
+        /** @var ?UploadedFile $newBanner */
+        $newBanner = $data['banner'] ?? null;
+
         if ($newBanner !== null) {
             $bannerFilepath = $newBanner->store('banners', ['disk' => 'public']);
             Storage::disk('public')->delete($job->banner);
