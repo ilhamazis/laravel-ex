@@ -10,15 +10,7 @@
                              ]),
                          )"
             >
-                @if($applicationStep->id === $currentApplicationStep->id)
-                    {{ $applicationStep->step->name }}
-                @else
-                    <x-link
-                        :href="route('managements.jobs.applications.steps.reviews.index', [
-                                   request()->route('job'), request()->route('application'), $applicationStep
-                               ])"
-                        class="stepper__link">{{ $applicationStep->step->name }}</x-link>
-                @endif
+                {{ $applicationStep->step->name }}
             </x-quantum.stepper-item>
         @endforeach
 
