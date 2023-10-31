@@ -13,20 +13,15 @@ class DashboardController extends Controller
         abort_if(Gate::denies(PermissionEnum::VIEW_DASHBOARD->value), 404);
 
         $activeJobsCount = $jobMonitoringService->getActiveJobsCount();
-        $totalApplicationsCount = $jobMonitoringService->getApplicationsCount();
-        $lastMonthApplicationsCount = $jobMonitoringService->getApplicationsCountFromRange(
-            now()->subMonth(),
-            now(),
-        );
-        $chartApplicationsPerMonth = $jobMonitoringService->formatForChart(
-            $jobMonitoringService->getApplicationsCountPerMonth(now()->year)
+        $jobsThatDoesntHaveApplications = $jobMonitoringService->getJobsThatDoesntHaveApplications();
+        $chartApplicationsByJob = $jobMonitoringService->formatForChart(
+            $jobMonitoringService->getApplicationsByJob()
         );
 
         return view('dashboard', [
             'activeJobsCount' => $activeJobsCount,
-            'totalApplicationsCount' => $totalApplicationsCount,
-            'lastMonthApplicationsCount' => $lastMonthApplicationsCount,
-            'chartApplicationsPerMonth' => $chartApplicationsPerMonth,
+            'jobsThatDoesntHaveApplications' => $jobsThatDoesntHaveApplications,
+            'chartApplicationsByJob' => $chartApplicationsByJob,
         ]);
     }
 }

@@ -13,12 +13,12 @@
         </div>
 
         <div class="grid">
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-6">
                 <div class="card">
                     <div class="card__body">
                         <div class="statistic__item blue">
                             <div class="statistic__header">
-                                <h5 class="statistic__title">Jumlah Pekerjaan yang Aktif</h5>
+                                <h5 class="statistic__title">Lowongan Pekerjaan yang Aktif</h5>
 
                                 <span data-tooltip="Jumlah lowongan pekerjaan dengan status aktif">
                                     <span class="statistic__tooltip icon icon-information-circle-solid"></span>
@@ -30,35 +30,18 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-4">
-                <div class="card">
-                    <div class="card__body">
-                        <div class="statistic__item green">
-                            <div class="statistic__header">
-                                <h5 class="statistic__title">Total Kandidat</h5>
-
-                                <span data-tooltip="Total kandidat yang telah melamar ke SEVIMA">
-                                    <span class="statistic__tooltip icon icon-information-circle-solid"></span>
-                                </span>
-                            </div>
-                            <span class="statistic__count">{{ $totalApplicationsCount }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-6">
                 <div class="card">
                     <div class="card__body">
                         <div class="statistic__item orange">
                             <div class="statistic__header">
-                                <h5 class="statistic__title">Kandidat Baru</h5>
+                                <h5 class="statistic__title">Lowongan Pekerjaan Tanpa Pelamar</h5>
 
-                                <span data-tooltip="Kandidat yang melamar dalam 1 bulan terakhir">
+                                <span data-tooltip="Lowongan pekerjaan aktif yang belum mempunyai pelamar">
                                     <span class="statistic__tooltip icon icon-information-circle-solid"></span>
                                 </span>
                             </div>
-                            <span class="statistic__count">{{ $lastMonthApplicationsCount }}</span>
+                            <span class="statistic__count">{{ $jobsThatDoesntHaveApplications }}</span>
                         </div>
                     </div>
                 </div>
@@ -67,7 +50,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card__body">
-                        <h2 style="padding-bottom: 2rem">Jumlah Pelamar Per Bulan</h2>
+                        <h2 style="padding-bottom: 2rem">Jumlah Pelamar Per Lowongan Pekerjaan</h2>
 
                         <div class="chart-line-area" style="width: 100%;">
                             <canvas id="chart-performance"></canvas>
@@ -98,11 +81,11 @@
             new Chart(chart, {
                 type: "line",
                 data: {
-                    labels: @js($chartApplicationsPerMonth['labels']),
+                    labels: @js($chartApplicationsByJob['labels']),
                     datasets: [
                         {
                             label: "Jumlah Pelamar",
-                            data: @js($chartApplicationsPerMonth['data']),
+                            data: @js($chartApplicationsByJob['data']),
                             backgroundColor: "#2486FF",
                             borderColor: "#2486FF",
                         },
