@@ -3,15 +3,8 @@
         ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
         ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $job)],
-        [
-            'title' => $application->applicant->name,
-            'link' => route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
-        ],
+        ['title' => $application->applicant->name . ' - Review'],
     ];
-
-    if (auth()->user()->can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)) {
-        $paths[] = ['title' => 'Review'];
-    }
 @endphp
 
 <x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application" :attachments="$attachments"

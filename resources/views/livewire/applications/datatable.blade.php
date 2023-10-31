@@ -84,9 +84,7 @@
                                         <x-link
                                             href="{{
                                                     route(
-                                                        auth()->user()->can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)
-                                                            ? 'managements.jobs.applications.steps.show'
-                                                            : 'managements.jobs.applications.steps.reviews.index',
+                                                        'managements.jobs.applications.steps.reviews.index',
                                                         [$job, $application, $application->currentApplicationStep],
                                                     )
                                                   }}"
