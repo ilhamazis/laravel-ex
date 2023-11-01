@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Applications;
+namespace App\Livewire\Jobs\Applications;
 
 use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
@@ -45,6 +45,6 @@ class Datatable extends MasterDatatable
             status: ApplicationStatusEnum::tryFrom($this->status),
         );
 
-        return view('livewire.applications.datatable', ['applications' => $applications]);
+        return view('livewire.jobs.applications.datatable', ['applications' => $applications]);
     }
 }
