@@ -30,7 +30,7 @@ class JobMonitoringService
         $applicationsByJob = Job::query()
             ->withCount('applications')
             ->isActive()
-            ->latest('updated_at')
+            ->orderBy('updated_at')
             ->get();
 
         return $applicationsByJob
