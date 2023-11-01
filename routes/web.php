@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
+
+        Route::resource('/applications', ApplicationController::class)
+            ->only(['index']);
 
         Route::resource('/templates', TemplateController::class)->except(['destroy']);
         Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');
