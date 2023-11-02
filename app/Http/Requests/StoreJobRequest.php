@@ -29,7 +29,7 @@ class StoreJobRequest extends FormRequest
             'description' => ['required', 'string'],
             'type' => ['required', new Enum(JobTypeEnum::class)],
             'status' => ['required', new Enum(JobStatusEnum::class)],
-            'quota' => ['required', 'numeric'],
+            'quota' => ['required', 'numeric', 'min:0'],
             'banner' => ['required', 'image', 'max:512'],
             'need_portfolio' => ['boolean'],
             'start_at' => ['nullable', 'date'],

@@ -77,6 +77,8 @@ class ApplicationStepController extends Controller
         }
 
         if (ApplicationStepEnum::onLastStep($applicationStep->step->name)) {
+            $this->validateJobQuota($job);
+
             $this->applicationStepManagingService->hire($applicationStep);
 
             return redirect()
@@ -118,6 +120,15 @@ class ApplicationStepController extends Controller
         if (!$applicationStep->hasReviews()) {
             throw ValidationException::withMessages([
                 'status' => 'Tahap Rekrutmen harus memiliki Review',
+            ]);
+        }
+    }
+
+    private function validateJobQuota(Job $job): void
+    {
+        if ($job->quota === 0) {
+            throw ValidationException::withMessages([
+                'status' => 'Kuota lowongan pekerjaan tidak mencukupi',
             ]);
         }
     }
