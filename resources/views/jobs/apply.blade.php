@@ -189,9 +189,8 @@
                             Pendidikan Terakhir<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-quantum.select x-on:change="education = $event.target.value" variant="single-search"
-                                              placeholder="Cari skala pendidikan..."
-                                              id="education" name="education" required>
+                            <x-quantum.select x-on:change="education = $event.target.value" id="education"
+                                              name="education" required>
                                 <option @selected(is_null(old('education'))) disabled>Pendidikan Terakhir</option>
                                 @foreach(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'] as $education)
                                     <option
@@ -213,9 +212,7 @@
                             Pengalaman Kerja<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-quantum.select variant="single-search"
-                                              placeholder="Cari skala pengalaman kerja..."
-                                              id="experience" name="experience" required>
+                            <x-quantum.select id="experience" name="experience" required>
                                 <option @selected(is_null(old('experience'))) disabled>Pengalaman Kerja</option>
                                 @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experience)
                                     <option
