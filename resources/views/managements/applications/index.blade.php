@@ -12,7 +12,9 @@
             </div>
         </div>
 
-        <livewire:applications.datatable/>
+        <div class="card">
+            <livewire:applications.datatable/>
+        </div>
     </div>
 </x-app-layout>
 

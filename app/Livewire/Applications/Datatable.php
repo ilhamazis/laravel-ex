@@ -15,6 +15,12 @@ class Datatable extends MasterDatatable
     private ApplicationManagingService $applicationManagingService;
 
     #[Url]
+    public ?string $field = 'created_at';
+
+    #[Url]
+    public ?string $direction = 'desc';
+
+    #[Url]
     public ?string $step = null;
 
     #[Url]
@@ -29,6 +35,8 @@ class Datatable extends MasterDatatable
     {
         $applications = $this->applicationManagingService->findAll(
             limit: $this->limit,
+            field: $this->field,
+            direction: $this->direction,
             query: $this->query,
             step: ApplicationStepEnum::tryFrom($this->step),
             status: ApplicationStatusEnum::tryFrom($this->status),

@@ -20,6 +20,8 @@ class ApplicationManagingService
      */
     public function findAll(
         int                    $limit,
+        ?string                $field = null,
+        ?string                $direction = null,
         ?string                $query = null,
         ?ApplicationStepEnum   $step = null,
         ?ApplicationStatusEnum $status = null,
@@ -39,7 +41,14 @@ class ApplicationManagingService
                 });
             })->when(!is_null($status), function (Builder $q) use ($status) {
                 $q->where('status', $status);
-            })->latest()
-            ->paginate($limit);
+            })->when(
+                !is_null($field) && !is_null($direction),
+                function (Builder $q) use ($field, $direction) {
+                    $q->orderBy($field, $direction);
+                },
+                function (Builder $q) {
+                    $q->latest();
+                },
+            )->paginate($limit);
     }
 }
