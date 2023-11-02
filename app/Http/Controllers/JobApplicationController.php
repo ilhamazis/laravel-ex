@@ -19,7 +19,7 @@ class JobApplicationController extends Controller
      */
     public function index(Job $job): View
     {
-        return view('managements.jobs.applications.index', ['job' => $job]);
+        return view('managements.jobs.applications.index', ['job' => $job->loadCount('applications')]);
     }
 
     /**

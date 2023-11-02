@@ -24,6 +24,7 @@ class JobManagingService
     ): LengthAwarePaginator|Collection
     {
         return Job::query()
+            ->withCount('applications')
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');
             })->when(!is_null($type), function (Builder $q) use ($type) {
@@ -74,7 +75,7 @@ class JobManagingService
     public function delete(int $id): bool
     {
         $job = Job::query()->where('id', $id)->first();
-        
+
         Storage::disk('public')->delete($job->banner);
 
         return $job->delete();

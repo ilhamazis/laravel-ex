@@ -58,7 +58,7 @@ class JobController extends Controller
      */
     public function show(Job $job): View
     {
-        return view('managements.jobs.show', ['job' => $job]);
+        return view('managements.jobs.show', ['job' => $job->loadCount('applications')]);
     }
 
     /**
