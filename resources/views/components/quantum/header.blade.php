@@ -21,6 +21,13 @@
                             </x-link>
                         </li>
                     @endcan
+                    @can(\App\Enums\PermissionEnum::VIEW_APPLICATION->value)
+                        <li @class(['nav__item', 'active' => request()->routeIs('managements.applications.*')])>
+                            <x-link class="nav__link" href="{{ route('managements.applications.index') }}">
+                                <span>Pelamar</span>
+                            </x-link>
+                        </li>
+                    @endcan
                     @can(\App\Enums\PermissionEnum::VIEW_TEMPLATE->value)
                         <li @class(['nav__item', 'active' => request()->routeIs('managements.templates.*')])>
                             <x-link class="nav__link" href="{{ route('managements.templates.index') }}">

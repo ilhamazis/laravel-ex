@@ -1,18 +1,26 @@
 <?php
 
-namespace App\Livewire\Applications;
+namespace App\Livewire\Jobs\Applications;
 
 use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Livewire\Master\Datatable as MasterDatatable;
-use App\Services\ApplicationManagingService;
+use App\Models\Job;
+use App\Services\JobApplicationManagingService;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Url;
 
 class Datatable extends MasterDatatable
 {
+    private JobApplicationManagingService $applicationManagingService;
 
-    private ApplicationManagingService $applicationManagingService;
+    public Job $job;
+
+    #[Url]
+    public ?string $field = 'created_at';
+
+    #[Url]
+    public ?string $direction = 'desc';
 
     #[Url]
     public ?string $step = null;
@@ -20,7 +28,7 @@ class Datatable extends MasterDatatable
     #[Url]
     public ?string $status = null;
 
-    public function boot(ApplicationManagingService $applicationManagingService): void
+    public function boot(JobApplicationManagingService $applicationManagingService): void
     {
         $this->applicationManagingService = $applicationManagingService;
     }
@@ -28,12 +36,15 @@ class Datatable extends MasterDatatable
     public function render(): View
     {
         $applications = $this->applicationManagingService->findAll(
+            job: $this->job,
             limit: $this->limit,
+            field: $this->field,
+            direction: $this->direction,
             query: $this->query,
             step: ApplicationStepEnum::tryFrom($this->step),
             status: ApplicationStatusEnum::tryFrom($this->status),
         );
 
-        return view('livewire.applications.datatable', ['applications' => $applications]);
+        return view('livewire.jobs.applications.datatable', ['applications' => $applications]);
     }
 }

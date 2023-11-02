@@ -1,8 +1,15 @@
 <div class="grid">
     <div class="col-12">
-        <x-quantum.badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
-            {{ $job->status }}
-        </x-quantum.badge>
+        <div style="display: flex; gap: 0.5rem">
+            <x-quantum.badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
+                {{ $job->status }}
+            </x-quantum.badge>
+
+            <x-quantum.badge variant="badge_secondary-default">
+                <span class="icon icon-clipboard-document-list-solid"></span>
+                {{ $job->quota }} Kuota
+            </x-quantum.badge>
+        </div>
     </div>
 
     <div class="col-12 col-sm-7 col-md-9">
