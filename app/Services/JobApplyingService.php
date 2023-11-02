@@ -5,18 +5,18 @@ namespace App\Services;
 use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Enums\ApplicationStepStatusEnum;
-use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
 use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\ApplicationStep;
+use App\Models\Attachment;
 use App\Models\Job;
 use App\Models\Step;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class JobApplyingService
 {
@@ -49,7 +49,7 @@ class JobApplyingService
      * @param array<UploadedFile> $attachments
      * @return void
      */
-    public function apply(Job $job, array $data, array $attachments): void
+    public function apply(Job $job, array $data): void
     {
         DB::beginTransaction();
 
@@ -79,10 +79,17 @@ class JobApplyingService
         ]);
 
         $folder = $job->slug . '/' . $application->id . '/' . now()->timestamp;
-        foreach ($attachments as $attachment) {
-            if ($attachment instanceof UploadedFile) {
-                $this->attachmentManagingService->create($application, $attachment, $folder);
-            }
+
+        /** @var UploadedFile $cv */
+        $cv = $data['curriculum_vitae'];
+
+        /** @var ?UploadedFile $portfolio */
+        $portfolio = $data['portfolio'] ?? null;
+
+        $this->createCV($application, $cv, $folder);
+
+        if ($portfolio !== null) {
+            $this->createPortfolio($application, $portfolio, $folder);
         }
 
         $step = Step::query()
@@ -98,5 +105,37 @@ class JobApplyingService
         $application->update(['current_application_step_id' => $applicationStep->id]);
 
         DB::commit();
+    }
+
+    private function createCV(Application $application, UploadedFile $cv, string $folder): Attachment
+    {
+        $cvFilename = Str::contains(
+            strtolower($cv->getClientOriginalName()),
+            ['cv', 'curriculum vitae', 'curriculum_vitae']
+        )
+            ? $cv->getClientOriginalName()
+            : 'CV_' . $cv->getClientOriginalName();
+
+        $cvPath = $cv->storeAs($folder, $cvFilename);
+
+        return $application->attachments()->create(
+            ['path' => $cvPath, 'created_by' => null, 'updated_by' => null],
+        );
+    }
+
+    private function createPortfolio(Application $application, UploadedFile $portfolio, string $folder): Attachment
+    {
+        $portfolioFilename = Str::contains(
+            strtolower($portfolio->getClientOriginalName()),
+            ['portfolio', 'portofolio']
+        )
+            ? $portfolio->getClientOriginalName()
+            : 'Portfolio_' . $portfolio->getClientOriginalName();
+
+        $portfolioPath = $portfolio->storeAs($folder, $portfolioFilename);
+
+        return $application->attachments()->create(
+            ['path' => $portfolioPath, 'created_by' => null, 'updated_by' => null]
+        );
     }
 }
