@@ -41,6 +41,25 @@
                     </x-quantum.select>
                 </div>
             </div>
+
+            <div class="col-12 col-sm-3">
+                <div class="form-control">
+                    <label for="step" class="form-control__label">Pengalaman Kerja</label>
+                    <x-quantum.select
+                        wire:change="$dispatch('changeSelect', { field: 'experience', value: $event.target.value })"
+                        variant="single-search" id="step" placeholder="Cari skala pengalaman kerja...">
+                        <option @selected(is_null($experience)) disabled>Pengalaman Kerja</option>
+                        @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experienceEnum)
+                            <option
+                                @selected($experience === $experienceEnum)
+                                value="{{ $experienceEnum }}"
+                            >
+                                {{ $experienceEnum }}
+                            </option>
+                        @endforeach
+                    </x-quantum.select>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -54,6 +73,7 @@
                     </x-quantum.cell-sorting>
                     <th>Posisi Pekerjaan</th>
                     <th>Nama Pelamar</th>
+                    <th>Pengalaman Kerja</th>
                     <th>Tahap Rekrutmen Saat Ini</th>
                     <th>Status</th>
                     <th class="cell-action cell-center">Aksi</th>
@@ -65,6 +85,7 @@
                         <td>{{ $application->created_at->toFormattedDateString() }}</td>
                         <td>{{ $application->job->title }}</td>
                         <td>{{ $application->applicant->name }}</td>
+                        <td>{{ $application->applicant->experience }}</td>
                         <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
                         <td>
                             <x-quantum.badge
