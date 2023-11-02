@@ -49,9 +49,6 @@
             <table>
                 <thead>
                 <tr>
-                    <th class="cell-check cell-center">
-                        <input type="checkbox" class="check-all-item" name="group">
-                    </th>
                     <x-quantum.cell-sorting column="created_at" :field="$field" :direction="$direction">
                         Tanggal Melamar
                     </x-quantum.cell-sorting>
@@ -64,9 +61,6 @@
                 <tbody>
                 @foreach($applications as $application)
                     <tr>
-                        <td class="cell-check cell-center">
-                            <input type="checkbox" class="form-control__checkbox check-item" name="group">
-                        </td>
                         <td>{{ $application->created_at->toFormattedDateString() }}</td>
                         <td>{{ $application->applicant->name }}</td>
                         <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
