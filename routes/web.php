@@ -14,7 +14,7 @@ use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landing\HomeController::class)->name('home');
-Route::get('/jobs', [Landing\JobController::class, 'index'])->name('jobs');
+Route::get('/about', Landing\AboutController::class)->name('about');
 Route::get('/jobs/{job}', [Landing\JobController::class, 'show'])->name('jobs.show');
 Route::get('/jobs/{job}/apply', [Landing\JobController::class, 'create'])->name('jobs.apply');
 Route::post('/jobs/{job}/apply', [Landing\JobController::class, 'store']);

@@ -37,7 +37,15 @@
         </div>
     </section>
 
-    <x-landing.cta/>
+    <div style="padding-top: 5rem">
+        <x-landing.cta title="Belum Yakin untuk Bergabung dengan SEVIMA?">
+            <x-slot:action>
+                <x-link href="{{ route('about') }}" class="cta__button button button__lg button__primary">
+                    Pelajari Lebih Lanjut
+                </x-link>
+            </x-slot:action>
+        </x-landing.cta>
+    </div>
 
     <x-landing.footer/>
 

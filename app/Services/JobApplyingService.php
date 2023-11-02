@@ -27,19 +27,6 @@ class JobApplyingService
         $this->attachmentManagingService = $attachmentManagingService;
     }
 
-    /**
-     * @return Collection<Job>
-     */
-    public function getFeaturedJobs(): Collection
-    {
-        return Job::query()
-            ->withCount('applications')
-            ->isActive()
-            ->orderBy('applications_count', 'desc')
-            ->limit(5)
-            ->get();
-    }
-
     public function findAll(
         int          $limit,
         ?string      $query = null,
@@ -47,7 +34,6 @@ class JobApplyingService
     ): LengthAwarePaginator
     {
         return Job::query()
-            ->withCount('applications')
             ->isActive()
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');

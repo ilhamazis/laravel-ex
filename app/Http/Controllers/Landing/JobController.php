@@ -31,15 +31,7 @@ class JobController extends Controller
             }
 
             return $next($request);
-        })->except(['index']);
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        return view('jobs.index');
+        });
     }
 
     /**
