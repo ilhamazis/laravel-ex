@@ -58,6 +58,7 @@ class JobApplyingService
             'nik' => $data['nik'],
             'email' => $data['email'],
             'telephone' => $data['telephone'],
+            'place_of_birth' => $data['place_of_birth'],
             'date_of_birth' => $data['date_of_birth'],
             'is_married' => $data['is_married'],
             'gender' => $data['gender'],
