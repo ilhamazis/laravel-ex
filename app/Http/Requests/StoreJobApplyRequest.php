@@ -37,6 +37,7 @@ class StoreJobApplyRequest extends FormRequest
             'nik' => ['required', 'numeric'],
             'email' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'numeric'],
+            'place_of_birth' => ['required', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date'],
             'is_married' => ['required', 'boolean'],
             'gender' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],

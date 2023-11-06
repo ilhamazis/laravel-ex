@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Services\JobApplyingService;
 use Illuminate\Contracts\View\View;
 
-class HomeController extends Controller
+class AboutController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(): View
     {
-        return view('home');
+        return view('about');
     }
 }

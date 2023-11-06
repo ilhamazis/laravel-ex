@@ -20,6 +20,7 @@ class JobMonitoringService
     {
         return $this->numberFormat(
             Job::query()
+                ->isActive()
                 ->whereDoesntHave('applications')
                 ->count()
         );

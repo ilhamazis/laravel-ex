@@ -93,8 +93,8 @@
                         <label for="telephone" class="form-control__label">
                             Nomor Telepon<span class="important">*</span>
                             <span data-tooltip="contoh: 81234567890">
-                        <span class="icon icon-information-circle"></span>
-                    </span>
+                                <span class="icon icon-information-circle"></span>
+                            </span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('telephone')])>
                             <span class="form-control__text">+62</span>
@@ -104,6 +104,23 @@
                             <span data-clear="input"></span>
                         </div>
                         @error('telephone')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
+                        <label for="place_of_birth" class="form-control__label">
+                            Tempat Lahir<span class="important">*</span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('place_of_birth')])>
+                            <x-quantum.input type="text" id="place_of_birth" name="place_of_birth"
+                                             value="{{ old('place_of_birth') }}"
+                                             placeholder="Masukkan kota/kabupaten kelahiran Anda" required/>
+                            <span data-clear="input"></span>
+                        </div>
+                        @error('place_of_birth')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
                     </div>
@@ -189,9 +206,8 @@
                             Pendidikan Terakhir<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-quantum.select x-on:change="education = $event.target.value" variant="single-search"
-                                              placeholder="Cari skala pendidikan..."
-                                              id="education" name="education" required>
+                            <x-quantum.select x-on:change="education = $event.target.value" id="education"
+                                              name="education" required>
                                 <option @selected(is_null(old('education'))) disabled>Pendidikan Terakhir</option>
                                 @foreach(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'] as $education)
                                     <option
@@ -213,9 +229,7 @@
                             Pengalaman Kerja<span class="important">*</span>
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-quantum.select variant="single-search"
-                                              placeholder="Cari skala pengalaman kerja..."
-                                              id="experience" name="experience" required>
+                            <x-quantum.select id="experience" name="experience" required>
                                 <option @selected(is_null(old('experience'))) disabled>Pengalaman Kerja</option>
                                 @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experience)
                                     <option
@@ -411,7 +425,15 @@
         </div>
     </section>
 
-    <x-landing.cta/>
+    <div style="padding-top: 5rem">
+        <x-landing.cta title="Belum Yakin untuk Bergabung dengan SEVIMA?">
+            <x-slot:action>
+                <x-link href="{{ route('about') }}" class="cta__button button button__lg button__primary">
+                    Pelajari Lebih Lanjut
+                </x-link>
+            </x-slot:action>
+        </x-landing.cta>
+    </div>
 
     <x-landing.footer/>
 

@@ -31,15 +31,7 @@ class JobController extends Controller
             }
 
             return $next($request);
-        })->except(['index']);
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        return view('jobs.index');
+        });
     }
 
     /**
@@ -63,8 +55,7 @@ class JobController extends Controller
      */
     public function store(StoreJobApplyRequest $request, Job $job): RedirectResponse
     {
-        $files = [$request->file('curriculum_vitae'), $request->file('portfolio')];
-        $this->jobApplyingService->apply($job, $request->validated(), $files);
+        $this->jobApplyingService->apply($job, $request->validated());
 
         return redirect()
             ->route('jobs.apply', $job)

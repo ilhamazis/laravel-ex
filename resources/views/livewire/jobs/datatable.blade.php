@@ -59,6 +59,8 @@
                             </p>
                             <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->type }}</p>
+                            <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->applications_count }} Pelamar</p>
                             @if($job->start_at)
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">

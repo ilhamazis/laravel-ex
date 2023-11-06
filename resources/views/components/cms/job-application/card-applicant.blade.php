@@ -44,10 +44,10 @@
             <div class="grid">
                 <div class="col-12">
                     <div class="row-data">
-                        <label class="row-data__name">Tanggal Lahir</label>
+                        <label class="row-data__name">Tempat, Tanggal Lahir</label>
                         <span class="row-data__value">
                             <span class="row-data__colon">:</span>
-                            {{ $applicant->date_of_birth->isoFormat('LL') }}
+                            {{ $applicant->place_of_birth }}, {{ $applicant->date_of_birth->isoFormat('LL') }}
                         </span>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ class ApplicantFactory extends Factory
             'nik' => fake()->numberBetween(1000000000, 2147483647),
             'email' => fake()->safeEmail(),
             'telephone' => fake()->numberBetween(8000000000, 8999999999),
+            'place_of_birth' => fake()->city(),
             'date_of_birth' => fake()->date(),
             'is_married' => fake()->boolean(),
             'gender' => collect(['Laki-laki', 'Perempuan'])->random(),

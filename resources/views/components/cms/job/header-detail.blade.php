@@ -9,6 +9,11 @@
                 <span class="icon icon-clipboard-document-list-solid"></span>
                 {{ $job->quota }} Kuota
             </x-quantum.badge>
+
+            <x-quantum.badge variant="badge_secondary-default">
+                <span class="icon icon-clipboard-document-check-solid"></span>
+                {{ $job->applications_count }} Pelamar
+            </x-quantum.badge>
         </div>
     </div>
 
