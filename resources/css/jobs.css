@@ -3,15 +3,17 @@
 }
 
 .jobs__title {
-    text-align: center;
+    text-align: left;
     color: var(--custom-color-black);
     font-size: var(--custom-fs-3);
     font-weight: 500;
     line-height: 125%;
 }
 
-.jobs__form {
-    padding: 1.5rem;
+.jobs__wrapper {
+    padding-top: 2.5rem;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .jobs__empty {
@@ -21,17 +23,24 @@
     text-align: center;
 }
 
-.jobs__wrapper {
+.jobs__list-container {
+    width: 100%;
+}
+
+.jobs__list-wrapper {
     display: grid;
     place-items: center;
     max-width: 1536px;
     margin: 0 auto;
 }
 
+.jobs__form {
+    position: relative;
+}
+
 .jobs__container {
-    padding: 2.5rem 0;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
