@@ -16,7 +16,6 @@
                     <span class="icon icon-share-solid"></span>
                     Bagikan
                 </x-copy-link>
-                <x-link href="{{ route('jobs.apply', $job) }}" class="btn btn_primary">Lamar Sekarang</x-link>
             </div>
         </div>
 
@@ -45,6 +44,12 @@
 
         <div class="jobs-detail__description">
             <x-rich-text-renderer id="job-description" :content="$job->description"/>
+        </div>
+
+        <div style="padding-top: 3rem">
+            <x-link href="{{ route('jobs.apply', $job) }}" class="btn btn_primary btn_full-width btn_md">
+                Lamar Sekarang
+            </x-link>
         </div>
     </section>
 
