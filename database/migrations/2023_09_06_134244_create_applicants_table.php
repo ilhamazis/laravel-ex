@@ -12,20 +12,22 @@ return new class extends Migration {
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
+            $table->text('photo');
             $table->string('name');
             $table->bigInteger('nik');
-            $table->string('email');
-            $table->bigInteger('telephone');
             $table->string('place_of_birth');
             $table->date('date_of_birth');
-            $table->boolean('is_married');
             $table->string('gender');
+            $table->boolean('is_married');
             $table->text('address');
+            $table->string('email');
+            $table->bigInteger('telephone');
             $table->string('education');
             $table->string('school');
             $table->string('faculty')->nullable();
             $table->string('major')->nullable();
             $table->string('experience');
+            $table->text('linkedin_url');
             $table->timestamps();
         });
     }
