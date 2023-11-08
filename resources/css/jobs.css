@@ -3,7 +3,7 @@
 }
 
 .jobs__title {
-    text-align: left;
+    text-align: center;
     color: var(--custom-color-black);
     font-size: var(--custom-fs-3);
     font-weight: 500;
@@ -13,6 +13,7 @@
 .jobs__wrapper {
     padding-top: 2.5rem;
     display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
@@ -58,6 +59,7 @@
 .jobs__pagination-detail {
     color: var(--custom-color-gray);
     line-height: var(--custom-lh-5);
+    text-align: center;
 }
 
 .jobs-detail__banner {
@@ -145,8 +147,20 @@
         padding: 4.5rem 5rem;
     }
 
+    .jobs__title {
+        text-align: left;
+    }
+
     .jobs__container {
         grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .jobs__wrapper {
+        flex-direction: row;
+    }
+
+    .jobs__pagination-detail {
+        text-align: left;
     }
 
     .jobs-detail__wrapper {

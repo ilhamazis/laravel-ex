@@ -67,7 +67,8 @@
 
 .hero__input,
 .hero__select {
-    width: 17.5rem;
+    min-width: 17.5rem;
+    width: 100%;
     border: none;
     outline: none;
     padding: 0.825rem 0;
