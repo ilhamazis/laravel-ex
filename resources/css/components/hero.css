@@ -47,6 +47,7 @@
     justify-content: center;
     gap: 1rem;
     position: sticky;
+    left: 0;
     top: 2.5rem;
 }
 
@@ -67,7 +68,6 @@
 
 .hero__input,
 .hero__select {
-    min-width: 17.5rem;
     width: 100%;
     border: none;
     outline: none;
@@ -101,5 +101,10 @@
 
     .hero__description {
         width: 35%;
+    }
+
+    .hero__input,
+    .hero__select {
+        min-width: 17.5rem;
     }
 }
