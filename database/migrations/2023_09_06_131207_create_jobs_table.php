@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('type');
             $table->string('status');
             $table->integer('quota');
-            $table->text('banner');
+            $table->string('location');
             $table->boolean('need_portfolio')->default(false);
             $table->date('start_at')->nullable();
             $table->date('end_at')->nullable();
