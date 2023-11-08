@@ -3,8 +3,6 @@
         <x-landing.navbar/>
     </div>
 
-    <img src="{{ asset('storage/' . $job->banner) }}" class="jobs-detail__banner" alt="Banner"/>
-
     <section class="jobs-detail__wrapper">
         <div class="jobs-detail__header-wrapper">
             <div class="jobs-detail__header">
