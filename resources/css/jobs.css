@@ -113,6 +113,15 @@
     margin: 2.5rem 0;
 }
 
+.jobs-detail__description {
+    padding: 2rem;
+    border-top: 1px solid #E3E8EF;
+}
+
+.jobs-detail__description:last-child {
+    border-bottom: 1px solid #E3E8EF;
+}
+
 .jobs-detail__buttons {
     display: flex;
     flex-direction: column;

@@ -60,17 +60,17 @@
             </div>
         </div>
 
-        <hr class="jobs-detail__divider"/>
-
-        <div class="jobs-detail__description">
-            <x-rich-text-renderer id="job-description" :content="$job->description"/>
+        <div style="padding: 4rem 0">
+            @foreach($job->sections as $section)
+                <div class="jobs-detail__description">
+                    <x-rich-text-renderer :id="'job-section-' . $section->order" :content="$section->content"/>
+                </div>
+            @endforeach
         </div>
 
-        <div style="padding-top: 3rem">
-            <x-link href="{{ route('jobs.apply', $job) }}" class="btn btn_primary btn_full-width btn_md">
-                Lamar Sekarang
-            </x-link>
-        </div>
+        <x-link href="{{ route('jobs.apply', $job) }}" class="btn btn_primary btn_full-width btn_md">
+            Lamar Sekarang
+        </x-link>
     </section>
 
     <div style="padding-top: 5rem">
