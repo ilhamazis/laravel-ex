@@ -38,6 +38,11 @@ class Job extends Model
         return 'slug';
     }
 
+    public function sections(): HasMany
+    {
+        return $this->hasMany(JobSection::class)->orderBy('order');
+    }
+
     public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
