@@ -11,7 +11,7 @@
 
     <livewire:landing.datatable/>
 
-    <x-landing.cta title="Belum Yakin untuk Bergabung dengan SEVIMA?">
+    <x-landing.cta title="Temukan Semua yang Perlu Anda Ketahui Tentang SEVIMA">
         <x-slot:action>
             <x-link href="{{ route('about') }}" class="cta__button button button__lg button__primary">
                 Pelajari Lebih Lanjut
