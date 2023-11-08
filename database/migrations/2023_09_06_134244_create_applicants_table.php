@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('faculty')->nullable();
             $table->string('major')->nullable();
             $table->string('experience');
-            $table->text('linkedin_url');
+            $table->text('linkedin_url')->nullable();
             $table->timestamps();
         });
     }
