@@ -34,6 +34,7 @@ class JobApplyingService
     ): LengthAwarePaginator
     {
         return Job::query()
+            ->with('firstSection')
             ->isActive()
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');
