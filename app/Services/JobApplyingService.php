@@ -59,7 +59,6 @@ class JobApplyingService
     /**
      * @param Job $job
      * @param array $data
-     * @param array<UploadedFile> $attachments
      * @return void
      */
     public function apply(Job $job, array $data): void
