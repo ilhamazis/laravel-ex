@@ -8,6 +8,16 @@
     min-height: 15rem;
 }
 
+.custom__avatar-xxl {
+    --qn-avatar-size: 7.5rem;
+    --qn-avatar-icon-status-size: 1.5rem;
+    --qn-avatar-icon-size: 2.5rem;
+    --qn-avatar-radius-border-size: 2.5rem;
+    --qn-avatar-profile-radius-size: 2.35rem;
+    --qn-avatar-font-size: 2rem;
+    --qn-avatar-border-size: 0.195rem;
+}
+
 .detail__desc-wrapper {
     padding-top: 1rem;
     display: flex;
