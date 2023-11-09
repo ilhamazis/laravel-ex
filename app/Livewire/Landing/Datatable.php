@@ -17,6 +17,9 @@ class Datatable extends MasterDatatable
     #[Url]
     public ?string $type = null;
 
+    #[Url]
+    public ?string $location = null;
+
     public function boot(JobApplyingService $jobApplyingService): void
     {
         $this->jobApplyingService = $jobApplyingService;
@@ -33,8 +36,14 @@ class Datatable extends MasterDatatable
             limit: $this->limit,
             query: $this->query,
             type: JobTypeEnum::tryFrom($this->type),
+            location: $this->location ?: null,
         );
 
-        return view('livewire.landing.datatable', ['jobs' => $jobs]);
+        $jobLocations = $this->jobApplyingService->getLocations();
+
+        return view('livewire.landing.datatable', [
+            'jobs' => $jobs,
+            'jobLocations' => $jobLocations,
+        ]);
     }
 }

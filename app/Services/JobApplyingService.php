@@ -32,6 +32,7 @@ class JobApplyingService
         int          $limit,
         ?string      $query = null,
         ?JobTypeEnum $type = null,
+        ?string      $location = null,
     ): LengthAwarePaginator
     {
         return Job::query()
@@ -41,6 +42,8 @@ class JobApplyingService
                 $q->where('title', 'ILIKE', '%' . $query . '%');
             })->when(!is_null($type), function (Builder $q) use ($type) {
                 $q->where('type', $type);
+            })->when(!is_null($location), function (Builder $q) use ($location) {
+                $q->where('location', $location);
             })->latest()
             ->paginate($limit);
     }
