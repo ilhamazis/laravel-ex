@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('jobs.applications.steps', ApplicationStepController::class)
             ->only(['show', 'update', 'destroy']);
 
-        Route::resource('jobs.application.steps.communications', CommunicationController::class)
+        Route::resource('jobs.applications.steps.communications', CommunicationController::class)
             ->only(['store']);
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)

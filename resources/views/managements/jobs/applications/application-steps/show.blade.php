@@ -12,7 +12,7 @@
                           :application-steps="$applicationSteps" :missing-application-steps="$missingApplicationSteps">
     <form
         class="card__body"
-        action="{{ route('managements.jobs.application.steps.communications.store', [
+        action="{{ route('managements.jobs.applications.steps.communications.store', [
             $job, $application, $applicationStep
         ]) }}"
         method="post"
