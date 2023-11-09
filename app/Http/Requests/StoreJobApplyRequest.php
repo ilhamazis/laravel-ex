@@ -30,8 +30,6 @@ class StoreJobApplyRequest extends FormRequest
         /** @var Job $job */
         $job = $this->route('job');
 
-        $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
-
         return [
             'photo' => ['required', 'file', 'mimes:.jpg,.jpeg,.png'],
             'name' => ['required', 'string', 'max:255'],
@@ -57,12 +55,11 @@ class StoreJobApplyRequest extends FormRequest
             'experience' => ['required', new Enum(ApplicationExperienceEnum::class)],
             'salary_before' => ['nullable', 'numeric', 'max:2147483647'],
             'salary_expected' => ['nullable', 'numeric', 'max:2147483647'],
-            'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+            'curriculum_vitae' => ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
             'portfolio' => [
                 Rule::when(
                     $job->need_portfolio,
-                    ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
-                    ['nullable'],
+                    ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
                 ),
             ],
         ];
