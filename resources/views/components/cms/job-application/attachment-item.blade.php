@@ -18,8 +18,27 @@
                 </div>
 
                 <div class="attachment__action" style="margin: auto 0">
+                    @if($attachment->file_extension->value === 'pdf')
+                        <button
+                            x-on:click="
+                                attachmentPreviewUrl =
+                                    @js(route('managements.jobs.applications.steps.attachments.show', [
+                                       request()->route('job'),
+                                       request()->route('application'),
+                                       request()->route('step'),
+                                       $attachment,
+                                   ]))"
+                            type="button"
+                            class="btn btn_icon btn_outline btn_xs"
+                            data-label="Preview Attachment"
+                            data-toggle="modal"
+                            data-target="#preview-attachment-modal">
+                            <span class="icon icon-eye"></span>
+                        </button>
+                    @endif
+
                     <x-link
-                        :href="route('managements.jobs.applications.steps.attachments.show', [
+                        :href="route('managements.jobs.applications.steps.attachments.download', [
                                    request()->route('job'),
                                    request()->route('application'),
                                    request()->route('step'),

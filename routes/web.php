@@ -48,6 +48,10 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
+        Route::get(
+            '/jobs/{job}/applications/{application}/steps/{step}/attachments/{attachment}/download',
+            [AttachmentController::class, 'download'],
+        )->name('jobs.applications.steps.attachments.download');
 
         Route::resource('/applications', ApplicationController::class)
             ->only(['index']);

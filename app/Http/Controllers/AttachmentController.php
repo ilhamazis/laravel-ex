@@ -10,6 +10,9 @@ use App\Models\Attachment;
 use App\Models\Job;
 use App\Services\AttachmentManagingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AttachmentController extends Controller
 {
@@ -64,7 +67,22 @@ class AttachmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Job $job, Application $application, ApplicationStep $step, Attachment $attachment)
+    public function show(
+        Job             $job,
+        Application     $application,
+        ApplicationStep $step,
+        Attachment      $attachment,
+    ): BinaryFileResponse
+    {
+        return response()->file(Storage::path($attachment->path));
+    }
+
+    public function download(
+        Job             $job,
+        Application     $application,
+        ApplicationStep $step,
+        Attachment      $attachment,
+    ): StreamedResponse
     {
         return $this->attachmentManagingService->download($attachment);
     }
