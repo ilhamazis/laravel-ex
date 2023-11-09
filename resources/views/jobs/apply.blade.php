@@ -72,6 +72,34 @@
                 @method('POST')
 
                 <div class="col-12">
+                    <div class="hr-intext">
+                        <span class="hr-intext__line"></span>
+                        <p class="hr-intext__text">Data Diri</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3" style="margin: auto">
+                    <div class="avatar avatar_xl">
+                        <img id="photo-preview" src="{{ asset('assets/images/dummy_avatar.jpg') }}"
+                             alt="Foto Diri"/>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-9">
+                    <div class="form-control">
+                        <label for="photo" class="form-control__label">
+                            Foto Diri<span class="important">*</span>
+                        </label>
+                        <x-quantum.input-file-small id="photo" name="photo"
+                                                    accept=".jpg,.jpeg,.png" required
+                                                    support="JPG atau PNG (max. 512KB)"/>
+                        @error('photo')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
                     <div class="form-control">
                         <label for="name" class="form-control__label">
                             Nama Lengkap<span class="important">*</span>
@@ -104,45 +132,7 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <div class="form-control">
-                        <label for="email" class="form-control__label">
-                            Email<span class="important">*</span>
-                        </label>
-                        <div @class(['form-control__group', 'error' => $errors->has('email')])>
-                            <span data-input-icon="email"></span>
-                            <x-quantum.input type="email" id="email" name="email" value="{{ old('email') }}"
-                                             placeholder="Masukkan email" required/>
-                            <span data-clear="input"></span>
-                        </div>
-                        @error('email')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="form-control">
-                        <label for="telephone" class="form-control__label">
-                            Nomor Telepon<span class="important">*</span>
-                            <span data-tooltip="contoh: 81234567890">
-                                <span class="icon icon-information-circle"></span>
-                            </span>
-                        </label>
-                        <div @class(['form-control__group', 'error' => $errors->has('telephone')])>
-                            <span class="form-control__text">+62</span>
-                            <x-quantum.input type="number" id="telephone" name="telephone"
-                                             value="{{ old('telephone') }}"
-                                             placeholder="Masukkan nomor telepon" required/>
-                            <span data-clear="input"></span>
-                        </div>
-                        @error('telephone')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="form-control">
                         <label for="place_of_birth" class="form-control__label">
                             Tempat Lahir<span class="important">*</span>
@@ -159,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="form-control">
                         <label for="date_of_birth" class="form-control__label">
                             Tanggal Lahir<span class="important">*</span>
@@ -170,27 +160,6 @@
                                              placeholder="Masukkan tanggal lahir Anda" required/>
                         </div>
                         @error('date_of_birth')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="form-control">
-                        <label class="form-control__label">
-                            Status<span class="important">*</span>
-                        </label>
-                        <div class="radio-button">
-                            <input type="radio" class="form-control__radio" id="not_married"
-                                   name="is_married" value="0" @checked(old('is_married') === '0')>
-                            <label for="not_married" class="form-control__label-radio">Belum Menikah</label>
-                        </div>
-                        <div class="radio-button">
-                            <input type="radio" class="form-control__radio" id="married"
-                                   name="is_married" value="1" @checked(old('is_married') === '1')>
-                            <label for="married" class="form-control__label-radio">Sudah Menikah</label>
-                        </div>
-                        @error('is_married')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
                     </div>
@@ -217,6 +186,27 @@
                     </div>
                 </div>
 
+                <div class="col-6">
+                    <div class="form-control">
+                        <label class="form-control__label">
+                            Status<span class="important">*</span>
+                        </label>
+                        <div class="radio-button">
+                            <input type="radio" class="form-control__radio" id="not_married"
+                                   name="is_married" value="0" @checked(old('is_married') === '0')>
+                            <label for="not_married" class="form-control__label-radio">Belum Menikah</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" class="form-control__radio" id="married"
+                                   name="is_married" value="1" @checked(old('is_married') === '1')>
+                            <label for="married" class="form-control__label-radio">Sudah Menikah</label>
+                        </div>
+                        @error('is_married')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <div class="form-control">
                         <label for="address" class="form-control__label">
@@ -233,7 +223,79 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-12" style="padding-top: 3rem">
+                    <div class="hr-intext">
+                        <span class="hr-intext__line"></span>
+                        <p class="hr-intext__text">Kontak</p>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
+                        <label for="email" class="form-control__label">
+                            Email<span class="important">*</span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('email')])>
+                            <span data-input-icon="email"></span>
+                            <x-quantum.input type="email" id="email" name="email" value="{{ old('email') }}"
+                                             placeholder="Masukkan email Anda" required/>
+                            <span data-clear="input"></span>
+                        </div>
+                        @error('email')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
+                        <label for="telephone" class="form-control__label">
+                            Nomor Telepon<span class="important">*</span>
+                            <span data-tooltip="contoh: 81234567890">
+                                <span class="icon icon-information-circle"></span>
+                            </span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('telephone')])>
+                            <span class="form-control__text">+62</span>
+                            <x-quantum.input type="number" id="telephone" name="telephone"
+                                             style="border-top-left-radius: 0;
+                                                    border-bottom-left-radius: 0;"
+                                             value="{{ old('telephone') }}"
+                                             placeholder="Masukkan nomor telepon Anda" required/>
+                            <span data-clear="input"></span>
+                        </div>
+                        @error('telephone')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
+                        <label for="linkedin_url" class="form-control__label">
+                            URL LinkedIn
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('linkedin_url')])>
+                            <span class="form-control__text">https://</span>
+                            <x-quantum.input type="url" id="linkedin_url" name="linkedin_url"
+                                             value="{{ old('linkedin_url') }}"
+                                             placeholder="Masukkan URL LinkedIn Anda"/>
+                            <span data-clear="input"></span>
+                        </div>
+                        @error('linkedin_url')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12" style="padding-top: 3rem">
+                    <div class="hr-intext">
+                        <span class="hr-intext__line"></span>
+                        <p class="hr-intext__text">Edukasi & Pengalaman</p>
+                    </div>
+                </div>
+
+                <div class="col-12">
                     <div class="form-control">
                         <label for="education" class="form-control__label">
                             Pendidikan Terakhir<span class="important">*</span>
@@ -251,28 +313,6 @@
                             </x-quantum.select>
                         </div>
                         @error('education')
-                        <div class="form-control__helper error">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="form-control">
-                        <label for="experience" class="form-control__label">
-                            Pengalaman Kerja<span class="important">*</span>
-                        </label>
-                        <div @class(['form-control__group', 'error' => $errors->has('education')])>
-                            <x-quantum.select id="experience" name="experience" required>
-                                <option @selected(is_null(old('experience'))) disabled>Pengalaman Kerja</option>
-                                @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experience)
-                                    <option
-                                        @selected(old('experience') === $experience) value="{{ $experience }}">
-                                        {{ $experience }}
-                                    </option>
-                                @endforeach
-                            </x-quantum.select>
-                        </div>
-                        @error('experience')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
                     </div>
@@ -352,15 +392,38 @@
 
                 <div class="col-12">
                     <div class="form-control">
+                        <label for="experience" class="form-control__label">
+                            Lama Bekerja<span class="important">*</span>
+                        </label>
+                        <div @class(['form-control__group', 'error' => $errors->has('education')])>
+                            <x-quantum.select id="experience" name="experience" required>
+                                <option @selected(is_null(old('experience'))) disabled>Lama Bekerja</option>
+                                @foreach(\App\Enums\ApplicationExperienceEnum::values() as $experience)
+                                    <option
+                                        @selected(old('experience') === $experience) value="{{ $experience }}">
+                                        {{ $experience }}
+                                    </option>
+                                @endforeach
+                            </x-quantum.select>
+                        </div>
+                        @error('experience')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-control">
                         <label for="salary_before" class="form-control__label">
                             Gaji Sebelumnya
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('salary_before')])>
                             <span class="form-control__text">Rp</span>
                             <x-quantum.input type="text" id="salary_before" name="salary_before"
+                                             style="border-radius: 0"
                                              value="{{ old('salary_before') }}"
                                              placeholder="Masukkan gaji Anda sebelumnya"/>
-                            <span data-clear="input"></span>
+                            <span class="form-control__text">,-</span>
                         </div>
                         @error('salary_before')
                         <div class="form-control__helper error">{{ $message }}</div>
@@ -376,9 +439,10 @@
                         <div @class(['form-control__group', 'error' => $errors->has('salary_expected')])>
                             <span class="form-control__text">Rp</span>
                             <x-quantum.input type="text" id="salary_expected"
+                                             style="border-radius: 0"
                                              name="salary_expected" value="{{ old('salary_expected') }}"
                                              placeholder="Masukkan gaji yang Anda harapkan"/>
-                            <span data-clear="input"></span>
+                            <span class="form-control__text">,-</span>
                         </div>
                         @error('salary_expected')
                         <div class="form-control__helper error">{{ $message }}</div>
@@ -386,15 +450,21 @@
                     </div>
                 </div>
 
+                <div class="col-12" style="padding-top: 3rem">
+                    <div class="hr-intext">
+                        <span class="hr-intext__line"></span>
+                        <p class="hr-intext__text">Lampiran Berkas</p>
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <div class="form-control">
                         <label for="curriculum_vitae" class="form-control__label">
-                            CV<span class="important">*</span>
+                            Curriculum Vitae<span class="important">*</span>
                         </label>
                         <x-quantum.input-file
-                            name="curriculum_vitae"
-                            id="curriculum_vitae" accept=".doc,.docx,.pdf" required
-                            value="{{ old('curriculum_vitae') }}"
+                            name="curriculum_vitae" id="curriculum_vitae"
+                            accept=".doc,.docx,.pdf" required
                             support="DOC, DOCX, atau PDF (max. 2MB)"
                         />
                         @error('curriculum_vitae')
@@ -487,6 +557,12 @@
             const salaryExpected = document.getElementById('salary_expected');
             salaryExpected.addEventListener('keyup', function (e) {
                 salaryExpected.value = formatRupiah(e.target.value);
+            });
+
+            document.querySelector('#photo').addEventListener('change', event => {
+                if (event.target.files[0]) {
+                    document.querySelector('#photo-preview').src = URL.createObjectURL(event.target.files[0]);
+                }
             });
         </script>
     @endpush
