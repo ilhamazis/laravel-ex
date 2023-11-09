@@ -15,6 +15,7 @@ use App\Models\Step;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,14 @@ class JobApplyingService
                 $q->where('type', $type);
             })->latest()
             ->paginate($limit);
+    }
+
+    public function getLocations(): array
+    {
+        return Cache::rememberForever(
+            'job_locations',
+            fn() => Job::query()->pluck('location')->toArray(),
+        );
     }
 
     /**

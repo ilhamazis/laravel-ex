@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\JobStatusEnum;
 use App\Enums\JobTypeEnum;
+use App\Traits\ForgetsCache;
 use App\Traits\HasIdentifier;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Job extends Model
 {
-    use HasFactory, SoftDeletes, HasIdentifier, HasSlug;
+    use HasFactory, SoftDeletes, HasIdentifier, HasSlug, ForgetsCache;
 
     protected $guarded = ['id'];
 
@@ -26,6 +27,12 @@ class Job extends Model
         'start_at' => 'date',
         'end_at' => 'date',
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::forgetCache('job_locations');
+    }
 
     public function getSlugOptions(): SlugOptions
     {
