@@ -57,7 +57,7 @@ class AttachmentController extends Controller
         $this->attachmentManagingService->create($application, $request->file('file'), $folder);
 
         return redirect()
-            ->route('managements.jobs.applications.steps.show', [$job, $application, $step])
+            ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $step])
             ->with('success', 'Berhasil menambah lampiran');
     }
 
@@ -77,7 +77,7 @@ class AttachmentController extends Controller
         $this->attachmentManagingService->delete($attachment);
 
         return redirect()
-            ->route('managements.jobs.applications.steps.show', [$job, $application, $step])
+            ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $step])
             ->with('success', 'Berhasil menghapus lampiran');
     }
 }
