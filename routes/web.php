@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicantPhotoController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AttachmentController;
@@ -50,6 +51,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/applications', ApplicationController::class)
             ->only(['index']);
+
+        Route::get('/applicants/{applicant}/photo', ApplicantPhotoController::class)
+            ->name('applicants.photo');
 
         Route::resource('/templates', TemplateController::class)->except(['destroy']);
         Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');
