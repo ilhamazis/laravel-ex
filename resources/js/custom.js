@@ -5,6 +5,7 @@ function initChoices(el) {
         allowHTML: true,
         searchEnabled: false,
         removeItemButton: false,
+        shouldSort: false,
     });
 }
 
@@ -14,6 +15,7 @@ function initChoicesSearch(el) {
     new Choices(el, {
         allowHTML: true,
         searchPlaceholderValue: searchPlaceholder,
+        shouldSort: false,
     });
 }
 
