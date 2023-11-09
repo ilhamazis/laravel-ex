@@ -1,10 +1,13 @@
 @props(['id', 'content'])
 
-<div id="{{ $id }}" class="custom__ql-container"></div>
+<div id="{{ $id }}" class="custom__ql-container" x-init="sanitize($el, @js($content))"></div>
 
 @push('scripts')
-    <script type="text/javascript" src="{{ asset('dompurify-3.0.6/purify.min.js') }}"></script>
     <script>
-        document.getElementById(@js($id)).innerHTML = DOMPurify.sanitize(@js($content));
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof Livewire === 'undefined') {
+                sanitize(document.getElementById(@js($id)), @js($content));
+            }
+        });
     </script>
 @endpush
