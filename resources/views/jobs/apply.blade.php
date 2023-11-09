@@ -276,7 +276,6 @@
                             URL LinkedIn
                         </label>
                         <div @class(['form-control__group', 'error' => $errors->has('linkedin_url')])>
-                            <span class="form-control__text">https://</span>
                             <x-quantum.input type="url" id="linkedin_url" name="linkedin_url"
                                              value="{{ old('linkedin_url') }}"
                                              placeholder="Masukkan URL LinkedIn Anda"/>
