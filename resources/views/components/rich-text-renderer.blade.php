@@ -1,6 +1,6 @@
 @props(['id', 'content'])
 
-<div id="{{ $id }}" class="custom__ql-container" x-init="sanitize($el, @js($content))"></div>
+<div wire:ignore id="{{ $id }}" class="custom__ql-container" x-init="sanitize($el, @js($content))"></div>
 
 @push('scripts')
     <script>
