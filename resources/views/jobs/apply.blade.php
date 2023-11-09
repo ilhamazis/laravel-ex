@@ -91,7 +91,7 @@
                             Foto Diri<span class="important">*</span>
                         </label>
                         <x-quantum.input-file-small id="photo" name="photo"
-                                                    accept=".jpg,.jpeg,.png" required
+                                                    accept="image/jpeg,image/png" required
                                                     support="JPG atau PNG (max. 512KB)"/>
                         @error('photo')
                         <div class="form-control__helper error">{{ $message }}</div>

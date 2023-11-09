@@ -31,7 +31,7 @@ class StoreJobApplyRequest extends FormRequest
         $job = $this->route('job');
 
         return [
-            'photo' => ['required', 'file', 'mimes:.jpg,.jpeg,.png'],
+            'photo' => ['required', 'file', 'mimetypes:image/jpeg,image/png'],
             'name' => ['required', 'string', 'max:255'],
             'nik' => ['required', 'numeric'],
             'place_of_birth' => ['required', 'string', 'max:255'],
