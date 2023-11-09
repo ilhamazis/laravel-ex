@@ -463,8 +463,8 @@
                         </label>
                         <x-quantum.input-file
                             name="curriculum_vitae" id="curriculum_vitae"
-                            accept=".doc,.docx,.pdf" required
-                            support="DOC, DOCX, atau PDF (max. 2MB)"
+                            accept="application/pdf" required
+                            support="Format file PDF (max. 5MB)"
                         />
                         @error('curriculum_vitae')
                         <div class="form-control__helper error">{{ $message }}</div>
@@ -480,9 +480,9 @@
                             </label>
                             <x-quantum.input-file
                                 name="portfolio"
-                                id="portfolio" accept=".doc,.docx,.pdf" required
+                                id="portfolio" accept="application/pdf" required
                                 value="{{ old('portfolio') }}"
-                                support="DOC, DOCX, atau PDF (max. 2MB)"
+                                support="Format file PDF (max. 5MB)"
                             />
                             @error('portfolio')
                             <div class="form-control__helper error">{{ $message }}</div>
