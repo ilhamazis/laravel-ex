@@ -21,13 +21,6 @@ use Illuminate\Support\Str;
 
 class JobApplyingService
 {
-    private AttachmentManagingService $attachmentManagingService;
-
-    public function __construct(AttachmentManagingService $attachmentManagingService)
-    {
-        $this->attachmentManagingService = $attachmentManagingService;
-    }
-
     public function findAll(
         int          $limit,
         ?string      $query = null,
