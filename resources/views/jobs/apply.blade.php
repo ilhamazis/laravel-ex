@@ -491,14 +491,25 @@
                     </div>
                 @endif
 
-                <div class="col-12">
-                    <div style="padding-top: 3rem">
-                        <button type="button" class="btn btn_primary btn_full-width btn_md"
-                                data-label="Upload" data-toggle="modal"
-                                data-target="#job-apply-modal">
-                            Kirim Lamaran
-                        </button>
+                <div class="col-12" style="padding-top: 3rem">
+                    <div class="form-control" style="margin-bottom: 2rem">
+                        <div class="checkbox">
+                            <input type="checkbox" class="form-control__checkbox" id="statement_of_honesty"
+                                   name="statement_of_honesty" value="1"/>
+                            <label for="statement_of_honesty" class="form-control__label-checkbox">
+                                Saya menyatakan bahwa data yang saya masukkan adalah benar dan akurat.
+                            </label>
+                        </div>
+                        @error('statement_of_honesty')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    <button type="button" class="btn btn_primary btn_full-width btn_md"
+                            data-label="Upload" data-toggle="modal"
+                            data-target="#job-apply-modal">
+                        Kirim Lamaran
+                    </button>
 
                     <x-quantum.modal-confirmation id="job-apply-modal"
                                                   title="Konfirmasi Melamar Pekerjaan">

@@ -62,6 +62,7 @@ class StoreJobApplyRequest extends FormRequest
                     ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
                 ),
             ],
+            'statement_of_honesty' => ['accepted'],
         ];
     }
 
