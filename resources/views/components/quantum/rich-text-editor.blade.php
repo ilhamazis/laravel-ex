@@ -4,7 +4,10 @@
     $quillId = $id . '-quill';
 @endphp
 
-<div id="{{ $quillId }}" class="text-editor" x-init="sanitize($el.querySelector('.ql-editor'), @js($value))"></div>
+<div wire:ignore>
+    <div id="{{ $quillId }}"
+         x-init="initQuill(@js('#' . $quillId)); sanitize($el.querySelector('.ql-editor'), @js($value))"></div>
+</div>
 
 <textarea id="{{ $id }}" name="{{ $name }}"
           x-init="sanitize($el, @js($value))"
