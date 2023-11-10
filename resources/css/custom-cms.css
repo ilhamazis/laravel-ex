@@ -4,7 +4,7 @@
 @import "cms/rating.css";
 @import "cms/statistic.css";
 
-.text-editor .ql-editor {
+.ql-editor {
     min-height: 10rem;
 }
 
