@@ -5,7 +5,7 @@
 @import "cms/statistic.css";
 
 .text-editor .ql-editor {
-    min-height: 15rem;
+    min-height: 10rem;
 }
 
 .custom__avatar-xxl {
