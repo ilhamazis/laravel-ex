@@ -16,11 +16,21 @@ const qnQuillToolbarOptions = [
     ['link', 'image', 'video']
 ];
 
-function initQuill(selector) {
-    return new Quill(selector, {
+function initQuill(quillSelector) {
+    return new Quill(quillSelector, {
         modules: {
             toolbar: qnQuillToolbarOptions
         },
         theme: 'snow'
     });
+}
+
+function syncQuillToTextarea(quillSelector, textareaSelector) {
+    document.querySelector(quillSelector)
+        .querySelector('.ql-editor')
+        .addEventListener('DOMSubtreeModified', () => {
+            document.querySelector(textareaSelector).value = document.querySelector(quillSelector)
+                .querySelector('.ql-editor')
+                .innerHTML;
+        });
 }
