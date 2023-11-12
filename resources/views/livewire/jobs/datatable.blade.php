@@ -60,6 +60,8 @@
                             <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->type }}</p>
                             <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->location }}</p>
+                            <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->quota }} Kuota</p>
                             <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->applications_count }} Pelamar</p>

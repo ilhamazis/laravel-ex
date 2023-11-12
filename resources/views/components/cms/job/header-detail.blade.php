@@ -27,6 +27,10 @@
             <p class="detail__desc">
                 {{ $job->type }}
             </p>
+            <span class="detail__desc-divider"></span>
+            <p class="detail__desc">
+                {{ $job->location }}
+            </p>
             @if($job->start_at && is_null($job->end_at))
                 <span class="detail__desc-divider"></span>
                 <p class="detail__desc">
