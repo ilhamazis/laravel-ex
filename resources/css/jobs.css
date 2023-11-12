@@ -143,6 +143,27 @@
     line-height: 1.5rem;
 }
 
+.jobs-apply-success__container {
+    max-width: 36rem;
+    padding: 2.5rem;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    gap: 2.5rem;
+}
+
+.jobs-apply-success__image {
+    max-width: 100%;
+}
+
+.jobs-apply-success__heading {
+    color: var(--custom-color-black);
+    text-align: center;
+    font-size: var(--custom-fs-4);
+    font-weight: 600;
+    line-height: 125%;
+}
+
 @media (min-width: 768px) {
     .jobs__container {
         grid-template-columns: 1fr 1fr;

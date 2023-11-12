@@ -8,7 +8,6 @@ use App\Http\Requests\StoreJobApplyRequest;
 use App\Models\Job;
 use App\Services\JobApplyingService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -53,12 +52,10 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobApplyRequest $request, Job $job): RedirectResponse
+    public function store(StoreJobApplyRequest $request, Job $job): View
     {
         $this->jobApplyingService->apply($job, $request->validated());
 
-        return redirect()
-            ->route('jobs.apply', $job)
-            ->with('success', 'Selamat! Anda berhasil melamar lowongan pekerjaan di SEVIMA');
+        return view('jobs.apply-success', ['job' => $job]);
     }
 }
