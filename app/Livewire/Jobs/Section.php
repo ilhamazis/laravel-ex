@@ -8,6 +8,7 @@ use Livewire\Component;
 class Section extends Component
 {
     public array $sections;
+    public array $errors;
 
     public function addSection(): void
     {

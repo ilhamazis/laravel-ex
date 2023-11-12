@@ -78,6 +78,9 @@
                                   style="display: none"
                         ></textarea>
                     </div>
+                    @if($message = $errors["sections.{$index}.content"][0] ?? '')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                    @endif
                 </div>
 
                 @if(!$loop->last)
@@ -87,6 +90,9 @@
                 @endif
             @endforeach
         </div>
+        @if($message = $errors[0] ?? '')
+            <div class="form-control__helper error">{{ $message }}</div>
+        @endif
     </div>
 
     @push('styles')

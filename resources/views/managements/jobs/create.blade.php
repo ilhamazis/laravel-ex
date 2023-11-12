@@ -147,6 +147,9 @@
                                                 Memerlukan lampiran portofolio?
                                             </label>
                                         </div>
+                                        @error('need_portfolio')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +158,8 @@
                 </div>
 
                 <div class="col-12">
-                    <livewire:jobs.section :sections="old('sections', [])"/>
+                    <livewire:jobs.section :sections="old('sections', [])"
+                                           :errors="$errors->get('sections') + $errors->get('sections.*')"/>
                 </div>
 
                 <div class="col-12">
