@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreJobRequest;
-use App\Http\Requests\UpdateJobRequest;
 use App\Models\Job;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
@@ -76,7 +75,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobRequest $request, Job $job)
+    public function update(StoreJobRequest $request, Job $job)
     {
         $this->jobManagingService->update($job, $request->validated());
 
