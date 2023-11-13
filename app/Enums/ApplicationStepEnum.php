@@ -41,4 +41,11 @@ enum ApplicationStepEnum: string
             ],
         );
     }
+
+    public static function getOrderOf(?ApplicationStepEnum $stepEnum = null): false|int
+    {
+        return is_null($stepEnum)
+            ? false
+            : array_search($stepEnum->value, ApplicationStepEnum::values()) + 1;
+    }
 }
