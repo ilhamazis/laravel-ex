@@ -25,43 +25,27 @@
                 <div class="grid">
                     <div class="col-12">
                         <div class="form-control">
-                            <label class="form-control__label">
-                                Rating<span class="important">*</span>
+                            <label for="content" class="form-control__label">
+                                Penilaian<span class="important">*</span>
                             </label>
-                            <div @class(['form-control__group', 'error' => $errors->has('rating')])>
-                                <div class="rating__group">
-                                    <label aria-label="1 star" class="rating__label" for="rating-1">
-                                        <span class="rating__icon"></span>
+                            <div @class(['form-control__group', 'error' => $errors->has('is_liked')])>
+                                <div class="radio-button__group">
+                                    <input class="radio-button" type="radio" id="like" name="is_liked" value="1"/>
+                                    <label class="like-icon" for="like">
+                                        <span class="icon icon-hand-thumb-up-solid"></span>
                                     </label>
-                                    <input checked class="rating__input" name="rating" id="rating-1" value="1"
-                                           type="radio">
-
-                                    <label aria-label="2 stars" class="rating__label" for="rating-2">
-                                        <span class="rating__icon"></span>
+                                </div>
+                                <div class="radio-button__group">
+                                    <input class="radio-button" type="radio" id="dislike" name="is_liked" value="0"/>
+                                    <label class="dislike-icon" for="dislike">
+                                        <span class="icon icon-hand-thumb-down-solid"></span>
                                     </label>
-                                    <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
-
-                                    <label aria-label="3 stars" class="rating__label" for="rating-3">
-                                        <span class="rating__icon"></span>
-                                    </label>
-                                    <input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
-
-                                    <label aria-label="4 stars" class="rating__label" for="rating-4">
-                                        <span class="rating__icon"></span>
-                                    </label>
-                                    <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
-
-                                    <label aria-label="5 stars" class="rating__label" for="rating-5">
-                                        <span class="rating__icon"></span>
-                                    </label>
-                                    <input class="rating__input" name="rating" id="rating-5" value="5" type="radio"
-                                           checked>
                                 </div>
                             </div>
-                            @error('rating')
-                            <div class="form-control__helper error">{{ $message }}</div>
-                            @enderror
                         </div>
+                        @error('is_liked')
+                        <div class="form-control__helper error">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-12">
@@ -124,14 +108,16 @@
                         <p class="review__description">
                             Dibuat tanggal {{ $review->created_at->toFormattedDateString() }}
                         </p>
-                        <div class="rating__group" style="padding: 0.5rem 0">
-                            @for($i = 1; $i <= $review->rating; $i++)
-                                <span class="rating__icon-checked"></span>
-                            @endfor
-
-                            @for($i = 1; $i <= 5 - $review->rating; $i++)
-                                <span class="rating__icon-unchecked"></span>
-                            @endfor
+                        <div class="radio-button__group" style="margin: 0.5rem 0">
+                            @if($review->is_liked)
+                                <div class="like-item">
+                                    <span class="icon icon-hand-thumb-up-solid"></span>
+                                </div>
+                            @else
+                                <div class="dislike-item">
+                                    <span class="icon icon-hand-thumb-down-solid"></span>
+                                </div>
+                            @endif
                         </div>
 
                         <x-rich-text-renderer id="{{ 'review-content-' . $loop->index }}" :content="$review->content"/>

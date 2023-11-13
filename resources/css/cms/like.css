@@ -30,10 +30,12 @@
     left: 0;
 }
 
-.radio-button__group .radio-button:checked + .like-icon {
+.radio-button__group .radio-button:checked + .like-icon,
+.like-item {
     color: #3498db;
 }
 
-.radio-button__group .radio-button:checked + .dislike-icon {
+.radio-button__group .radio-button:checked + .dislike-icon,
+.dislike-item {
     color: #ed0000;
 }
