@@ -84,7 +84,14 @@
                         <td>{{ $application->created_at->isoFormat('lll') }}</td>
                         <td>{{ $application->applicant->name }}</td>
                         <td>{{ $application->applicant->experience }}</td>
-                        <td>{{ $application->currentApplicationStep?->step?->name->value }}</td>
+                        <td>
+                            {{ $application->currentApplicationStep?->step?->name->value }}
+                            ({{ \App\Enums\ApplicationStepEnum::getOrderOf(
+                                    $application->currentApplicationStep?->step?->name
+                                ) }}
+                            /
+                            {{ count(\App\Enums\ApplicationStepEnum::values()) }})
+                        </td>
                         <td>
                             <x-quantum.badge
                                 :variant="\App\Enums\ApplicationStatusEnum::getBadgeVariant($application->status)">
