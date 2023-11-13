@@ -1,13 +1,13 @@
-@if(
-    \App\Enums\ApplicationStepEnum::mustHaveReview($applicationStep->step->name)
-    && !$applicationStep->hasReviews()
-)
-    <x-quantum.alert variant="helper" font-weight="normal"
-                     message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
-@endif
-
 @if($application->status === \App\Enums\ApplicationStatusEnum::ONGOING
     && $application->currentApplicationStep->id === $applicationStep->id)
+    @if(
+        \App\Enums\ApplicationStepEnum::mustHaveReview($applicationStep->step->name)
+        && !$applicationStep->hasReviews()
+    )
+        <x-quantum.alert variant="helper" font-weight="normal"
+                         message="Sebelum melanjutkan ke tahap selanjutnya, tahap ini harus memiliki Review"/>
+    @endif
+    
     <div class="grid cols-1 cols-sm-2">
         <button
             @disabled(
