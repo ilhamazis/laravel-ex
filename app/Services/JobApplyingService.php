@@ -15,12 +15,20 @@ use App\Models\Step;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class JobApplyingService
 {
+    private CommunicationSendingService $communicationSendingService;
+
+    public function __construct(CommunicationSendingService $communicationSendingService)
+    {
+        $this->communicationSendingService = $communicationSendingService;
+    }
+
     public function findAll(
         int          $limit,
         ?string      $query = null,
@@ -79,6 +87,17 @@ class JobApplyingService
         $applicationStep = $this->saveApplicationStep($application);
 
         $application->update(['current_application_step_id' => $applicationStep->id]);
+
+        try {
+            $this->communicationSendingService->create(
+                $application,
+                Auth::user(),
+                'Congratulations on Your SEVIMA Job Application!',
+                view('emails.apply-success', ['applicantName' => $applicant->name, 'jobTitle' => $job->title]),
+            );
+        } catch (\Exception $e) {
+            logger('Error sending email: ' . $e->getMessage());
+        }
 
         DB::commit();
     }
