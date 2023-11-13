@@ -68,11 +68,11 @@
             <table>
                 <thead>
                 <tr>
+                    <th>Nama Pelamar</th>
+                    <th>Posisi Pekerjaan</th>
                     <x-quantum.cell-sorting column="created_at" :field="$field" :direction="$direction">
                         Waktu Melamar
                     </x-quantum.cell-sorting>
-                    <th>Posisi Pekerjaan</th>
-                    <th>Nama Pelamar</th>
                     <th>Pengalaman Kerja</th>
                     <th>Tahap Rekrutmen Saat Ini</th>
                     <th>Status</th>
@@ -82,9 +82,9 @@
                 <tbody>
                 @foreach($applications as $application)
                     <tr>
-                        <td>{{ $application->created_at->isoFormat('lll') }}</td>
-                        <td>{{ $application->job->title }}</td>
                         <td>{{ $application->applicant->name }}</td>
+                        <td>{{ $application->job->title }}</td>
+                        <td>{{ $application->created_at->isoFormat('lll') }}</td>
                         <td>{{ $application->applicant->experience }}</td>
                         <td>
                             {{ $application->currentApplicationStep?->step?->name->value }}
