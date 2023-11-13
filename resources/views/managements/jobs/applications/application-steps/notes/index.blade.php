@@ -85,7 +85,7 @@
                             <p class="review__step">Tahap {{ $note->applicationStep->step->name }}</p>
                         </div>
                         <p class="review__description">
-                            Dibuat tanggal {{ $note->created_at->toFormattedDateString() }}
+                            Dibuat tanggal {{ $note->created_at->isoFormat('lll') }}
                         </p>
                         <div style="padding: 1rem 0">
                             <x-rich-text-renderer id="{{ 'note-content-' . $loop->index }}" :content="$note->content"/>

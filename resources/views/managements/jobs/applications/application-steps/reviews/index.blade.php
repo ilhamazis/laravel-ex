@@ -106,7 +106,7 @@
                             <p class="review__step">Tahap {{ $review->applicationStep->step->name }}</p>
                         </div>
                         <p class="review__description">
-                            Dibuat tanggal {{ $review->created_at->toFormattedDateString() }}
+                            Dibuat tanggal {{ $review->created_at->isoFormat('lll') }}
                         </p>
                         <div class="radio-button__group" style="margin: 0.5rem 0">
                             @if($review->is_liked)
