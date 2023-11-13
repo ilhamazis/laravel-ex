@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->integer('rating');
+            $table->boolean('is_liked');
             $table->text('content');
             $table->foreignId('application_step_id')->constrained();
             $table->foreignId('user_id')->constrained();
