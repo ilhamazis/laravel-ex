@@ -12,9 +12,12 @@ class Attachment extends Component
     /** @var Collection<\App\Models\Attachment> */
     public Collection $attachments;
 
-    public function __construct(Collection $attachments)
+    public bool $showForm;
+
+    public function __construct(Collection $attachments, bool $showForm)
     {
         $this->attachments = $attachments;
+        $this->showForm = $showForm;
     }
 
     public function render(): View|Closure|string

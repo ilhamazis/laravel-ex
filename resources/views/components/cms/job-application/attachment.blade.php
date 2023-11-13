@@ -3,13 +3,19 @@
         <h2 class="card__title">Lampiran Berkas</h2>
 
         <div class="grid cols-1">
-            @can(\App\Enums\PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value)
-                <x-cms.job-application.attachment-form/>
-            @endcan
+            @if($showForm)
+                @can(\App\Enums\PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value)
+                    <x-cms.job-application.attachment-form/>
+                @endcan
+            @endif
 
-            @foreach($attachments as $attachment)
+            @forelse($attachments as $attachment)
                 <x-cms.job-application.attachment-item :attachment="$attachment"/>
-            @endforeach
+            @empty
+                <div style="padding: 1rem 0; text-align: center">
+                    <p>Belum ada lampiran.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 
