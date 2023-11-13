@@ -32,8 +32,8 @@
                             <label for="content" class="form-control__label">
                                 Isi Catatan<span class="important">*</span>
                             </label>
-                            <x-rich-text-editor id="content" name="content"
-                                                :value="old('content')"/>
+                            <x-quantum.rich-text-editor id="content" name="content"
+                                                        :value="old('content')"/>
                             @error('content')
                             <div class="form-control__helper error">{{ $message }}</div>
                             @enderror
@@ -47,7 +47,7 @@
                         </button>
                     </div>
 
-                    <x-modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
+                    <x-quantum.modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
                         <x-slot:body>
                             <p>Apakah anda yakin ingin membuat catatan ini?</p>
                         </x-slot:body>
@@ -58,7 +58,7 @@
                                 <button type="submit" class="btn btn_primary">Konfirmasi</button>
                             </div>
                         </x-slot:footer>
-                    </x-modal-confirmation>
+                    </x-quantum.modal-confirmation>
                 </div>
             </form>
 
@@ -80,7 +80,10 @@
             @forelse($notes as $note)
                 <div class="col-12">
                     <div class="review__item">
-                        <h6 class="review__title">{{ $note->user->name }}</h6>
+                        <div class="review__header">
+                            <h6 class="review__title">{{ $note->user->name }}</h6>
+                            <p class="review__step">Tahap {{ $note->applicationStep->step->name }}</p>
+                        </div>
                         <p class="review__description">
                             Dibuat tanggal {{ $note->created_at->toFormattedDateString() }}
                         </p>
