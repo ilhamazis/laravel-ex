@@ -2,22 +2,23 @@
 
 namespace App\Services;
 
+use App\Models\Application;
 use App\Models\ApplicationStep;
 use App\Models\Note;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class NoteManagingService
 {
     /**
-     * @param ApplicationStep $applicationStep
-     * @return Collection<ApplicationStep>
+     * @param Application $application
+     * @return Collection<Review>
      */
-    public function findAll(ApplicationStep $applicationStep): Collection
+    public function findAll(Application $application): Collection
     {
-        return Note::query()
-            ->with('user')
-            ->whereBelongsTo($applicationStep)
+        return $application->notes()
+            ->with('user', 'applicationStep.step')
             ->latest()
             ->get();
     }

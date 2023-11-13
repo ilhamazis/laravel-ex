@@ -52,7 +52,7 @@ class NoteController extends Controller
         $applicationStep = $step->load('step');
         $applicationSteps = $this->applicationStepManagingService->findAll($application);
         $missingApplicationSteps = $this->applicationStepManagingService->getMissingSteps($applicationSteps);
-        $notes = $this->noteManagingService->findAll($applicationStep);
+        $notes = $this->noteManagingService->findAll($application);
 
         return view('managements.jobs.applications.application-steps.notes.index', [
             'job' => $job,
