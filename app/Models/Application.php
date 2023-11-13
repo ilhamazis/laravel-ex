@@ -55,6 +55,11 @@ class Application extends Model
         return $this->hasManyThrough(Review::class, ApplicationStep::class);
     }
 
+    public function notes(): HasManyThrough
+    {
+        return $this->hasManyThrough(Note::class, ApplicationStep::class);
+    }
+
     public function salaryBefore(): Attribute
     {
         return new Attribute(
