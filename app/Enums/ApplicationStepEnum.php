@@ -29,4 +29,23 @@ enum ApplicationStepEnum: string
 
         return end($stepEnums) === $stepEnum->value;
     }
+
+    public static function mustHaveReview(ApplicationStepEnum $stepEnum): bool
+    {
+        return in_array(
+            $stepEnum,
+            [
+                ApplicationStepEnum::TA_INTERVIEW,
+                ApplicationStepEnum::USER_INTERVIEW,
+                ApplicationStepEnum::FINAL_INTERVIEW
+            ],
+        );
+    }
+
+    public static function getOrderOf(?ApplicationStepEnum $stepEnum = null): false|int
+    {
+        return is_null($stepEnum)
+            ? false
+            : array_search($stepEnum->value, ApplicationStepEnum::values()) + 1;
+    }
 }

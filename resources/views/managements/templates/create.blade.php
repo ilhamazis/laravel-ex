@@ -18,7 +18,7 @@
                 </x-link>
             </div>
             <div class="form-nav__middle">
-                <x-breadcrumb-form :paths="$paths"/>
+                <x-quantum.breadcrumb-form :paths="$paths"/>
             </div>
             <div class="form-nav__right">
                 <div class="form-nav__wrapper">
@@ -34,7 +34,7 @@
         <div class="container">
             <div class="main__header">
                 <div class="main__location">
-                    <x-breadcrumb :paths="$paths"/>
+                    <x-quantum.breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
                         <h1 class="main__title">Buat Template</h1>
@@ -53,8 +53,9 @@
                                             Judul<span class="important">*</span>
                                         </label>
                                         <div @class(['form-control__group', 'error' => $errors->has('title')])>
-                                            <x-input type="text" id="title" name="title" value="{{ old('title') }}"
-                                                     placeholder="Masukkan judul" required/>
+                                            <x-quantum.input type="text" id="title" name="title"
+                                                             value="{{ old('title') }}"
+                                                             placeholder="Masukkan judul" required/>
                                             <span data-clear="input"></span>
                                         </div>
                                         @error('title')
@@ -68,8 +69,8 @@
                                         <label for="content" class="form-control__label">
                                             Isi template<span class="important">*</span>
                                         </label>
-                                        <x-rich-text-editor id="content" name="content"
-                                                            :value="old('content')"/>
+                                        <x-quantum.rich-text-editor id="content" name="content"
+                                                                    :value="old('content')"/>
                                         @error('content')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror

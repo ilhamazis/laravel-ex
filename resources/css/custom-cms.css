@@ -4,8 +4,18 @@
 @import "cms/rating.css";
 @import "cms/statistic.css";
 
-.text-editor .ql-editor {
-    min-height: 15rem;
+.ql-editor {
+    min-height: 10rem;
+}
+
+.custom__avatar-xxl {
+    --qn-avatar-size: 7.5rem;
+    --qn-avatar-icon-status-size: 1.5rem;
+    --qn-avatar-icon-size: 2.5rem;
+    --qn-avatar-radius-border-size: 2.5rem;
+    --qn-avatar-profile-radius-size: 2.35rem;
+    --qn-avatar-font-size: 2rem;
+    --qn-avatar-border-size: 0.195rem;
 }
 
 .detail__desc-wrapper {
@@ -15,7 +25,7 @@
     gap: 1rem;
 }
 
-.detail__desc-divider {
+.detail__desc-divider::before {
     display: none;
 }
 
@@ -35,10 +45,22 @@
     padding: 0 1rem 1rem 1rem;
 }
 
+.review__header {
+    display: flex;
+    flex-direction: column;
+}
+
 .review__title {
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 150%;
+}
+
+.review__step {
+    color: #9aa4b2;
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 150%
 }
 
 .review__description {
@@ -52,7 +74,14 @@
         align-items: center;
     }
 
-    .detail__desc-divider {
+    .detail__desc-divider::before {
+        content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNEOUQ5RDkiLz4KPC9zdmc+Cg==");
         display: inherit;
+        margin-bottom: 6px;
+    }
+
+    .review__header {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

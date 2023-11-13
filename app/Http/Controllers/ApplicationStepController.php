@@ -71,19 +71,24 @@ class ApplicationStepController extends Controller
         $applicationStep = $step->load('step');
 
         $this->validateStepStatus($applicationStep);
-        $this->validateStepHasReviews($applicationStep);
+
+        if (ApplicationStepEnum::mustHaveReview($applicationStep->step->name)) {
+            $this->validateStepHasReviews($applicationStep);
+        }
 
         if (ApplicationStepEnum::onLastStep($applicationStep->step->name)) {
+            $this->validateJobQuota($job);
+
             $this->applicationStepManagingService->hire($applicationStep);
 
             return redirect()
-                ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
+                ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $applicationStep])
                 ->with('success', 'Berhasil merekrut kandidat');
         } else {
             $nextApplicationStep = $this->applicationStepManagingService->moveToNextStep($applicationStep);
 
             return redirect()
-                ->route('managements.jobs.applications.steps.show', [$job, $application, $nextApplicationStep])
+                ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $nextApplicationStep])
                 ->with('success', 'Berhasil mengubah rekrutmen ke tahap selanjutnya');
         }
     }
@@ -97,7 +102,7 @@ class ApplicationStepController extends Controller
         $this->applicationStepManagingService->reject($applicationStep);
 
         return redirect()
-            ->route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
+            ->route('managements.jobs.applications.steps.reviews.index', [$job, $application, $applicationStep])
             ->with('success', 'Berhasil mengubah status rekrutmen');
     }
 
@@ -115,6 +120,15 @@ class ApplicationStepController extends Controller
         if (!$applicationStep->hasReviews()) {
             throw ValidationException::withMessages([
                 'status' => 'Tahap Rekrutmen harus memiliki Review',
+            ]);
+        }
+    }
+
+    private function validateJobQuota(Job $job): void
+    {
+        if ($job->quota === 0) {
+            throw ValidationException::withMessages([
+                'status' => 'Kuota lowongan pekerjaan tidak mencukupi',
             ]);
         }
     }

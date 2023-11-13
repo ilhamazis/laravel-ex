@@ -14,7 +14,7 @@
     @stack('styles')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body {{ $attributes->merge() }}>
+<body {{ $attributes->merge(['class' => 'body body_white']) }}>
 {{ $slot }}
 
 @stack('scripts')

@@ -21,9 +21,10 @@ class JobFactory extends Factory
     {
         return [
             'title' => fake()->sentence(3),
-            'description' => fake()->paragraphs(asText: true),
             'type' => collect(JobTypeEnum::values())->random(),
             'status' => collect(JobStatusEnum::values())->random(),
+            'quota' => fake()->numberBetween(1, 5),
+            'location' => fake()->city(),
             'start_at' => null,
             'end_at' => null,
         ];

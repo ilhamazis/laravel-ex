@@ -6,8 +6,8 @@
                     <label for="search" class="form-control__label">Cari</label>
                     <div class="form-control__group">
                         <span data-input-icon="search"></span>
-                        <x-input wire:model.live.debounce.500ms="query" type="search"
-                                 id="search" placeholder="Cari lowongan pekerjaan..."/>
+                        <x-quantum.input wire:model.live.debounce.500ms="query" type="search"
+                                         id="search" placeholder="Cari lowongan pekerjaan..."/>
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
             <div class="col-12 col-sm-3 col-md-2">
                 <div class="form-control">
                     <label for="type" class="form-control__label">Tipe Pekerjaan</label>
-                    <x-select
+                    <x-quantum.select
                         wire:change="$dispatch('changeSelect', { field: 'type', value: $event.target.value })"
                         variant="single-search" id="type" placeholder="Cari tipe pekerjaan...">
                         <option @selected(is_null($type)) disabled>Tipe Pekerjaan</option>
@@ -23,14 +23,14 @@
                             <option
                                 @selected($type === $typeEnum) value="{{ $typeEnum }}">{{ $typeEnum }}</option>
                         @endforeach
-                    </x-select>
+                    </x-quantum.select>
                 </div>
             </div>
 
             <div class="col-12 col-sm-3 col-md-2">
                 <div class="form-control">
                     <label for="status" class="form-control__label">Status</label>
-                    <x-select
+                    <x-quantum.select
                         wire:change="$dispatch('changeSelect', { field: 'status', value: $event.target.value })"
                         variant="single-search" id="status" placeholder="Cari status pekerjaan...">
                         <option @selected(is_null($status)) disabled>Status</option>
@@ -38,13 +38,13 @@
                             <option
                                 @selected($status === $statusEnum) value="{{ $statusEnum }}">{{ $statusEnum }}</option>
                         @endforeach
-                    </x-select>
+                    </x-quantum.select>
                 </div>
             </div>
         </div>
 
-        <x-alert variant="success" style="padding: 1rem" :message="session()->get('success')"
-                 dismissable/>
+        <x-quantum.alert variant="success" style="padding: 1rem" :message="session()->get('success')"
+                         dismissable/>
 
         <div class="custom__data-list">
             @foreach($jobs as $job)
@@ -53,37 +53,34 @@
                         <h3 class="custom__data-title">{{ $job->title }}</h3>
                         <div class="custom__data-info-wrapper">
                             <p class="custom__data-info">
-                                <x-badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
+                                <x-quantum.badge :variant="\App\Enums\JobStatusEnum::getBadgeVariant($job->status)">
                                     {{ $job->status }}
-                                </x-badge>
+                                </x-quantum.badge>
                             </p>
-                            <div class="custom__data-info-divider">
-                                <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                </svg>
-                            </div>
+                            <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->type }}</p>
-                            @if($job->start_at)
-                                <div class="custom__data-info-divider">
-                                    <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                    </svg>
-                                </div>
+                            <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->location }}</p>
+                            <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->quota }} Kuota</p>
+                            <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->applications_count }} Pelamar</p>
+                            @if($job->start_at && is_null($job->end_at))
+                                <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Mulai tanggal {{ $job->created_at->toFormattedDateString() }}
+                                    Aktif sejak {{ $job->start_at->toFormattedDateString() }}
                                 </p>
-                            @endif
-                            @if($job->end_at)
-                                <div class="custom__data-info-divider">
-                                    <svg width="4" height="4" viewBox="0 0 4 4" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
-                                    </svg>
-                                </div>
+                            @elseif(is_null($job->start_at) && $job->end_at)
+                                <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
+                                    Berakhir tanggal {{ $job->end_at->toFormattedDateString() }}
+                                </p>
+                            @elseif($job->start_at && $job->end_at)
+                                <span class="custom__data-info-divider"></span>
+                                <p class="jobs__item-info">
+                                    {{ $job->start_at->toFormattedDateString() }}
+                                    -
+                                    {{ $job->end_at->toFormattedDateString() }}
                                 </p>
                             @endif
                         </div>
@@ -107,10 +104,10 @@
             @endforeach
         </div>
 
-        <x-pagination :limit="$limit" :items="$jobs"/>
+        <x-cms.pagination :limit="$limit" :items="$jobs"/>
     </div>
 
-    <x-modal-confirmation variant="danger" id="delete-modal" title="Hapus Job">
+    <x-quantum.modal-confirmation variant="danger" id="delete-modal" title="Hapus Job">
         <x-slot:body>
             <p>Apakah anda yakin ingin menghapus data job?</p>
         </x-slot:body>
@@ -127,5 +124,5 @@
                 </form>
             </div>
         </x-slot:footer>
-    </x-modal-confirmation>
+    </x-quantum.modal-confirmation>
 </div>

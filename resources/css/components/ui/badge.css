@@ -5,18 +5,29 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 3.5rem;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
 }
 
 .custom__badge-outline {
+    padding: 0.5rem 0.75rem;
+    border-radius: 3.5rem;
     border: 1px solid var(--custom-color-blue);
     background-color: var(--custom-color-light-gray);
     color: var(--custom-color-blue);
 }
 
 .custom__badge-secondary {
+    padding: 0.5rem 0.75rem;
+    border-radius: 3.5rem;
     background-color: var(--custom-color-light-gray);
+    color: var(--custom-color-gray);
+}
+
+.custom__badge-text-primary {
+    color: var(--custom-color-blue);
+}
+
+.custom__badge-text-secondary {
     color: var(--custom-color-gray);
 }

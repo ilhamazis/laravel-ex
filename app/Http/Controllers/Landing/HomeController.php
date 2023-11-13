@@ -11,10 +11,8 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(JobApplyingService $jobApplyingService): View
+    public function __invoke(): View
     {
-        $featuredJobs = $jobApplyingService->getFeaturedJobs();
-
-        return view('home', ['featuredJobs' => $featuredJobs]);
+        return view('home');
     }
 }

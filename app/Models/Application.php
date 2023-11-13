@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Application extends Model
 {
@@ -49,10 +50,15 @@ class Application extends Model
         return $this->hasMany(ApplicationStep::class);
     }
 
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(Review::class, ApplicationStep::class);
+    }
+
     public function salaryBefore(): Attribute
     {
         return new Attribute(
-            get: fn(string $value) => $value
+            get: fn(?string $value) => $value
                 ? 'Rp ' . number_format($value, decimal_separator: ',', thousands_separator: '.') . ',-'
                 : '-',
         );
@@ -61,7 +67,7 @@ class Application extends Model
     public function salaryExpected(): Attribute
     {
         return new Attribute(
-            get: fn(string $value) => $value
+            get: fn(?string $value) => $value
                 ? 'Rp ' . number_format($value, decimal_separator: ',', thousands_separator: '.') . ',-'
                 : '-',
         );

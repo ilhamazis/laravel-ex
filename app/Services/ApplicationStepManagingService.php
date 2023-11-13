@@ -67,6 +67,8 @@ class ApplicationStepManagingService
         $applicationStep->update(['status' => ApplicationStepStatusEnum::PASSED]);
         $applicationStep->application()->update(['status' => ApplicationStatusEnum::HIRED]);
 
+        $applicationStep->application->job()->decrement('quota');
+
         DB::commit();
     }
 

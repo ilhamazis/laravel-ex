@@ -1,26 +1,38 @@
 .card {
     display: grid;
-    gap: 1.5rem;
-    padding: 2.25rem 1.5rem;
+    gap: 1rem;
+    padding: 1.5rem;
     border-radius: 2rem;
-    border: 2px solid rgba(174, 174, 174, 0.12);
+    border: 1px solid #F3F3F3;
+    box-shadow: 0 40px 95px 0 rgba(174, 174, 174, 0.12);
+}
+
+.card__image {
+    width: 100%;
+    height: 15rem;
+    border-radius: 1.5rem;
+    object-fit: cover;
 }
 
 .card__title {
     color: var(--custom-color-black);
     font-size: var(--custom-fs-5);
     font-weight: 500;
-    line-height: var(--custom-lh-4);
+    line-height: var(--custom-lh-6);
 }
 
 .card__badges {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.card__description {
+    margin: 0.5rem 0;
 }
 
 .card__link {
     width: fit-content;
     height: fit-content;
-    margin-top: 1rem;
 }

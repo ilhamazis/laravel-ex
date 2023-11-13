@@ -3,15 +3,8 @@
         ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
         ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
         ['title' => 'List Pelamar', 'link' => route('managements.jobs.applications.index', $job)],
-        [
-            'title' => $application->applicant->name,
-            'link' => route('managements.jobs.applications.steps.show', [$job, $application, $applicationStep])
-        ],
+        ['title' => $application->applicant->name . ' - Review'],
     ];
-
-    if (auth()->user()->can(\App\Enums\PermissionEnum::VIEW_APPLICATION_COMMUNICATION->value)) {
-        $paths[] = ['title' => 'Review'];
-    }
 @endphp
 
 <x-job-application-layout :breadcrumbs="$paths" :job="$job" :application="$application" :attachments="$attachments"
@@ -22,8 +15,8 @@
             <form
                 class="card__body"
                 action="{{ route('managements.jobs.applications.steps.reviews.store', [
-            $job, $application, $applicationStep
-        ]) }}"
+                    $job, $application, $applicationStep
+                ]) }}"
                 method="post"
             >
                 @csrf
@@ -76,8 +69,8 @@
                             <label for="content" class="form-control__label">
                                 Review<span class="important">*</span>
                             </label>
-                            <x-rich-text-editor id="content" name="content"
-                                                :value="old('content')"/>
+                            <x-quantum.rich-text-editor id="content" name="content"
+                                                        :value="old('content')"/>
                             @error('content')
                             <div class="form-control__helper error">{{ $message }}</div>
                             @enderror
@@ -91,7 +84,7 @@
                         </button>
                     </div>
 
-                    <x-modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
+                    <x-quantum.modal-confirmation id="review-modal" title="Konfirmasi Membuat Review">
                         <x-slot:body>
                             <p>Apakah anda yakin ingin membuat review ini?</p>
                         </x-slot:body>
@@ -102,7 +95,7 @@
                                 <button type="submit" class="btn btn_primary">Konfirmasi</button>
                             </div>
                         </x-slot:footer>
-                    </x-modal-confirmation>
+                    </x-quantum.modal-confirmation>
                 </div>
             </form>
 
@@ -124,7 +117,10 @@
             @forelse($reviews as $review)
                 <div class="col-12">
                     <div class="review__item">
-                        <h6 class="review__title">{{ $review->user->name }}</h6>
+                        <div class="review__header">
+                            <h6 class="review__title">{{ $review->user->name }}</h6>
+                            <p class="review__step">Tahap {{ $review->applicationStep->step->name }}</p>
+                        </div>
                         <p class="review__description">
                             Dibuat tanggal {{ $review->created_at->toFormattedDateString() }}
                         </p>

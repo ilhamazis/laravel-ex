@@ -1,5 +1,5 @@
 .cta {
-    padding: 5rem 2.5rem;
+    padding: 0 2.5rem;
 }
 
 .cta__wrapper {
@@ -22,7 +22,7 @@
     font-size: var(--custom-fs-1);
     font-style: normal;
     font-weight: 600;
-    line-height: var(--custom-lh-1);
+    line-height: 125%;
     letter-spacing: -0.075rem;
 }
 
@@ -35,7 +35,7 @@
 
 @media (min-width: 1024px) {
     .cta {
-        padding: 5rem 5rem;
+        padding: 0 5rem;
     }
 
     .cta__container {
@@ -43,6 +43,6 @@
     }
 
     .cta__title {
-        width: 45%;
+        width: 50%;
     }
 }

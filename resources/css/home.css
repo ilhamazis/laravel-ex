@@ -1,5 +1,5 @@
 .home__gallery {
-    padding: 2.5rem;
+    padding: 3.5rem 2.5rem;
     background-color: var(--custom-color-white);
 }
 
@@ -93,7 +93,6 @@
 
 .home__statistic {
     margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
     padding: 4.25rem 0;
     display: flex;
     flex-direction: column;
@@ -109,6 +108,7 @@
     display: grid;
     place-items: center;
     gap: 1rem;
+    text-align: center;
 }
 
 .home__statistic-count {
@@ -266,7 +266,7 @@
 
 @media (min-width: 1024px) {
     .home__gallery {
-        padding: 2.5rem 5rem;
+        padding: 3.5rem 5rem;
     }
 
     .home__gallery-header,

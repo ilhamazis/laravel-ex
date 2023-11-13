@@ -8,7 +8,6 @@ use App\Http\Requests\StoreJobApplyRequest;
 use App\Models\Job;
 use App\Services\JobApplyingService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -24,22 +23,14 @@ class JobController extends Controller
 
             if (
                 $job->status !== JobStatusEnum::PUBLISHED
-                || ($job->start_at !== null && $job->start_at > now())
-                || ($job->end_at !== null && $job->end_at < now())
+                || ($job->start_at !== null && $job->start_at > today())
+                || ($job->end_at !== null && $job->end_at < today())
             ) {
                 abort(404);
             }
 
             return $next($request);
-        })->except(['index']);
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        return view('jobs.index');
+        });
     }
 
     /**
@@ -47,7 +38,7 @@ class JobController extends Controller
      */
     public function show(Job $job): View
     {
-        return view('jobs.show', ['job' => $job->loadCount('applications')]);
+        return view('jobs.show', ['job' => $job->load('sections')]);
     }
 
     /**
@@ -55,19 +46,16 @@ class JobController extends Controller
      */
     public function create(Job $job): View
     {
-        return view('jobs.apply', ['job' => $job->loadCount('applications')]);
+        return view('jobs.apply', ['job' => $job]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobApplyRequest $request, Job $job): RedirectResponse
+    public function store(StoreJobApplyRequest $request, Job $job): View
     {
-        $files = [$request->file('curriculum_vitae'), $request->file('portfolio')];
-        $this->jobApplyingService->apply($job, $request->validated(), $files);
+        $this->jobApplyingService->apply($job, $request->validated());
 
-        return redirect()
-            ->route('jobs.apply', $job)
-            ->with('success', 'Selamat! Anda berhasil melamar lowongan pekerjaan di SEVIMA');
+        return view('jobs.apply-success', ['job' => $job]);
     }
 }

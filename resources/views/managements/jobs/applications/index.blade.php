@@ -7,5 +7,5 @@
 @endphp
 
 <x-job-layout :breadcrumbs="$paths" :job="$job">
-    <livewire:applications.datatable :job="$job"/>
+    <livewire:jobs.applications.datatable :job="$job"/>
 </x-job-layout>

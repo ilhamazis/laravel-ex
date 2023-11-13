@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApplicantPhotoController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
@@ -14,7 +16,7 @@ use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landing\HomeController::class)->name('home');
-Route::get('/jobs', [Landing\JobController::class, 'index'])->name('jobs');
+Route::get('/about', Landing\AboutController::class)->name('about');
 Route::get('/jobs/{job}', [Landing\JobController::class, 'show'])->name('jobs.show');
 Route::get('/jobs/{job}/apply', [Landing\JobController::class, 'create'])->name('jobs.apply');
 Route::post('/jobs/{job}/apply', [Landing\JobController::class, 'store']);
@@ -39,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('jobs.applications.steps', ApplicationStepController::class)
             ->only(['show', 'update', 'destroy']);
 
-        Route::resource('jobs.application.steps.communications', CommunicationController::class)
+        Route::resource('jobs.applications.steps.communications', CommunicationController::class)
             ->only(['store']);
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)
@@ -50,6 +52,16 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
+        Route::get(
+            '/jobs/{job}/applications/{application}/steps/{step}/attachments/{attachment}/download',
+            [AttachmentController::class, 'download'],
+        )->name('jobs.applications.steps.attachments.download');
+
+        Route::resource('/applications', ApplicationController::class)
+            ->only(['index']);
+
+        Route::get('/applicants/{applicant}/photo', ApplicantPhotoController::class)
+            ->name('applicants.photo');
 
         Route::resource('/templates', TemplateController::class)->except(['destroy']);
         Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');

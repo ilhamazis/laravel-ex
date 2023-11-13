@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AttachmentExtensionEnum;
 use App\Traits\HasIdentifier;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,7 +32,7 @@ class Attachment extends Model
     public function fileExtension(): Attribute
     {
         return new Attribute(
-            get: fn() => pathinfo($this->path, PATHINFO_EXTENSION),
+            get: fn() => AttachmentExtensionEnum::tryFrom(pathinfo($this->path, PATHINFO_EXTENSION)),
         );
     }
 

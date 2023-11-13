@@ -14,9 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('description');
             $table->string('type');
             $table->string('status');
+            $table->integer('quota');
+            $table->string('location');
+            $table->boolean('need_portfolio')->default(false);
             $table->date('start_at')->nullable();
             $table->date('end_at')->nullable();
             $table->foreignId('created_by')->constrained('users');

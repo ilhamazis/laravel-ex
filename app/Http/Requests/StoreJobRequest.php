@@ -26,11 +26,32 @@ class StoreJobRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
             'type' => ['required', new Enum(JobTypeEnum::class)],
+            'quota' => ['required', 'numeric', 'min:0'],
+            'location' => ['required', 'string', 'max:255'],
+            'need_portfolio' => ['boolean'],
+            'sections' => ['required', 'array'],
+            'sections.*' => ['array'],
+            'sections.*.content' => ['string'],
             'status' => ['required', new Enum(JobStatusEnum::class)],
             'start_at' => ['nullable', 'date'],
             'end_at' => ['nullable', 'date'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if (is_array($this->input('sections'))) {
+            $filteredSections = [];
+
+            // only take a section content that doesn't have '<p><br></p>' (quill default value)
+            foreach ($this->input('sections') as $index => $section) {
+                if (isset($section['content']) && $section['content'] !== '<p><br></p>') {
+                    $filteredSections[$index]['content'] = $section['content'];
+                }
+            }
+
+            $this->merge(['sections' => $filteredSections]);
+        }
     }
 }

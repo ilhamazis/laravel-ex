@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ApplicationExperienceEnum;
+use App\Enums\AttachmentExtensionEnum;
+use App\Models\Job;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreJobApplyRequest extends FormRequest
 {
@@ -23,36 +27,57 @@ class StoreJobApplyRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var Job $job */
+        $job = $this->route('job');
+
         return [
+            'photo' => ['required', 'file', 'mimetypes:image/jpeg,image/png'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'numeric'],
-            'age' => ['required', 'numeric'],
+            'nik' => ['required', 'numeric'],
+            'place_of_birth' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date'],
+            'gender' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'is_married' => ['required', 'boolean'],
             'address' => ['required', 'string'],
-            'education' => ['required', Rule::in(['S3', 'S2', 'S1', 'SMK', 'SMA', 'SMP', 'SD'])],
+            'email' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'numeric'],
+            'linkedin_url' => ['nullable', 'url'],
+            'education' => ['required', Rule::in(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'])],
             'school' => ['required', 'string', 'max:255'],
             'faculty' => [Rule::when(
-                in_array($this->education, ['S3', 'S2', 'S1']),
+                in_array($this->education, ['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1']),
                 ['required', 'string', 'max:255'],
             )],
             'major' => [Rule::when(
-                in_array($this->education, ['S3', 'S2', 'S1', 'SMK', 'SMA']),
+                in_array($this->education, ['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA']),
                 ['required', 'string', 'max:255'],
             )],
-            'experience' => ['required', 'numeric'],
-            'salary_before' => ['nullable', 'numeric'],
-            'salary_expected' => ['nullable', 'numeric'],
-            'curriculum_vitae' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
-            'portfolio' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:2048'],
+            'experience' => ['required', new Enum(ApplicationExperienceEnum::class)],
+            'salary_before' => ['nullable', 'numeric', 'max:2147483647'],
+            'salary_expected' => ['nullable', 'numeric', 'max:2147483647'],
+            'curriculum_vitae' => ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
+            'portfolio' => [
+                Rule::when(
+                    $job->need_portfolio,
+                    ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
+                ),
+            ],
+            'statement_of_honesty' => ['accepted'],
         ];
     }
 
     protected function prepareForValidation(): void
     {
+        $salaryBefore = empty($this->salary_before)
+            ? null
+            : Str::replace('.', '', $this->salary_before);
+        $salaryExpected = empty($this->salary_expected)
+            ? null
+            : Str::replace('.', '', $this->salary_expected);
+
         $this->merge([
-            'salary_before' => Str::replace('.', '', $this->salary_before),
-            'salary_expected' => Str::replace('.', '', $this->salary_expected),
+            'salary_before' => $salaryBefore,
+            'salary_expected' => $salaryExpected,
         ]);
     }
 }

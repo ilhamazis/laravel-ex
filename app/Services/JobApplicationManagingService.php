@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\ApplicationExperienceEnum;
+use App\Enums\ApplicationStatusEnum;
 use App\Enums\ApplicationStepEnum;
 use App\Models\Application;
 use App\Models\Job;
@@ -12,12 +14,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class JobApplicationManagingService
 {
     public function findAll(
-        Job                  $job,
-        int                  $limit,
-        ?string              $field = null,
-        ?string              $direction = null,
-        ?string              $query = null,
-        ?ApplicationStepEnum $step = null,
+        Job                        $job,
+        int                        $limit,
+        ?string                    $field = null,
+        ?string                    $direction = null,
+        ?string                    $query = null,
+        ?ApplicationStepEnum       $step = null,
+        ?ApplicationStatusEnum     $status = null,
+        ?ApplicationExperienceEnum $experience = null,
     ): LengthAwarePaginator|Collection
     {
         return Application::query()
@@ -27,12 +31,18 @@ class JobApplicationManagingService
                 $q->whereHas('applicant', function (Builder $_q) use ($query) {
                     $_q->where('name', 'ILIKE', '%' . $query . '%');
                 });
+            })->when(!is_null($experience), function (Builder $q) use ($experience) {
+                $q->whereHas('applicant', function (Builder $_q) use ($experience) {
+                    $_q->where('experience', $experience);
+                });
             })->when(!is_null($step), function (Builder $q) use ($step) {
                 $q->whereHas('currentApplicationStep', function (Builder $_q) use ($step) {
                     $_q->whereHas('step', function (Builder $__q) use ($step) {
                         $__q->where('name', $step);
                     });
                 });
+            })->when(!is_null($status), function (Builder $q) use ($status) {
+                $q->where('status', $status);
             })->when(
                 !is_null($field) && !is_null($direction),
                 function (Builder $q) use ($field, $direction) {
