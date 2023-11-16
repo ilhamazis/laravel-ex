@@ -12,10 +12,10 @@ use App\Models\ApplicationStep;
 use App\Models\Attachment;
 use App\Models\Job;
 use App\Models\Step;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -89,9 +89,11 @@ class JobApplyingService
         $application->update(['current_application_step_id' => $applicationStep->id]);
 
         try {
+            $sender = User::query()->where('email', 'hc@email.com')->first();
+
             $this->communicationSendingService->create(
                 $application,
-                Auth::user(),
+                $sender,
                 'Congratulations on Your SEVIMA Job Application!',
                 view('emails.apply-success', ['applicantName' => $applicant->name, 'jobTitle' => $job->title]),
             );
