@@ -90,11 +90,7 @@ class JobManagingService
 
     public function delete(int $id): bool
     {
-        $job = Job::query()->where('id', $id)->first();
-
-        Storage::disk('public')->delete($job->banner);
-
-        return $job->delete();
+        return Job::query()->where('id', $id)->delete();
     }
 
     /**
