@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicantPhotoController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationStepController;
 use App\Http\Controllers\AttachmentController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\Landing;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -39,17 +41,27 @@ Route::middleware('auth')->group(function () {
         Route::resource('jobs.applications.steps', ApplicationStepController::class)
             ->only(['show', 'update', 'destroy']);
 
-        Route::resource('jobs.application.steps.communications', CommunicationController::class)
+        Route::resource('jobs.applications.steps.communications', CommunicationController::class)
             ->only(['store']);
 
         Route::resource('jobs.applications.steps.reviews', ReviewController::class)
             ->only(['index', 'store', 'update', 'destroy']);
 
+        Route::resource('jobs.applications.steps.notes', NoteController::class)
+            ->only(['index', 'store', 'update', 'destroy']);
+
         Route::resource('jobs.applications.steps.attachments', AttachmentController::class)
             ->only(['store', 'show', 'destroy']);
+        Route::get(
+            '/jobs/{job}/applications/{application}/steps/{step}/attachments/{attachment}/download',
+            [AttachmentController::class, 'download'],
+        )->name('jobs.applications.steps.attachments.download');
 
         Route::resource('/applications', ApplicationController::class)
             ->only(['index']);
+
+        Route::get('/applicants/{applicant}/photo', ApplicantPhotoController::class)
+            ->name('applicants.photo');
 
         Route::resource('/templates', TemplateController::class)->except(['destroy']);
         Route::delete('/templates', [TemplateController::class, 'destroy'])->name('templates.destroy');

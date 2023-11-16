@@ -25,7 +25,7 @@ class StoreAttachmentRequest extends FormRequest
         $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
 
         return [
-            'file' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+            'file' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:5120'],
         ];
     }
 }

@@ -27,16 +27,26 @@
             <p class="detail__desc">
                 {{ $job->type }}
             </p>
-            @if ($job->start_at)
+            <span class="detail__desc-divider"></span>
+            <p class="detail__desc">
+                {{ $job->location }}
+            </p>
+            @if($job->start_at && is_null($job->end_at))
                 <span class="detail__desc-divider"></span>
                 <p class="detail__desc">
-                    Mulai tanggal {{ $job->start_at->toFormattedDateString() }}
+                    Aktif sejak {{ $job->start_at->toFormattedDateString() }}
                 </p>
-            @endif
-            @if($job->end_at)
+            @elseif(is_null($job->start_at) && $job->end_at)
                 <span class="detail__desc-divider"></span>
                 <p class="detail__desc">
-                    Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
+                    Berakhir tanggal {{ $job->end_at->toFormattedDateString() }}
+                </p>
+            @elseif($job->start_at && $job->end_at)
+                <span class="detail__desc-divider"></span>
+                <p class="detail__desc">
+                    {{ $job->start_at->toFormattedDateString() }}
+                    -
+                    {{ $job->end_at->toFormattedDateString() }}
                 </p>
             @endif
         </div>

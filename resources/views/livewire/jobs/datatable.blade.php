@@ -60,17 +60,27 @@
                             <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->type }}</p>
                             <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->location }}</p>
+                            <span class="custom__data-info-divider"></span>
+                            <p class="jobs__item-info">{{ $job->quota }} Kuota</p>
+                            <span class="custom__data-info-divider"></span>
                             <p class="jobs__item-info">{{ $job->applications_count }} Pelamar</p>
-                            @if($job->start_at)
+                            @if($job->start_at && is_null($job->end_at))
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Mulai tanggal {{ $job->start_at->toFormattedDateString() }}
+                                    Aktif sejak {{ $job->start_at->isoFormat('LL') }}
                                 </p>
-                            @endif
-                            @if($job->end_at)
+                            @elseif(is_null($job->start_at) && $job->end_at)
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Selesai tanggal {{ $job->end_at->toFormattedDateString() }}
+                                    Berakhir tanggal {{ $job->end_at->isoFormat('LL') }}
+                                </p>
+                            @elseif($job->start_at && $job->end_at)
+                                <span class="custom__data-info-divider"></span>
+                                <p class="jobs__item-info">
+                                    {{ $job->start_at->isoFormat('LL') }}
+                                    -
+                                    {{ $job->end_at->isoFormat('LL') }}
                                 </p>
                             @endif
                         </div>

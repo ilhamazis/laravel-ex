@@ -24,7 +24,7 @@
         />
 
         <div class="grid">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-8" style="height: fit-content">
                 <div class="card">
                     <x-cms.job-application.card-navigation/>
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4" style="height: fit-content">
                 <div class="grid cols-1">
                     @can(\App\Enums\PermissionEnum::UPDATE_APPLICATION_STEP->value)
                         <x-cms.job-application.action
@@ -42,7 +42,11 @@
                     @endcan
 
                     @can(\App\Enums\PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value)
-                        <x-cms.job-application.attachment :attachments="$attachments"/>
+                        <x-cms.job-application.attachment
+                            :attachments="$attachments"
+                            :show-form="$application->status === \App\Enums\ApplicationStatusEnum::ONGOING
+                                        && $application->currentApplicationStep->id === $currentApplicationStep->id"
+                        />
                     @endcan
                 </div>
             </div>

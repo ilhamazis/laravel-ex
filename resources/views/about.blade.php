@@ -140,7 +140,7 @@
     </section>
 
     <div style="padding-top: 5rem">
-        <x-landing.cta title="Jangan Tunggu Lagi, Bergabunglah dengan SEVIMA!">
+        <x-landing.cta title="Mulailah Petualangan Karir dengan Bergabung di SEVIMA">
             <x-slot:action>
                 <x-link href="{{ route('home') }}" class="cta__button button button__lg button__primary">
                     Lamar Sekarang

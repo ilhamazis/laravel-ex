@@ -2,10 +2,21 @@
 @import "cms/custom-list.css";
 @import "cms/stepper.css";
 @import "cms/rating.css";
+@import "cms/like.css";
 @import "cms/statistic.css";
 
-.text-editor .ql-editor {
-    min-height: 15rem;
+.ql-editor {
+    min-height: 10rem;
+}
+
+.custom__avatar-xxl {
+    --qn-avatar-size: 7.5rem;
+    --qn-avatar-icon-status-size: 1.5rem;
+    --qn-avatar-icon-size: 2.5rem;
+    --qn-avatar-radius-border-size: 2.5rem;
+    --qn-avatar-profile-radius-size: 2.35rem;
+    --qn-avatar-font-size: 2rem;
+    --qn-avatar-border-size: 0.195rem;
 }
 
 .detail__desc-wrapper {

@@ -14,7 +14,7 @@
             <x-quantum.input-file
                 name="file" id="file"
                 accept="application/pdf,.doc,.docx"
-                support="DOC, DOCX, atau PDF (max. 2MB)"
+                support="DOC, DOCX, atau PDF (max. 5MB)"
             />
 
             @error('file')

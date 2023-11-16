@@ -2,7 +2,7 @@
     $paths = [
         ['title' => 'Lowongan Pekerjaan', 'link' => route('managements.jobs.index')],
         ['title' => $job->title, 'link' => route('managements.jobs.show', $job)],
-        ['title' => 'Ubah Data'],
+        ['title' => 'Ubah Lowongan Pekerjaan'],
     ];
 @endphp
 
@@ -42,7 +42,7 @@
                     <x-quantum.breadcrumb :paths="$paths"/>
 
                     <div class="main__wrapper">
-                        <h1 class="main__title">Ubah Data</h1>
+                        <h1 class="main__title">Ubah Lowongan Pekerjaan</h1>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,18 @@
             <div class="grid">
                 <div class="col-12">
                     <div class="card card_form">
+                        <div class="card__header">
+                            <div class="form-header">
+                                <div class="form-header__wrapper">
+                                    <div class="form-header__avatar">
+                                        <span class="icon icon-briefcase-mini"></span>
+                                    </div>
+                                    <div class="form-header__information">
+                                        <h3 class="form-header__title">Data Lowongan Pekerjaan</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card__body">
                             <div class="grid">
                                 <div class="col-12">
@@ -64,48 +76,6 @@
                                             <span data-clear="input"></span>
                                         </div>
                                         @error('title')
-                                        <div class="form-control__helper error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-control">
-                                        <label for="banner" class="form-control__label">
-                                            Banner
-                                        </label>
-
-                                        <div
-                                            style="display: block;
-                                                    margin-bottom: 1rem;
-                                                    margin-right: auto;
-                                                    margin-left: auto"
-                                        >
-                                            <img id="banner-preview" src="{{ asset('storage/' . $job->banner) }}"
-                                                 alt="Job banner"/>
-                                        </div>
-
-                                        <x-quantum.input-file
-                                            name="banner"
-                                            id="banner" accept=".jpg,.jpeg,.png,.bmp,.gif,.svg,.webp"
-                                            value="{{ old('banner') }}"
-                                            title="Klik untuk ubah banner"
-                                            support="JPG, PNG, BMP, GIF, SVG, atau WEBP (max. 500KB)"
-                                        />
-                                        @error('banner')
-                                        <div class="form-control__h elper error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div x-data="{ textareaValue: '' }" class="form-control">
-                                        <label for="description" class="form-control__label">
-                                            Deskripsi<span class="important">*</span>
-                                        </label>
-                                        <x-quantum.rich-text-editor id="description" name="description"
-                                                                    :value="old('description', $job->description)"/>
-                                        @error('description')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -139,6 +109,83 @@
 
                                 <div class="col-12">
                                     <div class="form-control">
+                                        <label for="quota" class="form-control__label">
+                                            Kuota<span class="important">*</span>
+                                        </label>
+                                        <div @class(['form-control__group', 'error' => $errors->has('quota')])>
+                                            <x-quantum.input type="number" id="quota" name="quota"
+                                                             style="border-top-right-radius: 0;
+                                                                    border-bottom-right-radius: 0;"
+                                                             value="{{ old('quota', $job->quota) }}"
+                                                             placeholder="Masukkan kuota lowongan pekerjaan" required/>
+                                            <span class="form-control__text">orang</span>
+                                        </div>
+                                        @error('quota')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <label for="location" class="form-control__label">
+                                            Lokasi<span class="important">*</span>
+                                        </label>
+                                        <div @class(['form-control__group', 'error' => $errors->has('location')])>
+                                            <x-quantum.input type="text" id="location" name="location"
+                                                             value="{{ old('location', $job->location) }}"
+                                                             placeholder="Masukkan lokasi pekerjaan" required/>
+                                            <span data-clear="input"></span>
+                                        </div>
+                                        @error('location')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="form-control__checkbox" id="need_portfolio"
+                                                   name="need_portfolio"
+                                                   value="1" @checked(old('need_portfolio', $job->need_portfolio))/>
+                                            <label for="need_portfolio" class="form-control__label-checkbox">
+                                                Memerlukan lampiran portofolio?
+                                            </label>
+                                        </div>
+                                        @error('need_portfolio')
+                                        <div class="form-control__helper error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <livewire:jobs.section :sections="old('sections', $job->sections->toArray())"
+                                           :errors="$errors->get('sections') + $errors->get('sections.*')"/>
+                </div>
+
+                <div class="col-12">
+                    <div class="card card_form">
+                        <div class="card__header">
+                            <div class="form-header">
+                                <div class="form-header__wrapper">
+                                    <div class="form-header__avatar">
+                                        <span class="icon icon-clock-mini"></span>
+                                    </div>
+                                    <div class="form-header__information">
+                                        <h3 class="form-header__title">Periode Lowongan Pekerjaan</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__body">
+                            <div class="grid">
+                                <div class="col-12">
+                                    <div class="form-control">
                                         <label for="status" class="form-control__label">
                                             Status<span class="important">*</span>
                                         </label>
@@ -158,23 +205,6 @@
                                             </x-quantum.select>
                                         </div>
                                         @error('status')
-                                        <div class="form-control__helper error">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-control">
-                                        <label for="quota" class="form-control__label">
-                                            Kuota<span class="important">*</span>
-                                        </label>
-                                        <div @class(['form-control__group', 'error' => $errors->has('quota')])>
-                                            <x-quantum.input type="number" id="quota" name="quota"
-                                                             value="{{ old('quota', $job->quota) }}"
-                                                             placeholder="Masukkan kuota lowongan pekerjaan" required/>
-                                            <span class="form-control__text">orang</span>
-                                        </div>
-                                        @error('quota')
                                         <div class="form-control__helper error">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -209,20 +239,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
-                                <div class="col-12">
-                                    <div class="form-control">
-                                        <div class="checkbox">
-                                            <input @checked(old('need_portfolio', $job->need_portfolio))
-                                                   type="checkbox" class="form-control__checkbox" id="need_portfolio"
-                                                   name="need_portfolio" value="1"
-                                            />
-                                            <label for="need_portfolio" class="form-control__label-checkbox">
-                                                Memerlukan lampiran portofolio?
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -230,14 +246,4 @@
             </div>
         </div>
     </form>
-
-    @push('custom-scripts')
-        <script>
-            document.querySelector('#banner').addEventListener('change', event => {
-                if (event.target.files[0]) {
-                    document.querySelector('#banner-preview').src = URL.createObjectURL(event.target.files[0]);
-                }
-            });
-        </script>
-    @endpush
 </x-app-layout>

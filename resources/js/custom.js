@@ -1,8 +1,11 @@
+import DOMPurify from 'dompurify';
+
 function initChoices(el) {
     new Choices(el, {
         allowHTML: true,
         searchEnabled: false,
         removeItemButton: false,
+        shouldSort: false,
     });
 }
 
@@ -12,6 +15,7 @@ function initChoicesSearch(el) {
     new Choices(el, {
         allowHTML: true,
         searchPlaceholderValue: searchPlaceholder,
+        shouldSort: false,
     });
 }
 
@@ -46,10 +50,15 @@ function formatRupiah(angka) {
     return rupiah;
 }
 
+function sanitize(el, unsafeHTML) {
+    el.innerHTML = DOMPurify.sanitize(unsafeHTML);
+}
+
 window.initChoices = initChoices;
 window.initChoicesSearch = initChoicesSearch;
 window.copyToClipboard = copyToClipboard;
 window.formatRupiah = formatRupiah;
+window.sanitize = sanitize;
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof Livewire === 'undefined') {

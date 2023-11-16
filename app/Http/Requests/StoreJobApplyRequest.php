@@ -30,18 +30,18 @@ class StoreJobApplyRequest extends FormRequest
         /** @var Job $job */
         $job = $this->route('job');
 
-        $allowedMimes = AttachmentExtensionEnum::valuesWithCommaSeparatedFormat();
-
         return [
+            'photo' => ['required', 'file', 'mimetypes:image/jpeg,image/png'],
             'name' => ['required', 'string', 'max:255'],
             'nik' => ['required', 'numeric'],
-            'email' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'numeric'],
             'place_of_birth' => ['required', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date'],
-            'is_married' => ['required', 'boolean'],
             'gender' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
+            'is_married' => ['required', 'boolean'],
             'address' => ['required', 'string'],
+            'email' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'numeric'],
+            'linkedin_url' => ['nullable', 'url'],
             'education' => ['required', Rule::in(['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMK', 'SMA'])],
             'school' => ['required', 'string', 'max:255'],
             'faculty' => [Rule::when(
@@ -55,14 +55,14 @@ class StoreJobApplyRequest extends FormRequest
             'experience' => ['required', new Enum(ApplicationExperienceEnum::class)],
             'salary_before' => ['nullable', 'numeric', 'max:2147483647'],
             'salary_expected' => ['nullable', 'numeric', 'max:2147483647'],
-            'curriculum_vitae' => ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
+            'curriculum_vitae' => ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
             'portfolio' => [
                 Rule::when(
                     $job->need_portfolio,
-                    ['required', 'file', 'mimes:' . $allowedMimes, 'max:2048'],
-                    ['nullable'],
+                    ['required', 'file', 'mimetypes:application/pdf', 'max:5120'],
                 ),
             ],
+            'statement_of_honesty' => ['accepted'],
         ];
     }
 

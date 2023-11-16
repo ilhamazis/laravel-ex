@@ -10,8 +10,11 @@
     line-height: 125%;
 }
 
-.jobs__form {
-    padding: 1.5rem;
+.jobs__wrapper {
+    padding-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .jobs__empty {
@@ -21,18 +24,26 @@
     text-align: center;
 }
 
-.jobs__wrapper {
+.jobs__list-container {
+    width: 100%;
+}
+
+.jobs__list-wrapper {
     display: grid;
     place-items: center;
     max-width: 1536px;
     margin: 0 auto;
 }
 
+.jobs__form {
+    position: relative;
+}
+
 .jobs__container {
-    padding: 2.5rem 0;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
 }
 
 .jobs__pagination {
@@ -49,6 +60,7 @@
 .jobs__pagination-detail {
     color: var(--custom-color-gray);
     line-height: var(--custom-lh-5);
+    text-align: center;
 }
 
 .jobs-detail__banner {
@@ -65,7 +77,7 @@
 
 .jobs-detail__header-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
     gap: 2rem;
@@ -95,10 +107,20 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .jobs-detail__divider {
     margin: 2.5rem 0;
+}
+
+.jobs-detail__description {
+    padding: 2rem;
+    border-top: 1px solid #E3E8EF;
+}
+
+.jobs-detail__description:last-child {
+    border-bottom: 1px solid #E3E8EF;
 }
 
 .jobs-detail__buttons {
@@ -121,6 +143,27 @@
     line-height: 1.5rem;
 }
 
+.jobs-apply-success__container {
+    max-width: 36rem;
+    padding: 2.5rem;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    gap: 2.5rem;
+}
+
+.jobs-apply-success__image {
+    max-width: 100%;
+}
+
+.jobs-apply-success__heading {
+    color: var(--custom-color-black);
+    text-align: center;
+    font-size: var(--custom-fs-4);
+    font-weight: 600;
+    line-height: 125%;
+}
+
 @media (min-width: 768px) {
     .jobs__container {
         grid-template-columns: 1fr 1fr;
@@ -136,8 +179,20 @@
         padding: 4.5rem 5rem;
     }
 
+    .jobs__title {
+        text-align: left;
+    }
+
     .jobs__container {
         grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .jobs__wrapper {
+        flex-direction: row;
+    }
+
+    .jobs__pagination-detail {
+        text-align: left;
     }
 
     .jobs-detail__wrapper {

@@ -14,6 +14,7 @@ use App\Models\ApplicationStep;
 use App\Models\Attachment;
 use App\Models\Communication;
 use App\Models\Job;
+use App\Models\JobSection;
 use App\Models\Note;
 use App\Models\Permission;
 use App\Models\Review;
@@ -54,6 +55,8 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::CREATE_APPLICATION_COMMUNICATION->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_NOTE->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_NOTE->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_ATTACHMENT->value]->id,
             $permissions[PermissionEnum::DELETE_APPLICATION_ATTACHMENT->value]->id,
@@ -70,6 +73,8 @@ class DatabaseSeeder extends Seeder
             $permissions[PermissionEnum::VIEW_APPLICATION_STEP->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_REVIEW->value]->id,
             $permissions[PermissionEnum::CREATE_APPLICATION_REVIEW->value]->id,
+            $permissions[PermissionEnum::VIEW_APPLICATION_NOTE->value]->id,
+            $permissions[PermissionEnum::CREATE_APPLICATION_NOTE->value]->id,
             $permissions[PermissionEnum::VIEW_APPLICATION_ATTACHMENT->value]->id,
         ]);
 
@@ -87,11 +92,13 @@ class DatabaseSeeder extends Seeder
             $humanCapital->roles()->attach($roles[RoleEnum::HUMAN_CAPITAL->value]->id);
             $interviewer->roles()->attach($roles[RoleEnum::INTERVIEWER->value]->id);
 
-            $job = Job::factory()->create([
-                'created_by' => $humanCapital->id,
-                'updated_by' => $humanCapital->id,
-                'deleted_by' => null,
-            ]);
+            $job = Job::factory()
+                ->has(JobSection::factory()->count(3), 'sections')
+                ->create([
+                    'created_by' => $humanCapital->id,
+                    'updated_by' => $humanCapital->id,
+                    'deleted_by' => null,
+                ]);
 
             $applicant = Applicant::factory()->create();
 

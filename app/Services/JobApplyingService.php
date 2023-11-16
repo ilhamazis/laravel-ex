@@ -15,68 +15,60 @@ use App\Models\Step;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class JobApplyingService
 {
-    private AttachmentManagingService $attachmentManagingService;
+    private CommunicationSendingService $communicationSendingService;
 
-    public function __construct(AttachmentManagingService $attachmentManagingService)
+    public function __construct(CommunicationSendingService $communicationSendingService)
     {
-        $this->attachmentManagingService = $attachmentManagingService;
+        $this->communicationSendingService = $communicationSendingService;
     }
 
     public function findAll(
         int          $limit,
         ?string      $query = null,
         ?JobTypeEnum $type = null,
+        ?string      $location = null,
     ): LengthAwarePaginator
     {
         return Job::query()
+            ->with('firstSection')
             ->isActive()
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->where('title', 'ILIKE', '%' . $query . '%');
             })->when(!is_null($type), function (Builder $q) use ($type) {
                 $q->where('type', $type);
+            })->when(!is_null($location), function (Builder $q) use ($location) {
+                $q->where('location', $location);
             })->latest()
             ->paginate($limit);
+    }
+
+    public function getLocations(): array
+    {
+        return Cache::rememberForever(
+            'job_locations',
+            fn() => Job::query()->pluck('location')->toArray(),
+        );
     }
 
     /**
      * @param Job $job
      * @param array $data
-     * @param array<UploadedFile> $attachments
      * @return void
      */
     public function apply(Job $job, array $data): void
     {
         DB::beginTransaction();
 
-        $applicant = Applicant::query()->create([
-            'name' => $data['name'],
-            'nik' => $data['nik'],
-            'email' => $data['email'],
-            'telephone' => $data['telephone'],
-            'place_of_birth' => $data['place_of_birth'],
-            'date_of_birth' => $data['date_of_birth'],
-            'is_married' => $data['is_married'],
-            'gender' => $data['gender'],
-            'address' => $data['address'],
-            'education' => $data['education'],
-            'school' => $data['school'],
-            'faculty' => $data['faculty'] ?? null,
-            'major' => $data['major'] ?? null,
-            'experience' => $data['experience'],
-        ]);
+        $applicant = $this->saveApplicant($data);
 
-        $application = Application::query()->create([
-            'status' => ApplicationStatusEnum::ONGOING,
-            'salary_before' => $data['salary_before'],
-            'salary_expected' => $data['salary_expected'],
-            'applicant_id' => $applicant->id,
-            'job_id' => $job->id,
-        ]);
+        $application = $this->saveApplication($job, $applicant, $data);
 
         $folder = $job->slug . '/' . $application->id . '/' . now()->timestamp;
 
@@ -92,23 +84,86 @@ class JobApplyingService
             $this->createPortfolio($application, $portfolio, $folder);
         }
 
-        $step = Step::query()
-            ->where('name', ApplicationStepEnum::RECRUITER_SCREEN)
-            ->first();
-
-        $applicationStep = ApplicationStep::query()->create([
-            'status' => ApplicationStepStatusEnum::ONGOING,
-            'application_id' => $application->id,
-            'step_id' => $step->id,
-        ]);
+        $applicationStep = $this->saveApplicationStep($application);
 
         $application->update(['current_application_step_id' => $applicationStep->id]);
+
+        try {
+            $this->communicationSendingService->create(
+                $application,
+                Auth::user(),
+                'Congratulations on Your SEVIMA Job Application!',
+                view('emails.apply-success', ['applicantName' => $applicant->name, 'jobTitle' => $job->title]),
+            );
+        } catch (\Exception $e) {
+            logger('Error sending email: ' . $e->getMessage());
+        }
 
         DB::commit();
     }
 
+    private function saveApplicant(array $data): Applicant
+    {
+        $photoFolder = 'applicants/profiles';
+        $photoFile = $data['photo'];
+
+        $storedPhotoPath = $this->storePhoto($photoFolder, $photoFile);
+
+        return Applicant::query()->create([
+            'photo' => $storedPhotoPath,
+            'name' => $data['name'],
+            'nik' => $data['nik'],
+            'place_of_birth' => $data['place_of_birth'],
+            'date_of_birth' => $data['date_of_birth'],
+            'gender' => $data['gender'],
+            'is_married' => $data['is_married'],
+            'address' => $data['address'],
+            'email' => $data['email'],
+            'telephone' => $data['telephone'],
+            'linkedin_url' => $data['linkedin_url'] ?? null,
+            'education' => $data['education'],
+            'school' => $data['school'],
+            'faculty' => $data['faculty'] ?? null,
+            'major' => $data['major'] ?? null,
+            'experience' => $data['experience'],
+        ]);
+    }
+
+    private function saveApplication(Job $job, Applicant $applicant, array $data)
+    {
+        return Application::query()->create([
+            'status' => ApplicationStatusEnum::ONGOING,
+            'salary_before' => $data['salary_before'],
+            'salary_expected' => $data['salary_expected'],
+            'applicant_id' => $applicant->id,
+            'job_id' => $job->id,
+        ]);
+    }
+
+    private function saveApplicationStep(Application $application): ApplicationStep
+    {
+        $step = Step::query()
+            ->where('name', ApplicationStepEnum::RECRUITER_SCREEN)
+            ->first();
+
+        return ApplicationStep::query()->create([
+            'status' => ApplicationStepStatusEnum::ONGOING,
+            'application_id' => $application->id,
+            'step_id' => $step->id,
+        ]);
+    }
+
+    private function storePhoto(string $folder, UploadedFile $image): string
+    {
+        return $image->store($folder);
+    }
+
     private function createCV(Application $application, UploadedFile $cv, string $folder): Attachment
     {
+        /**
+         * if CV filename doesn't contain 'cv', 'curriculum vitae', or 'curriculum_vitae'
+         * then add 'CV_' prefix
+         */
         $cvFilename = Str::contains(
             strtolower($cv->getClientOriginalName()),
             ['cv', 'curriculum vitae', 'curriculum_vitae']
@@ -125,6 +180,10 @@ class JobApplyingService
 
     private function createPortfolio(Application $application, UploadedFile $portfolio, string $folder): Attachment
     {
+        /**
+         * if Portfolio filename doesn't contain 'portfolio' or 'portofolio'
+         * then add 'Portfolio_' prefix
+         */
         $portfolioFilename = Str::contains(
             strtolower($portfolio->getClientOriginalName()),
             ['portfolio', 'portofolio']

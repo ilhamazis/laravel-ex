@@ -12,7 +12,7 @@
                           :application-steps="$applicationSteps" :missing-application-steps="$missingApplicationSteps">
     <form
         class="card__body"
-        action="{{ route('managements.jobs.application.steps.communications.store', [
+        action="{{ route('managements.jobs.applications.steps.communications.store', [
             $job, $application, $applicationStep
         ]) }}"
         method="post"
@@ -101,7 +101,7 @@
     @push('custom-scripts')
         <script>
             const templateSelect = document.querySelector('#template_id');
-            const contentQuill = document.querySelector('#contentQuill');
+            const contentQuill = document.querySelector('#content-quill');
 
             templateSelect.addEventListener('change', async (e) => {
                 const baseRoute = @js(route('managements.templates.index'));

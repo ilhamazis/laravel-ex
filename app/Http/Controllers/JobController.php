@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\PermissionEnum;
 use App\Http\Requests\StoreJobRequest;
-use App\Http\Requests\UpdateJobRequest;
 use App\Models\Job;
 use App\Services\JobManagingService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -44,7 +44,7 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobRequest $request)
+    public function store(StoreJobRequest $request): RedirectResponse
     {
         $this->jobManagingService->create($request->validated());
 
@@ -58,7 +58,10 @@ class JobController extends Controller
      */
     public function show(Job $job): View
     {
-        return view('managements.jobs.show', ['job' => $job->loadCount('applications')]);
+        return view('managements.jobs.show', [
+            'job' => $job->load('sections')
+                ->loadCount('applications'),
+        ]);
     }
 
     /**
@@ -72,7 +75,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobRequest $request, Job $job)
+    public function update(StoreJobRequest $request, Job $job)
     {
         $this->jobManagingService->update($job, $request->validated());
 
