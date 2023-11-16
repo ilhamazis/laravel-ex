@@ -31,6 +31,7 @@ class ApplicationManagingService
     {
         return Application::query()
             ->with(['job', 'applicant', 'currentApplicationStep', 'currentApplicationStep.step'])
+            ->whereHas('job')
             ->when(!is_null($query), function (Builder $q) use ($query) {
                 $q->whereHas('applicant', function (Builder $_q) use ($query) {
                     $_q->where('name', 'ILIKE', '%' . $query . '%');
