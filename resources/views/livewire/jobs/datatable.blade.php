@@ -68,19 +68,19 @@
                             @if($job->start_at && is_null($job->end_at))
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Aktif sejak {{ $job->start_at->toFormattedDateString() }}
+                                    Aktif sejak {{ $job->start_at->isoFormat('LL') }}
                                 </p>
                             @elseif(is_null($job->start_at) && $job->end_at)
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    Berakhir tanggal {{ $job->end_at->toFormattedDateString() }}
+                                    Berakhir tanggal {{ $job->end_at->isoFormat('LL') }}
                                 </p>
                             @elseif($job->start_at && $job->end_at)
                                 <span class="custom__data-info-divider"></span>
                                 <p class="jobs__item-info">
-                                    {{ $job->start_at->toFormattedDateString() }}
+                                    {{ $job->start_at->isoFormat('LL') }}
                                     -
-                                    {{ $job->end_at->toFormattedDateString() }}
+                                    {{ $job->end_at->isoFormat('LL') }}
                                 </p>
                             @endif
                         </div>
