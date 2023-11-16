@@ -78,6 +78,11 @@
                                   style="display: none"
                         ></textarea>
                     </div>
+                    @if($index === 0)
+                        <div class="form-control__helper">
+                            Bagian ini akan muncul di deskripsi singkat lowongan pekerjaan.
+                        </div>
+                    @endif
                     @if($message = $errors["sections.{$index}.content"][0] ?? '')
                         <div class="form-control__helper error">{{ $message }}</div>
                     @endif
