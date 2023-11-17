@@ -18,6 +18,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class JobApplyingService
@@ -89,14 +90,23 @@ class JobApplyingService
         $application->update(['current_application_step_id' => $applicationStep->id]);
 
         try {
-            $sender = User::query()->where('email', 'hc@email.com')->first();
-
-            $this->communicationSendingService->create(
-                $application,
-                $sender,
-                'Congratulations on Your SEVIMA Job Application!',
-                view('emails.apply-success', ['applicantName' => $applicant->name, 'jobTitle' => $job->title]),
-            );
+            // Send success applying job email to applicant
+            Http::baseUrl(config('sevima.notification.url') . '/api/v1')
+                ->withHeaders([
+                    'app-id' => config('sevima.notification.app_id'),
+                    'app-secret' => config('sevima.notification.app_secret'),
+                ])->timeout(30)
+                ->post('/notifications', [
+                    'channel' => 'email',
+                    'subject' => 'Congratulations on Your SEVIMA Job Application!',
+                    'message' => view('emails.apply-success', [
+                        'applicantName' => $applicant->name,
+                        'jobTitle' => $job->title,
+                    ])->render(),
+                    'sender_name' => 'Human Capital SEVIMA',
+                    'from' => 'hc@sevima.com',
+                    'to' => $applicant->email,
+                ]);
         } catch (\Exception $e) {
             logger('Error sending email: ' . $e->getMessage());
         }
