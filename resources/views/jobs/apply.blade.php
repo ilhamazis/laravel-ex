@@ -92,7 +92,7 @@
                         </label>
                         <x-quantum.input-file-small id="photo" name="photo"
                                                     accept="image/jpeg,image/png" required
-                                                    support="JPG atau PNG (max. 512KB)"/>
+                                                    support="JPG atau PNG (max. 4MB)"/>
                         @error('photo')
                         <div class="form-control__helper error">{{ $message }}</div>
                         @enderror
